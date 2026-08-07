@@ -11,8 +11,8 @@
 //
 // Options:
 //   --html <file>    path to the composition HTML (required; relative paths OK)
-//   --out <dir>      output directory (default: "output")
-//   --name <base>    output base name  -> {name}.mp4  (default: "reel_4k")
+//   --out <dir>      parent output directory (default: "output")
+//   --name <base>    output base name; creates output/{name}/ with frames/ + {name}.mp4
 //   --fps <n>        frames per second (default: 30)
 //   --duration <s>   total seconds (default: timeline duration, fallback 15)
 //   --width <px>     viewport CSS width  (default: 1080)
@@ -60,8 +60,9 @@ const TIMELINE = opt("timeline", "reel");
 const AUDIO = opt("audio");
 const ASSEMBLE = !has("no-assemble");
 
-const FRAMES_DIR = join(OUT, `${NAME}_frames`);
-mkdirSync(FRAMES_DIR, { recursive: true }); // also creates OUT
+const VIDEO_DIR = join(OUT, NAME); // one proper folder per video
+const FRAMES_DIR = join(VIDEO_DIR, "frames");
+mkdirSync(FRAMES_DIR, { recursive: true });
 
 console.log(`Composition : ${URL}`);
 const PX = WIDTH * SCALE, PY = HEIGHT * SCALE;
@@ -142,7 +143,7 @@ console.log(`\nDone: ${FRAMES} frames → ${FRAMES_DIR} in ${((Date.now() - t0) 
 
 // --- assemble the final, properly-named 4K MP4 ----------------------------
 if (ASSEMBLE) {
-  const mp4 = join(OUT, `${NAME}.mp4`);
+  const mp4 = join(VIDEO_DIR, `${NAME}.mp4`);
   const inputs = ["-framerate", String(FPS), "-i", join(FRAMES_DIR, "frame_%04d.jpg")];
   let filters = ["fps=" + FPS, "format=yuv420p"];
   const map = ["-map", "0:v"];

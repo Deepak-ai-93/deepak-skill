@@ -80,13 +80,20 @@ The `text-motion-reels` skill starts with an **interactive format wizard** — t
 5. **Chat Thriller** — text-message storytime (reddit, drama)
 6. **SVG Ambient** — animated SVG backgrounds (mindset, aesthetic, brand)
 
-After you pick a format, the agent builds the composition to that format's spec and renders it at **vertical 4K (2160x3840)** with a proper filename:
+After you pick a format, the agent builds the composition to that format's spec, generates a **beat-synced voiceover** (Kokoro), renders it at **vertical 4K (2160x3840)** into a proper folder, and writes a ready-to-post `caption.md`:
 
 ```bash
-node render/render-frames.mjs --html word-pop_reel.html --name word-pop_money-rules_4k --duration 15 --fps 30 --scale 2
+node render/render-frames.mjs --html word-pop_reel.html --name word-pop_money-rules_4k --duration 15 --fps 30 --scale 2 --audio assets/full_mix.m4a
 ```
 
-Output → `output/{format-slug}_{topic-slug}_4k.mp4` (e.g. `3d-editorial_mental-clarity_4k.mp4`).
+Output → one folder per video:
+
+```
+output/word-pop_money-rules_4k/
+├── word-pop_money-rules_4k.mp4   # 2160x3840, H.264, -14 LUFS mix
+├── frames/                        # source frames
+└── caption.md                     # YouTube Shorts, Instagram, X, LinkedIn, TikTok, Threads captions
+```
 
 ### Sample prompts
 
@@ -112,7 +119,7 @@ The `render/` folder contains the pipeline scripts the skills use to turn an HTM
 cd render
 npm install          # playwright (headless Chrome driver)
 
-# Render a composition to vertical 4K with a proper name
+# Render a composition to vertical 4K into output/my-reel_4k/
 node render-frames.mjs --html my-reel.html --name my-reel_4k --duration 15 --fps 30 --scale 2
 
 # With a mixed audio track

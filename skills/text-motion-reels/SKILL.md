@@ -40,7 +40,7 @@ Never start coding a composition without first running the **format selection wi
         Topic / niche?        → "mental clarity"
         Hook (≤8 words)?      → "How I mastered mental clarity in three weeks."
         Duration? (default 15s)→ 15
-        Audio? (none | bed | voice) → none  (text-only, mute-first)
+        Audio? → voice (always-on, synced to text beats — see Always-on voiceover)
 ```
 
 ### Wizard rules
@@ -50,6 +50,7 @@ Never start coding a composition without first running the **format selection wi
 3. Collect topic, hook, duration, and audio preference after the format is locked in.
 4. Build the composition using ONLY the chosen format's spec below (typography, palette, motion, effects). Do not mix format styles.
 5. Default duration is 15s unless the user says otherwise. Beat count = seconds ÷ 2.
+6. **Voiceover is always-on.** Every reel gets a Kokoro voiceover synced beat-for-beat to the text (see Always-on voiceover).
 
 ### Single-command agent template (wizard + build + render in one shot)
 
@@ -59,8 +60,9 @@ Act as a text-motion reel engineer using the text-motion-reels skill.
    3D Editorial / Card Listicle / Chat Thriller / SVG Ambient) and gather topic, hook, duration, audio.
 2. Build the 1080x1920 HTML composition strictly per the chosen format's spec.
 3. Register the paused GSAP timeline on window.__timelines.reel.
-4. Render at vertical 4K and name the output {format-slug}_{topic-slug}_4k.mp4
-   (see Rendering to 4K section).
+4. Generate the voiceover and sync every line to its text beat (see Always-on voiceover).
+5. Render at vertical 4K into the proper folder output/{format-slug}_{topic-slug}_4k/ (see Rendering to 4K section).
+6. Write caption.md into the output folder (see Caption pack section).
 ```
 
 ---
@@ -296,10 +298,31 @@ Native SVG `<animate>` tags cannot be scrubbed by the paused GSAP timeline (`tl.
 1. **Plan** — pick niche + hook + beat count. Estimate length (sweet spot 15–45s).
 2. **Write HTML** — one composition per scene. Vertical 1080x1920 stage.
 3. **Wire seekable animation** — GSAP timeline registered on `window.__timelines` (paused by default).
-4. **Add audio** — optional trending/mood track with `data-start`/`data-duration`.
+4. **Add voiceover (always-on)** — one Kokoro voice line per text beat, auto-fit into its `data-start`/`data-duration` window (see Always-on voiceover).
 5. **Lint & check** — validate composition (`hyperframes check`).
 6. **Preview** — live-reload browser preview.
-7. **Render** — deterministic vertical 4K MP4 (2160x3840) via headless Chrome + FFmpeg with a proper filename (see below).
+7. **Render** — deterministic vertical 4K MP4 (2160x3840) via headless Chrome + FFmpeg into the proper output folder (see below).
+8. **Caption pack** — write `caption.md` into the output folder (see Caption pack section).
+
+## Always-on voiceover (text ↔ voice sync contract)
+
+Every reel gets a voiceover by default — no silent reels. The voice is generated with the `voice-sfx-audio` skill (Kokoro-82M, Apache 2.0, commercial-safe) and MUST be synchronized to the on-screen text beat-for-beat.
+
+### The sync contract (hard rules)
+
+1. **One script line = one text beat = one voice line.** Each beat is 3–6 words (2–2.5s window max).
+2. **Write beats FIRST**, then derive everything from them:
+   - HTML: `data-start` / `data-duration` on each `.clip`
+   - GSAP: timeline positions identical to the beat starts
+   - Voice: the `generate-voice.mjs` LINES array uses the same `[start, maxDur, text]`
+3. **Auto-fit, don't stretch:** `generate-voice.mjs` fits each line into its window via Kokoro's speed param (cap 1.35x). If a line still can't fit, SHORTEN THE COPY — never widen the window.
+4. **The text appears exactly when the voice says it** — a visual change at every beat start, matching the narration (1.5–2s stimulus cycle preserved).
+5. **Mix + mux:** `mix-audio.sh` places each line at its beat start, sidechain-ducks the ambient bed under the voice (voice 100% / bed ~30% → ducked), masters to **-14 LUFS**. Render with `--audio assets/full_mix.m4a`.
+6. **Verify:** check the `FITS ✓` log lines from `generate-voice.mjs` (every `dur <= window`).
+
+Voice delivery by beat: hook = energetic/faster; body = calm natural cadence; CTA = confident. (See `voice-sfx-audio` for voices + licensing — commercial-safe only.)
+
+---
 
 ## Rendering to 4K with a proper filename
 
@@ -321,9 +344,10 @@ node render/render-frames.mjs \
   # --no-assemble                 # frames only, skip the MP4 step
 ```
 
-Outputs:
-- Frames → `output/{name}_frames/frame_0000.jpg` …
-- Final video → `output/{name}.mp4` (H.264, yuv420p, CRF 18, faststart, resolution verified by ffprobe)
+Outputs (one proper folder per video):
+- `output/{name}/frames/frame_0000.jpg` … (source frames)
+- `output/{name}/{name}.mp4` (H.264, yuv420p, CRF 18, faststart, resolution verified by ffprobe)
+- `output/{name}/caption.md` (see Caption pack)
 
 ### Filename convention (the "proper name")
 
@@ -337,7 +361,72 @@ Outputs:
 | Card Listicle | 5 habits | `card-listicle_5-habits_4k.mp4` |
 | Chat Thriller | reddit roommate | `chat-thriller_reddit-roommate_4k.mp4` |
 
-If audio is included, generate voice lines + mix with the `voice-sfx-audio` skill and keep every beat window aligned to the composition's `data-start` values.
+A voiceover is ALWAYS generated and synced to the beats (see Always-on voiceover), mixed with the `voice-sfx-audio` skill, and muxed at render time with `--audio assets/full_mix.m4a`.
+
+---
+
+## Caption pack (caption.md)
+
+After rendering, write a **`caption.md`** into the output folder (same folder as the MP4). It contains ready-to-post, high-CTR captions for every major platform — formatted, character-compatible, and **zero hashtags**.
+
+### Caption rules (apply to every platform)
+
+1. **Hook-first:** the first sentence stops the scroll (question, bold claim, or result) — the caption mirrors the video's hook.
+2. **High CTR / high engagement:** specific numbers, curiosity, one clear CTA ("Save this", "Comment your #", "Follow for part 2"). No hashtags, no tag-spam, max 2 emojis.
+3. **E-E-A-T tone:** authoritative, honest, specific — no hype lies, no fake screenshots. Back claims ("I tested this for 90 days").
+4. **Proper format:** short punchy lines, blank line between hook / value / CTA.
+5. **Character-compatible:** stay under each platform's limit (table below); no control characters; smart quotes and em-dashes are safe everywhere.
+
+### Platform limits (2026)
+
+| Platform | Limit | First visible |
+|---|---|---|
+| YouTube Shorts — title | 100 chars | ~60 |
+| YouTube Shorts — description | 5000 chars | ~125 |
+| Instagram | 2200 chars | ~125 |
+| TikTok | 2200 chars (title 100) | ~125 |
+| X (Twitter) | 280 chars | all |
+| Threads | 500 chars | ~125 |
+| LinkedIn | 3000 chars | ~210 |
+| Facebook | 63,206 chars | ~125 |
+
+### caption.md template
+
+```markdown
+# Caption Pack — {topic} ({format-slug})
+
+Video: output/{name}_4k/{name}_4k.mp4
+Voiceover: Kokoro ({voice}) • Duration: {s}s • 4K vertical • No hashtags
+
+## YouTube Shorts
+### Title ({n}/100 chars)
+[High-CTR title — hook phrase, ≤100 chars]
+### Description ({n}/5000 chars — first 125 = the hook)
+[Hook line]
+
+[Value: 2–3 short lines, one per beat]
+
+[CTA: "Save this. Share it with someone who needs it."]
+
+## Instagram ({n}/2200 chars)
+[Same structure, platform tone — casual, ends with a conversation-starter question]
+
+## X / Twitter ({n}/280 chars)
+[1–2 punchy lines + CTA. Trim until it fits]
+
+## Threads ({n}/500 chars)
+[Conversational hook + one takeaway]
+
+## LinkedIn ({n}/3000 chars)
+[Professional framing: insight → why it matters → CTA for your network]
+
+## TikTok ({n}/2200 chars)
+[Trend-aware hook + caption text]
+```
+
+### Character-count rule
+
+Count every section before finalizing (`wc -m` on the section text). If over the limit → cut filler, never the hook or the CTA.
 
 ---
 
@@ -640,4 +729,8 @@ If audio is included, generate voice lines + mix with the `voice-sfx-audio` skil
 - [ ] Output named `{format-slug}_{topic-slug}_4k.mp4` and resolution verified with ffprobe
 - [ ] Animated SVG (if used) is GSAP-driven only — no SMIL, no per-frame `fill`/`stroke` animation
 - [ ] SVG confined to top/bottom bands + gutters via `.bg-clip` (overflow hidden); text column untouched
+- [ ] Voiceover generated for every beat and auto-fit into its window (FITS ✓ in the log)
+- [ ] Voice ↔ text sync: `data-start`/`data-duration` == GSAP positions == voice line starts
+- [ ] Rendered 4K into the proper folder `output/{name}/` with MP4 + frames
+- [ ] `caption.md` written into the output folder — per-platform sections, no hashtags, under char limits
 - [ ] `hyperframes check` passes successfully
