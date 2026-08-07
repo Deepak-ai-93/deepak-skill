@@ -6,7 +6,7 @@
 | :--- | :--- |
 | **Product Name** | deepak-skill |
 | **Description** | Open-source agent skills for programmatic, short-form video creation (Reels, TikTok, Shorts). |
-| **Version** | 1.4.0 (Multistyle Video Generation & Developer Interface Edition) |
+| **Version** | 1.5.0 (Interactive Multistyle Selection & Premium Video Generation Edition) |
 | **Status** | Approved |
 | **Author** | Jules (AI Assistant) |
 | **Target Platforms** | Instagram Reels, TikTok, YouTube Shorts, and the agent skill ecosystem (Claude Code, Cursor, Codex, Gemini CLI, etc.) |
@@ -76,7 +76,7 @@ To ensure videos stop the scroll in under 3 seconds, maximize average completion
 #### A. Purpose
 To handle visual representation using typography-driven layout styles in standard HTML, optimized for headless-browser rendering (HyperFrames compatibility).
 
-#### B. Premium Functional Specifications & Supported Visual Styles (v1.4.0 Changes)
+#### B. Premium Functional Specifications & Supported Visual Styles
 To scale viewer engagement, the video generation module must natively support three distinct trending visual aesthetics:
 
 ##### Style A: Vox-Style (The Analytical Explainer)
@@ -138,44 +138,57 @@ To generate local, commercial-safe AI voiceovers and soundscapes, mixing them wi
 
 ---
 
-## 7. Developer & Agent Interaction Interfaces (Prompts & Templates)
+## 7. Developer & Agent Interaction Interfaces (Interactive Choice Wizard)
 
-To allow developers and AI coding agents to interact with and invoke these skills reliably, the system supports standardized Prompt Templates.
+To enable developers and AI coding agents to interact with the skills dynamically, the system specifies an Interactive Wizard workflow.
 
-### 7.1 Template 1: Premium Mindset & Stoic Wisom Reel
-**Objective:** Generate a premium, high-retention video displaying mindset wisdom with floating geometry.
+### 7.1 Interactive Style Selection Prompts
+
+When starting the workflow, the system prompts the user with the following select menus to configure the generation pipeline:
+
 ```
-Act as a content engineering agent. Using deepak-skill, make a 20-second Stoic Wisdom Reel.
+[System]: Welcome to the deepak-skill content generator. Which visual style do you want to build?
+(1) Vox-Style (The Analytical Explainer)
+(2) Hormozi-Style (High-Impact Captions)
+(3) Minimalist Editorial (The Luxury Quiet)
 
-Specifications:
-- Niche: Mindset & Stoic Wisdom
-- Hook Formula: Contrarian / Pattern Break ("Everything you knew about focus is WRONG.")
-- Design Vibe: Premium minimalism (Champagne Gold accents, #050505 background)
-- Visual Overlays: Low-opacity animated lines (opacity 0.08) expanding horizontally, 2 background circles (opacity 0.04) slowly rotating.
-- Voiceover: Kokoro 'af_heart' (US American female)
-- Background track: CC0 lo-fi ambient pad (ducked to 25% volume under voice)
+[User]: 1
 
-Generate:
-1. Synchronized dual-column script & visual storyboard beats.
-2. Complete, responsive, 1080x1920 HTML5 composition utilizing GSAP for the 3D text perspective transition, ambient shape morphs, and a hairline video progress tracker.
+[System]: Vox-style selected (#fbf9f5 canvas, bold serif typography, dynamic highlighter elements).
+         What is the core topic or niche for your video?
+
+[User]: Psychology micro-lessons on cognitive biases.
 ```
 
-### 7.2 Template 2: Vox-Style Explainer Short
-**Objective:** Generate an analytical, documentary-style explainer featuring a cream backdrop and a yellow highlighter.
-```
-Act as a documentarian. Using deepak-skill, make a 30-second Vox-style analytical reel.
+### 7.2 Interactive Wizard Integration Prompt Templates
 
-Specifications:
-- Niche: Psychology & Micro-lessons
-- Hook Formula: Curiosity Gap / Open Loop ("This single cognitive bias shapes 90% of your choices...")
-- Design Vibe: Style A (Vox Analytical Explainer)
-- Palette: #fbf9f5 backdrop, jet-black text, dynamic yellow highlight bars (#ffd166).
+#### Template 1: Dynamic Vox-Style Selector Prompt
+**Objective:** Programmatic wizard invoke for Style A.
+```
+Act as a content engineering agent. Initialize the deepak-skill choice wizard and choose:
+- Visual Style: Option (1) - Vox-Style (Analytical Explainer)
+- Niche: Psychology & Brain Bias
+- Hook Formula: Curiosity Gap / Open Loop ("Nobody is talking about how your brain tricks you here...")
 - Voiceover: Kokoro 'bm_george' (UK English male)
-- Background track: Upbeat, investigative acoustic guitar (ducked under voice)
+- Background track: CC0 acoustic investigatory guitar
 
 Generate:
-1. Multi-scene documentary script and timeline beats.
-2. Complete vertical HTML with GSAP executing custom-drawn highlighter lines sliding behind the highlighted words.
+1. Double-column script and timed pacing beats.
+2. Complete, responsive, 1080x1920 HTML5 composition utilizing GSAP for the drawing of the yellow highlight bar (#ffd166) under the active keyword.
+```
+
+#### Template 2: Dynamic Hormozi-Style Selector Prompt
+**Objective:** Programmatic wizard invoke for Style B.
+```
+Act as a content engineering agent. Initialize the deepak-skill choice wizard and choose:
+- Visual Style: Option (2) - Hormozi-Style (High-Impact Captions)
+- Niche: Business & Entrepreneurship
+- Hook Formula: Pain Point / Loss Aversion ("Stop wasting money on bad ads.")
+- Voiceover: Kokoro 'am_adam' (US American male)
+
+Generate:
+1. Dynamic, highly dense vertical storyboard.
+2. Complete, vertical HTML with GSAP executing word-by-word uppercase caption scaling on Montserrat Black.
 ```
 
 ---
@@ -213,6 +226,7 @@ For content produced using these skills:
 
 | Version | Skill / Module | Type | Description |
 | :--- | :--- | :--- | :--- |
+| **v1.5.0** | `PRD.md` | **Interactive Upgrade** | Specified detailed user/agent Interactive Choice Wizard flow requirements and selection prompts for multiple visual styles. |
 | **v1.4.0** | `PRD.md` | **Style Upgrades** | Defined explicit design guidelines and motion specs for Vox-style explainers, Hormozi-style captions, and Minimalist Editorial reels. Added Template 2 prompt for Vox shorts. |
 | **v1.3.0** | `PRD.md` | **Interface Upgrade** | Embedded structured developer/agent Prompt Templates for Stoic and Financial listicle niches. |
 | **v1.2.0** | `text-motion-reels` | **Premium Upgrade** | Enforced premium, anti-messy minimalist typography aesthetics. |
@@ -223,4 +237,4 @@ For content produced using these skills:
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Implemented 3D Spatial transitions with relative perspective & Z-axis translation. |
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Integrated dynamic film-grain & noise patterns via native background SVG fractal noise generation. |
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Built visual retention-boosting progress indicators into core template structure. |
-| **v1.1.0-v1.4.0** | `PRD.md` | **Documentation** | Documented and synchronized the upgraded capabilities under Module 2 functional requirements and technical sections. |
+| **v1.1.0-v1.5.0** | `PRD.md` | **Documentation** | Documented and synchronized the upgraded capabilities under Module 2 functional requirements and technical sections. |
