@@ -6,7 +6,7 @@
 | :--- | :--- |
 | **Product Name** | deepak-skill |
 | **Description** | Open-source agent skills for programmatic, short-form video creation (Reels, TikTok, Shorts). |
-| **Version** | 1.0.0 |
+| **Version** | 1.1.0 (Upgraded Video Generation Edition) |
 | **Status** | Approved |
 | **Author** | Jules (AI Assistant) |
 | **Target Platforms** | Instagram Reels, TikTok, YouTube Shorts, and the agent skill ecosystem (Claude Code, Cursor, Codex, Gemini CLI, etc.) |
@@ -71,14 +71,18 @@ To ensure videos stop the scroll in under 3 seconds, maximize average completion
 
 ---
 
-### 5.2 Module 2: Text-Only Motion Reels (`text-motion-reels`)
+### 5.2 Module 2: Text-Only Motion Reels (`text-motion-reels`) — *UPGRADED*
 
 #### A. Purpose
 To handle visual representation using typography-driven layout styles in standard HTML, optimized for headless-browser rendering (HyperFrames compatibility).
 
-#### B. Functional Specifications
+#### B. Upgraded Functional Specifications (v1.1.0 Changes)
 - **Vertical Aspect Ratio:** Render exclusively in vertical 9:16 aspect ratio (**1080x1920 pixels**).
 - **Mute-First Visual Layouts:** Typography-centric layouts where text remains perfectly legible in silence.
+- **Fluid & Responsive Typography Scale:** Uses CSS math functions (like `clamp()`) and relative viewport units (`vw`, `vh`) to automatically scale titles and details. This prevents overlapping and maintains perfect composition bounds on any render target device.
+- **3D Spatial Typography Transitions:** Text containers and clips must leverage perspective and 3D transforms (`perspective: 1000px`, `transform-style: preserve-3d`) to enable Z-depth slides, 3D rotations, and camera-pan simulations.
+- **Dynamic Organic Background Overlays:** Implement SVG `<filter>` elements generating fractal noise/turbulence color-mapped at small alphas (e.g. `0.05` to `0.15`) to supply dynamic, film-grain texture over standard gradients.
+- **Visual Retention Indicators:** A dedicated progress bar or loading track synced programmatically with the absolute duration of the video timeline to enhance completion metrics.
 - **Design Style Libraries:** Must support the creation of multiple styles:
   - *Stoic / Mindset Minimal:* Clean serif fonts, high contrast, atmospheric backgrounds.
   - *Reddit Storytime:* Chat/SMS interface bubbles with suspenseful pacing.
@@ -159,3 +163,15 @@ For content produced using these skills:
 2. **Audio Mixing Quality:** Master tracks outputted to exactly **-14 LUFS** with zero audio clipping.
 3. **Execution Time:** A 15-second typography composition must build and export to MP4 in under 60 seconds on standard dual-core VPS setups.
 4. **Agent Adoption Rate:** Integration compatibility across multiple major agent platforms (Claude Code, Cursor, Codex).
+
+---
+
+## 9. Upgrades & Changelog (v1.1.0)
+
+| Skill / Module | Type | Description |
+| :--- | :--- | :--- |
+| `text-motion-reels` | **Upgrade** | Added Fluid & Responsive Typography scaling via the `clamp()` formula. |
+| `text-motion-reels` | **Upgrade** | Implemented 3D Spatial transitions with relative perspective & Z-axis translation. |
+| `text-motion-reels` | **Upgrade** | Integrated dynamic film-grain & noise patterns via native background SVG fractal noise generation. |
+| `text-motion-reels` | **Upgrade** | Built visual retention-boosting progress indicators into core template structure. |
+| `PRD.md` | **Documentation** | Documented and synchronized the upgraded capabilities under Module 2 functional requirements and technical sections. |
