@@ -32,6 +32,7 @@ Never start coding a composition without first running the **format selection wi
         (3) 3D Editorial   — Luxury quiet minimalist (mindset, stoic)
         (4) Card Listicle  — Numbered save-bait grid (finance, productivity)
         (5) Chat Thriller  — Text-message storytime (reddit, drama)
+        (6) SVG Ambient    — Animated SVG backgrounds (mindset, aesthetic, brand)
 
 [User]: 3
 
@@ -44,7 +45,7 @@ Never start coding a composition without first running the **format selection wi
 
 ### Wizard rules
 
-1. **Ask first.** Present the 1–5 menu and wait for the user's selection before writing any HTML.
+1. **Ask first.** Present the 1–6 menu and wait for the user's selection before writing any HTML.
 2. **Always confirm the format slug** — it is reused for the output filename (see Rendering to 4K).
 3. Collect topic, hook, duration, and audio preference after the format is locked in.
 4. Build the composition using ONLY the chosen format's spec below (typography, palette, motion, effects). Do not mix format styles.
@@ -54,8 +55,8 @@ Never start coding a composition without first running the **format selection wi
 
 ```
 Act as a text-motion reel engineer using the text-motion-reels skill.
-1. Run the format wizard: ask the user to pick format 1-5 (Word Pop / Highlighter /
-   3D Editorial / Card Listicle / Chat Thriller) and gather topic, hook, duration, audio.
+1. Run the format wizard: ask the user to pick format 1-6 (Word Pop / Highlighter /
+   3D Editorial / Card Listicle / Chat Thriller / SVG Ambient) and gather topic, hook, duration, audio.
 2. Build the 1080x1920 HTML composition strictly per the chosen format's spec.
 3. Register the paused GSAP timeline on window.__timelines.reel.
 4. Render at vertical 4K and name the output {format-slug}_{topic-slug}_4k.mp4
@@ -88,7 +89,7 @@ Act as a text-motion reel engineer using the text-motion-reels skill.
 
 ---
 
-## The 5 Trending Text-Only Formats (format library)
+## The 6 Trending Text-Only Formats (format library)
 
 Pick ONE format via the wizard and build the composition strictly to its spec below.
 
@@ -147,6 +148,18 @@ Pick ONE format via the wizard and build the composition strictly to its spec be
 - **Signature effects:** Bubble tint flips red/green on emotional turns; keystroke SFX cue per bubble; final frame flashes the full "screenshot" of the whole chat at the payoff.
 - **Retention device:** The cliffhanger bubble ("…and then he replied:") IS the loop ending → forces rewatch.
 
+### Format 6 — SVG Ambient (`svg-ambient`)
+*Animated SVG motion graphics. Generative ambient layers behind luxury type.*
+
+- **Best for:** Mindset, aesthetics, product/brand reveals, "vibe" content. **Hook:** Curiosity gap / aesthetic.
+- **Typography:** Bodoni Moda / Cormorant Garamond serif headline with light italic accents, `clamp(3.8rem, 7.5vw, 6.8rem)` — same voice as 3D Editorial.
+- **Palette:** deep charcoal bg `#0a0a0d`, ivory text `#f5f2ea`, ONE signature accent (champagne `#e5c158` or electric violet `#7c5cff`); all SVG strokes/shapes tinted to the accent at low opacity.
+- **Layout:** Text in the central reading column (centered, 75% width, y 28–72%). SVG animation confined to the top band, bottom band, and side gutters via `.bg-clip` containers with `overflow: hidden` (see Animated SVG backgrounds section).
+- **Motion system (GSAP only — NO SMIL):** rotating dashed ring in the top band; breathing/morphing blob in a corner; 8–12 drifting particles in the gutters; optional vivus.js fine-frame line draw. Every tween is transform-only (`rotation`, `scale`, `x/y`) for 4K GPU-cheap rendering.
+- **Signature effects:** static feTurbulence grain overlay (z-index 10, opacity 0.06); accent pulse ring at 5% opacity behind the hook word; hairline progress bar.
+- **Retention device:** ambient motion keeps the frame alive between text beats; loop ending mirrors frame 1 for rewatch.
+- **4K perf:** max 4 SVG containers, ~20 nodes total, transforms only — never animate `fill`/`stroke` per frame.
+
 ### Format cheat-sheet
 
 | # | Format | Slug | Pace | Best niche | Signature motion |
@@ -156,6 +169,116 @@ Pick ONE format via the wizard and build the composition strictly to its spec be
 | 3 | 3D Editorial | `3d-editorial` | Slow | Mindset | perspective tilt, film grain |
 | 4 | Card Listicle | `card-listicle` | Medium | Finance | flip cards, progress dots |
 | 5 | Chat Thriller | `chat-thriller` | Medium-fast | Storytime | bubbles, typing dots |
+| 6 | SVG Ambient | `svg-ambient` | Slow-medium | Mindset / Brand | animated rings, morph blobs, particles |
+
+## Animated SVG backgrounds (no text overlap)
+
+Add open-source animated SVG motion BEHIND the typography — never on top of it. This is the library-tier (Option B) approach: permissively-licensed libraries driving your own SVG, all synchronized to the single paused GSAP timeline.
+
+### Allowed libraries (all commercial-safe)
+
+| Library | License | Use it for |
+|---|---|---|
+| GSAP core | Free (Standard) | transforms, `stroke-dashoffset`, `pathLength`, SVG attribute tweens — already in the stack |
+| KUTE.js | MIT | free path morphing (shape A → shape B) |
+| vivus.js | MIT | hand-drawn line reveals (fine wireframes) |
+| anime.js | MIT | SVG attrs + path-following motion |
+| SVG.js | MIT | procedural SVG building + animation |
+| mo.js | MIT | bursts / curve motion graphics |
+| lottie-web | MIT | Lottie JSON rendered to SVG (source: LottieFiles free library, Lottie Simple License — commercial use OK, attribution optional) |
+
+### The one hard rule: NO SMIL
+
+Native SVG `<animate>` tags cannot be scrubbed by the paused GSAP timeline (`tl.progress()`), which breaks deterministic frame rendering. Every animated property MUST be driven from the single paused timeline registered on `window.__timelines`. For Lottie: embed the JSON inline and call `lottie.goToAndStop(frame, true)` on every rendered frame. No `Math.random()` — seed anything random.
+
+### Layer stack (text always wins)
+
+| z-index | Layer |
+|---|---|
+| 1 | animated SVG background containers (clipped) |
+| 2 | optional readability backplate — soft dark radial vignette only where text sits |
+| 3 | text container (never below 3) |
+| 5 | hairline progress bar |
+| 10 | static film-grain overlay (opacity 0.06) |
+
+### Zone map (9:16)
+
+- Text lives ONLY in the central reading column: centered, 75% width, y ≈ 28%–72%.
+- Animations live ONLY in: top band (y 0–25%), bottom band (y 75–100%), left/right gutters (x 0–12% / 88–100%).
+- Wrap every animated SVG in a `.bg-clip` container with `overflow: hidden` so stray paths physically cannot cross into the text column.
+- Opacity: full animated scenes 15–35%; decorative shapes 4–15% (existing rule). Tint to the reel palette.
+
+### Working background-layer example (GSAP-driven)
+
+```html
+<style>
+  .bg-clip { position: absolute; overflow: hidden; z-index: 1; pointer-events: none; }
+  .bg-top    { top: 0;    left: 0;   width: 100%;   height: 480px; }
+  .bg-corner { bottom: 0; left: 0;   width: 540px;  height: 540px; }
+  .bg-gutter { top: 0;    right: 0;  width: 120px;  height: 100%; }
+  .bg-clip svg { width: 100%; height: 100%; display: block; }
+</style>
+
+<!-- Layer 1: animated SVG, clipped to bands/gutters (z-index 1) -->
+<div class="bg-clip bg-top">
+  <svg viewBox="0 0 1080 480" xmlns="http://www.w3.org/2000/svg">
+    <circle id="bgRing" cx="540" cy="240" r="170" fill="none"
+            stroke="rgba(229,193,88,0.5)" stroke-width="1.5" stroke-dasharray="4 14"/>
+  </svg>
+</div>
+<div class="bg-clip bg-corner">
+  <svg viewBox="0 0 540 540" xmlns="http://www.w3.org/2000/svg">
+    <path id="bgBlob" fill="rgba(255,255,255,0.06)"
+          d="M270,60C390,60 470,140 470,260C470,390 380,480 270,480C160,480 70,390 70,260C70,140 150,60 270,60Z"/>
+  </svg>
+</div>
+<div class="bg-clip bg-gutter">
+  <svg viewBox="0 0 120 1920" xmlns="http://www.w3.org/2000/svg">
+    <circle id="p1" cx="60" cy="300" r="3"    fill="rgba(255,255,255,0.5)"/>
+    <circle id="p2" cx="60" cy="900" r="2"    fill="rgba(255,255,255,0.4)"/>
+    <circle id="p3" cx="60" cy="1500" r="2.5" fill="rgba(255,255,255,0.45)"/>
+  </svg>
+</div>
+
+<!-- Layer 3: text stays above all animation -->
+<div class="text-container">
+  <div id="scene1" class="clip" data-start="0" data-duration="3">
+    <h1 class="title-large">Mastery is <span class="highlight-text">subtraction.</span></h1>
+  </div>
+</div>
+
+<script>
+  const tl = gsap.timeline({ paused: true });
+  const D = 6; // seconds
+
+  // Rotating dashed ring — transform-only, GPU cheap at 4K
+  tl.fromTo("#bgRing", { rotation: 0, transformOrigin: "50% 50%" },
+            { rotation: 360, duration: D, ease: "none" }, 0);
+
+  // Blob breathing — same path, scale/rotate only
+  tl.fromTo("#bgBlob", { scale: 0.92, rotation: 0, transformOrigin: "50% 50%" },
+            { scale: 1.08, rotation: 8, duration: D, ease: "sine.inOut", yoyo: true, repeat: 1 }, 0);
+
+  // Particles drift — transform-only loops
+  tl.fromTo("#p1", { y: 0 }, { y: 260, duration: 3.0, ease: "none", yoyo: true, repeat: 1 }, 0);
+  tl.fromTo("#p2", { y: 0 }, { y: 320, duration: 3.6, ease: "none", yoyo: true, repeat: 1 }, 0.6);
+  tl.fromTo("#p3", { y: 0 }, { y: 300, duration: 3.2, ease: "none", yoyo: true, repeat: 1 }, 1.1);
+
+  // Hook scene + progress bar (existing pattern)
+  tl.from("#scene1", { opacity: 0, y: 40, duration: 0.6, ease: "power2.out" }, 0);
+  tl.fromTo("#progressbar", { width: "0%" }, { width: "100%", duration: D, ease: "none" }, 0);
+
+  window.__timelines = window.__timelines || {};
+  window.__timelines.reel = tl;
+</script>
+```
+
+### 4K performance rules
+
+- Max 4 SVG containers / ~20 nodes per composition.
+- Animate transforms ONLY (`rotation`, `scale`, `x/y`) — never `fill`, `stroke`, or `d` per frame.
+- Do not apply filters to animated elements (feTurbulence grain stays static).
+- Lottie: keep to one small loop, preload JSON inline, seek with `goToAndStop`.
 
 ## Premium Design Elements & Styles
 
@@ -515,4 +638,6 @@ If audio is included, generate voice lines + mix with the `voice-sfx-audio` skil
 - [ ] Rendered MP4 is perfectly deterministic and seamlessly matches timeline durations
 - [ ] Rendered at vertical 4K (2160x3840 via `--scale 2`)
 - [ ] Output named `{format-slug}_{topic-slug}_4k.mp4` and resolution verified with ffprobe
+- [ ] Animated SVG (if used) is GSAP-driven only — no SMIL, no per-frame `fill`/`stroke` animation
+- [ ] SVG confined to top/bottom bands + gutters via `.bg-clip` (overflow hidden); text column untouched
 - [ ] `hyperframes check` passes successfully

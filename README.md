@@ -71,13 +71,14 @@ See the [skills.sh docs](https://www.skills.sh/docs) for more options (`--list`,
 
 ### Format wizard + 4K rendering (`text-motion-reels`)
 
-The `text-motion-reels` skill starts with an **interactive format wizard** — the agent asks you to pick one of 5 trending text-only formats before building anything:
+The `text-motion-reels` skill starts with an **interactive format wizard** — the agent asks you to pick one of 6 trending text-only formats before building anything:
 
 1. **Word Pop** — Hormozi-style high-impact captions (business, hot takes)
 2. **Highlighter** — Vox-style analytical explainer (psychology, facts)
 3. **3D Editorial** — luxury quiet minimalist (mindset, stoic)
 4. **Card Listicle** — numbered save-bait grid (finance, productivity)
 5. **Chat Thriller** — text-message storytime (reddit, drama)
+6. **SVG Ambient** — animated SVG backgrounds (mindset, aesthetic, brand)
 
 After you pick a format, the agent builds the composition to that format's spec and renders it at **vertical 4K (2160x3840)** with a proper filename:
 
