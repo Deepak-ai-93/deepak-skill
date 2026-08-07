@@ -19,11 +19,29 @@ description: Create proper reels from user-supplied video clips and images with 
 
 ---
 
+## Install anywhere (standalone)
+
+This skill is **self-contained** — `SKILL.md` + `scripts/` travel together, so it installs cleanly into ANY project on its own:
+
+```bash
+# install ONLY this skill into the current project
+npx skills add Deepak-ai-93/deepak-skill --skill video-asset-reels
+
+# globally — available in every project on this machine
+npx skills add Deepak-ai-93/deepak-skill --skill video-asset-reels -g
+```
+
+Installs to `.agents/skills/video-asset-reels/` (SKILL.md + scripts/).
+
+**Prerequisites:** Node.js 18+, Google Chrome (rendering), FFmpeg (cuts + MP4 assembly), Playwright (`npm i -D playwright` in the target project — used by `render-frames.mjs`).
+
+---
+
 ## The deterministic contract (non-negotiable)
 
 A rendered frame is a **pure function of time t**. Therefore:
 
-1. **Pre-cut every clip with FFmpeg** (`render/cut-assets.mjs`) → one exact-length clip per beat: 1080x1920 cover-crop, 30 fps, H.264 yuv420p, **muted** (`-an`).
+1. **Pre-cut every clip with FFmpeg** (`scripts/cut-assets.mjs`) → one exact-length clip per beat: 1080x1920 cover-crop, 30 fps, H.264 yuv420p, **muted** (`-an`).
 2. **In HTML**, assets are `<video muted playsinline preload="auto" data-start data-duration src="assets/cuts/beat_01.mp4">` or `<img>` elements in `.asset-clip` containers at **z-index 1** (below text).
 3. **The renderer seeks per frame**: for each visible clip, `currentTime = t − data-start` (clamped to `duration − 0.05`), waits for the `seeked` event, then screenshots. (`render-frames.mjs` does this automatically and is a no-op for text-only reels.)
 4. **No audio inside the HTML** — clips are muted; the real mix (voice + bed) is muxed at the end with `--audio`.
@@ -32,6 +50,8 @@ A rendered frame is a **pure function of time t**. Therefore:
 ---
 
 ## Workflow (6 stages)
+
+> **Scripts:** all commands below use `scripts/` — the scripts bundled inside this skill (work standalone in any project). In a repo clone, the identical scripts also live in `render/`; either path works.
 
 ### Stage 1 — Ingest & beat sheet
 Read the prompt, pick a style (see Styles), and build the beat sheet: hook → agitate → payoff → CTA. One beat = one asset + 3–6 words of text. Beat count ≈ seconds ÷ 2. Write `storyboard.json`:
@@ -51,7 +71,7 @@ Read the prompt, pick a style (see Styles), and build the beat sheet: hook → a
 
 ### Stage 2 — Cut assets
 ```bash
-node render/cut-assets.mjs storyboard.json
+node scripts/cut-assets.mjs storyboard.json
 ```
 Produces `assets/cuts/beat_01.mp4 …` — exact-length, cover-cropped, muted. (Images are looped for their duration.)
 
@@ -67,7 +87,7 @@ Register one paused GSAP timeline on `window.__timelines.reel`: text tweens at b
 
 ### Stage 4 — Render 4K
 ```bash
-node render/render-frames.mjs --html reel.html --name {format-slug}_{topic-slug}_4k --duration 15 --fps 30 --scale 2
+node scripts/render-frames.mjs --html reel.html --name {format-slug}_{topic-slug}_4k --duration 15 --fps 30 --scale 2
 ```
 Output → `output/{name}/frames/` + `output/{name}/{name}.mp4` (2160x3840).
 
@@ -76,7 +96,7 @@ Kokoro voiceover via `voice-sfx-audio`: one line per beat, auto-fit into its win
 
 ### Stage 6 — Caption pack
 ```bash
-node render/generate-caption.mjs --name {name} --topic "{topic}" --format {format-slug} --hook "{hook}" --beats "beat text 1|beat text 2|…" --voice kokoro --duration 15
+node scripts/generate-caption.mjs --name {name} --topic "{topic}" --format {format-slug} --hook "{hook}" --beats "beat text 1|beat text 2|…" --voice kokoro --duration 15
 ```
 Writes `output/{name}/caption.md` — every platform section auto-checked into the **500–900 char window**, no hashtags.
 
@@ -186,7 +206,7 @@ Just ask any agent CLI (Claude Code, Cursor, Codex, Gemini CLI, …) once the sk
 
 1. Runs a mini-wizard: picks a style (Documentary / Aesthetic / Montage), confirms beat count
 2. Writes `storyboard.json` — one beat per asset, with in-points, durations, text, and reel timings
-3. Cuts assets → `node render/cut-assets.mjs storyboard.json`
+3. Cuts assets → `node scripts/cut-assets.mjs storyboard.json`
 4. Composes the 1080x1920 HTML (asset layer + text overlay + grain) with a paused GSAP timeline
 5. Renders 4K → `output/{name}/` (+ muxes the -14 LUFS voice+bed mix)
 6. Writes `caption.md` (all sections 500–900 chars, no hashtags)

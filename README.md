@@ -51,6 +51,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 |---|---|
 | All skills into the current project | `npx skills add Deepak-ai-93/deepak-skill --all` |
 | A single skill | `npx skills add Deepak-ai-93/deepak-skill --skill text-motion-reels` |
+| **video-asset-reels only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill video-asset-reels` |
 | Install globally (any project, any machine) | `npx skills add Deepak-ai-93/deepak-skill --all -g` |
 | Target specific agents | `npx skills add Deepak-ai-93/deepak-skill --all -a claude-code -a cursor` |
 | Install from a local clone | `npx skills add ./deepak-skill --all` |
