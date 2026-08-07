@@ -1,0 +1,15 @@
+# Node
+node_modules/
+
+# Locally installed skills (registry installs land here)
+.agents/
+
+# Rendered video output
+frames/
+output/
+*.mp4
+
+# Generated audio assets (regenerable via render/generate-voice.mjs + mix-audio.sh)
+assets/
+*.wav
+*.m4a

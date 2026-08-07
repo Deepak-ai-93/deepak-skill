@@ -38,6 +38,24 @@ After installing, just ask your agent:
 
 > "Using the text-motion skills, make a 20-second psychology-facts reel with a strong hook, beat-synced typography, and a Kokoro voiceover."
 
+### Format wizard + 4K rendering
+
+The `text-motion-reels` skill now starts with an **interactive format wizard** — the agent asks you to pick one of 5 trending text-only formats before building anything:
+
+1. **Word Pop** — Hormozi-style high-impact captions
+2. **Highlighter** — Vox-style analytical explainer
+3. **3D Editorial** — luxury quiet minimalist
+4. **Card Listicle** — numbered save-bait grid
+5. **Chat Thriller** — text-message storytime
+
+After you pick a format, the agent builds the composition to that format's spec and renders it at **vertical 4K (2160x3840)** with a proper filename:
+
+```bash
+node render/render-frames.mjs --html word-pop_reel.html --name word-pop_money-rules_4k --duration 15 --fps 30 --scale 2
+```
+
+Output → `output/{format-slug}_{topic-slug}_4k.mp4` (e.g. `3d-editorial_mental-clarity_4k.mp4`).
+
 ## License
 
 MIT — free to use, modify, and monetize. See [LICENSE](LICENSE).

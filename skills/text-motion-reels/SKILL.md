@@ -19,6 +19,51 @@ Use this skill whenever the user asks to:
 
 ---
 
+## Step 1 — Run the Format Wizard (always do this first)
+
+Never start coding a composition without first running the **format selection wizard**. The wizard decides the visual language (typography, palette, motion system, effects) for the whole video — it is the single most important decision.
+
+### Wizard prompt flow
+
+```
+[Agent]: Welcome to the Text-Motion Reel Generator. Pick a trending format:
+        (1) Word Pop       — Hormozi-style high-impact captions (business, hot takes)
+        (2) Highlighter    — Vox-style analytical explainer (psychology, facts)
+        (3) 3D Editorial   — Luxury quiet minimalist (mindset, stoic)
+        (4) Card Listicle  — Numbered save-bait grid (finance, productivity)
+        (5) Chat Thriller  — Text-message storytime (reddit, drama)
+
+[User]: 3
+
+[Agent]: 3D Editorial selected (slug: 3d-editorial).
+        Topic / niche?        → "mental clarity"
+        Hook (≤8 words)?      → "How I mastered mental clarity in three weeks."
+        Duration? (default 15s)→ 15
+        Audio? (none | bed | voice) → none  (text-only, mute-first)
+```
+
+### Wizard rules
+
+1. **Ask first.** Present the 1–5 menu and wait for the user's selection before writing any HTML.
+2. **Always confirm the format slug** — it is reused for the output filename (see Rendering to 4K).
+3. Collect topic, hook, duration, and audio preference after the format is locked in.
+4. Build the composition using ONLY the chosen format's spec below (typography, palette, motion, effects). Do not mix format styles.
+5. Default duration is 15s unless the user says otherwise. Beat count = seconds ÷ 2.
+
+### Single-command agent template (wizard + build + render in one shot)
+
+```
+Act as a text-motion reel engineer using the text-motion-reels skill.
+1. Run the format wizard: ask the user to pick format 1-5 (Word Pop / Highlighter /
+   3D Editorial / Card Listicle / Chat Thriller) and gather topic, hook, duration, audio.
+2. Build the 1080x1920 HTML composition strictly per the chosen format's spec.
+3. Register the paused GSAP timeline on window.__timelines.reel.
+4. Render at vertical 4K and name the output {format-slug}_{topic-slug}_4k.mp4
+   (see Rendering to 4K section).
+```
+
+---
+
 ## Core principles (always apply)
 
 1. **Clean Premium Aesthetic (Anti-Messy)** — Avoid high-frequency visual chaos, distracting transitions, or overlapping text. Use a unified, clean color palette, structured whitespace, and subtle layouts.
@@ -41,6 +86,77 @@ Use this skill whenever the user asks to:
 | 5 | Aesthetic "chaos culture" vibes | Poetic raw text, lo-fi beats | "You're not lazy. You're exhausted." |
 | 6 | Hot takes & listicles | Punchy numbered cards | "5 signs you're being taken for granted." |
 
+---
+
+## The 5 Trending Text-Only Formats (format library)
+
+Pick ONE format via the wizard and build the composition strictly to its spec below.
+
+### Format 1 — Word Pop (`word-pop`)
+*Hormozi-style high-impact captions. Fast, loud, mute-first.*
+
+- **Best for:** Business, finance, hot takes, motivation. **Hook:** Contrarian / PAS.
+- **Typography:** Montserrat Black or Impact, UPPERCASE, `clamp(3.5rem, 9vw, 8rem)`, line-height 1.05, letter-spacing -0.02em.
+- **Palette:** bg `#000`, text `#fff`, accent `#ffd60a` (neon yellow, or `#39ff14`); thick black stroke via `text-shadow` ring so text survives any backdrop.
+- **Layout:** Text anchored in the lower-third safe zone (below center, above UI overlays). MAX 6 words on screen at once.
+- **Motion system (GSAP):** Word-by-word spring pop — each word `from { scale: 1.35, opacity: 0 }` to `{ scale: 1, opacity: 1 }` with `elastic.out(1, 0.6)` on cadence. Active word highlights neon + scales 1.08; previous words dim to 40% gray.
+- **Signature effects:** 10ms full-frame white flash on the pattern-break word; micro screen shake (`x: ±4px`, 0.1s) on big claims; optional beat-synced audio thump.
+- **Retention device:** 6-word cap = one-glance readability; the hook word pops FIRST, before the rest of the sentence.
+
+### Format 2 — Highlighter (`highlighter`)
+*Vox-style analytical explainer. Documentary, authoritative, "receipt" energy.*
+
+- **Best for:** Psychology, science, "how X works", facts. **Hook:** Curiosity gap.
+- **Typography:** Playfair Display / Georgia bold serif headline + Space Mono / Courier monospace detail labels, `clamp(3rem, 7vw, 6.5rem)`.
+- **Palette:** bg `#fbf9f5` cream, text `#1a1a1a`, accent `#ffd166` (highlighter yellow); thin `#1a1a1a` at 12% grid lines.
+- **Layout:** Centered headline with generous margins; monospace stat/source cards sit below as "receipts".
+- **Motion system (GSAP):** Yellow highlighter sweeps left→right under the active keyword (`scaleX: 0 → 1`, 0.25s, `power3.out`, transform-origin left); underline re-draw; slow map-style pan/zoom of the whole canvas between beats (`scale: 1.0 → 1.06`, `x`/`y` drift, 2s, `none`).
+- **Signature effects:** Stat numbers count up (e.g. `0 → 87%`); monospace labels typewriter-reveal; crosshair + grid lines for the "investigation" frame.
+- **Retention device:** Every claim gets a visual receipt card → feels researched → drives saves.
+
+### Format 3 — 3D Editorial (`3d-editorial`)
+*Luxury quiet minimalist. The default premium skeleton in this skill.*
+
+- **Best for:** Mindset, stoic wisdom, luxury branding. **Hook:** Results-first / authority.
+- **Typography:** Bodoni Moda / Didot / Cormorant Garamond, regular weight with light italic accents, `clamp(3.8rem, 7.5vw, 6.8rem)`.
+- **Palette:** bg `#0b0b0d`, text `#f5f2ea`, accent champagne `#e5c158`; framing lines `rgba(255,255,255,0.08)`; blobs `rgba(255,255,255,0.04)`.
+- **Layout:** Centered text block at 75% width, generous whitespace, hairline framing lines + corner crosshairs.
+- **Motion system (GSAP):** 3D perspective entry — `rotationX/rotationY: ±15°, z: -100 → 0` with `power3.out` (stage needs `perspective: 1200px; transform-style: preserve-3d`); slow camera push-in across scenes; key phrase gets a gentle Z-axis pull toward the viewer.
+- **Signature effects:** SVG fractal-noise film grain overlay (opacity 0.06), breathing organic blobs (`scale 0.95 ↔ 1.05`, `rotation ±12°`), champagne-gold fade on the money word, hairline progress bar.
+- **Retention device:** Slow luxury pace; loop ending mirrors frame 1 for infinite rewatch.
+
+### Format 4 — Card Listicle (`card-listicle`)
+*Numbered save-bait grid. Structured, scroll-stopping lists.*
+
+- **Best for:** Wealth, productivity, "X things…". **Hook:** Specific number / list.
+- **Typography:** Inter / Montserrat bold numerals + clean sans body, `clamp(2.6rem, 6.5vw, 5.5rem)` for numbers.
+- **Palette:** bg `#0a0a0f`, cards `rgba(255,255,255,0.04)` with 1px `rgba(255,255,255,0.08)` borders, accent `#7c5cff` or gold; thin grid dividers.
+- **Layout:** Vertical stack of numbered cards divided by hairlines; progress dots along the top edge.
+- **Motion system (GSAP):** Cards flip in from alternating sides (`rotateY: -90° → 0`, `back.out(1.7)`, origin left/right); number badge count-up; the "best/easiest" item pops bigger with accent color change + micro shake.
+- **Signature effects:** Progress dots fill one-per-item; end frame stacks ALL cards as a save bait; subtle glitch on the punchline number.
+- **Retention device:** Open loop ("what's #4?") — the last card reveals only in the final 2 seconds.
+
+### Format 5 — Chat Thriller (`chat-thriller`)
+*Text-message storytime. Suspense via simulated iMessage UI.*
+
+- **Best for:** Reddit stories, confessionals, drama. **Hook:** Open loop / cliffhanger.
+- **Typography:** System UI stack (`-apple-system, Segoe UI, Roboto`), `clamp(1.4rem, 3vw, 2.2rem)`.
+- **Palette:** bg `#0f172a`-dark chat theme; bubbles `#262d40` (incoming) / `#2f6fed` (outgoing), text white.
+- **Layout:** Full simulated chat — top contact bar, timestamps, chat bubbles, typing indicator, one bubble per beat.
+- **Motion system (GSAP):** Bubbles pop in (`scale: 0.8 → 1`, `back.out(1.7)`); typing dots animate 0.6s before each reveal (suspense); read-receipt ticks fill in after each bubble.
+- **Signature effects:** Bubble tint flips red/green on emotional turns; keystroke SFX cue per bubble; final frame flashes the full "screenshot" of the whole chat at the payoff.
+- **Retention device:** The cliffhanger bubble ("…and then he replied:") IS the loop ending → forces rewatch.
+
+### Format cheat-sheet
+
+| # | Format | Slug | Pace | Best niche | Signature motion |
+|---|--------|------|------|------------|------------------|
+| 1 | Word Pop | `word-pop` | Fast | Business | spring-scale words, white flash |
+| 2 | Highlighter | `highlighter` | Medium | Psychology | highlighter sweep, stat count-up |
+| 3 | 3D Editorial | `3d-editorial` | Slow | Mindset | perspective tilt, film grain |
+| 4 | Card Listicle | `card-listicle` | Medium | Finance | flip cards, progress dots |
+| 5 | Chat Thriller | `chat-thriller` | Medium-fast | Storytime | bubbles, typing dots |
+
 ## Premium Design Elements & Styles
 
 - **Low-Opacity Structural Lines:** Horizontal and vertical dividers (with opacity `0.05` to `0.12`) that slowly expand, fade, or act as bounding frames.
@@ -60,7 +176,47 @@ Use this skill whenever the user asks to:
 4. **Add audio** — optional trending/mood track with `data-start`/`data-duration`.
 5. **Lint & check** — validate composition (`hyperframes check`).
 6. **Preview** — live-reload browser preview.
-7. **Render** — deterministic MP4 via headless Chrome + FFmpeg.
+7. **Render** — deterministic vertical 4K MP4 (2160x3840) via headless Chrome + FFmpeg with a proper filename (see below).
+
+## Rendering to 4K with a proper filename
+
+### Resolution strategy
+
+- **Design at 1080x1920 CSS** (the stage in the skeleton below) — ergonomic to author.
+- **Render at device scale factor 2** → output is a true **2160x3840 vertical 4K (UHD)** image. All `clamp()` typography scales fluidly, so compositions hold pixel-perfect at 4K with zero extra CSS.
+- FPS: 30. Determinism contract unchanged: same HTML → same frames → same MP4.
+
+### Render command (this repo's `render/render-frames.mjs`)
+
+```bash
+node render/render-frames.mjs \
+  --html word-pop_reel.html \
+  --name word-pop_money-rules_4k \
+  --duration 15 --fps 30 \
+  --scale 2              # 1080x1920 CSS x2 -> 2160x3840 (4K)
+  # --audio assets/full_mix.m4a   # optional: mux a mixed audio track
+  # --no-assemble                 # frames only, skip the MP4 step
+```
+
+Outputs:
+- Frames → `output/{name}_frames/frame_0000.jpg` …
+- Final video → `output/{name}.mp4` (H.264, yuv420p, CRF 18, faststart, resolution verified by ffprobe)
+
+### Filename convention (the "proper name")
+
+`{format-slug}_{topic-slug}_4k.mp4` — lowercase, hyphens for spaces, topic capped at 3 words.
+
+| Format chosen | Topic | Output name |
+|---|---|---|
+| Word Pop | money rules | `word-pop_money-rules_4k.mp4` |
+| Highlighter | cognitive biases | `highlighter_cognitive-biases_4k.mp4` |
+| 3D Editorial | mental clarity | `3d-editorial_mental-clarity_4k.mp4` |
+| Card Listicle | 5 habits | `card-listicle_5-habits_4k.mp4` |
+| Chat Thriller | reddit roommate | `chat-thriller_reddit-roommate_4k.mp4` |
+
+If audio is included, generate voice lines + mix with the `voice-sfx-audio` skill and keep every beat window aligned to the composition's `data-start` values.
+
+---
 
 ## Upgraded HTML Skeleton (Premium implementation)
 
@@ -354,5 +510,9 @@ Use this skill whenever the user asks to:
 - [ ] Added high-quality SVG filter overlays for custom background aesthetics (grain, noise, dynamic gradient maps)
 - [ ] Message is easily readable on mute (crucial for short-form retention metrics)
 - [ ] Includes a visible hairline retention progress bar synced with the video duration
+- [ ] Format wizard run first: format slug, topic, hook, duration, audio all confirmed
+- [ ] Composition follows ONLY the chosen format's spec (typography, palette, motion, effects)
 - [ ] Rendered MP4 is perfectly deterministic and seamlessly matches timeline durations
+- [ ] Rendered at vertical 4K (2160x3840 via `--scale 2`)
+- [ ] Output named `{format-slug}_{topic-slug}_4k.mp4` and resolution verified with ffprobe
 - [ ] `hyperframes check` passes successfully
