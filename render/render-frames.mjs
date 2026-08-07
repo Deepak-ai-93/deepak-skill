@@ -72,7 +72,7 @@ console.log(`Frames      : ${FRAMES_DIR}`);
 const browser = await chromium.launch({
   channel: "chrome",
   headless: true,
-  args: ["--force-color-profile=srgb", "--hide-scrollbars"],
+  args: ["--force-color-profile=srgb", "--hide-scrollbars", "--autoplay-policy=no-user-gesture-required"],
 });
 
 const page = await browser.newPage({
@@ -125,6 +125,34 @@ for (let i = 0; i < FRAMES; i++) {
       window.__timelines[tl].progress(total > 0 ? tt / total : 0);
     },
     { tt: t, total: TOTAL, tl: TIMELINE }
+  );
+  // Asset reels: deterministically seek visible <video> clips to t - data-start
+  // and wait for 'seeked' before the screenshot. No-op for text-only reels.
+  await page.evaluate(
+    async ({ tt }) => {
+      const vids = [...document.querySelectorAll("video")];
+      if (!vids.length) return;
+      const waiters = [];
+      for (const v of vids) {
+        const wrap = v.closest("[data-start]");
+        if (!wrap || !v.duration) continue;
+        const start = parseFloat(wrap.dataset.start || "0");
+        if (tt < start) continue;
+        const local = Math.min(tt - start, Math.max(v.duration - 0.05, 0.001));
+        if (Math.abs(v.currentTime - local) > 0.01) {
+          waiters.push(
+            new Promise((res) => {
+              const done = () => res();
+              v.addEventListener("seeked", done, { once: true });
+              v.currentTime = local;
+              setTimeout(done, 1500); // safety: never hang a frame
+            })
+          );
+        }
+      }
+      if (waiters.length) await Promise.all(waiters);
+    },
+    { tt: t }
   );
   await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => r())));
   await page.screenshot({
