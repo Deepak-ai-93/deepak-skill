@@ -6,7 +6,7 @@
 | :--- | :--- |
 | **Product Name** | deepak-skill |
 | **Description** | Open-source agent skills for programmatic, short-form video creation (Reels, TikTok, Shorts). |
-| **Version** | 1.1.0 (Upgraded Video Generation Edition) |
+| **Version** | 1.2.0 (Premium Video Generation Edition) |
 | **Status** | Approved |
 | **Author** | Jules (AI Assistant) |
 | **Target Platforms** | Instagram Reels, TikTok, YouTube Shorts, and the agent skill ecosystem (Claude Code, Cursor, Codex, Gemini CLI, etc.) |
@@ -71,18 +71,22 @@ To ensure videos stop the scroll in under 3 seconds, maximize average completion
 
 ---
 
-### 5.2 Module 2: Text-Only Motion Reels (`text-motion-reels`) — *UPGRADED*
+### 5.2 Module 2: Text-Only Motion Reels (`text-motion-reels`) — *UPGRADED (PREMIUM)*
 
 #### A. Purpose
 To handle visual representation using typography-driven layout styles in standard HTML, optimized for headless-browser rendering (HyperFrames compatibility).
 
-#### B. Upgraded Functional Specifications (v1.1.0 Changes)
+#### B. Premium Functional Specifications (v1.2.0 Changes)
 - **Vertical Aspect Ratio:** Render exclusively in vertical 9:16 aspect ratio (**1080x1920 pixels**).
 - **Mute-First Visual Layouts:** Typography-centric layouts where text remains perfectly legible in silence.
+- **Clean Luxury Aesthetic (Anti-Messy):** Layouts must prioritize structured minimalism, high-end typography layout rules, elegant gold or champagne accent colors, and clean margins. Clashing text, high-frequency kinetic flickers, and overlapping frames are banned.
+- **Low-Opacity Ambient Shapes:** Employs geometric decorations, background circular rings, or organic blobs at very low opacity (**0.04 to 0.10**) to build multi-layer cinematic depth.
+- **Low-Opacity Structural Grid Lines:** Incorporates fine horizontal/vertical division lines and Luxury Crosshair framing details (at opacity **0.05 to 0.15**) acting as dynamic composition framing.
+- **Slow Ambient Animations:** Background shapes and framing lines must possess slow, ambient micro-animations (e.g. drifting, 3D rotating, morphing, and line-drawing expansion effects) that run in parallel with kinetic text sequences.
 - **Fluid & Responsive Typography Scale:** Uses CSS math functions (like `clamp()`) and relative viewport units (`vw`, `vh`) to automatically scale titles and details. This prevents overlapping and maintains perfect composition bounds on any render target device.
-- **3D Spatial Typography Transitions:** Text containers and clips must leverage perspective and 3D transforms (`perspective: 1000px`, `transform-style: preserve-3d`) to enable Z-depth slides, 3D rotations, and camera-pan simulations.
+- **3D Spatial Typography Transitions:** Text containers and clips must leverage perspective and 3D transforms (`perspective: 1200px`, `transform-style: preserve-3d`) to enable Z-depth slides, 3D rotations, and camera-pan simulations.
 - **Dynamic Organic Background Overlays:** Implement SVG `<filter>` elements generating fractal noise/turbulence color-mapped at small alphas (e.g. `0.05` to `0.15`) to supply dynamic, film-grain texture over standard gradients.
-- **Visual Retention Indicators:** A dedicated progress bar or loading track synced programmatically with the absolute duration of the video timeline to enhance completion metrics.
+- **Visual Retention Indicators:** A dedicated, ultra-thin hairline progress bar or loading track synced programmatically with the absolute duration of the video timeline to enhance completion metrics.
 - **Design Style Libraries:** Must support the creation of multiple styles:
   - *Stoic / Mindset Minimal:* Clean serif fonts, high contrast, atmospheric backgrounds.
   - *Reddit Storytime:* Chat/SMS interface bubbles with suspenseful pacing.
@@ -166,12 +170,16 @@ For content produced using these skills:
 
 ---
 
-## 9. Upgrades & Changelog (v1.1.0)
+## 9. Upgrades & Changelog
 
-| Skill / Module | Type | Description |
-| :--- | :--- | :--- |
-| `text-motion-reels` | **Upgrade** | Added Fluid & Responsive Typography scaling via the `clamp()` formula. |
-| `text-motion-reels` | **Upgrade** | Implemented 3D Spatial transitions with relative perspective & Z-axis translation. |
-| `text-motion-reels` | **Upgrade** | Integrated dynamic film-grain & noise patterns via native background SVG fractal noise generation. |
-| `text-motion-reels` | **Upgrade** | Built visual retention-boosting progress indicators into core template structure. |
-| `PRD.md` | **Documentation** | Documented and synchronized the upgraded capabilities under Module 2 functional requirements and technical sections. |
+| Version | Skill / Module | Type | Description |
+| :--- | :--- | :--- | :--- |
+| **v1.2.0** | `text-motion-reels` | **Premium Upgrade** | Enforced premium, anti-messy minimalist typography aesthetics. |
+| **v1.2.0** | `text-motion-reels` | **Premium Upgrade** | Integrated fine horizontal/vertical framing lines with low opacity (0.05 - 0.15). |
+| **v1.2.0** | `text-motion-reels` | **Premium Upgrade** | Added low-opacity animated geometric shapes and organic floating background blobs (0.04 - 0.10). |
+| **v1.2.0** | `text-motion-reels` | **Premium Upgrade** | Programmed slow-drift, rotation, morphing, and path-entrance animations for framing lines and background shapes. |
+| **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Added Fluid & Responsive Typography scaling via the `clamp()` formula. |
+| **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Implemented 3D Spatial transitions with relative perspective & Z-axis translation. |
+| **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Integrated dynamic film-grain & noise patterns via native background SVG fractal noise generation. |
+| **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Built visual retention-boosting progress indicators into core template structure. |
+| **v1.1.0** / **v1.2.0** | `PRD.md` | **Documentation** | Documented and synchronized the upgraded capabilities under Module 2 functional requirements and technical sections. |
