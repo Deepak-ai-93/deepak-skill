@@ -6,7 +6,7 @@
 | :--- | :--- |
 | **Product Name** | deepak-skill |
 | **Description** | Open-source agent skills for programmatic, short-form video creation (Reels, TikTok, Shorts). |
-| **Version** | 1.5.0 (Interactive Multistyle Selection & Premium Video Generation Edition) |
+| **Version** | 1.6.0 (Extended Interaction Interface & Premium Video Generation Edition) |
 | **Status** | Approved |
 | **Author** | Jules (AI Assistant) |
 | **Target Platforms** | Instagram Reels, TikTok, YouTube Shorts, and the agent skill ecosystem (Claude Code, Cursor, Codex, Gemini CLI, etc.) |
@@ -140,7 +140,7 @@ To generate local, commercial-safe AI voiceovers and soundscapes, mixing them wi
 
 ## 7. Developer & Agent Interaction Interfaces (Interactive Choice Wizard)
 
-To enable developers and AI coding agents to interact with the skills dynamically, the system specifies an Interactive Wizard workflow.
+To enable developers and AI coding agents to interact with the skills dynamically, the system specifies an Interactive Wizard workflow with structured Prompt Templates.
 
 ### 7.1 Interactive Style Selection Prompts
 
@@ -162,7 +162,7 @@ When starting the workflow, the system prompts the user with the following selec
 
 ### 7.2 Interactive Wizard Integration Prompt Templates
 
-#### Template 1: Dynamic Vox-Style Selector Prompt
+#### Template 1: Dynamic Vox-Style Selector Prompt (Style A)
 **Objective:** Programmatic wizard invoke for Style A.
 ```
 Act as a content engineering agent. Initialize the deepak-skill choice wizard and choose:
@@ -177,18 +177,47 @@ Generate:
 2. Complete, responsive, 1080x1920 HTML5 composition utilizing GSAP for the drawing of the yellow highlight bar (#ffd166) under the active keyword.
 ```
 
-#### Template 2: Dynamic Hormozi-Style Selector Prompt
+#### Template 2: Dynamic Hormozi-Style Selector Prompt (Style B)
 **Objective:** Programmatic wizard invoke for Style B.
 ```
 Act as a content engineering agent. Initialize the deepak-skill choice wizard and choose:
 - Visual Style: Option (2) - Hormozi-Style (High-Impact Captions)
 - Niche: Business & Entrepreneurship
-- Hook Formula: Pain Point / Loss Aversion ("Stop wasting money on bad ads.")
+- Hook Formula: Pain Point / Loss Aversion ("Stop wasting money on bad ads. Do this instead.")
 - Voiceover: Kokoro 'am_adam' (US American male)
 
 Generate:
 1. Dynamic, highly dense vertical storyboard.
 2. Complete, vertical HTML with GSAP executing word-by-word uppercase caption scaling on Montserrat Black.
+```
+
+#### Template 3: Dynamic Minimalist Editorial Selector Prompt (Style C)
+**Objective:** Programmatic wizard invoke for Style C.
+```
+Act as a luxury brand designer. Initialize the deepak-skill choice wizard and choose:
+- Visual Style: Option (3) - Minimalist Editorial (The Luxury Quiet)
+- Niche: Mindset & Stoic Wisdom
+- Hook Formula: Results-First / Authority ("How I mastered mental clarity in 3 weeks.")
+- Voiceover: Kokoro 'af_heart' (US American female)
+- Background track: Cinematic low-frequency ambient pad (ducked to 20%)
+
+Generate:
+1. Structural layout mapping margins and crosshairs.
+2. Elegant HTML5/GSAP layout incorporating Bodoni serif fonts, low-opacity organic blob drifts, and slow slide-up fade text transitions.
+```
+
+#### Template 4: Dynamic Save-Bait Listicle Selector Prompt (Combined Styles)
+**Objective:** Create high-save lists using structured numbers and grids.
+```
+Act as a growth marketer. Initialize the deepak-skill choice wizard and configure:
+- Visual Style: Option (1) or (3) - Structured Grid Minimalist
+- Niche: Wealth & Productivity Hacks
+- Hook Formula: Specific Number / List ("These 3 habit rules feel illegal to know. #3 is easiest.")
+- Voiceover: Kokoro 'am_adam' (US American male)
+
+Generate:
+1. Copywriting storyboard using hook -> agitate -> payoff -> CTA loop format.
+2. Balanced 1080x1920 HTML utilizing thin grid line dividers, progressive number card triggers, and a luxury progress tracking line.
 ```
 
 ---
@@ -226,6 +255,7 @@ For content produced using these skills:
 
 | Version | Skill / Module | Type | Description |
 | :--- | :--- | :--- | :--- |
+| **v1.6.0** | `PRD.md` | **Extended Templates** | Added Template 3 (Minimalist Editorial) and Template 4 (Growth Listicle) to provide developers with fully operational, ready-to-use select prompts. |
 | **v1.5.0** | `PRD.md` | **Interactive Upgrade** | Specified detailed user/agent Interactive Choice Wizard flow requirements and selection prompts for multiple visual styles. |
 | **v1.4.0** | `PRD.md` | **Style Upgrades** | Defined explicit design guidelines and motion specs for Vox-style explainers, Hormozi-style captions, and Minimalist Editorial reels. Added Template 2 prompt for Vox shorts. |
 | **v1.3.0** | `PRD.md` | **Interface Upgrade** | Embedded structured developer/agent Prompt Templates for Stoic and Financial listicle niches. |
@@ -237,4 +267,4 @@ For content produced using these skills:
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Implemented 3D Spatial transitions with relative perspective & Z-axis translation. |
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Integrated dynamic film-grain & noise patterns via native background SVG fractal noise generation. |
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Built visual retention-boosting progress indicators into core template structure. |
-| **v1.1.0-v1.5.0** | `PRD.md` | **Documentation** | Documented and synchronized the upgraded capabilities under Module 2 functional requirements and technical sections. |
+| **v1.1.0-v1.6.0** | `PRD.md` | **Documentation** | Documented and synchronized the upgraded capabilities under Module 2 functional requirements and technical sections. |
