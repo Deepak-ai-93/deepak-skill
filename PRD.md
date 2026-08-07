@@ -6,7 +6,7 @@
 | :--- | :--- |
 | **Product Name** | deepak-skill |
 | **Description** | Open-source agent skills for programmatic, short-form video creation (Reels, TikTok, Shorts). |
-| **Version** | 1.2.0 (Premium Video Generation Edition) |
+| **Version** | 1.3.0 (Premium Video Generation & Interaction Interface Edition) |
 | **Status** | Approved |
 | **Author** | Jules (AI Assistant) |
 | **Target Platforms** | Instagram Reels, TikTok, YouTube Shorts, and the agent skill ecosystem (Claude Code, Cursor, Codex, Gemini CLI, etc.) |
@@ -76,7 +76,7 @@ To ensure videos stop the scroll in under 3 seconds, maximize average completion
 #### A. Purpose
 To handle visual representation using typography-driven layout styles in standard HTML, optimized for headless-browser rendering (HyperFrames compatibility).
 
-#### B. Premium Functional Specifications (v1.2.0 Changes)
+#### B. Premium Functional Specifications
 - **Vertical Aspect Ratio:** Render exclusively in vertical 9:16 aspect ratio (**1080x1920 pixels**).
 - **Mute-First Visual Layouts:** Typography-centric layouts where text remains perfectly legible in silence.
 - **Clean Luxury Aesthetic (Anti-Messy):** Layouts must prioritize structured minimalism, high-end typography layout rules, elegant gold or champagne accent colors, and clean margins. Clashing text, high-frequency kinetic flickers, and overlapping frames are banned.
@@ -141,23 +141,64 @@ Audio elements are embedded directly within HTML layouts so rendering engines ca
 
 ---
 
-## 7. Non-Functional Requirements
+## 7. Developer & Agent Interaction Interfaces (Prompts & Templates)
 
-### 7.1 Determinism
+To allow developers and AI coding agents to interact with and invoke these skills reliably, the system supports standardized Prompt Templates.
+
+### 7.1 Template 1: Premium Mindset & Stoic Wisom Reel
+**Objective:** Generate a premium, high-retention video displaying mindset wisdom with floating geometry.
+```
+Act as a content engineering agent. Using deepak-skill, make a 20-second Stoic Wisdom Reel.
+
+Specifications:
+- Niche: Mindset & Stoic Wisdom
+- Hook Formula: Contrarian / Pattern Break ("Everything you knew about focus is WRONG.")
+- Design Vibe: Premium minimalism (Champagne Gold accents, #050505 background)
+- Visual Overlays: Low-opacity animated lines (opacity 0.08) expanding horizontally, 2 background circles (opacity 0.04) slowly rotating.
+- Voiceover: Kokoro 'af_heart' (US American female)
+- Background track: CC0 lo-fi ambient pad (ducked to 25% volume under voice)
+
+Generate:
+1. Synchronized dual-column script & visual storyboard beats.
+2. Complete, responsive, 1080x1920 HTML5 composition utilizing GSAP for the 3D text perspective transition, ambient shape morphs, and a hairline video progress tracker.
+```
+
+### 7.2 Template 2: Financial Grid-Reveals Reel
+**Objective:** Create a structured grid template with numbered highlights.
+```
+Using deepak-skill, write and build a 15-second financial lists short.
+
+Specifications:
+- Niche: Finance & Wealth
+- Hook Formula: Listicle ("3 finance secrets that feel illegal to know.")
+- Design Vibe: Modern sans-serif, high-contrast grid lines
+- Visual Overlays: Framing structural lines and crosshairs with 0.1 opacity. A progress bar loading at the bottom.
+- Voiceover: Kokoro 'am_adam' (US American male)
+
+Generate:
+1. Line-by-line script and storyboard pacing beats.
+2. Complete HyperFrames-compliant HTML with GSAP 3D Z-axis stagger animations on key financial secrets.
+```
+
+---
+
+## 8. Non-Functional Requirements
+
+### 8.1 Determinism
 - **Frame-Perfect Rendering:** Same HTML composition input must produce the exact same sequence of frames and MP4 artifact. Randomization components (`Math.random()`) are banned unless seeded.
 - **Timing Coherence:** If a storyboard specifies a visual cut at `2.5s`, the visual timeline must scale exactly at `2.5s` and the corresponding voiceover segment must match.
 
-### 7.2 Developer Experience & Agent Compatibility
+### 8.2 Developer Experience & Agent Compatibility
 - **Clean Skill Metadata:** JSON/YAML header blocks (`SKILL.md`) so that LLM agents (Claude Code, Cursor) can instantly parse triggers, design specifications, and formulas.
 - **Simplified CLI Installation:** Provide direct global and local setup commands using `npx skills` to streamline agent toolchains.
 
-### 7.3 Licensing & Monetization
+### 8.3 Licensing & Monetization
 - All dependencies (TTS engines, voices, models, libraries, and asset packages) must adhere to commercial-use friendly licenses (MIT, Apache 2.0, CC0, CC-BY).
 - Prevent model packages with non-commercial clauses (such as CC-BY-NC) from sneaking into default system templates.
 
 ---
 
-## 8. Success Metrics & KPIs (Key Performance Indicators)
+## 9. Success Metrics & KPIs (Key Performance Indicators)
 
 For content produced using these skills:
 
@@ -170,10 +211,11 @@ For content produced using these skills:
 
 ---
 
-## 9. Upgrades & Changelog
+## 10. Upgrades & Changelog
 
 | Version | Skill / Module | Type | Description |
 | :--- | :--- | :--- | :--- |
+| **v1.3.0** | `PRD.md` | **Interface Upgrade** | Embedded structured developer/agent Prompt Templates for Stoic and Financial listicle niches. |
 | **v1.2.0** | `text-motion-reels` | **Premium Upgrade** | Enforced premium, anti-messy minimalist typography aesthetics. |
 | **v1.2.0** | `text-motion-reels` | **Premium Upgrade** | Integrated fine horizontal/vertical framing lines with low opacity (0.05 - 0.15). |
 | **v1.2.0** | `text-motion-reels` | **Premium Upgrade** | Added low-opacity animated geometric shapes and organic floating background blobs (0.04 - 0.10). |
@@ -182,4 +224,4 @@ For content produced using these skills:
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Implemented 3D Spatial transitions with relative perspective & Z-axis translation. |
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Integrated dynamic film-grain & noise patterns via native background SVG fractal noise generation. |
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Built visual retention-boosting progress indicators into core template structure. |
-| **v1.1.0** / **v1.2.0** | `PRD.md` | **Documentation** | Documented and synchronized the upgraded capabilities under Module 2 functional requirements and technical sections. |
+| **v1.1.0-v1.3.0** | `PRD.md` | **Documentation** | Documented and synchronized the upgraded capabilities under Module 2 functional requirements and technical sections. |
