@@ -375,20 +375,24 @@ After rendering, write a **`caption.md`** into the output folder (same folder as
 2. **High CTR / high engagement:** specific numbers, curiosity, one clear CTA ("Save this", "Comment your #", "Follow for part 2"). No hashtags, no tag-spam, max 2 emojis.
 3. **E-E-A-T tone:** authoritative, honest, specific — no hype lies, no fake screenshots. Back claims ("I tested this for 90 days").
 4. **Proper format:** short punchy lines, blank line between hook / value / CTA.
-5. **Character-compatible:** stay under each platform's limit (table below); no control characters; smart quotes and em-dashes are safe everywhere.
+5. **Character-compatible:** every platform caption targets **500–900 characters (aim ~700)** — see Character window below. No control characters; smart quotes and em-dashes are safe everywhere.
 
-### Platform limits (2026)
+### Character window (ALL platforms)
 
-| Platform | Limit | First visible |
-|---|---|---|
-| YouTube Shorts — title | 100 chars | ~60 |
-| YouTube Shorts — description | 5000 chars | ~125 |
-| Instagram | 2200 chars | ~125 |
-| TikTok | 2200 chars (title 100) | ~125 |
-| X (Twitter) | 280 chars | all |
-| Threads | 500 chars | ~125 |
-| LinkedIn | 3000 chars | ~210 |
-| Facebook | 63,206 chars | ~125 |
+Every caption body targets **500–900 characters (aim ~700)** — uniform across every platform. No more platform-length variations.
+
+| Platform | Target window |
+|---|---|
+| YouTube Shorts — title | ≤100 (platform hard cap — this is a title, not a caption) |
+| YouTube Shorts — description | 500–900 |
+| Instagram | 500–900 |
+| TikTok | 500–900 |
+| X (Twitter) | 500–900 (platform truncates at 280 → hook + CTA in first 280) |
+| Threads | 500–900 |
+| LinkedIn | 500–900 |
+| Facebook | 500–900 |
+
+**Truncation-safe rule:** put the hook in the first sentence and the CTA in the last line of EVERY section — then even if a platform cuts the middle, the post still converts.
 
 ### caption.md template
 
@@ -399,34 +403,36 @@ Video: output/{name}_4k/{name}_4k.mp4
 Voiceover: Kokoro ({voice}) • Duration: {s}s • 4K vertical • No hashtags
 
 ## YouTube Shorts
-### Title ({n}/100 chars)
+### Title (≤100 — platform hard cap)
 [High-CTR title — hook phrase, ≤100 chars]
-### Description ({n}/5000 chars — first 125 = the hook)
+### Description ({n}/500–900 chars)
 [Hook line]
 
 [Value: 2–3 short lines, one per beat]
 
 [CTA: "Save this. Share it with someone who needs it."]
 
-## Instagram ({n}/2200 chars)
+## Instagram ({n}/500–900 chars)
 [Same structure, platform tone — casual, ends with a conversation-starter question]
 
-## X / Twitter ({n}/280 chars)
-[1–2 punchy lines + CTA. Trim until it fits]
+## X / Twitter ({n}/500–900 chars)
+[Full 500–900 copy — hook + CTA must fit within the first 280 chars]
 
-## Threads ({n}/500 chars)
+## Threads ({n}/500–900 chars)
 [Conversational hook + one takeaway]
 
-## LinkedIn ({n}/3000 chars)
+## LinkedIn ({n}/500–900 chars)
 [Professional framing: insight → why it matters → CTA for your network]
 
-## TikTok ({n}/2200 chars)
+## TikTok ({n}/500–900 chars)
 [Trend-aware hook + caption text]
 ```
 
 ### Character-count rule
 
-Count every section before finalizing (`wc -m` on the section text). If over the limit → cut filler, never the hook or the CTA.
+Count every section before finalizing (`wc -m`). Each section MUST land in the **500–900 window** (aim ~700):
+- Under 500 → add value (a concrete example or stat), never padding.
+- Over 900 → cut filler, never the hook or the CTA.
 
 ---
 
