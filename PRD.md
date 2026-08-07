@@ -6,7 +6,7 @@
 | :--- | :--- |
 | **Product Name** | deepak-skill |
 | **Description** | Open-source agent skills for programmatic, short-form video creation (Reels, TikTok, Shorts). |
-| **Version** | 1.3.0 (Premium Video Generation & Interaction Interface Edition) |
+| **Version** | 1.4.0 (Multistyle Video Generation & Developer Interface Edition) |
 | **Status** | Approved |
 | **Author** | Jules (AI Assistant) |
 | **Target Platforms** | Instagram Reels, TikTok, YouTube Shorts, and the agent skill ecosystem (Claude Code, Cursor, Codex, Gemini CLI, etc.) |
@@ -71,27 +71,33 @@ To ensure videos stop the scroll in under 3 seconds, maximize average completion
 
 ---
 
-### 5.2 Module 2: Text-Only Motion Reels (`text-motion-reels`) — *UPGRADED (PREMIUM)*
+### 5.2 Module 2: Text-Only Motion Reels (`text-motion-reels`) — *UPGRADED (MULTISTYLE)*
 
 #### A. Purpose
 To handle visual representation using typography-driven layout styles in standard HTML, optimized for headless-browser rendering (HyperFrames compatibility).
 
-#### B. Premium Functional Specifications
-- **Vertical Aspect Ratio:** Render exclusively in vertical 9:16 aspect ratio (**1080x1920 pixels**).
-- **Mute-First Visual Layouts:** Typography-centric layouts where text remains perfectly legible in silence.
-- **Clean Luxury Aesthetic (Anti-Messy):** Layouts must prioritize structured minimalism, high-end typography layout rules, elegant gold or champagne accent colors, and clean margins. Clashing text, high-frequency kinetic flickers, and overlapping frames are banned.
-- **Low-Opacity Ambient Shapes:** Employs geometric decorations, background circular rings, or organic blobs at very low opacity (**0.04 to 0.10**) to build multi-layer cinematic depth.
-- **Low-Opacity Structural Grid Lines:** Incorporates fine horizontal/vertical division lines and Luxury Crosshair framing details (at opacity **0.05 to 0.15**) acting as dynamic composition framing.
-- **Slow Ambient Animations:** Background shapes and framing lines must possess slow, ambient micro-animations (e.g. drifting, 3D rotating, morphing, and line-drawing expansion effects) that run in parallel with kinetic text sequences.
-- **Fluid & Responsive Typography Scale:** Uses CSS math functions (like `clamp()`) and relative viewport units (`vw`, `vh`) to automatically scale titles and details. This prevents overlapping and maintains perfect composition bounds on any render target device.
-- **3D Spatial Typography Transitions:** Text containers and clips must leverage perspective and 3D transforms (`perspective: 1200px`, `transform-style: preserve-3d`) to enable Z-depth slides, 3D rotations, and camera-pan simulations.
-- **Dynamic Organic Background Overlays:** Implement SVG `<filter>` elements generating fractal noise/turbulence color-mapped at small alphas (e.g. `0.05` to `0.15`) to supply dynamic, film-grain texture over standard gradients.
+#### B. Premium Functional Specifications & Supported Visual Styles (v1.4.0 Changes)
+To scale viewer engagement, the video generation module must natively support three distinct trending visual aesthetics:
+
+##### Style A: Vox-Style (The Analytical Explainer)
+*   **Aesthetic Principle:** Clean, authoritative, documentary-style graphic reporting. Emulates investigative newspaper or factual reporting aesthetics.
+*   **Typography:** Bold serif headings (e.g., Playfair Display or Georgia) combined with monospaced detail labels (e.g., Courier or Space Mono).
+*   **Color Profile:** Cream or off-white background backgrounds (`#fbf9f5`) paired with jet-black text (`#1a1a1a`) and vibrant yellow highlighter sweeps (`#ffd166`).
+*   **Unique Motion Cue:** Yellow highlighter sweeps that dynamically stretch across key words and slow map/document pan-and-zooms.
+
+##### Style B: Hormozi-Style (High-Impact Captions)
+*   **Aesthetic Principle:** Ultra-high impact, rapid engagement, loud and modern mobile captions. Optimized for instant read on mute.
+*   **Typography:** Heavy, blocky, capitalized sans-serif fonts (e.g., Montserrat Black or Impact). Large size filling the lower-third quadrant.
+*   **Color Profile:** Dark background (`#000000` or heavy gradient) with stark white text bounded by thick black strokes (`text-shadow` / outlines) and bright neon yellow or green highlights.
+*   **Unique Motion Cue:** Word-by-word spring-scale bouncy pops where the active word highlights in neon yellow and scales up slightly on vocal cadence.
+
+##### Style C: Minimalist Editorial (The Luxury Quiet)
+*   **Aesthetic Principle:** High-end magazine layout, luxury quiet-fashion branding. Prioritizes generous white space and elegance.
+*   **Typography:** High-contrast classic luxury serif typography (e.g., Bodoni, Didot, or Georgia) in regular weight with light italic accents.
+*   **Color Profile:** Monochromatic slate, charcoal, or deep champagne backgrounds with thin low-opacity framing margins (opacity `0.05` to `0.15`).
+*   **Unique Motion Cue:** Slow, soft fade-in slides and ambient floating shapes with subtle drifts.
+
 - **Visual Retention Indicators:** A dedicated, ultra-thin hairline progress bar or loading track synced programmatically with the absolute duration of the video timeline to enhance completion metrics.
-- **Design Style Libraries:** Must support the creation of multiple styles:
-  - *Stoic / Mindset Minimal:* Clean serif fonts, high contrast, atmospheric backgrounds.
-  - *Reddit Storytime:* Chat/SMS interface bubbles with suspenseful pacing.
-  - *Psychology Data Grids:* Modern sans-serif layouts with structured block reveals.
-  - *Aesthetic Chaos Culture:* Poetic, raw typewriter typography with lo-fi aesthetics.
 - **Programmatic Motion Sync (GSAP):**
   - Register a main paused timeline directly to `window.__timelines`.
   - Use programmatic timing triggers matching scene durations (via elements like `.clip` containing `data-start` and `data-duration` attributes).
@@ -130,15 +136,6 @@ To generate local, commercial-safe AI voiceovers and soundscapes, mixing them wi
 | **Audio/Video Processing** | FFmpeg | Video assembly, audio mixing, sidechain ducking, MP4 encoding |
 | **Validation Utility** | HyperFrames | Verifies deterministic frame generation & scene composition |
 
-### 6.1 Programmatic Audio Integration Example
-Audio elements are embedded directly within HTML layouts so rendering engines can compile them side-by-side with GSAP visual timelines:
-```html
-<!-- Background music on a separate track at low default volume -->
-<audio data-start="0" data-duration="15" data-track-index="1" data-volume="0.3" src="bgm_track.mp3"></audio>
-<!-- Main voice track timed to the narration of scene 2 -->
-<audio data-start="1.5" data-duration="8" data-track-index="2" data-volume="0.9" src="voiceover_scene2.wav"></audio>
-```
-
 ---
 
 ## 7. Developer & Agent Interaction Interfaces (Prompts & Templates)
@@ -163,21 +160,22 @@ Generate:
 2. Complete, responsive, 1080x1920 HTML5 composition utilizing GSAP for the 3D text perspective transition, ambient shape morphs, and a hairline video progress tracker.
 ```
 
-### 7.2 Template 2: Financial Grid-Reveals Reel
-**Objective:** Create a structured grid template with numbered highlights.
+### 7.2 Template 2: Vox-Style Explainer Short
+**Objective:** Generate an analytical, documentary-style explainer featuring a cream backdrop and a yellow highlighter.
 ```
-Using deepak-skill, write and build a 15-second financial lists short.
+Act as a documentarian. Using deepak-skill, make a 30-second Vox-style analytical reel.
 
 Specifications:
-- Niche: Finance & Wealth
-- Hook Formula: Listicle ("3 finance secrets that feel illegal to know.")
-- Design Vibe: Modern sans-serif, high-contrast grid lines
-- Visual Overlays: Framing structural lines and crosshairs with 0.1 opacity. A progress bar loading at the bottom.
-- Voiceover: Kokoro 'am_adam' (US American male)
+- Niche: Psychology & Micro-lessons
+- Hook Formula: Curiosity Gap / Open Loop ("This single cognitive bias shapes 90% of your choices...")
+- Design Vibe: Style A (Vox Analytical Explainer)
+- Palette: #fbf9f5 backdrop, jet-black text, dynamic yellow highlight bars (#ffd166).
+- Voiceover: Kokoro 'bm_george' (UK English male)
+- Background track: Upbeat, investigative acoustic guitar (ducked under voice)
 
 Generate:
-1. Line-by-line script and storyboard pacing beats.
-2. Complete HyperFrames-compliant HTML with GSAP 3D Z-axis stagger animations on key financial secrets.
+1. Multi-scene documentary script and timeline beats.
+2. Complete vertical HTML with GSAP executing custom-drawn highlighter lines sliding behind the highlighted words.
 ```
 
 ---
@@ -215,6 +213,7 @@ For content produced using these skills:
 
 | Version | Skill / Module | Type | Description |
 | :--- | :--- | :--- | :--- |
+| **v1.4.0** | `PRD.md` | **Style Upgrades** | Defined explicit design guidelines and motion specs for Vox-style explainers, Hormozi-style captions, and Minimalist Editorial reels. Added Template 2 prompt for Vox shorts. |
 | **v1.3.0** | `PRD.md` | **Interface Upgrade** | Embedded structured developer/agent Prompt Templates for Stoic and Financial listicle niches. |
 | **v1.2.0** | `text-motion-reels` | **Premium Upgrade** | Enforced premium, anti-messy minimalist typography aesthetics. |
 | **v1.2.0** | `text-motion-reels` | **Premium Upgrade** | Integrated fine horizontal/vertical framing lines with low opacity (0.05 - 0.15). |
@@ -224,4 +223,4 @@ For content produced using these skills:
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Implemented 3D Spatial transitions with relative perspective & Z-axis translation. |
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Integrated dynamic film-grain & noise patterns via native background SVG fractal noise generation. |
 | **v1.1.0** | `text-motion-reels` | **Feature Upgrade** | Built visual retention-boosting progress indicators into core template structure. |
-| **v1.1.0-v1.3.0** | `PRD.md` | **Documentation** | Documented and synchronized the upgraded capabilities under Module 2 functional requirements and technical sections. |
+| **v1.1.0-v1.4.0** | `PRD.md` | **Documentation** | Documented and synchronized the upgraded capabilities under Module 2 functional requirements and technical sections. |
