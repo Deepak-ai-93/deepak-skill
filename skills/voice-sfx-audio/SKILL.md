@@ -24,6 +24,8 @@ Use this skill whenever the user asks to:
 
 **Top pick: Kokoro-82M** — Apache 2.0, broadcast-quality narration, runs locally (even CPU), 54 voices across 8+ languages (US/UK English, Spanish, French, Hindi, Italian, Japanese, Mandarin, Brazilian Portuguese).
 
+**Deep & emotive voices:** for a deep, non-robotic narration voice use the male voices — `am_fenrir` (deepest, robust), `am_michael` (most stable), `bm_george` (warm UK). Avoid `am_adam` (deep but rough). Combine with the deep-voice recipe below (Tier 1, CPU-only).
+
 | Engine | License | Run | Best for | Notes |
 |---|---|---|---|---|
 | **Kokoro-82M** ⭐ | Apache 2.0 | Local, CPU-fast | Natural explainer/story narration | Recommended default; `pip install kokoro soundfile` |
@@ -53,6 +55,26 @@ for i, (gs, ps, audio) in enumerate(generator):
 - Story/explainer: calm, natural cadence; use reference audio with the emotion you want (F5/XTTS style)
 - For explicit emotion control, use Chatterbox's exaggeration dial
 - Generate each scene separately, then stitch — easier to re-do one take
+- **Deep voice (CPU):** Kokoro male voice (`am_fenrir`) + `enhance-voice.mjs` (pitch −2 st + warmth EQ) — see the deep-voice recipe below
+
+---
+
+## The deep-voice recipe (Tier 1 — CPU, zero new deps)
+
+> The commands below assume a repo clone (`render/`). In a standalone skill install, copy `generate-voice.mjs` + `enhance-voice.mjs` into your project (or run from a clone) — the recipe itself is just FFmpeg + Kokoro.
+
+The default Kokoro voice (`af_heart`) is the most natural *female* voice, but the "robotic" complaint usually comes from a female register + auto-fitting lines up to 1.35×. For a deep, emotive narration with no GPU:
+
+1. **Pick a deep male voice:** `am_fenrir` (deepest, robust) · `am_michael` (most stable) · `bm_george` (warm UK). Avoid `am_adam` — deep but rough.
+2. **Slow the pace:** cap auto-fit at **1.15×** (`node render/generate-voice.mjs --voice am_fenrir --max-speed 1.15`). If a line still overflows its beat window, **shorten the copy** — never widen the window (FITS ✓ contract).
+3. **Deepen the audio** (duration-preserving, so sync holds):
+```bash
+node render/enhance-voice.mjs --in assets/vo_01_hook.wav --out assets/vo_01_hook_deep.wav
+# pitch −2 semitones (asetrate+atempo) + +4 dB @ 120 Hz warmth EQ (+ --compress optional)
+```
+4. **Master:** `mix-audio.sh` → −14 LUFS.
+
+**Roadmap (GPU):** Tier 2 = Chatterbox (MIT, emotion exaggeration dial 0.0→1.0+, `[pause]`/`[sigh]` tags, zero-shot cloning) · Tier 3 = Zonos / Orpheus (Apache 2.0, emotion sliders / `<laugh>` tags). Full plan: `voice-plan.md`. Never F5-TTS or XTTS (non-commercial models) or Edge-TTS (ToS) for monetized videos.
 
 ---
 

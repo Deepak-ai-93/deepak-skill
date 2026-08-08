@@ -19,7 +19,7 @@ Two rules that make these prompts work:
 | **Style / format** | word-pop · highlighter · 3d-editorial · card-listicle · chat-thriller · svg-ambient | by niche |
 | **Hook direction** | "stop the scroll with a stat" | trend-brief winner |
 | **Assets** | `assets/clips/…` folder (video-asset-reels) | text-only |
-| **Voice / music** | kokoro af_heart, CC0 bed | kokoro, no bed |
+| **Voice / music** | kokoro am_fenrir (deep male), CC0 bed | kokoro am_fenrir, no bed |
 | **Platform** | Reels / TikTok / Shorts | all (caption pack) |
 
 ### Blank template (fill the brackets)
@@ -94,7 +94,7 @@ Two rules that make these prompts work:
 | Prompt | Type |
 |---|---|
 | "motivational reel" | sloppy |
-| "3d-editorial 15s: 'Mastery is subtraction.' — dark minimal, champagne accents, film grain, slow camera push, loop ending, soft female Kokoro voice." | premium |
+| "3d-editorial 15s: 'Mastery is subtraction.' — dark minimal, champagne accents, film grain, slow camera push, loop ending, deep male Kokoro voice (am_fenrir)." | premium |
 
 **Idea sparks:** stoic one-liners · "things I wish I knew at 20" · "you're not lazy, you're exhausted" (validation hook) · "quiet quitting your own life".
 
