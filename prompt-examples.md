@@ -146,7 +146,7 @@ Two rules that make these prompts work:
 
 ## 11. Vibe-coded web apps 🧱
 
-*Runs through **`vibe-code-webapp`**: research → evaluate → `PRD.md` → approval → build → production audit.*
+*Runs through **`vibe-code-webapp`**: research → evaluate → **build pack** (`PRD.md` + stack blueprint: design system + architecture + handoff prompts) → approval → build (CLI or Lovable/Bolt/v0) → production audit.*
 
 | Prompt | Type |
 |---|---|

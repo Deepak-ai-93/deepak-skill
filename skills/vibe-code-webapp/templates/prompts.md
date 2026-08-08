@@ -5,13 +5,14 @@ Works in Claude Code, Cursor, Windsurf, Codex CLI, Gemini CLI, Antigravity, Grok
 
 ---
 
-## 1. Full pipeline (research → evaluate → PRD → approve → build → audit)
+## 1. Full pipeline (idea + stack → build pack → approve → build anywhere → audit)
 
 > Using the **vibe-code-webapp** skill, I want to build **{idea}** for **{audience}**.
-> Run the full pipeline: research demand → evaluate the idea on the SaaS scorecard
-> → write `PRD.md` → **wait for my approval** → build it → run the production audit
-> before you hand it over.
-> Stack preference: {Next.js / React + Vite / Express / whatever fits} · Monetized: {yes / no}
+> Stack preference: **{Next.js / React + Vite / Express / whatever fits}** · Monetized: {yes / no}
+> Run the full pipeline: research demand → analyze my idea + stack and evaluate it
+> on the SaaS scorecard → write the **build pack** (`PRD.md` + `stack-blueprint.md`
+> with the open-source design system + backend architecture + handoff prompts)
+> → **wait for my approval** → build it → run the production audit before handover.
 
 ## 2. Research only (Stage 0)
 
@@ -28,11 +29,13 @@ Works in Claude Code, Cursor, Windsurf, Codex CLI, Gemini CLI, Antigravity, Grok
 > moat, time-to-MVP), give the /35 total and a BUILD / ITERATE / PIVOT verdict
 > with the top 3 risks. Be brutally honest — I'd rather kill it now than build a dud.
 
-## 4. PRD only (Stage 2 — approval gate)
+## 4. Build pack only (Stage 2 — approval gate)
 
-> Using the **vibe-code-webapp** skill, write the `PRD.md` for **{idea}**
-> from the template, with MVP scope, user flows, tech stack, data model,
-> auth + {payments}, KPIs and non-goals. Show it to me for approval — don't
+> Using the **vibe-code-webapp** skill, write the **build pack** for **{idea}**:
+> `PRD.md` (MVP scope, flows, KPIs) + `stack-blueprint.md` (locked stack,
+> design system from the open-source pack, backend architecture, paste-ready
+> data model, numbered build order, and filled handoff prompts for CLI +
+> Lovable/Bolt/v0). Stack: {Next.js / …}. Show both to me for approval — don't
 > write a line of code until I say **approve**.
 
 ## 5. Build (Stage 3 — after approval)
@@ -61,6 +64,38 @@ Works in Claude Code, Cursor, Windsurf, Codex CLI, Gemini CLI, Antigravity, Grok
 > Continue with the **vibe-code-webapp** skill: from the current state of the
 > app, pick the next highest-impact thing in `PRD.md`, implement it, run it,
 > commit. Keep the app green and demoable at all times.
+
+## 9. Analyze + evaluate only (idea + stack in → verdict out)
+
+> Using the **vibe-code-webapp** skill, analyze this idea and stack preference,
+> then evaluate before anything is built: **{idea}**, stack **{Next.js / Vite / …}**,
+> for **{audience}**. Confirm the stack fits (or say why not), score 1–5 on all
+> 7 criteria, give the /35 total and BUILD / ITERATE / PIVOT with top 3 risks.
+> Be brutally honest — I'd rather kill it now than build a dud.
+
+## 10. Build anywhere — handoff prompts (paste the approved build pack)
+
+### CLI agent
+
+> Build the app in `PRD.md` + `stack-blueprint.md` exactly — follow the build
+> order, keep the app runnable after every step, commit after each working
+> feature, tests for auth + billing. Don't redesign; apply the locked design
+> system and architecture as-is.
+
+### Lovable / Bolt / v0 (paste this + the blueprint's §7 details)
+
+> Build a production-ready web app: **{one-liner}**. Stack: Next.js + TypeScript
+> + Tailwind v4 + shadcn/ui + Drizzle + Postgres + Auth.js + Stripe + Vercel.
+> Pages: **{list}**. Design: neutral shadcn tokens, accent **{hue}**, Geist fonts,
+> **{component list}**. Data model: **{tables}**. Auth: email/Google sign-in,
+> protect /dashboard. Payments: **{checkout + webhook → status}**. Features in
+> order: **{must-haves}**. Quality: mobile responsive, empty/loading/error
+> states, accessibility, SEO meta. Run/verify after every step, no gold-plating.
+
+### Any tool, re-prompt after edits
+
+> Keep this project's design system and architecture unchanged. Implement the
+> next item from `PRD.md`'s must-haves exactly as scoped; run it; verify; commit.
 
 ---
 

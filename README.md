@@ -14,7 +14,7 @@ Open-source agent skills for creating **short-form video content and carousel po
 | **video-asset-reels** | Build reels from your own video clips & images — understand the prompt, cut assets to beats, overlay kinetic text, sync a voiceover, render 4K (see [PLAN.md](PLAN.md)) |
 | **video-product-pipeline** | The viral-engineered gatekeeper for every video request: hunt trending topics (`trend-hunt.mjs` + web research) → brainstorm + score angles → analyze ANY prompt (sloppy or not) → write a `video-product.md` spec → **get your approval** → generate (text-motion / asset reels) → audit the frames with a script + dedicated auditor subagent (spelling, text overlap, safe zones, style, readability) |
 | **carousel-post-images** | Scroll-stopping carousel posts (LinkedIn/Instagram) as image sets — **one script, two CLI modes**: **browser render** (slides.html → deterministic 4K PNGs, any CLI) or **native image-model generation** (same deck exports photoreal 4K prompts for Antigravity / Codex `image_gen` / Grok `/imagine`). Photorealistic real-life visuals, viral anti-fluff copywriting, 4 trending styles (Cinematic Real-Life default), per-platform `caption.md` |
-| **vibe-code-webapp** | Build **production-ready vibe-coded web apps** (SaaS / tools / MVPs / internal apps) — **research** demand (`research-idea.mjs`, no API key) → **SaaS evaluator** scorecard (BUILD / ITERATE / PIVOT) → `PRD.md` **approval gate** → build with vibe-coding craft rules (runnable at every step, one feature at a time) → **production audit** (`audit-webapp.mjs` + auditor subagent). Ships copy-paste prompts for any CLI + PRD & production-checklist templates |
+| **vibe-code-webapp** | Build **production-ready vibe-coded web apps** from one idea + stack preference (Next.js, Vite, …) — **analyze + evaluate** (SaaS scorecard → BUILD / ITERATE / PIVOT) → **Build Pack** (`PRD.md` + `stack-blueprint.md`: locked open-source design system + backend architecture + paste-ready data model + build order + **handoff prompts**) → approve → **build anywhere** (CLI, Lovable, Bolt, v0) → **production audit** (`audit-webapp.mjs` + auditor subagent). Ships design-system & backend-architecture packs |
 
 The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline).
 
@@ -146,18 +146,18 @@ Built-in examples — **"Day in the life of an AI developer"** (`examples/day-in
 
 ### Vibe-code web apps (`vibe-code-webapp`)
 
-Build **production-ready vibe-coded web apps** (SaaS, tools, MVPs, internal apps) on any CLI — research demand, evaluate the idea before writing code, approve a PRD, build, then audit:
+Build **production-ready vibe-coded web apps** from a single idea — "I want to build something like X with Next.js" — on any CLI **or** web builder (Lovable, Bolt, v0):
 
 1. **Research** — `node scripts/research-idea.mjs --niche "saas for freelancers" --subreddits "freelance,Entrepreneur" --geo US` → `idea-brief.md` (Reddit pain + Google Trends, no API key)
-2. **Evaluate** — SaaS scorecard (/35) → **BUILD / ITERATE / PIVOT** verdict shared with you
-3. **`PRD.md`** from the template → **your approval** — nothing is coded before you say "approve"
-4. **Build** with vibe-coding craft rules (runnable at every step, one feature at a time, tests on auth/billing)
-5. **Audit** — `node scripts/audit-webapp.mjs --dir . --name app --payments` → auditor subagent signs **PASS** → deliver
+2. **Analyze + evaluate** — your idea and stack preference are analyzed, then scored on the SaaS scorecard (/35) → **BUILD / ITERATE / PIVOT** verdict shared with you
+3. **Build Pack** — `PRD.md` + `stack-blueprint.md`: locked **open-source design system** (Tailwind + shadcn/ui tokens) + **backend architecture** (Drizzle/Postgres, Auth.js, Stripe) + paste-ready data model + numbered build order + **handoff prompts** → **your approval** — nothing is coded before you say "approve"
+4. **Build anywhere** — the pack works in any CLI (craft rules: runnable at every step, one feature at a time) or pasted into **Lovable / Bolt / v0** via the handoff prompt
+5. **Audit** — `node scripts/audit-webapp.mjs --dir . --name app --payments` on whatever the builder produced → auditor subagent signs **PASS** → deliver
 
-Ships `templates/prompts.md` (copy-paste prompts for any CLI), `templates/prd-template.md`, and `templates/production-checklist.md`.
+Ships `templates/prompts.md` (copy-paste + handoff prompts), `templates/design-system.md`, `templates/backend-architecture.md`, `templates/stack-blueprint-template.md`, `templates/prd-template.md`, and `templates/production-checklist.md`.
 
-> "Build me a SaaS for freelancers to get paid faster. Next.js + Stripe. Run the full pipeline."
-> → research → evaluate → PRD → approve → build → audit → deliver
+> "I want to build something like a freelancer invoicing tool with Next.js. Run the full pipeline."
+> → research → evaluate → build pack → approve → build (CLI / Lovable / Bolt) → audit → deliver
 
 ---
 
