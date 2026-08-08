@@ -146,7 +146,7 @@ Two rules that make these prompts work:
 
 ## 11. Vibe-coded web apps 🧱
 
-*Runs through **`vibe-code-webapp`**: detailed idea interview (+ existing-project scan if the folder already has code) → research → evaluate → **build pack** (`PRD.md` + stack blueprint + handoff prompts) + **`TODO.md`** (P0/P1/P2 via `todo.mjs`) → approval of pack AND todo → build **step by step** from `vibe-coder-instructions.md` (BUILD.md) with a detailed `build-report.md` per session → production audit → **everything-auditor** final review (app + plan + instructions + memory + reports → hardening/tests/brainstorming) → daily `MEMORY.md` log.*
+*Runs through **`vibe-code-webapp`**: detailed idea interview (+ existing-project scan if the folder already has code) → research → evaluate → **build pack** (`PRD.md` + stack blueprint + **`sitemap.md`** — full sitemap, every frontend page, backend architecture, workflows — + handoff prompts) + **`TODO.md`** (P0/P1/P2 via `todo.mjs`) → approval of pack AND todo → build **step by step** from `vibe-coder-instructions.md` (BUILD.md) with a detailed `build-report.md` per session → production audit → **everything-auditor** final review (app + plan + instructions + memory + reports → hardening/tests/brainstorming) → daily `MEMORY.md` log.*
 
 | Prompt | Type |
 |---|---|

@@ -27,7 +27,7 @@
 - **{Feature/task}** — `{file paths}` — how it works: {2–5 sentences}. Evidence: {command/output/test}.
 - **{Feature/task}** — `{file paths}` — how it works: {…}. Evidence: {…}.
 
-### 4. Deviations from the plan (stack-blueprint §6 / PRD)
+### 4. Deviations from the plan (stack-blueprint §6 / PRD / sitemap)
 - {e.g. "Blueprint said Auth.js credentials+Google; wired Google first because email verification adds a step — kept credentials in the blueprint for later." — **and** the blueprint/TODO was updated to match, or is flagged for update.}
 - {Any scope change → re-confirmed with user? yes/no + when}
 

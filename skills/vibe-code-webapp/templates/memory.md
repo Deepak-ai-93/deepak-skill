@@ -9,7 +9,7 @@
 - **Goal:** {one line — e.g. "InvoiceFlow — invoices freelancers actually get paid on"}
 - **Stack (locked):** {e.g. Next.js 15 + TS + Tailwind/shadcn + Drizzle/Postgres + Auth.js + Stripe}
 - **Where we are:** {e.g. Stage 4 — building the invoice form · or: launched, now on feature #6}
-- **Pack:** `PRD.md` + `stack-blueprint.md` + `TODO.md` (confirmed {date}) — the contract for this build.
+- **Pack:** `PRD.md` + `stack-blueprint.md` + `sitemap.md` (full sitemap, pages, backend, workflows) + `TODO.md` (confirmed {date}) — the contract for this build.
 
 ## Standing decisions (decided once, never re-litigated)
 - {e.g. Neutral shadcn tokens, indigo accent, Geist fonts — per design-system.md}

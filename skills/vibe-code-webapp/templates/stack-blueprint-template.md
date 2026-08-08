@@ -1,12 +1,13 @@
 # Stack Blueprint — {App Name}
 
 > Copy this template to `stack-blueprint.md` (project root) and fill every field
-> from the analysis + evaluation. This file + `PRD.md` are **the build pack**:
-> everything the builder needs, nothing it doesn't. Tool-agnostic — works in any
-> CLI (Claude Code, Cursor, Codex), Lovable, Bolt, v0, anywhere.
+> from the analysis + evaluation. This file + `PRD.md` + `sitemap.md` are **the
+> build pack**: everything the builder needs, nothing it doesn't. Tool-agnostic —
+> works in any CLI (Claude Code, Cursor, Codex), Lovable, Bolt, v0, anywhere.
 >
-> The pack = `PRD.md` (what to build) + `stack-blueprint.md` (exactly HOW: design
-> system + architecture + data + build order + handoff prompts).
+> The pack = `PRD.md` (what to build) + `sitemap.md` (the map: every route, page,
+> endpoint, workflow) + `stack-blueprint.md` (exactly HOW: design system +
+> architecture + data + build order + handoff prompts).
 
 ## 1. Identity & verdict
 
@@ -38,8 +39,9 @@
 ## 3. Design system (open-source, applied as-is)
 
 - **Reference:** `templates/design-system.md` — tokens, typography, layout, components.
+- **Full sitemap + page map:** see `sitemap.md` (every route, every page block, all workflows). The quick table below is the summary — fill BOTH from the same list of pages.
 - **Palette:** neutral shadcn tokens + one accent (`--primary` hue only): `{243 75% 59%}`.
-- **Pages & components map:**
+- **Pages & components map (summary — full blocks in `sitemap.md` §2):**
 
 | Page/Route | Components (shadcn) | Notes |
 |---|---|---|
@@ -99,10 +101,11 @@ Rules: `user_id` FK on every owned table · `created_at` default now() · indexe
 ### A. CLI agent (Claude Code / Cursor / Codex / …)
 
 ```
-Build the app described in PRD.md and stack-blueprint.md in this folder.
-Follow the build order exactly; keep the app runnable after every step;
-commit after each working feature; cover auth + billing with tests.
-Don't redesign — apply the locked design system and architecture as-is.
+Build the app described in PRD.md, stack-blueprint.md and sitemap.md in this
+folder. The sitemap is the map: every route/page/endpoint in it must exist,
+nothing else. Follow the build order exactly; keep the app runnable after
+every step; commit after each working feature; cover auth + billing with
+tests. Don't redesign — apply the locked design system and architecture as-is.
 ```
 
 ### B. Lovable / Bolt / v0 (web builders — paste everything)

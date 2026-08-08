@@ -36,8 +36,8 @@ _Completed tasks move here (status `[x]`) — `node scripts/todo.mjs done <id>`.
 - **Priorities:** `P0` = do first (blocks everything else) · `P1` = important · `P2` = nice to have. Order within a group is the suggested build order.
 - **Status markers:** `[ ]` todo · `[~]` doing · `[!]` blocked · `[x]` done.
 - **IDs** (`#n`) are assigned by `todo.mjs add` and never reused — stable for `priority/done/doing/blocked/todo/remove`.
-- **Confirm:** the agent runs `node scripts/todo.mjs confirm` only after the user explicitly approves (verbally or via chat). The build pack (`PRD.md` + `stack-blueprint.md`) and this list are confirmed together — no code before both are approved.
+- **Confirm:** the agent runs `node scripts/todo.mjs confirm` only after the user explicitly approves (verbally or via chat). The build pack (`PRD.md` + `stack-blueprint.md` + `sitemap.md`) and this list are confirmed together — no code before both are approved.
 - **User changes mid-build:** "make task 4 P0" → `node scripts/todo.mjs priority 4 P0`. "add a task" → `node scripts/todo.mjs add "…" --p P1`. The agent then works the new order and says what changed.
 - **Done only when verified:** a task is `done` after it runs and is verified — not when the code is merely written.
-- **Keep the list in sync with the pack:** if a confirmed task contradicts `PRD.md` or `stack-blueprint.md`, update both and re-confirm scope with the user.
+- **Keep the list in sync with the pack:** if a confirmed task contradicts `PRD.md`, `stack-blueprint.md` or `sitemap.md`, update them and re-confirm scope with the user.
 - **Script owns the four sections** (`P0/P1/P2/Done`): `todo.mjs` re-sorts tasks into them on every change. Keep prose notes **above the list** or **under the Done section** — non-task lines between tasks are not preserved by the script. You can also edit the file by hand; the script only parses lines matching the exact format above.

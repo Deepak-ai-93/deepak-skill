@@ -3,7 +3,7 @@
 > **Copy this file to the project root as `BUILD.md` the moment the build starts**
 > (Stage 4 of the vibe-code-webapp skill). It is the vibe coder's operating manual:
 > step-by-step, both for **new projects** and **existing projects**.
-> The user confirmed `PRD.md` + `stack-blueprint.md` + `TODO.md` — build ONLY what they say.
+> The user confirmed `PRD.md` + `stack-blueprint.md` + `sitemap.md` + `TODO.md` — build ONLY what they say.
 
 ---
 
@@ -14,7 +14,8 @@
 | `MEMORY.md` — where the project stands | Working app (runnable after every change) |
 | `PRD.md` — WHAT to build (the contract) | `TODO.md` updated (`todo.mjs done <id>`) |
 | `stack-blueprint.md` — exactly HOW (build order §6) | `build-report.md` appended (detailed, evidence-backed) |
-| `TODO.md` — the confirmed task list (P0/P1/P2) | `MEMORY.md` updated (standing decisions + today's entry) |
+| `sitemap.md` — the MAP: every route, page, endpoint, workflow | `MEMORY.md` updated (standing decisions + today's entry) |
+| `TODO.md` — the confirmed task list (P0/P1/P2) | | |
 
 **Golden rule:** implement → run → verify → mark done → commit → report. Never two steps without running. Never build anything the user hasn't approved.
 
@@ -26,7 +27,7 @@
 flowchart TD
     A[Session start: read MEMORY.md] --> B{Check TODO.md status}
     B -->|NOT confirmed| STOP[STOP - get user approval first]
-    B -->|confirmed| C[Read PRD.md + stack-blueprint.md + TODO.md]
+    B -->|confirmed| C[Read PRD.md + stack-blueprint.md + sitemap.md + TODO.md]
     C --> D{Any open P0/P1 task?}
     D -->|yes| E[Pick highest-priority open task]
     E --> F[Read its scope - ref: PRD / blueprint section]
@@ -48,7 +49,7 @@ flowchart TD
 
 ```
 Session start ──► read MEMORY.md ──► check TODO confirmed? ──NO──► STOP (get approval)
-                                  ──YES──► read PRD + blueprint + TODO
+                                  ──YES──► read PRD + blueprint + sitemap + TODO
                                            │
                                            ▼
                             ┌─── highest-priority open task ───┐
@@ -77,7 +78,7 @@ Session start ──► read MEMORY.md ──► check TODO confirmed? ──NO�
 ## 2. Session start ritual (every session, ~2 minutes)
 
 1. **Read `MEMORY.md` first.** Greet with *"Picking up from {last date}: next is {Next line}"*. Never re-ask what memory already answers.
-2. **Read `PRD.md` + `stack-blueprint.md` + `TODO.md`.** Note the current task.
+2. **Read `PRD.md` + `stack-blueprint.md` + `sitemap.md` + `TODO.md`.** `sitemap.md` is the map — every route, page, endpoint and workflow; build exactly what it lists, nothing else. Note the current task.
 3. **Check the gate:** if `TODO.md` shows `Confirmed: NO`, **stop** — no code until the user approves (Stage 3).
 4. **Open `build-report.md`** (create from the template if missing) — today's session section.
 
@@ -161,7 +162,8 @@ The final report (`build-report.md` complete + `audit-report.md` PASS) is handed
 
 ## 8. What NOT to do
 
-- ❌ Build anything not in the confirmed `PRD.md` / `TODO.md` (gold-plating → `NEXT.md` or P2)
+- ❌ Build anything not in the confirmed `PRD.md` / `sitemap.md` / `TODO.md` (gold-plating → `NEXT.md` or P2)
+- ❌ Add or remove routes/pages/endpoints that aren't in `sitemap.md` — if the sitemap needs changing, update it AND re-confirm with the user
 - ❌ Redesign the app — apply the locked design system and architecture as-is
 - ❌ Write secrets in code — `process.env` only, `.env.example` committed, `.env` ignored
 - ❌ Skip running between changes, or commit an app that doesn't start

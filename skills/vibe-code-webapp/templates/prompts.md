@@ -12,8 +12,10 @@ Works in Claude Code, Cursor, Windsurf, Codex CLI, Gemini CLI, Antigravity, Grok
 > Run the full pipeline: run the detailed **idea interview** first (ask me the
 > `idea-interview.md` questions, I'll answer or say "skip"), then research demand,
 > evaluate my idea on the SaaS scorecard, write the **build pack**
-> (`PRD.md` + `stack-blueprint.md` + a **`TODO.md` with P0/P1/P2 priorities**
-> managed by `todo.mjs`) → **wait for my approval of the pack AND the todo list**
+> (`PRD.md` + `stack-blueprint.md` + **`sitemap.md`** — the full sitemap with
+> every frontend page, the backend architecture and all workflows — + a
+> **`TODO.md` with P0/P1/P2 priorities** managed by `todo.mjs`) → **wait for my
+> approval of the pack AND the todo list**
 > → build it **step by step** from `vibe-coder-instructions.md` (BUILD.md),
 > file a detailed `build-report.md`, run the production audit, then spawn the
 > **everything-auditor** for the final review (app + plan + instructions + memory
@@ -70,9 +72,12 @@ Works in Claude Code, Cursor, Windsurf, Codex CLI, Gemini CLI, Antigravity, Grok
 > `PRD.md` (MVP scope, flows, KPIs) + `stack-blueprint.md` (locked stack,
 > design system from the open-source pack, backend architecture, paste-ready
 > data model, numbered build order, and filled handoff prompts for CLI +
-> Lovable/Bolt/v0). Then turn the build order into a **`TODO.md`** task list with
-> P0/P1/P2 priorities (`node scripts/todo.mjs init` + `add`). Stack: {Next.js / …}.
-> Show me the pack AND the todo list — don't write a line of code until I say **approve**.
+> Lovable/Bolt/v0) + **`sitemap.md`** (from `templates/sitemap-pages.md`: the
+> full sitemap with every route, every frontend page block, the backend
+> architecture and all user/system workflows). Then turn the build order into a
+> **`TODO.md`** task list with P0/P1/P2 priorities (`node scripts/todo.mjs init`
+> + `add`). Stack: {Next.js / …}. Show me the pack AND the todo list — don't
+> write a line of code until I say **approve**.
 
 ## 8. Build (Stage 4 — after approval)
 
@@ -93,7 +98,7 @@ Works in Claude Code, Cursor, Windsurf, Codex CLI, Gemini CLI, Antigravity, Grok
 ## 10. Confirm the pack + todo (the gate)
 
 > Using the **vibe-code-webapp** skill, I **approve** the build pack
-> (`PRD.md` + `stack-blueprint.md`) AND the `TODO.md` list. Run
+> (`PRD.md` + `stack-blueprint.md` + `sitemap.md`) AND the `TODO.md` list. Run
 > `node scripts/todo.mjs confirm` (and `priority` re-orders if I gave any),
 > then start building per the todo list.
 
@@ -135,10 +140,11 @@ Works in Claude Code, Cursor, Windsurf, Codex CLI, Gemini CLI, Antigravity, Grok
 
 ### CLI agent
 
-> Build the app in `PRD.md` + `stack-blueprint.md` + `TODO.md` exactly — work the
-> todo list in priority order, keep the app runnable after every task, commit after
-> each working feature, tests for auth + billing. Don't redesign; apply the locked
-> design system and architecture as-is.
+> Build the app in `PRD.md` + `stack-blueprint.md` + `sitemap.md` + `TODO.md`
+> exactly — work the todo list in priority order, keep the app runnable after
+> every task, commit after each working feature, tests for auth + billing. The
+> sitemap is the map: every route/page/endpoint in it must exist, nothing else.
+> Don't redesign; apply the locked design system and architecture as-is.
 
 ### Lovable / Bolt / v0 (paste this + the blueprint's §7 details)
 
@@ -177,12 +183,26 @@ Works in Claude Code, Cursor, Windsurf, Codex CLI, Gemini CLI, Antigravity, Grok
 
 > Using the **vibe-code-webapp** skill, spawn the FINAL REVIEW everything-auditor
 > subagent exactly as described in SKILL.md Stage 6b: it must analyze THE APP
-> (audit-report.md), THE PLAN (PRD/blueprint/TODO vs what was built), THE
-> INSTRUCTIONS (SKILL.md + templates + BUILD.md — feedback to improve the
-> skill), MEMORY (MEMORY.md), and REPORTS (build-report.md). Then run the fix
-> loop: apply HARDENING fixes + TEST HARNESS gaps → re-audit → PASS; add the
-> BRAINSTORMED angles to `NEXT.md`/P2; submit the SKILL FEEDBACK edits to the
-> user and apply only with approval. Report the verdict + what changed.
+> (audit-report.md), THE PLAN (PRD/blueprint/sitemap/TODO vs what was built —
+> routes and pages must match `sitemap.md`), THE INSTRUCTIONS (SKILL.md +
+> templates + BUILD.md — feedback to improve the skill), MEMORY (MEMORY.md),
+> and REPORTS (build-report.md). Then run the fix loop: apply HARDENING fixes
+> + TEST HARNESS gaps → re-audit → PASS; add the BRAINSTORMED angles to
+> `NEXT.md`/P2; submit the SKILL FEEDBACK edits to the user and apply only with
+> approval. Report the verdict + what changed.
+
+## 20. Write the app map — sitemap + pages + backend architecture + workflows (Stage 3)
+
+> Using the **vibe-code-webapp** skill, write **`sitemap.md`** for **{idea}** from
+> `templates/sitemap-pages.md`: (1) the **full sitemap** — Mermaid diagram +
+> complete route table (public / auth / app / API, auth level, existing-project
+> ✅/➕/🆕 markers), (2) every **frontend page** block (purpose, layout, auth,
+> components, data, actions, states), (3) the **backend architecture** (folder
+> structure, paste-ready data model, every endpoint/server action, auth +
+> payments flows, env vars), and (4) the **workflows** (numbered user journeys
+> + system workflows + sequence diagram). No `{…}` placeholders left; every
+> PRD must-have appears as a route + a workflow. Add it to the build pack before
+> presenting it for approval.
 
 ---
 
@@ -191,7 +211,7 @@ Works in Claude Code, Cursor, Windsurf, Codex CLI, Gemini CLI, Antigravity, Grok
 1. **Read memory first** — `MEMORY.md` at session start; append today's entry at the end.
 2. **Run early, run often** — the app must start after every change, not at the end.
 3. **Work the TODO, one task at a time** — implement → run → verify → `done` → commit. No mega-branches.
-4. **No gold-plating** — build what `PRD.md` + the todo list say; ideas for later go in `NEXT.md` or P2.
+4. **No gold-plating** — build what `PRD.md` + `sitemap.md` + the todo list say; ideas for later go in `NEXT.md` or P2.
 5. **Tests for the money paths** — auth, billing, and anything that deletes data.
 6. **Secrets never in code** — `process.env` only, `.env.example` committed, `.env` ignored.
 7. **Production audit before handover** — every deliverable passes `audit-webapp.mjs` + the auditor.

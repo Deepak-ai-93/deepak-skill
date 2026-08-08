@@ -4,7 +4,7 @@
 // stack, folder structure, routes/pages, data/auth/payment markers, env files,
 // quality markers (tests/lint/CI/deploy) — the ground truth the build pack is
 // planned on. The agent completes the judgment sections (existing features,
-// gaps, extension opportunities) before writing PRD.md + stack-blueprint.md.
+// gaps, extension opportunities) before writing PRD.md + stack-blueprint.md + sitemap.md + TODO.md.
 //
 // Usage:
 //   node scripts/scan-project.mjs --dir . --name my-app [--out output/scan]
@@ -173,7 +173,7 @@ const md = `# Project Scan — ${NAME}
 - **Date:** ${new Date().toISOString().slice(0, 10)}
 - **Project dir:** ${DIR} · **Source files:** ${srcCount} · **Files scanned:** ${textFiles.length}
 - **Mode:** existing project — the build pack EXTENDS this app, it does not start from zero
-- **Next:** agent completes sections 3–9, then writes \`PRD.md\` + \`stack-blueprint.md\` + \`TODO.md\` on top of this ground truth.
+- **Next:** agent completes sections 3–9, then writes \`PRD.md\` + \`stack-blueprint.md\` + \`sitemap.md\` (full sitemap, pages, backend, workflows) + \`TODO.md\` on top of this ground truth.
 
 ## 1. Automated scan (script verdicts)
 
