@@ -1,6 +1,6 @@
 # deepak-skill 🎬
 
-Open-source agent skills for creating **short-form video content** — text-only motion graphic reels, hook copywriting, storyboarding, retention engineering, and AI voiceover + sound design. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, and 70+ more via the skills ecosystem).
+Open-source agent skills for creating **short-form video content and carousel posts** — text-only motion graphic reels, viral hook copywriting, storyboarding, retention engineering, AI voiceover + sound design, and native-image-model carousels. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
 
 [![skills.sh](https://skills.sh/b/Deepak-ai-93/deepak-skill)](https://skills.sh/Deepak-ai-93/deepak-skill)
 
@@ -35,7 +35,7 @@ Run this **inside your project folder**:
 npx skills add Deepak-ai-93/deepak-skill --all
 ```
 
-That's it. It installs only the three skills into `.agents/skills/` — no heavy media, no demo files.
+That's it. It installs all six skills into `.agents/skills/` — no heavy media, no demo files.
 
 ### 3. Use it with any CLI
 
@@ -64,7 +64,8 @@ The agent will run the format wizard, build the composition, and render your 4K 
 
 ```bash
 ls .agents/skills/
-# text-motion-reels  hook-storyboard-retention  voice-sfx-audio
+# carousel-post-images  hook-storyboard-retention  text-motion-reels
+# video-asset-reels  video-product-pipeline  voice-sfx-audio
 ```
 
 **Update:** `npx skills update` • **Remove:** `npx skills remove <skill-name>`
@@ -117,14 +118,28 @@ The premium default for **every** video request — engineered to reach millions
 
 1. **Trend research + brainstorm** — `node render/trend-hunt.mjs --niche "{topic}" --subreddits "{r1},{r2}" --geo US` (Reddit top-of-day + Google Trends, no API key) + web research → ≥5 angles scored on the viral scorecard → winner locked in `trend-brief.md`
 2. **Analyze** the prompt (asks ≤3 clarifying questions if vague — never guesses silently)
-2. **Write `video-product.md`** — full spec: style, hook, beat-by-beat text + timings, safe-zone map, voice, audio, output name
-3. **Stop and wait for your approval** — nothing is generated before you say "approve" (or "edit")
-4. **Generate** by delegating to `text-motion-reels` / `video-asset-reels` / `voice-sfx-audio`
-5. **Audit** — `node render/audit-composition.mjs --html reel.html` captures a keyframe per beat and auto-checks safe zones (x 8–92%, y 15–85%), text overlap, word caps & determinism, then a dedicated **auditor subagent** reviews spelling, style and readability and signs `audit-report.md` PASS before delivery
-6. **Deliver** — MP4 + `caption.md` + `video-product.md` + `trend-brief.md` + `audit-report.md`
+3. **Write `video-product.md`** — full spec: style, hook, beat-by-beat text + timings, safe-zone map, voice, audio, output name
+4. **Stop and wait for your approval** — nothing is generated before you say "approve" (or "edit")
+5. **Generate** by delegating to `text-motion-reels` / `video-asset-reels` / `voice-sfx-audio`
+6. **Audit** — `node render/audit-composition.mjs --html reel.html` captures a keyframe per beat and auto-checks safe zones (x 8–92%, y 15–85%), text overlap, word caps & determinism, then a dedicated **auditor subagent** reviews spelling, style and readability and signs `audit-report.md` PASS before delivery
+7. **Deliver** — MP4 + `caption.md` + `video-product.md` + `trend-brief.md` + `audit-report.md`
 
 > "Make a 20-second psychology reel — hook: 'Your brain does this every time you scroll.'"
 > → spec file first → approve → generate → audit → deliver
+
+### Carousel posts (`carousel-post-images`)
+
+Scroll-stopping LinkedIn/Instagram **carousels as image sets** — built for CLIs with a **native image model** (Antigravity CLI, OpenAI Codex, Grok Build), with a deterministic HTML→PNG fallback that works anywhere:
+
+1. The agent analyzes the prompt, picks one of **3 trending styles** (Dark Terminal / Editorial Cards / Neon Gradient), and plans 8–10 slides (cover hook → beats → CTA)
+2. **Path A — native model:** one prompt per slide via the CLI's image tool (Codex `image_gen` / Grok `/imagine` / Antigravity artifacts); text is verified — LLM models garble on-image text, so any wrong character gets regenerated or falls back to Path B
+3. **Path B — deterministic (any CLI):** `slides.html` → `node render/render-carousel.mjs --html slides.html --out carousel/` — pixel-perfect PNGs, text never garbled
+4. **`caption.md`** written next to the images (500–900 chars per platform, no hashtags, hook first, one CTA)
+
+Built-in example — **"Day in the life of an AI developer"** at `skills/carousel-post-images/examples/day-in-the-life-dev/`: 8 rendered slides (Dark Terminal style) + a full caption pack.
+
+> "Make a carousel: day in the life of an AI developer. Style: Dark Terminal. 8 slides, LinkedIn."
+> → slide map → 8 PNGs → `caption.md` → auditor check → deliver
 
 ---
 
