@@ -31,6 +31,17 @@ Use this skill whenever the user asks to:
 
 ---
 
+## 0. Trend research & brainstorming (go viral on purpose)
+
+Before writing any hook, find out what is **rising right now** in the niche. Research first, brainstorm second — never settle on the first idea:
+
+1. **Harvest signals** — if the `video-product-pipeline` skill is installed, run `node scripts/trend-hunt.mjs --niche "{topic}" --subreddits "{r1},{r2}" --geo US` (Reddit top-of-day + Google Trends, no API key); then web-research **TikTok Creative Center, X trending, YouTube Trending**, and niche subreddits. **Freshness rule:** rising > peaked — nothing older than ~14 days. Note date + source per signal.
+2. **Brainstorm ≥5 angles** — hook-formula remix (apply each formula in Section 1 to the trend topic), audience lens (beginner / skeptic / expert), pain-first (mine the Reddit signals for the most repeated pain).
+3. **Score with the viral scorecard (1–5 each, /35):** Relatability · Curiosity gap · Hook strength · Format fit · Trend momentum · Mute-first clarity · Loopability. **Winner rule:** highest score; tie → strongest curiosity gap.
+4. **Lock the winner** — it becomes the hook (Section 1) and the beat sheet (Section 3). Engineered virality = trend momentum + proven hook formula + mute-first craft, not luck.
+
+---
+
 ## 1. Hook copywriting formulas (stop the scroll)
 
 Pick ONE hook formula per video. Fill the blanks from the niche.

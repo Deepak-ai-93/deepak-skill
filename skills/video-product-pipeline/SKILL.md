@@ -1,12 +1,12 @@
 ---
 name: video-product-pipeline
-description: Premium production workflow for ANY short-form video request (reels, TikTok, Shorts) — analyze the prompt (even vague or sloppy ones), write a video-product.md spec, STOP and wait for user approval, then generate using text-motion-reels / video-asset-reels / voice-sfx-audio, and finally audit the finished composition with an automated script plus a dedicated auditor subagent (spelling, text overlap, safe zones, style, readability). Use for every video-generation request.
+description: Viral-engineered production workflow for ANY short-form video request (reels, TikTok, Shorts) — hunt trending viral topics for the prompt (trend-hunt.mjs + web research), brainstorm and score angles with a viral scorecard, write a video-product.md spec, STOP and wait for user approval, then generate using text-motion-reels / video-asset-reels / voice-sfx-audio, and finally audit the finished composition with an automated script plus a dedicated auditor subagent (spelling, text overlap, safe zones, style, readability). Use for every video-generation request.
 ---
 
 # skill: video-product-pipeline
 
-**Name:** Prompt → Video Product → Approval → Generation → Audit pipeline
-**Description:** The premium gatekeeper around every video-generation skill in this repo. A bad prompt can no longer produce a bad video silently: the agent **analyzes** the prompt, writes a complete **`video-product.md`** spec, **waits for explicit user approval**, only then generates (delegating to `text-motion-reels`, `video-asset-reels`, `voice-sfx-audio`), and after rendering **audits** the frames with an automated script + a dedicated auditor subagent before anything is delivered.
+**Name:** Trend Research → Brainstorm → Video Product → Approval → Generation → Audit pipeline
+**Description:** The premium gatekeeper around every video-generation skill in this repo, built to engineer reels that reach millions of views. A bad prompt can no longer produce a bad video silently: the agent first **hunts trending viral topics** for the prompt and **brainstorms + scores angles**, then **analyzes** the prompt, writes a complete **`video-product.md`** spec, **waits for explicit user approval**, only then generates (delegating to `text-motion-reels`, `video-asset-reels`, `voice-sfx-audio`), and after rendering **audits** the frames with an automated script + a dedicated auditor subagent before anything is delivered.
 
 ---
 
@@ -14,11 +14,11 @@ description: Premium production workflow for ANY short-form video request (reels
 
 Use this skill for **every** "make a reel / short / TikTok" request, no matter how good or how broken the prompt is:
 
-- "make a reel about motivation" (vague) → analyze → spec → approve → generate → audit
-- A fully scripted, detailed request → still spec → approve → generate → audit (the spec is the contract)
+- "make a reel about motivation" (vague) → trend research → brainstorm → analyze → spec → approve → generate → audit
+- A fully scripted, detailed request → still trend-check, spec, approve, generate, audit (the trend check is the viral advantage)
 - A prompt with typos, contradictions, or missing info → never guess silently — ask, then spec
 
-**Invariant:** *No HTML, no rendering, no audio is produced before the user has approved `video-product.md`.*
+**Invariant:** *Research and brainstorming are always allowed; **no HTML, no rendering, no audio** is produced before the user has approved `video-product.md`.*
 
 ---
 
@@ -32,7 +32,7 @@ npx skills add Deepak-ai-93/deepak-skill --skill video-product-pipeline
 npx skills add Deepak-ai-93/deepak-skill --skill video-product-pipeline -g
 ```
 
-Installs to `.agents/skills/video-product-pipeline/` (`SKILL.md` + `scripts/`). It *orchestrates* the other skills, so also install them:
+Installs to `.agents/skills/video-product-pipeline/` (`SKILL.md` + `scripts/`: `audit-composition.mjs`, `trend-hunt.mjs`, `spec-template.md`, `trend-brief-template.md`). It *orchestrates* the other skills, so also install them:
 
 ```bash
 npx skills add Deepak-ai-93/deepak-skill --skill text-motion-reels --skill video-asset-reels --skill voice-sfx-audio
@@ -42,17 +42,60 @@ npx skills add Deepak-ai-93/deepak-skill --skill text-motion-reels --skill video
 
 ---
 
-## The 5-stage workflow
+## The 6-stage workflow
 
 ```
-prompt ──► 0. ANALYZE ──► 1. video-product.md ──► USER APPROVAL ──► 2. GENERATE ──► 3. AUDIT ──► 4. DELIVER
-                 │              │                     ▲                                 │
-                 └── ask up to 3 questions ──────────┘  (edit / reject loops)          └─ fix loop until PASS
+prompt ──► 0. TREND + BRAINSTORM ──► 1. ANALYZE ──► 2. video-product.md ──► USER APPROVAL ──► 3. GENERATE ──► 4. AUDIT ──► 5. DELIVER
+                                        │              │                      ▲                              │
+                                        └── ask ≤3 ────┘   (edit / reject)                                  └─ fix loop until PASS
 ```
 
-### Stage 0 — Analyze the prompt (never generate yet)
+### Stage 0 — Trend research & brainstorming (go viral on purpose)
 
-Read the prompt **as written** — including the bad ones. Extract or confirm:
+Before analyzing the prompt, find out what is **rising right now** in the niche. Goal: one **`trend-brief.md`** (from `scripts/trend-brief-template.md`) that names the angle most likely to reach millions of views.
+
+**Step 0a — harvest signals (no API key needed):**
+
+```bash
+node scripts/trend-hunt.mjs --niche "personal finance" --subreddits "personalfinance,Entrepreneur,financialindependence" --geo US
+```
+
+`trend-hunt.mjs` fetches **Reddit top-of-day posts** (real pain points + the exact language people use) and **Google Trends "Trending now" RSS** (what is rising in a region today), then writes the `trend-brief.md` scaffold. **Copy the scaffold to the project root** (it becomes the live `trend-brief.md`) and complete it. Then run **agent web research** for platform-native signals:
+
+| Source | What it gives | Freshness rule |
+|---|---|---|
+| `trend-hunt.mjs` | Reddit top-by-day + Google Trends rising | today |
+| TikTok Creative Center | top ads, hashtags, sounds per market | last 7 days |
+| Google Trends (web) | rising queries, geo breakdown | last 7 days |
+| X / Twitter trending | live conversation, hot takes | today |
+| YouTube Trending | formats + topics currently popping | last 7 days |
+| Niche subreddits (via trend-hunt) | community pain, jargon, desires | today |
+
+**Freshness rule:** a signal older than ~14 days is probably decayed — prefer **rising** over **peaked** trends. Write date + source next to every signal.
+
+**Step 0b — brainstorm ≥5 angles.** Never settle on the first idea:
+
+1. **Hook-formula remix** — take the trend topic and apply each hook formula (curiosity gap / contrarian / results-first / listicle / PAS) → 5 candidates.
+2. **Audience lens** — reframe the trend for 3 sub-audiences (beginner / skeptic / expert).
+3. **Pain-first** — mine the Reddit signals for the most repeated pain and make it the hook.
+
+**Step 0c — score every angle with the viral scorecard (1–5 each, /35):**
+
+| Criterion | Ask |
+|---|---|
+| Relatability | Does the target viewer see themselves in 1 second? |
+| Curiosity gap | Is there a real open loop the brain must close? |
+| Hook strength | Would the hook stop a 1.7s scroll? |
+| Format fit | Does the angle fit a trending format in this skill? |
+| Trend momentum | Riding a live rise, not a decayed trend? |
+| Mute-first clarity | Comprehensible with sound off? |
+| Loopability | Rewatch / share / save impulse? |
+
+**Winner rule:** take the highest score; on a tie, prefer the strongest curiosity gap. Lock the winner into the hook + beat sheet. The aim is *engineered virality*: trend momentum + a proven hook formula + mute-first craft — not luck.
+
+### Stage 1 — Analyze the prompt (never generate yet)
+
+Read the prompt **as written** — including the bad ones. Fold the winning angle from `trend-brief.md` into the analysis: the prompt is your starting point, the trend is your advantage. Extract or confirm:
 
 | Field | Notes |
 |---|---|
@@ -60,7 +103,7 @@ Read the prompt **as written** — including the bad ones. Extract or confirm:
 | Platform | Reels / TikTok / Shorts (affects duration + caption pack). |
 | Duration | Default **15s**. Beat count ≈ seconds ÷ 2. |
 | Visual style | Pick from the format/style libraries (see delegation table). Default by niche. |
-| Hook | Use a hook formula (`hook-storyboard-retention`) if the user didn't give one. |
+| Hook | The trend-brief winner; use a hook formula (`hook-storyboard-retention`). |
 | Assets | Own clips/images, or none (text-only)? Only CC0/CC-BY/MIT sources. |
 | Voice / music | Kokoro voice (default), CC0 bed. |
 
@@ -69,26 +112,26 @@ Read the prompt **as written** — including the bad ones. Extract or confirm:
 2. If the prompt is *actionable but sloppy*, fix the copy yourself in the spec (grammar, spelling, hook structure) — and mark every rewrite in the spec's **Decisions** section so the user sees what changed.
 3. If you cannot determine topic or assets after one round of questions, write the spec with the safest defaults and let the approval gate catch it.
 
-### Stage 1 — Write `video-product.md` and STOP for approval (the gate)
+### Stage 2 — Write `video-product.md` and STOP for approval (the gate)
 
 Copy `scripts/spec-template.md` → **`video-product.md`** in the project root and fill it completely:
 
 - **Title, niche, platform, duration** — locked, no ambiguity left.
-- **Style / format** (one entry, with slug) + hook formula + hook copy.
+- **Style / format** (one entry, with slug) + hook formula + hook copy (from the trend-brief winner).
 - **Beat sheet** — every beat: `id, start, duration, text (3–6 words), visual`. This IS the generation contract.
 - **Safe-zone map** — the 9:16 numbers below (the audit enforces them).
 - **Voice / music / SFX** — engine, voice id, license of the bed.
 - **Output naming** — `{format-slug}_{topic-slug}_4k`.
-- **Decisions** — what you rewrote or defaulted from the raw prompt.
+- **Decisions** — what you rewrote or defaulted from the raw prompt, and the trend-brief winner.
 
 Then **present the full file to the user and wait**. The user may:
-- **Approve** → proceed to Stage 2.
+- **Approve** → proceed to Stage 3.
 - **Edit** → revise `video-product.md` and re-present (loop until approved).
 - **Reject** → stop.
 
 > Do NOT start any generation, render, or audio work before approval. The gate exists because the non-premium failure mode is exactly "prompt in → junk out".
 
-### Stage 2 — Generate (only after approval)
+### Stage 3 — Generate (only after approval)
 
 Execute the spec by delegating to the production skills (never freelance the pipeline):
 
@@ -103,9 +146,9 @@ Hard rules inherited from the deterministic contract: one paused GSAP timeline o
 
 Copy `video-product.md` into `output/{name}/` for the record. Render at 4K (`--scale 2`).
 
-### Stage 3 — Audit (automated checks + auditor subagent)
+### Stage 4 — Audit (automated checks + auditor subagent)
 
-**Step 3a — run the automated audit script:**
+**Step 4a — run the automated audit script:**
 
 ```bash
 # text-only reels
@@ -117,7 +160,7 @@ node scripts/audit-composition.mjs --html reel.html --duration 15 --storyboard s
 
 The script captures **one keyframe per beat** into `output/{name}/audit/frames/` (add `--scale 2` for 4K keyframes), measures every visible text element against the 9:16 safe zone, flags **off-screen/clipped text, text overlap, word-cap violations, timeline incoherence**, runs **static determinism lint** (Math.random / SMIL / `.play()` / `<audio>`), and writes the **`audit-report.md`** scaffold with all automated verdicts.
 
-**Step 3b — spawn the auditor subagent.** After the script finishes, spawn a fresh subagent (a second pair of eyes — never audit your own work) with this exact brief:
+**Step 4b — spawn the auditor subagent.** After the script finishes, spawn a fresh subagent (a second pair of eyes — never audit your own work) with this exact brief:
 
 ```
 You are the video auditor for the reel at {output}/{name}/.
@@ -140,12 +183,12 @@ You are the video auditor for the reel at {output}/{name}/.
 4. Report your verdict and the completed audit-report.md path.
 ```
 
-**Step 3c — fix loop.** Any FAIL (or auditor-flagged WARN) → fix the composition / copy / storyboard, re-render, re-audit, re-submit to the auditor. **Nothing is delivered until the auditor signs off PASS.**
+**Step 4c — fix loop.** Any FAIL (or auditor-flagged WARN) → fix the composition / copy / storyboard, re-render, re-audit, re-submit to the auditor. **Nothing is delivered until the auditor signs off PASS.**
 
-### Stage 4 — Deliver
+### Stage 5 — Deliver
 
-- Final MP4 + `caption.md` + `video-product.md` + `audit-report.md` (all PASS) in `output/{name}/`.
-- Tell the user exactly what was generated, the one-line spec summary, and the audit verdict.
+- Final MP4 + `caption.md` + `video-product.md` + `audit-report.md` (all PASS) + `trend-brief.md` in `output/{name}/`.
+- Tell the user exactly what was generated, the one-line spec summary, the trend that drove the angle, and the audit verdict.
 
 ---
 
@@ -182,33 +225,40 @@ The audit script flags any text outside the hard safe zone (WARN) or off-screen/
 
 **User:** "maek a vid about money"
 
-**Agent:** *(Stage 0 — asks ≤3 questions)* "Got it — a money reel. 15 seconds default? Text-only or do you have clips? And a topic: saving, investing, or spending habits?"
+**Agent:** *(Stage 0 — trend-hunt + brainstorm)*
+`node scripts/trend-hunt.mjs --niche money --subreddits personalfinance,Entrepreneur --geo US`
+→ Reddit signals: "I'm 26 and finally debt-free — nobody told me this" · Google Trends: "60/30/10 rule". Brainstorms 5 angles, scores them, winner = listicle remix: **"3 money rules nobody told you"** (score 33/35).
+
+**Agent:** *(Stage 1 — asks ≤3 questions)* "Got it — a money reel on the trending '3 money rules' angle. 15 seconds default? Text-only or do you have clips? Saving, investing, or spending?"
 
 **User:** "savings, text only"
 
-**Agent:** *(Stage 1 — writes `video-product.md`, presents the full spec, waits)*
+**Agent:** *(Stage 2 — writes `video-product.md`, presents the full spec, waits)*
 
-> `video-product.md` — title: "3 Money Rules Nobody Told You", format: word-pop, 15s, hook: "Your savings are leaking. Fix these 3 rules.", beats: [0.0–3.0 "Your savings are leaking."], [3.0–4.5 "Rule one: pay yourself."] … voice: kokoro af_heart, no music. **Approve? (edit?)**
+> `video-product.md` — title: "3 Money Rules Nobody Told You", format: word-pop, 15s, hook: "Your savings are leaking. Fix these 3 rules.", beats: [0.0–3.0 "Your savings are leaking."], [3.0–4.5 "Rule one: pay yourself."] … voice: kokoro af_heart, no music. Trend: "60/30/10 rule" (rising). **Approve? (edit?)**
 
 **User:** "approve"
 
-**Agent:** *(Stage 2 — delegates to text-motion-reels + voice-sfx-audio, renders 4K)*
+**Agent:** *(Stage 3 — delegates to text-motion-reels + voice-sfx-audio, renders 4K)*
 
-**Agent:** *(Stage 3 — runs audit-composition.mjs, spawns the auditor subagent, gets PASS)*
+**Agent:** *(Stage 4 — runs audit-composition.mjs, spawns the auditor subagent, gets PASS)*
 
-**Agent:** *(Stage 4 — delivers `output/word-pop_money-rules_4k/` with mp4 + caption.md + video-product.md + audit-report.md)*
+**Agent:** *(Stage 5 — delivers `output/word-pop_money-rules_4k/` with mp4 + caption.md + video-product.md + audit-report.md + trend-brief.md)*
 
 ---
 
 ## Production checklist
 
+- [ ] `trend-brief.md` written: signals dated + sourced (trend-hunt + web research)
+- [ ] Freshness rule respected (rising > peaked; nothing older than ~14 days)
+- [ ] ≥5 brainstormed angles; viral scorecard applied; winner locked
 - [ ] Prompt analyzed; ≤3 clarifying questions if vague; no silent guessing
-- [ ] `video-product.md` written from `scripts/spec-template.md` (root) with **Decisions** section
+- [ ] `video-product.md` written from `scripts/spec-template.md` (root) with **Decisions** section incl. the trend winner
 - [ ] **Approval gate: user explicitly approved before ANY generation**
 - [ ] Generation delegated per the spec (text-motion-reels / video-asset-reels / voice-sfx-audio)
 - [ ] Deterministic contract held: paused GSAP timeline, data-start/duration, no SMIL/Math.random/play()/audio
 - [ ] `audit-composition.mjs` ran: keyframes + audit-report.md scaffold produced
 - [ ] Auditor subagent completed Section 4 and signed off **PASS**
 - [ ] Any FAIL → fixed → re-rendered → re-audited (loop closed)
-- [ ] `video-product.md` + `audit-report.md` copied into `output/{name}/`
-- [ ] Delivered: MP4 + `caption.md` + spec + audit report
+- [ ] `video-product.md` + `audit-report.md` + `trend-brief.md` copied into `output/{name}/`
+- [ ] Delivered: MP4 + `caption.md` + spec + trend brief + audit report

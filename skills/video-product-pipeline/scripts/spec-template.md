@@ -20,6 +20,7 @@
 | **Format / style** | {word-pop / highlighter / 3d-editorial / card-listicle / chat-thriller / svg-ambient / documentary / aesthetic / montage} |
 | **Style slug** | {format-slug} |
 | **Hook formula** | {curiosity gap / contrarian / results-first / listicle / PAS} |
+| **Trend winner** | {from trend-brief.md — the winning angle + its score /35} |
 | **Hook copy (first 3s, ≤8 words)** | {e.g. Your savings are leaking. Fix these 3 rules.} |
 | **Palette** | {bg / text / accent hex} |
 | **Typography** | {font stack + weights} |
@@ -63,6 +64,7 @@ Rules: hook in beat 1, open loop closed in the final 3s, visual shift every 1.5�
 - {Raw prompt said "…" — interpreted as …}
 - {Fixed typo / rewrote copy: "…" → "…"}
 - {Defaulted duration / style / voice to … because the prompt didn't specify}
+- {Trend-brief winner: “…” chosen from trend-brief.md (score …/35) because …}
 
 ---
 

@@ -12,9 +12,9 @@ Open-source agent skills for creating **short-form video content** — text-only
 | **hook-storyboard-retention** | Write scroll-stopping hooks, engineer watch-time, and build beat-by-beat storyboards with script ↔ video timeline in sync |
 | **voice-sfx-audio** | Open-source TTS voiceovers (Kokoro, Piper, etc.), royalty-free SFX/music sources with license guidance, and FFmpeg audio ducking |
 | **video-asset-reels** | Build reels from your own video clips & images — understand the prompt, cut assets to beats, overlay kinetic text, sync a voiceover, render 4K (see [PLAN.md](PLAN.md)) |
-| **video-product-pipeline** | The premium gatekeeper for every video request: analyze ANY prompt (sloppy or not) → write a `video-product.md` spec → **get your approval** → generate (text-motion / asset reels) → audit the frames with a script + dedicated auditor subagent (spelling, text overlap, safe zones, style, readability) |
+| **video-product-pipeline** | The viral-engineered gatekeeper for every video request: hunt trending topics (`trend-hunt.mjs` + web research) → brainstorm + score angles → analyze ANY prompt (sloppy or not) → write a `video-product.md` spec → **get your approval** → generate (text-motion / asset reels) → audit the frames with a script + dedicated auditor subagent (spelling, text overlap, safe zones, style, readability) |
 
-The skills are a complete production pipeline: **what to say** (hooks) → **how it looks** (motion / assets) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline).
+The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline).
 
 ---
 
@@ -109,13 +109,15 @@ output/word-pop_money-rules_4k/
 
 ### Prompt → spec → approve → generate → audit (`video-product-pipeline`)
 
-The premium default for **every** video request — a sloppy prompt can't silently produce a sloppy video:
+The premium default for **every** video request — engineered to reach millions of views, and a sloppy prompt can't silently produce a sloppy video:
 
-1. **Analyze** the prompt (asks ≤3 clarifying questions if vague — never guesses silently)
+1. **Trend research + brainstorm** — `node render/trend-hunt.mjs --niche "{topic}" --subreddits "{r1},{r2}" --geo US` (Reddit top-of-day + Google Trends, no API key) + web research → ≥5 angles scored on the viral scorecard → winner locked in `trend-brief.md`
+2. **Analyze** the prompt (asks ≤3 clarifying questions if vague — never guesses silently)
 2. **Write `video-product.md`** — full spec: style, hook, beat-by-beat text + timings, safe-zone map, voice, audio, output name
 3. **Stop and wait for your approval** — nothing is generated before you say "approve" (or "edit")
 4. **Generate** by delegating to `text-motion-reels` / `video-asset-reels` / `voice-sfx-audio`
 5. **Audit** — `node render/audit-composition.mjs --html reel.html` captures a keyframe per beat and auto-checks safe zones (x 8–92%, y 15–85%), text overlap, word caps & determinism, then a dedicated **auditor subagent** reviews spelling, style and readability and signs `audit-report.md` PASS before delivery
+6. **Deliver** — MP4 + `caption.md` + `video-product.md` + `trend-brief.md` + `audit-report.md`
 
 > "Make a 20-second psychology reel — hook: 'Your brain does this every time you scroll.'"
 > → spec file first → approve → generate → audit → deliver
@@ -134,6 +136,7 @@ The `render/` folder contains the pipeline scripts the skills use to turn an HTM
 | `cut-assets.mjs` | FFmpeg cutter: pre-cuts video/image assets into per-beat 1080x1920 clips from a `storyboard.json` manifest |
 | `generate-caption.mjs` | Writes `caption.md` from storyboard beats; auto-checks every section into the 500–900 char window |
 | `audit-composition.mjs` | Post-generation audit: captures one keyframe per beat, auto-checks the 9:16 safe zone, text overlap, word caps, timeline coherence + determinism lint; writes `audit-report.md` for the auditor subagent |
+| `trend-hunt.mjs` | Pre-generation viral research (no API key): Reddit top-of-day posts from niche subreddits + Google Trends "Trending now" RSS → `trend-brief.md` scaffold for the brainstorm + viral scorecard |
 
 ```bash
 cd render

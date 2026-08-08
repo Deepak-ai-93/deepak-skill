@@ -6,7 +6,7 @@ description: Generate voiceovers with open-source TTS, source royalty-free sound
 # skill: voice-sfx-audio
 
 **Name:** Open-Source Voiceover + Sound Effects for Reels/Shorts
-**Description:** Use this skill to generate natural AI voiceovers with open-source TTS, source royalty-free/open-source sound effects and background music, and mix them into a video with FFmpeg (ducking included) — fully monetizable, no commercial fees. Complements `text-only-motion-reels` (visuals) and `hook-storyboard-retention` (message/timing). The three skills together = complete reel production.
+**Description:** Use this skill to generate natural AI voiceovers with open-source TTS, source royalty-free/open-source sound effects and background music, and mix them into a video with FFmpeg (ducking included) — fully monetizable, no commercial fees. Complements `text-only-motion-reels` (visuals) and `hook-storyboard-retention` (message/timing). The three skills together = complete reel production. Content first: the trending topic, hook and script come from `hook-storyboard-retention` / `video-product-pipeline` (trend research + brainstorming happen there) — this skill makes them sound premium.
 
 ---
 

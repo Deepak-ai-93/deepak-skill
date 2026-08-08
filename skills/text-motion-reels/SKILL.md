@@ -19,6 +19,15 @@ Use this skill whenever the user asks to:
 
 ---
 
+## Step 0 — Trend research & brainstorming (do this before the wizard)
+
+The wizard picks the *format*; first you must pick the *angle*. Research what is rising in the niche right now, then brainstorm:
+
+1. **Trend signals** — if `video-product-pipeline` is installed, run `node scripts/trend-hunt.mjs --niche "{topic}" --subreddits "{r1},{r2}" --geo US` (Reddit top-of-day + Google Trends, no API key); web-research TikTok Creative Center, X, YouTube Trending, niche subreddits. **Freshness rule:** rising > peaked — nothing older than ~14 days.
+2. **Brainstorm ≥5 angles** — hook-formula remix (curiosity / contrarian / results / list / PAS applied to the trend), audience lens (beginner / skeptic / expert), pain-first (the most repeated pain in the signals).
+3. **Score with the viral scorecard (1–5 each, /35):** Relatability · Curiosity gap · Hook strength · Format fit · Trend momentum · Mute-first clarity · Loopability. Winner = highest score (tie → curiosity gap).
+4. **Lock the winner** — the winning hook drives the format selection and the beat sheet. Then run the wizard below.
+
 ## Step 1 — Run the Format Wizard (always do this first)
 
 Never start coding a composition without first running the **format selection wizard**. The wizard decides the visual language (typography, palette, motion system, effects) for the whole video — it is the single most important decision.

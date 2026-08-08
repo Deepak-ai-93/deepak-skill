@@ -53,8 +53,8 @@ A rendered frame is a **pure function of time t**. Therefore:
 
 > **Scripts:** all commands below use `scripts/` — the scripts bundled inside this skill (work standalone in any project). In a repo clone, the identical scripts also live in `render/`; either path works.
 
-### Stage 1 — Ingest & beat sheet
-Read the prompt, pick a style (see Styles), and build the beat sheet: hook → agitate → payoff → CTA. One beat = one asset + 3–6 words of text. Beat count ≈ seconds ÷ 2. Write `storyboard.json`:
+### Stage 1 — Ingest, trend-check & beat sheet
+Research what is **rising** in the niche before writing anything (if `video-product-pipeline` is installed, run its `trend-hunt.mjs` + web-research TikTok Creative Center / X / YouTube; freshness rule: rising > peaked, nothing older than ~14 days), brainstorm ≥5 angles, score them (relatability · curiosity · hook · format fit · momentum · mute-first · loopability) and lock the winner. Then read the prompt, pick a style (see Styles), and build the beat sheet: hook → agitate → payoff → CTA. One beat = one asset + 3–6 words of text. Beat count ≈ seconds ÷ 2. Write `storyboard.json`:
 
 ```json
 {
