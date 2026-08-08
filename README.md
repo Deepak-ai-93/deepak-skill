@@ -13,7 +13,7 @@ Open-source agent skills for creating **short-form video content and carousel po
 | **voice-sfx-audio** | Open-source TTS voiceovers (Kokoro, Piper, etc.), royalty-free SFX/music sources with license guidance, FFmpeg audio ducking, and a **deep-voice recipe** (Tier 1: Kokoro male voice + FFmpeg pitch/EQ — see [voice-plan.md](voice-plan.md)) |
 | **video-asset-reels** | Build reels from your own video clips & images — understand the prompt, cut assets to beats, overlay kinetic text, sync a voiceover, render 4K (see [PLAN.md](PLAN.md)) |
 | **video-product-pipeline** | The viral-engineered gatekeeper for every video request: hunt trending topics (`trend-hunt.mjs` + web research) → brainstorm + score angles → analyze ANY prompt (sloppy or not) → write a `video-product.md` spec → **get your approval** → generate (text-motion / asset reels) → audit the frames with a script + dedicated auditor subagent (spelling, text overlap, safe zones, style, readability) |
-| **carousel-post-images** | Scroll-stopping carousel posts (LinkedIn/Instagram) as image sets — **4K generation** via native image models (Antigravity CLI, Codex `image_gen`, Grok `/imagine`): photorealistic **real-life scenario visuals**, viral **anti-fluff copywriting** (hook formulas + fluff blocklist), 4 trending design styles (Cinematic Real-Life default), per-platform `caption.md`, + deterministic HTML→PNG fallback (`render-carousel.mjs --4k`) |
+| **carousel-post-images** | Scroll-stopping carousel posts (LinkedIn/Instagram) as image sets — **one script, two CLI modes**: **browser render** (slides.html → deterministic 4K PNGs, any CLI) or **native image-model generation** (same deck exports photoreal 4K prompts for Antigravity / Codex `image_gen` / Grok `/imagine`). Photorealistic real-life visuals, viral anti-fluff copywriting, 4 trending styles (Cinematic Real-Life default), per-platform `caption.md` |
 
 The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline).
 
@@ -129,18 +129,17 @@ The premium default for **every** video request — engineered to reach millions
 
 ### Carousel posts (`carousel-post-images`)
 
-Scroll-stopping LinkedIn/Instagram **carousels as image sets at 4K** — built for CLIs with a **native image model** (Antigravity CLI, OpenAI Codex, Grok Build), with a deterministic HTML→PNG fallback that works anywhere. Every deck clears a fixed quality bar: **4K resolution** (≥ 4000px long edge), **photorealistic real-life scenario visuals** (one real moment per slide — never floating text), and **viral anti-fluff copywriting** (hook formulas + a fluff blocklist — no "unlock", no "game-changer"):
+Scroll-stopping LinkedIn/Instagram **carousels as image sets at 4K** — **one script, two CLI modes** on a shared `slides.html` deck. Every deck clears a fixed quality bar: **4K resolution** (≥ 4000px long edge), **photorealistic real-life scenario visuals**, and **viral anti-fluff copywriting** (hook formulas + a fluff blocklist — no "unlock", no "game-changer"). The agent always presents the two-mode choice before generating:
 
-1. The agent analyzes the prompt, locks **one of 4 styles** (Cinematic Real-Life default / Dark Terminal / Editorial Cards / Neon Gradient), and plans 8–10 slides (cover hook → beats → CTA) with a real-life **scene** planned per slide
-2. **Path A — native model (primary, 4K):** one prompt per slide via the CLI's image tool (Codex `image_gen` / Grok `/imagine` / Antigravity artifacts) — scene + cinematic grade + exact overlay text at max resolution, upscaled to **4K** (≥ 4000px long edge); text is verified — LLM models garble on-image text, so any wrong character gets regenerated or falls back to Path B
-3. **Path B — deterministic (any CLI, 4K):** `slides.html` → `node render/render-carousel.mjs --html slides.html --out carousel/ --4k` — pixel-perfect 4320×5400 (4:5) / 4320×4320 (1:1) PNGs, text never garbled
-4. **Audit:** text accuracy, copy punch (no fluff), scene authenticity, contrast, style consistency, 4K size
-5. **`caption.md`** written next to the images (500–900 chars per platform, no hashtags, hook first, one CTA)
+- **Mode 1 — Browser render (any CLI):** `node render/render-carousel.mjs --html slides.html --out carousel/ --4k` → pixel-perfect 4320×5400 (4:5) / 4320×4320 (1:1) PNGs, text never garbled
+- **Mode 2 — Image-model generation (photoreal):** `node render/render-carousel.mjs --html slides.html --out carousel/ --mode model` → exports per-slide 4K prompts (`prompts.md`) with the deck's exact copy → dispatch to the CLI's native image tool (Codex `image_gen` / Grok `/imagine` / Antigravity artifacts) at 4K; text is verified — LLM models garble on-image text, so any wrong character gets regenerated or falls back to Mode 1
 
-Built-in examples — **"Day in the life of an AI developer"** (`examples/day-in-the-life-dev/`, Dark Terminal) and **"3 Money Rules Nobody Told You"** (`examples/real-life-money/`, Cinematic Real-Life with per-slide 4K native prompts + fallback deck) — both with full caption packs.
+Then: **audit** (text accuracy, copy punch, scene authenticity, contrast, style consistency, 4K size) → **`caption.md`** (500–900 chars per platform, no hashtags, hook first, one CTA).
 
-> "Make a carousel: 3 money rules nobody told you. Cinematic real-life style, real scenes, 8 slides, 4K, LinkedIn."
-> → slide map with scenes → 4K PNGs → `caption.md` → auditor check → deliver
+Built-in examples — **"Day in the life of an AI developer"** (`examples/day-in-the-life-dev/`, browser-mode deck) and **"3 Money Rules Nobody Told You"** (`examples/real-life-money/`, image-model mode: hand-written per-slide 4K prompts + fallback deck) — both with full caption packs.
+
+> "Make a carousel: 3 money rules nobody told you. Real scenes, image-model mode, 8 slides, 4K, LinkedIn."
+> → choose mode → `prompts.md` → 4K images → `caption.md` → auditor check → deliver
 
 ---
 
@@ -158,7 +157,7 @@ The `render/` folder contains the pipeline scripts the skills use to turn an HTM
 | `generate-caption.mjs` | Writes `caption.md` from storyboard beats; auto-checks every section into the 500–900 char window |
 | `audit-composition.mjs` | Post-generation audit: captures one keyframe per beat, auto-checks the 9:16 safe zone, text overlap, word caps, timeline coherence + determinism lint; writes `audit-report.md` for the auditor subagent |
 | `trend-hunt.mjs` | Pre-generation viral research (no API key): Reddit top-of-day posts from niche subreddits + Google Trends "Trending now" RSS → `trend-brief.md` scaffold for the brainstorm + viral scorecard |
-| `render-carousel.mjs` | Carousel-post renderer (fallback for `carousel-post-images`): one HTML deck with N `.slide` elements → per-slide PNGs via headless Chrome; `--4k` renders at 4320×5400 (4:5) / 4320×4320 (1:1) |
+| `render-carousel.mjs` | Carousel-post renderer (`carousel-post-images`) — **two modes on one deck**: browser mode renders `.slide` elements → per-slide PNGs via headless Chrome (`--4k` = 4320×5400 / 4320×4320); `--mode model` exports the deck as per-slide native image-model prompts (`prompts.md`) |
 
 ```bash
 cd render

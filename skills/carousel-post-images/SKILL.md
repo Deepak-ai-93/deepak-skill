@@ -1,12 +1,16 @@
 ---
 name: carousel-post-images
-description: Create scroll-stopping carousel posts (LinkedIn + Instagram) as image sets using the CLI's native image generation — Antigravity CLI (agy), OpenAI Codex (image_gen / gpt-image-2), Grok Build (/imagine). Generates at 4K with photorealistic real-life scenario visuals, viral anti-fluff copywriting (hook formulas + a fluff blocklist), four trending design styles (Cinematic Real-Life default), slide-by-slide planning, a per-platform caption pack, and a deterministic HTML→PNG fallback (scripts/render-carousel.mjs, --4k) for any agent.
+description: Create scroll-stopping carousel posts (LinkedIn + Instagram) as image sets. ONE script, TWO CLI modes — Mode 1 browser render (slides.html → headless Chrome → pixel-perfect 4K PNGs on any agent) or Mode 2 native image-model generation (the same deck exports 4K photoreal prompts for Antigravity CLI / Codex image_gen / Grok /imagine). Photorealistic real-life scenario visuals, viral anti-fluff copywriting (hook formulas + a fluff blocklist), four trending design styles (Cinematic Real-Life default), per-platform caption pack, and an auditor stage.
 ---
 
 # skill: carousel-post-images
 
-**Name:** Carousel Post Images (LinkedIn / Instagram) — native image-model skill
-**Description:** Turns a topic into a **cohesive 8–10 slide carousel** (images + `caption.md`). Optimized for CLI agents with a **built-in image generation model** (Antigravity CLI, OpenAI Codex, Grok Build). Every slide is generated at **4K**, shows a **real-life scenario** (a specific, believable moment — never a floating-text abstract), and carries **viral-grade copy**: punchy, specific, zero fluff. Slides follow one of four design styles and a fixed quality bar, so the deck looks like it came from a design team — not a template dump.
+**Name:** Carousel Post Images (LinkedIn / Instagram) — two-mode generation
+**Description:** Turns a topic into a **cohesive 8–10 slide carousel** (images + `caption.md`). The agent writes ONE deck (`slides.html`) — the single source of truth — then generates it in **either of two modes**:
+- **Mode 1 — Browser render:** `render-carousel.mjs --4k` → pixel-perfect **4K PNGs** via headless Chrome. Works on **every** CLI, text is always exact.
+- **Mode 2 — Image-model generation:** `render-carousel.mjs --mode model` → exports **per-slide 4K image-gen prompts** (`prompts.md`) that the CLI's native image model (Antigravity / Codex `image_gen` / Grok `/imagine`) turns into **photorealistic real-life scenes**.
+
+Either way the quality bar is identical: **4K** (≥ 4000px long edge), **real-life scenario visuals**, and **viral-grade anti-fluff copy**.
 
 ---
 
@@ -16,9 +20,31 @@ Every carousel must clear all three rails. If a slide fails any of them, regener
 
 | Rail | Rule |
 |---|---|
-| **4K resolution** | Generate/upscale to **≥ 4000px on the long edge** (native model: 4:5 → `4320×5400`, 1:1 → `4096×4096`, or model max + upscale). Never deliver below that. Posting size stays 1080px; 4K source survives re-encoding. |
-| **Real-life visuals** | Every slide shows **one real scenario from the target's actual life** — photorealistic, specific, emotionally true. A person, a place, a moment, a prop. No abstract gradients, no floating 3D shapes as the main visual, no stock-photo clichés (no gold bars, no hand-on-chin thinking, no shaking hands). The scene IS the visual; the text rides on top of it. |
+| **4K resolution** | Generate/render at **≥ 4000px on the long edge** (4:5 → `4320×5400`, 1:1 → `4096×4096`). Never deliver below that. Posting size stays 1080px; 4K source survives re-encoding. |
+| **Real-life visuals** | Every slide shows **one real scenario from the target's actual life** — photorealistic, specific, emotionally true. A person, a place, a moment, a prop. No abstract gradients, no floating 3D shapes as the main visual, no stock-photo clichés (no gold bars, no hand-on-chin thinking, no shaking hands). The scene IS the visual; the text rides on top. |
 | **Copy that hits** | Every headline follows the anti-fluff contract (§ Copywriting): specific beats generic, numbers beat adjectives, ≤ 8 words, one idea, an open loop on the cover and a payoff per slide. If the copy reads like it could describe any brand, it's fluff — rewrite it. |
+
+---
+
+## Two modes — pick ONE before generating (always present the choice)
+
+The skill has **two generation modes behind one command**. Same deck (`slides.html`), two outputs:
+
+| | **Mode 1 — Browser render** (`--mode browser`, default) | **Mode 2 — Image-model generation** (`--mode model`) |
+|---|---|---|
+| Command | `render-carousel.mjs --html slides.html --out carousel/ --4k` | `render-carousel.mjs --html slides.html --out carousel/ --mode model` → then dispatch `prompts.md` to the image tool |
+| Output | Pixel-perfect **4K PNGs** (`slide_01.png …`) | Per-slide **4K image-gen prompts** → photoreal 4K images |
+| Text | Always exact (deterministic render) | Excellent, but **must be visually verified** (LLM models garble text) |
+| Visuals | Text-first deck; `.photo`/`.scene-tag` slots mark where a scene goes | **Photorealistic real-life scenes** — maximum visual impact |
+| Requires | Chrome + Node + Playwright (any CLI) | The CLI's native image tool (Antigravity / Codex `image_gen` / Grok `/imagine`) |
+| Best when | No image tool, or a garbled slide needs a pixel-perfect replacement | The user wants real-life photo scenes and the image tool exists |
+
+**Decision rule — the agent must surface the choice, not silently pick:**
+1. At Stage 1, tell the user: *"Carousel in **browser mode** (pixel-perfect text, works anywhere) or **image-model mode** (photoreal scenes, uses the image tool)?"*
+2. No image tool on this CLI → Mode 1, no question asked.
+3. Image tool available and the user wants real-life photo scenes → Mode 2.
+4. User undecided → recommend **Mode 2** when the tool exists (matches the real-life visual rail), otherwise Mode 1.
+5. **Hybrid path:** generate in Mode 2; any slide whose text comes out garbled is regenerated in Mode 1 (browser) and swapped in. The deck HTML is shared by both modes, so this is cheap.
 
 ---
 
@@ -28,19 +54,19 @@ Every carousel must clear all three rails. If a slide fails any of them, regener
 - "Day in the life of…", "5 mistakes…", "How I…" — any save-bait / storytelling deck
 - Building brand, dev, finance, or personal-brand content as image posts
 
-**Examples built-in:** `examples/day-in-the-life-dev/` — "Day in the life of an AI developer" (8 slides, Dark Terminal, caption pack). `examples/real-life-money/` — "3 money rules nobody told you" (8 slides, **Style D Cinematic Real-Life**, per-slide 4K native image-gen prompts, fallback deck, caption pack). Copy the pattern: scene → overlay text → 4K prompt.
+**Examples built-in:** `examples/day-in-the-life-dev/` — "Day in the life of an AI developer" (8 slides, Dark Terminal, **browser-mode** deck + caption pack). `examples/real-life-money/` — "3 money rules nobody told you" (8 slides, **Style D Cinematic Real-Life, image-model mode**: hand-written per-slide 4K prompts + fallback deck + caption pack). Copy the pattern: scene → overlay text → mode → 4K.
 
 ---
 
-## CLI matrix — how the native image model is invoked
+## CLI matrix — how each CLI runs Mode 2 (image-model)
 
-| CLI | Image model | How the agent generates slides |
+| CLI | Image model | How the agent dispatches Mode 2 prompts |
 |---|---|---|
-| **Antigravity CLI** (`agy`) | Google native pipeline (Nano Banana Pro / Imagen) | Natural language — ask the agent to create the slide images with its artifact/image tools, at max resolution, and write them to `carousel/slide_01.png …` |
-| **OpenAI Codex** | `gpt-image-2` via headless `image_gen` tool | Instruct the agent to dispatch its image tool per slide with the exact 4K prompt + style, saving to explicit paths |
-| **Grok Build** (`grok`) | Grok Imagine (`/imagine`) | Instruct the agent to run `/imagine "<slide prompt>"` per slide (or trigger its built-in agent image loop), collecting outputs into one folder |
+| **Antigravity CLI** (`agy`) | Google native pipeline (Nano Banana Pro / Imagen) | Natural language — ask the agent to create the slide images with its artifact/image tools at max resolution from `prompts.md`, upscaled to 4K, written to `carousel/slide_01.png …` |
+| **OpenAI Codex** | `gpt-image-2` via headless `image_gen` tool | Instruct the agent to dispatch its image tool per prompt block (exact 4K prompt + style), saving to explicit paths |
+| **Grok Build** (`grok`) | Grok Imagine (`/imagine`) | Instruct the agent to run `/imagine "<prompt block>"` per slide (or trigger its built-in agent image loop), collecting outputs into one folder |
 
-> **Cross-CLI rule:** the skill must work the same on every CLI. Detect the environment and route to the matching mechanism (artifact tool / `image_gen` / `/imagine`). Where no native model exists, fall back to the **deterministic renderer** (`scripts/render-carousel.mjs --4k` + the slides HTML) — same slides, 4K, pixel-perfect, any agent.
+> **Cross-CLI rule:** Mode 1 (browser render) works identically on every CLI — it's the universal fallback and the fix for garbled text. Mode 2 requires the image tool; detect the environment and route accordingly.
 
 ---
 
@@ -120,56 +146,44 @@ Style D is the default — the other three keep their identity as the *text/acce
 
 ---
 
-## 4K spec (applies to both generation paths)
+## 4K spec (applies to both modes)
 
 | Platform | Aspect | Generation size (4K) | Posting size |
 |---|---|---|---|
 | LinkedIn | 1:1 | `4096×4096` (or 3840×3840 min) | 1080×1080 |
 | Instagram | 4:5 | `4320×5400` (or model max + upscale) | 1080×1350 |
 
-- Native model: ask for the **highest native resolution**, then **upscale to ≥ 4000px long edge** with the model's upscale/outpaint tool if it capped lower. Ask the model to export PNG (never lossy JPEG at 4K).
-- Deterministic renderer: `node scripts/render-carousel.mjs --html slides.html --out carousel/ --4k` → deviceScaleFactor 4 = exactly `4320×5400` / `4320×4320`. Verify the log line says the 4K size.
+- Mode 1 (browser): `node scripts/render-carousel.mjs --html slides.html --out carousel/ --4k` → deviceScaleFactor 4 = exactly `4320×5400` / `4320×4320`. Verify the log line says the 4K size.
+- Mode 2 (image-model): the exported prompts carry `Canvas: 4K 4320x5400`. Ask the image tool for the **highest native resolution**, then **upscale to ≥ 4000px long edge** if it capped lower. Ask for PNG (never lossy JPEG at 4K).
 - Deliver both: `carousel/slide_XX.png` at 4K (source) — and note the 1080px posting size in `caption.md`.
 
 ---
 
 ## Workflow (6 stages)
 
-### Stage 1 — Analyze the prompt
+### Stage 1 — Analyze the prompt + CHOOSE THE MODE
 Extract: **topic** (if vague, ask ≤3 questions), **audience**, **platform** (LinkedIn → square, Instagram → 4:5), **tone** (funny/authoritative/emotional), **style** (default: Cinematic Real-Life; dev/tech → A, business → B, aesthetic → C — in every case the visual layer is real-life per the quality bar).
+Then **present the two-mode choice** (§ Two modes): browser render vs image-model generation — recommend Mode 2 if the image tool exists, else Mode 1. Lock the mode; it drives Stage 4.
 
 ### Stage 2 — Plan the carousel (the slide map)
 Write the deck plan: **cover (hook) → 6–8 content beats → CTA**. For each slide record: `# / headline (≤8 words, anti-fluff) / sub (≤20 words) / SCENE (the exact real-life moment) / prop / layout variant`. The scene is planned *before* the prompt — it's half the content.
 
 > Content rules: one idea per slide; open a loop on the cover; resolve + CTA on the last; diary/step formats ("day in the life", "5 steps") convert best. If any headline contains a blocklisted word, rewrite it now.
 
-### Stage 3 — Lock ONE style
-Pick exactly one of the 4 styles above. Everything downstream uses its palette + type + signature, with a photorealistic real-life scene as the visual layer.
+### Stage 3 — Lock ONE style + write the deck (`slides.html`)
+Pick exactly one of the 4 styles. Then write `slides.html` — **the single source of truth for BOTH modes**: one `.slide` div per slide (`data-name` optional), a `.headline` / `.sub` / `.label` / `.cta` element per slide, plus a `.photo` band with a `.scene-tag` annotation describing the real-life moment (Mode 2 reads it as the SCENE; Mode 1 renders it as the placeholder). Legacy decks without `.scene-tag` still export fine — `--mode model` falls back to a `{describe the real-life moment}` placeholder.
 
-### Stage 4 — Generate the images at 4K
-**Path A — native image model (PRIMARY, always try first):** one prompt per slide using the template below; instruct the model to keep the SAME scene-world + style tokens across all slides; request max resolution and upscale to 4K; save to `carousel/slide_01.png …`.
+### Stage 4 — Generate in the chosen mode
+**Mode 2 — Image-model generation (photoreal 4K):**
+1. `node scripts/render-carousel.mjs --html slides.html --out carousel/ --mode model` → writes `carousel/prompts.md` (per-slide blocks with the deck's exact copy + scene tags + 4K canvas + consistency tokens).
+2. Polish the SCENE lines if the tags are terse, then **dispatch one block per slide** to the CLI's image tool (see CLI matrix) at max resolution; upscale to 4K; save to `carousel/slide_01.png …`.
+3. ⚠️ **Visually verify every word** on every slide — LLM models garble on-image text. Any wrong character → regenerate that slide or swap it for the Mode 1 render.
 
-> ⚠️ **Text accuracy (non-negotiable):** LLM image models often garble on-image text. Ask the model to render the text **exactly as given**, then **visually verify every slide** — for a carousel, the text IS the content. Any wrong character → regenerate that slide or fall back to Path B (the deterministic renderer guarantees pixel-perfect text).
+**Mode 1 — Browser render (pixel-perfect 4K):**
+1. `node scripts/render-carousel.mjs --html slides.html --out carousel/ --4k` → `4320×5400` PNGs, text never garbled.
+2. The `.scene-tag` photo slots render as storyboard annotations — for a photo-real deck, fill them by compositing Mode 2 images (hybrid path).
 
-**Path B — deterministic renderer (any CLI, 4K):** build `slides.html` (one `.slide` div per slide, `data-name` optional; reserve a `.photo` band per slide for the scene) → `node scripts/render-carousel.mjs --html slides.html --out carousel/ --4k`. Pixel-perfect, reproducible, 4320×5400.
-
-### Native image-model prompt template (Path A — copy per slide)
-
-```
-Carousel slide {n}/{total} — style: {cinematic-real-life | dark-terminal | editorial-cards | neon-gradient}.
-CANVAS: 4K {4320x5400 | 4096x4096}, PNG, {platform}. No watermark, no logo.
-
-SCENE (photoreal, real life — the visual IS this moment):
-  {who is doing what, where, what time of day, what prop is in frame, what emotion shows on their face}
-  No clichés (no gold bars / hand-on-chin / abstract gradients). Same world as every other slide.
-CINEMATIC GRADE: {camera & lens, lighting source + color, depth of field, film grain, color mood}.
-TEXT LAYER — render the text EXACTLY, no typos, no extra words:
-  Headline: "{≤8 words, specific, zero fluff}"
-  Sub: "{≤20 words}"   (optional)
-  Label: "{rule #3 / 07:30 AM / swipe →}" (optional, mono)
-  Placement: bottom {45}% over a dark scrim gradient; headline size ≈ {6}% of frame height; color {white}; accent {#ffb703} for the {number/keyword}.
-CONSISTENCY (repeat on EVERY slide): same character, same location, same lens + light grade, same font, same scrim, same accent hex.
-```
+> Both modes share the deck, so switching is free: write the HTML once, run `--mode model` *or* `--4k` (or both).
 
 ### Stage 5 — Caption pack → `caption.md`
 Write `caption.md` next to the images: one section per platform (**LinkedIn, Instagram, X, Threads, Facebook**), each **500–900 chars (aim ~700)**, **no hashtags**, **hook-first**, **one CTA** ("Save this", "Follow for part 2", "Comment your #"), and a "swipe" cue. Include a slide-recap table (headline + scene) so the post and images never drift apart. (Same rules as `generate-caption.mjs` in this repo.)
@@ -188,13 +202,14 @@ Any FAIL → fix → re-generate/re-render → re-audit.
 
 ## Production checklist
 
+- [ ] Mode chosen and **presented to the user** (browser render vs image-model generation) before generating
 - [ ] Quality bar held: 4K (≥ 4000px long edge), real-life scenario visuals, anti-fluff copy
 - [ ] Prompt analyzed; platform chosen (4:5 vs 1:1) and kept for the whole deck
 - [ ] Slide map: cover hook → 6–8 beats → CTA; headline ≤ 8 words, sub ≤ 20; every headline cleared against the fluff blocklist
 - [ ] ONE style locked; palette + type + scrim + accent identical across every slide
-- [ ] Scene planned per slide (who / where / when / prop / emotion) and written into the image prompt
-- [ ] Images generated at 4K with the native model (Antigravity/Codex/Grok) or rendered with `render-carousel.mjs --4k` into `carousel/slide_01.png …`
-- [ ] On-image text visually verified (no garbled characters — regenerate or Path B if any)
+- [ ] `slides.html` written as the single source of truth (scene tags + exact copy per slide)
+- [ ] Mode 1: rendered with `render-carousel.mjs --4k` → `carousel/slide_01.png …` (4320×5400 / 4320×4320) **or** Mode 2: `--mode model` → prompts dispatched to the image tool at 4K
+- [ ] On-image text visually verified (no garbled characters — regenerate or fall back to the browser render)
 - [ ] `caption.md`: 500–900 chars per platform, no hashtags, hook first, one CTA, slide recap incl. scenes
 - [ ] Auditor subagent signed off: text accuracy, copy punch, scene authenticity, contrast/safe zones, style consistency, 4K size
 - [ ] Deliverables: `carousel/*.png` (4K) + `caption.md`
