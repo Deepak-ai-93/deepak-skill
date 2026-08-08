@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>3 Money Rules Nobody Told You — carousel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .deck { position: relative; width: 1080px; height: 1350px; background: #0e0e10; }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: none;
+    background: #0e0e10;
+    color: #f5f5f4;
+    font-family: 'Inter', 'Segoe UI', -apple-system, Helvetica, Arial, sans-serif;
+    overflow: hidden;
+  }
+  .slide.active { display: block; }
+
+  .mono { font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace; }
+
+  /* photo band — in Path A this is replaced by the generated 4K scene photo.
+     In this fallback deck it renders as a storyboard annotation slot. */
+  .photo {
+    position: absolute; top: 0; left: 0; right: 0; height: 58%;
+    background:
+      radial-gradient(120% 90% at 75% 18%, #2a2320 0%, #17141c 48%, #0e0e10 100%);
+    display: flex; align-items: flex-end;
+    padding: 0 88px 52px;
+  }
+  .scene-tag {
+    width: 100%;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 24px; line-height: 1.5; color: #8a8a93;
+    border: 1px dashed #3a3a42; border-radius: 14px;
+    padding: 20px 26px; background: rgba(14, 14, 16, 0.72);
+  }
+  .scene-tag b { color: #ffb703; font-weight: 600; }
+
+  /* scrim — guarantees headline contrast over the photo in both paths */
+  .scrim {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 52%;
+    background: linear-gradient(to bottom, rgba(14,14,16,0) 0%, rgba(14,14,16,0.94) 58%);
+  }
+
+  .copy { position: absolute; left: 88px; right: 88px; bottom: 150px; }
+  .label {
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 27px; font-weight: 600; letter-spacing: 0.12em;
+    color: #ffb703; margin-bottom: 26px;
+  }
+  .headline {
+    font-size: clamp(60px, 7.6vw, 88px);
+    font-weight: 900; line-height: 1.05; letter-spacing: -0.015em;
+  }
+  .headline .acc { color: #ffb703; }
+  .sub {
+    margin-top: 30px;
+    font-size: 34px; line-height: 1.4; font-weight: 600;
+    color: #c9c9cf; max-width: 860px;
+  }
+  .swipe {
+    margin-top: 42px; display: inline-block;
+    border: 2px solid #ffb703; border-radius: 14px;
+    padding: 22px 40px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 30px; font-weight: 600; color: #ffb703; letter-spacing: 0.05em;
+  }
+
+  .footer {
+    position: absolute; bottom: 56px; left: 88px; right: 88px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 22px; color: #6b6b74; letter-spacing: 0.06em;
+  }
+  .footer .brand { color: #ffb703; }
+
+  /* cover + cta get a bigger headline */
+  .cover .headline, .cta .headline { font-size: clamp(76px, 9.4vw, 108px); }
+  .cover .sub { font-size: 37px; }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 1. COVER -->
+  <div class="slide cover active" data-name="cover">
+    <div class="photo">
+      <div class="scene-tag"><b>scene:</b> kitchen table · 11:47 pm · laptop budget sheet + phone glow · Maya, tired but defiant</div>
+    </div>
+    <div class="scrim"></div>
+    <div class="copy">
+      <div class="label">11:47 PM</div>
+      <div class="headline">3 MONEY RULES <span class="acc">NOBODY TOLD YOU</span></div>
+      <div class="sub">rule #3 is the one that hurts.</div>
+      <div class="swipe">SWIPE →</div>
+    </div>
+    <div class="footer"><span>01 / 08</span><span class="brand">real_money</span></div>
+  </div>
+
+  <!-- 2. RULE #1 -->
+  <div class="slide" data-name="rule-1">
+    <div class="photo">
+      <div class="scene-tag"><b>scene:</b> payday morning · 7:12 am · thumb on "transfer to savings" · coffee + pay stub</div>
+    </div>
+    <div class="scrim"></div>
+    <div class="copy">
+      <div class="label">RULE <span style="color:#fff">#1</span> · 7:12 AM</div>
+      <div class="headline">PAY YOURSELF <span class="acc">FIRST</span></div>
+      <div class="sub">before the bills win.</div>
+    </div>
+    <div class="footer"><span>02 / 08</span><span class="brand">real_money</span></div>
+  </div>
+
+  <!-- 3. RULE #2 -->
+  <div class="slide" data-name="rule-2">
+    <div class="photo">
+      <div class="scene-tag"><b>scene:</b> 2:04 am · dark bedroom · phone glow · thumb on "recurring transfer: every payday"</div>
+    </div>
+    <div class="scrim"></div>
+    <div class="copy">
+      <div class="label">RULE <span style="color:#fff">#2</span> · 2:04 AM</div>
+      <div class="headline">AUTOMATE IT. THEN <span class="acc">FORGET IT.</span></div>
+      <div class="sub">if you can see it, you'll spend it.</div>
+    </div>
+    <div class="footer"><span>03 / 08</span><span class="brand">real_money</span></div>
+  </div>
+
+  <!-- 4. RULE #3 -->
+  <div class="slide" data-name="rule-3">
+    <div class="photo">
+      <div class="scene-tag"><b>scene:</b> dusk · used-car lot · Maya eyeing a shiny sedan · friend laughing</div>
+    </div>
+    <div class="scrim"></div>
+    <div class="copy">
+      <div class="label">RULE <span style="color:#fff">#3</span> · THE ONE THAT HURTS</div>
+      <div class="headline">DON'T <span class="acc">FINANCE</span> YOUR LIFESTYLE</div>
+      <div class="sub">the car is not the flex. the balance is.</div>
+    </div>
+    <div class="footer"><span>04 / 08</span><span class="brand">real_money</span></div>
+  </div>
+
+  <!-- 5. THE MATH -->
+  <div class="slide" data-name="the-math">
+    <div class="photo">
+      <div class="scene-tag"><b>scene:</b> kitchen table covered in real receipts + coffee cups · one week</div>
+    </div>
+    <div class="scrim"></div>
+    <div class="copy">
+      <div class="label">THE RECEIPTS · LAST 30 DAYS</div>
+      <div class="headline">$7 COFFEE × 5 DAYS = <span class="acc">$1,820</span> / YEAR</div>
+      <div class="sub">it leaves quietly. that's why you never notice.</div>
+    </div>
+    <div class="footer"><span>05 / 08</span><span class="brand">real_money</span></div>
+  </div>
+
+  <!-- 6. QUIET WEALTH -->
+  <div class="slide" data-name="quiet-wealth">
+    <div class="photo">
+      <div class="scene-tag"><b>scene:</b> grey morning · ATM · plain hoodie · no watch, no flash · calm check of the balance</div>
+    </div>
+    <div class="scrim"></div>
+    <div class="copy">
+      <div class="label">CONTRARIAN · MOST PEOPLE MISS THIS</div>
+      <div class="headline">WEALTH IS <span class="acc">QUIET</span>. NOBODY KNOWS.</div>
+      <div class="sub">and that's the point.</div>
+    </div>
+    <div class="footer"><span>06 / 08</span><span class="brand">real_money</span></div>
+  </div>
+
+  <!-- 7. START TODAY -->
+  <div class="slide" data-name="start-today">
+    <div class="photo">
+      <div class="scene-tag"><b>scene:</b> 9:12 pm · sofa · savings app open · notepad with 3 hand-written lines · TV off</div>
+    </div>
+    <div class="scrim"></div>
+    <div class="copy">
+      <div class="label">TODAY · 9:12 PM</div>
+      <div class="headline">10 MINUTES. 3 MOVES. <span class="acc">TODAY.</span></div>
+      <div class="sub">1 · pay yourself first&nbsp;&nbsp;&nbsp;2 · automate it&nbsp;&nbsp;&nbsp;3 · never finance the flex</div>
+    </div>
+    <div class="footer"><span>07 / 08</span><span class="brand">real_money</span></div>
+  </div>
+
+  <!-- 8. CTA -->
+  <div class="slide cta" data-name="cta">
+    <div class="photo">
+      <div class="scene-tag"><b>scene:</b> sunrise through the kitchen window · mug in both hands · phone showing the balance</div>
+    </div>
+    <div class="scrim"></div>
+    <div class="copy">
+      <div class="label">DONE ✓</div>
+      <div class="headline">SAVE THIS. <span class="acc">DO IT TODAY.</span></div>
+      <div class="sub">one rule can fix years of quiet leaks.</div>
+      <div class="swipe">FOLLOW FOR PART 2 — THE TOOLS</div>
+    </div>
+    <div class="footer"><span>08 / 08</span><span class="brand">real_money</span></div>
+  </div>
+
+</div>
+</body>
+</html>

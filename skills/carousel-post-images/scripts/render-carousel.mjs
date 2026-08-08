@@ -6,7 +6,11 @@
 // slides on ANY agent.
 //
 // Usage:
-//   node render/render-carousel.mjs --html slides.html [--out dir] [--width 1080] [--height 1350] [--scale 1]
+//   node render-carousel.mjs --html slides.html [--out dir] [--width 1080] [--height 1350] [--scale 1] [--4k]
+//
+// Quality bar: carousels are posted at 1080px, but ALWAYS render at 4K so the
+// deck stays crisp when platforms re-encode. `--4k` forces deviceScaleFactor 4
+// → 4320×5400 (4:5) / 4320×4320 (1:1). An explicit `--scale N` always wins.
 //
 // HTML contract: <div class="slide" data-name="cover">…</div> — one PNG per
 // slide → {out}/slide_01_cover.png, slide_02_….png (data-name optional).
@@ -16,17 +20,19 @@ import { resolve, join } from "node:path";
 import { pathToFileURL } from "node:url";
 
 // --- tiny arg parser (same style as the other render scripts) ----------------
+// Supports BOTH "--name value" and "--name=value" forms (e.g. --scale=2).
 const args = process.argv.slice(2);
 const opt = (name, fallback) => {
-  const i = args.indexOf(`--${name}`);
-  if (i === -1) return fallback;
-  const inline = args[i].split("=")[1];
-  return inline !== undefined ? inline : args[i + 1];
+  const needle = `--${name}`;
+  const found = args.find((a) => a === needle || a.startsWith(`${needle}=`));
+  if (found === undefined) return fallback;
+  const eq = found.indexOf("=");
+  return eq !== -1 ? found.slice(eq + 1) : args[args.indexOf(found) + 1];
 };
 
 const htmlArg = opt("html");
 if (!htmlArg) {
-  console.error("Usage: node render-carousel.mjs --html slides.html [--out dir] [--width 1080] [--height 1350] [--scale 1]");
+  console.error("Usage: node render-carousel.mjs --html slides.html [--out dir] [--width 1080] [--height 1350] [--scale 1] [--4k]");
   process.exit(2);
 }
 
@@ -35,7 +41,19 @@ const URL = pathToFileURL(resolve(CWD, htmlArg)).href;
 const OUT = resolve(CWD, opt("out", "output/carousel"));
 const WIDTH = parseInt(opt("width", "1080"), 10);
 const HEIGHT = parseInt(opt("height", "1350"), 10);
-const SCALE = parseFloat(opt("scale", "1"));
+// 4K quality bar: --4k sets deviceScaleFactor 4 (4320×5400 @ 4:5). An explicit
+// --scale N (also the --scale=N form) overrides it — the caller knows best.
+// opt() handles both spellings, so derive from it instead of args.includes().
+const FOUR_K = args.includes("--4k");
+const scaleArg = opt("scale", null);
+const SCALE =
+  scaleArg !== null && Number.isFinite(parseFloat(scaleArg))
+    ? parseFloat(scaleArg)
+    : FOUR_K
+    ? 4
+    : 1;
+const OUT_W = WIDTH * SCALE;
+const OUT_H = HEIGHT * SCALE;
 mkdirSync(OUT, { recursive: true });
 
 const browser = await chromium.launch({
@@ -64,7 +82,7 @@ if (!count) {
   await browser.close();
   throw new Error("No .slide elements found in the HTML — each slide needs class=\"slide\".");
 }
-console.log(`Slides: ${count} → ${OUT}`);
+console.log(`Slides: ${count} → ${OUT} · ${WIDTH}×${HEIGHT} @${SCALE}x = ${OUT_W}×${OUT_H}px (${OUT_W >= 4000 ? "4K" : SCALE >= 2 ? "HD+" : "preview"})`);
 
 try {
   for (let i = 0; i < count; i++) {
