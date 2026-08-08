@@ -107,6 +107,8 @@ output/word-pop_money-rules_4k/
 | Full text-only reel | "Make a 20-second psychology reel using the Word Pop format, hook: 'Your brain does this every time you scroll.'" |
 | Add voiceover | "Generate a Kokoro voiceover for this reel and mix it with a CC0 ambient track." |
 
+> **Ready-to-paste prompts for SaaS, AI, web-dev life, finance, mindset & 10+ more niches → [`prompt-examples.md`](prompt-examples.md)** — every prompt runs trend-research → spec → approval → generate → audit.
+
 ### Prompt → spec → approve → generate → audit (`video-product-pipeline`)
 
 The premium default for **every** video request — engineered to reach millions of views, and a sloppy prompt can't silently produce a sloppy video:
