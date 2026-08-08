@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Day in the life of an AI developer — carousel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .deck { position: relative; width: 1080px; height: 1350px; background: #0d1117; }
+
+  .slide {
+    position: absolute; inset: 0;
+    display: none;
+    background: #0d1117;
+    color: #e6edf3;
+    font-family: 'Inter', 'Segoe UI', -apple-system, Helvetica, Arial, sans-serif;
+    padding: 130px 88px 96px;
+    overflow: hidden;
+  }
+  .slide.active { display: block; }
+
+  .mono { font-family: 'JetBrains Mono', Consolas, 'Courier New', monospace; }
+
+  /* terminal chrome */
+  .term {
+    position: absolute; top: 60px; left: 88px; right: 88px; height: 52px;
+    display: flex; align-items: center; gap: 10px;
+    background: #161b22; border: 1px solid #30363d; border-radius: 12px;
+    padding: 0 20px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 20px; color: #8b949e;
+  }
+  .dot { width: 14px; height: 14px; border-radius: 50%; }
+  .d-red { background: #ff5f56; } .d-yel { background: #ffbd2e; } .d-grn { background: #27c93f; }
+  .term-title { margin-left: 12px; letter-spacing: 0.04em; }
+
+  .time {
+    margin-top: 96px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 38px; font-weight: 600; letter-spacing: 0.10em;
+    color: #3fb950;
+  }
+
+  .headline {
+    margin-top: 28px;
+    font-size: clamp(58px, 7.6vw, 88px);
+    font-weight: 900; line-height: 1.08; letter-spacing: -0.015em;
+    max-width: 900px;
+  }
+  .headline .grn { color: #3fb950; }
+  .headline .blu { color: #58a6ff; }
+
+  .sub {
+    margin-top: 36px;
+    font-size: 34px; line-height: 1.45; font-weight: 600;
+    color: #8b949e; max-width: 840px;
+  }
+
+  .code {
+    margin-top: 52px;
+    background: #161b22; border: 1px solid #30363d; border-radius: 14px;
+    padding: 34px 40px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 31px; line-height: 1.65; color: #7ee787;
+    max-width: 880px;
+  }
+  .code .dim { color: #8b949e; }
+  .code .ylw { color: #ffd60a; }
+  .cursor {
+    display: inline-block; width: 18px; height: 30px;
+    background: #3fb950; vertical-align: -5px;
+  }
+
+  .footer {
+    position: absolute; bottom: 56px; left: 88px; right: 88px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 22px; color: #484f58; letter-spacing: 0.06em;
+  }
+  .footer .brand { color: #3fb950; }
+
+  /* cover */
+  .cover .time { color: #58a6ff; }
+  .cover .headline { font-size: clamp(72px, 9vw, 104px); }
+  .cover .sub { font-size: 36px; color: #8b949e; }
+  .cta-box {
+    margin-top: 60px;
+    display: inline-block;
+    border: 2px solid #3fb950; border-radius: 14px;
+    padding: 24px 44px;
+    font-family: 'JetBrains Mono', Consolas, monospace;
+    font-size: 32px; font-weight: 600; color: #3fb950; letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+<div class="deck">
+
+  <!-- 1. COVER -->
+  <div class="slide cover active" data-name="cover">
+    <div class="term"><span class="dot d-red"></span><span class="dot d-yel"></span><span class="dot d-grn"></span><span class="term-title">day_in_the_life.sh — zsh</span></div>
+    <div class="time">$ ./life.sh</div>
+    <div class="headline">A DAY IN THE LIFE OF AN <span class="grn">AI DEVELOPER</span></div>
+    <div class="sub">it's not what you think. (slide 5 is the truth.)</div>
+    <div class="footer"><span>01 / 08</span><span class="brand">dev_life</span></div>
+  </div>
+
+  <!-- 2. 07:30 -->
+  <div class="slide" data-name="morning">
+    <div class="term"><span class="dot d-red"></span><span class="dot d-yel"></span><span class="dot d-grn"></span><span class="term-title">inbox.sh — unread: 47</span></div>
+    <div class="time">07:30 AM</div>
+    <div class="headline">FIRST: <span class="blu">47 UNREAD MESSAGES</span></div>
+    <div class="sub">the inbox is the real boss.</div>
+    <div class="footer"><span>02 / 08</span><span class="brand">dev_life</span></div>
+  </div>
+
+  <!-- 3. 09:00 -->
+  <div class="slide" data-name="standup">
+    <div class="term"><span class="dot d-red"></span><span class="dot d-yel"></span><span class="dot d-grn"></span><span class="term-title">standup.sh — today</span></div>
+    <div class="time">09:00 AM</div>
+    <div class="headline">"DONE IN <span class="grn">20 MINUTES</span>"</div>
+    <div class="sub">standup said. two hours passed.</div>
+    <div class="code"><span class="dim">// me:</span> almost done ✅</div>
+    <div class="footer"><span>03 / 08</span><span class="brand">dev_life</span></div>
+  </div>
+
+  <!-- 4. 11:00 -->
+  <div class="slide" data-name="deepwork">
+    <div class="term"><span class="dot d-red"></span><span class="dot d-yel"></span><span class="dot d-grn"></span><span class="term-title">deep_work.sh — focus mode</span></div>
+    <div class="time">11:00 AM</div>
+    <div class="headline"><span class="blu">HEADPHONES ON.</span> DEEP WORK.</div>
+    <div class="sub">3 hours. zero meetings. pure code.</div>
+    <div class="code">$ git commit -m <span class="ylw">"feat: actually shipped"</span></div>
+    <div class="footer"><span>04 / 08</span><span class="brand">dev_life</span></div>
+  </div>
+
+  <!-- 5. 13:00 -->
+  <div class="slide" data-name="bugfix">
+    <div class="term"><span class="dot d-red"></span><span class="dot d-yel"></span><span class="dot d-grn"></span><span class="term-title">bugfix.sh — found: 1</span></div>
+    <div class="time">01:00 PM</div>
+    <div class="headline">"QUICK BUG FIX" = <span class="grn">6 HOURS</span></div>
+    <div class="sub">the bug was one character.</div>
+    <div class="code">if (x <span class="ylw">==</span> y) <span class="dim">// should be ===</span></div>
+    <div class="footer"><span>05 / 08</span><span class="brand">dev_life</span></div>
+  </div>
+
+  <!-- 6. 15:00 -->
+  <div class="slide" data-name="ai-pair">
+    <div class="term"><span class="dot d-red"></span><span class="dot d-yel"></span><span class="dot d-grn"></span><span class="term-title">pair.sh — ai assistant</span></div>
+    <div class="time">03:00 PM</div>
+    <div class="headline">THE AI WRITES <span class="grn">80%</span> OF THE CODE</div>
+    <div class="sub">I read all of it. carefully. twice.</div>
+    <div class="code"><span class="dim">// reviewed by:</span> human (that's me)</div>
+    <div class="footer"><span>06 / 08</span><span class="brand">dev_life</span></div>
+  </div>
+
+  <!-- 7. 17:00 -->
+  <div class="slide" data-name="deploy">
+    <div class="term"><span class="dot d-red"></span><span class="dot d-yel"></span><span class="dot d-grn"></span><span class="term-title">deploy.sh — production</span></div>
+    <div class="time">05:00 PM</div>
+    <div class="headline">DEPLOY AT <span class="blu">5PM</span>. CLASSIC.</div>
+    <div class="sub">everyone is watching.</div>
+    <div class="code">$ npm run deploy <span class="cursor"></span></div>
+    <div class="footer"><span>07 / 08</span><span class="brand">dev_life</span></div>
+  </div>
+
+  <!-- 8. CTA -->
+  <div class="slide" data-name="cta">
+    <div class="term"><span class="dot d-red"></span><span class="dot d-yel"></span><span class="dot d-grn"></span><span class="term-title">day_in_the_life.sh — done ✓</span></div>
+    <div class="time">$ echo "the real day"</div>
+    <div class="headline">REALITY: <span class="grn">MEETINGS</span>, DEBUGGING &amp; 10 MIN OF GENIUS</div>
+    <div class="sub">inbox first · headphones on · read the AI's code.</div>
+    <div class="cta-box">SAVE THIS — FOLLOW FOR PART 2</div>
+    <div class="footer"><span>08 / 08</span><span class="brand">dev_life</span></div>
+  </div>
+
+</div>
+</body>
+</html>
