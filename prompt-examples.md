@@ -146,15 +146,18 @@ Two rules that make these prompts work:
 
 ## 11. Vibe-coded web apps 🧱
 
-*Runs through **`vibe-code-webapp`**: research → evaluate → **build pack** (`PRD.md` + stack blueprint: design system + architecture + handoff prompts) → approval → build (CLI or Lovable/Bolt/v0) → production audit.*
+*Runs through **`vibe-code-webapp`**: detailed idea interview (+ existing-project scan if the folder already has code) → research → evaluate → **build pack** (`PRD.md` + stack blueprint + handoff prompts) + **`TODO.md`** (P0/P1/P2 via `todo.mjs`) → approval of pack AND todo → build **step by step** from `vibe-coder-instructions.md` (BUILD.md) with a detailed `build-report.md` per session → production audit → **everything-auditor** final review (app + plan + instructions + memory + reports → hardening/tests/brainstorming) → daily `MEMORY.md` log.*
 
 | Prompt | Type |
 |---|---|
 | "build me an app for productivity" | sloppy |
 | "Vibe-code a SaaS: invoices freelancers actually get paid on — Next.js + Supabase + Stripe, $12/mo. Run the full pipeline (research → evaluate → PRD → approve → build → audit)." | premium |
 | "SaaS evaluator only: is a local-business review widget worth building? Score it honestly on the scorecard and tell me BUILD / ITERATE / PIVOT with top 3 risks." | evaluate only |
+| "Existing project: add subscriptions to my app — scan it first, then interview me for what to change, then pack + TODO and wait for my approval." | existing project |
+| "Start from memory: read MEMORY.md and continue the build from where we left off." | memory (daily) |
 | "Build a landing page + waitlist for my AI-meeting-notes idea — Vite + Tailwind, SEO + analytics ready, deploy to Vercel. Skip payments." | premium (non-SaaS) |
-| "Keep the vibe loop going: from my current app state, build the next PRD must-have, run it, commit." | iterate |
+| "Keep the vibe loop going: from my current app state + TODO list, build the next highest-priority open task, run it, commit." | iterate |
+| "Final review: spawn the everything-auditor — check the app, the plan, the instructions, memory and reports, then apply hardening + test fixes, brainstorm next ideas, and suggest skill improvements." | final review |
 
 **Idea sparks:** "freelancer payment pain" · "AI tool for X" · "internal tool that kills a spreadsheet" · "waitlist-first SaaS" · "the app nobody built well yet".
 

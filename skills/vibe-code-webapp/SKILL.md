@@ -1,23 +1,25 @@
 ---
 name: vibe-code-webapp
-description: Build production-ready vibe-coded web apps from a single idea. The skill ANALYZES the idea + stack preference (Next.js, Vite, whatever), EVALUATES it on a SaaS scorecard (BUILD / ITERATE / PIVOT), then produces a complete distraction-free BUILD PACK — PRD.md + stack-blueprint.md with a locked open-source design system (Tailwind + shadcn/ui), backend architecture (Drizzle/Postgres, Auth.js, Stripe), paste-ready data model, build order and handoff prompts — so the user can build in ANY tool (Claude Code, Cursor, Lovable, Bolt, v0) without design/architecture decisions. Research (research-idea.mjs) + production audit (audit-webapp.mjs + auditor subagent) included.
+description: Build or EXTEND production-ready vibe-coded web apps. The skill ONBOARDS the user with a detailed idea interview (idea-interview.md), and in EXISTING projects first SCANS the current structure (scan-project.mjs → project-scan.md) so the plan extends what's already there instead of starting from zero. Then it ANALYZES the idea + stack, EVALUATES it on the SaaS scorecard (BUILD / ITERATE / PIVOT), and produces a complete distraction-free BUILD PACK — PRD.md + stack-blueprint.md (locked open-source design system + backend architecture, paste-ready data model, build order) + a TODO.md task list with P0/P1/P2 priorities managed by todo.mjs. The user CONFIRMS the pack AND the todo list (gate) before any code, and can add/re-prioritize tasks mid-build. The vibe coder then builds STEP-BY-STEP from vibe-coder-instructions.md (flowchart + golden loop + memory rules) and files a DETAILED evidence-backed build-report.md per session. Research (research-idea.mjs) + production audit (audit-webapp.mjs + auditor subagent) included, and a final EVERYTHING-AUDITOR subagent reviews the app, the plan, the instructions, the memory and the reports — then applies hardening fixes, adds tests, brainstorms next ideas, and feeds skill improvements back. A daily MEMORY.md protocol keeps the user and the AI in sync across every session and any tool.
 ---
 
 # skill: vibe-code-webapp
 
-**Name:** Vibe-Coding Web App Builder (analyze → evaluate → build pack → approve → build anywhere → audit)
-**Description:** Turns any app idea — "I want to build something like X with Next.js" — into a **complete, distraction-free build pack** and then a **working, production-ready web app**. The skill first **analyzes the idea and the stack preference**, **evaluates** it (kill the dud ideas cheaply), then writes the **Build Pack**: `PRD.md` (what to build) + `stack-blueprint.md` (exactly HOW — locked open-source design system, backend architecture, paste-ready data model, numbered build order, and **handoff prompts**). The pack is **tool-agnostic**: build with any CLI (Claude Code, Cursor, Codex, Gemini CLI, Antigravity, Grok Build, Freebuff) **or** paste it into web builders (Lovable, Bolt, v0). The production audit runs on whatever folder any tool produces.
+**Name:** Vibe-Coding Web App Builder (onboard → scan existing → research → evaluate → build pack + todo → confirm → build step-by-step → audit → report + everything-auditor → deliver)
+**Description:** Turns any app idea — "I want to build something like X with Next.js" — into a **complete, distraction-free build pack** and then a **working, production-ready web app**. The skill first **onboards** you with a detailed idea interview, and if you're already in a project with code, **scans the existing structure** so the plan *extends* what exists instead of restarting. Then it **researches** the idea, **evaluates** it (kill the dud ideas cheaply), and writes the **Build Pack**: `PRD.md` (what to build) + `stack-blueprint.md` (exactly HOW — locked open-source design system, backend architecture, paste-ready data model, numbered build order) + `TODO.md` (the task list with P0/P1/P2 priorities). **You confirm the pack AND the todo list before any code** — and you can add tasks or re-prioritize them anytime, even mid-build. The pack is **tool-agnostic**: build with any CLI (Claude Code, Cursor, Codex, Gemini CLI, Antigravity, Grok Build, Freebuff) **or** paste it into web builders (Lovable, Bolt, v0). A **daily `MEMORY.md`** records decisions, progress and next steps so you (or any AI, in any tool) can pick up exactly where you left off — every single day. The production audit runs on whatever folder any tool produces.
 
 ---
 
 ## When to use
 
-- "I want to build something like **X**" / "an app with **Next.js**" — any idea + optional stack preference
+- "I want to build something like **X**" / "an app with **Next.js**" — any idea + optional stack preference (new project)
+- "**Extend** my app / add this feature to the project I already have" — **existing project mode**: the skill scans your structure first, then plans the extension on top of it
 - "Turn this idea into a SaaS / MVP / tool" — full pipeline
 - User has a stack in mind ("React + Vite", "Next.js + Supabase") → the skill validates it and locks it into the pack
 - Non-SaaS too (tools, internal apps, landing+waitlist): skip monetization-specific checks, keep the rest
+- "Start the day with context" / "remember where we are" → the **memory protocol** (`MEMORY.md`) is always on
 
-**Invariant:** *Research and evaluation are always allowed; **no code is written before the user has approved the Build Pack** (`PRD.md` + `stack-blueprint.md`).*
+**Invariant:** *Research, scanning and evaluation are always allowed; **no code is written before the user has approved the Build Pack** (`PRD.md` + `stack-blueprint.md`) **and the todo list** (`TODO.md`).*
 
 ---
 
@@ -37,11 +39,18 @@ Installs to `.agents/skills/vibe-code-webapp/`:
 SKILL.md
 scripts/
   research-idea.mjs     # demand research (Reddit + Google Trends, no API key)
+  scan-project.mjs      # existing-project mode: structure scan → project-scan.md
+  todo.mjs              # TODO.md manager (list/add/priority/status/confirm)
   audit-webapp.mjs      # production-readiness audit (marker-based, any stack)
 templates/
   prompts.md                 # copy-paste prompts for any CLI + handoff prompts
+  idea-interview.md          # the detailed idea questionnaire (Stage 0)
   prd-template.md            # PRD (what to build)
   stack-blueprint-template.md# BUILD PACK: stack lock, design system, architecture, data, build order, handoff prompts
+  todo.md                    # TODO.md format + the confirmation contract
+  memory.md                  # MEMORY.md daily memory protocol
+  vibe-coder-instructions.md # BUILD.md — the step-by-step build manual (flowchart, golden loop, memory + report rules)
+  build-report.md            # the detailed, evidence-backed build report (per session + final handover)
   design-system.md           # open-source design system pack (Tailwind + shadcn/ui tokens + components)
   backend-architecture.md    # backend architecture pack (Drizzle/Postgres, Auth.js, Stripe, security, ops)
   production-checklist.md    # the go-live bar (mirrors audit-webapp.mjs)
@@ -51,29 +60,60 @@ templates/
 
 ---
 
-## The 6-stage workflow
+## The workflow
 
 ```
-idea ──► 0. RESEARCH ──► 1. ANALYZE + EVALUATE ──► 2. BUILD PACK (PRD + blueprint) ──► USER APPROVAL ──► 3. BUILD ANYWHERE ──► 4. AUDIT ──► 5. DELIVER
-              │                   │                        │                              ▲                         │
-              └─ idea-brief.md    └─ scorecard /35         └─ ask ≤3 questions            └─ (edit / reject)       └─ fix loop until PASS
+start ──► 0. ONBOARD ──► 1. RESEARCH ──► 2. EVALUATE ──► 3. BUILD PACK + TODO ──► USER CONFIRMS ──► 4. BUILD ──► 5. AUDIT ──► 6. REPORT + FINAL REVIEW ──► 7. DELIVER
+            │              │               │              │                        ▲                 │            │                │
+            ├─ idea-       ├─ idea-        ├─ scorecard   └─ PRD.md + stack-       └─ (edit /        └─ work the └─ fix loop       └─ build-report.md
+            │  answers.md  │  brief.md     │  /35            blueprint.md +            reject)         TODO list     until PASS        (detailed)
+            │  (interview) │               │                TODO.md (P0/P1/P2)                        (todo.mjs +                       +
+            └─ project-    │               │                                                     BUILD.md instructions)              everything-
+               scan.md     │               │                                                                                       auditor subagent
+               (existing   │               │                                                                                       (app + plan +
+                projects)  │               │                                                                                       instructions +
+                           ▼               ▼                                                                                       memory + reports
+              MEMORY (always on): read MEMORY.md at session start · append today's entry at the end                                     → hardening /
+                                                                                                                                    tests / brainstorm)
 ```
 
-### Stage 0 — Research the idea (don't build on vibes alone)
+### Stage 0 — Onboard: interview the idea, scan the project (always first)
 
-Goal: one **`idea-brief.md`** (from `scripts/research-idea.mjs`) that proves (or disproves) demand.
+The skill NEVER guesses the idea silently. It starts with a **detailed interview** (not just 3 questions — the full `templates/idea-interview.md`), and when run inside a project that already has code, it **scans the existing structure** first so the plan is grounded in what's actually there.
+
+**0a — Detect the mode.** Does the current folder already contain a project (package.json / requirements.txt / src / app)? 
+- **No → New-project mode.** Go straight to the interview (0b).
+- **Yes → Existing-project mode.** Run the scan first (0a′), then interview with the *existing-project* questions.
+
+**0a′ — Scan the existing project (existing-project mode only):**
+
+```bash
+node scripts/scan-project.mjs --dir . --name {app}        # → output/scan/project-scan.md
+```
+
+The scan captures the **ground truth**: detected stack, folder structure, pages/routes, data/auth/payment markers, env files, tests/CI/deploy config. The agent then completes the judgment sections — *existing features & routes, data model, gaps & risks, extension opportunities*. This file is what the build pack is planned **on top of**: the plan EXTENDS the existing app, never ignores it.
+
+**0b — The detailed idea interview.** Walk through `templates/idea-interview.md` one section at a time (idea → users → scope → stack → business → timeline → metrics; plus section 8 in existing-project mode). Every question can be answered, partially answered, or **"skip — you decide"** (defaults are listed). Record the user's verbatim answers to `output/idea/idea-answers.md`.
+
+**0c — Initialize the shared memory (first session only):** copy `templates/memory.md` → `MEMORY.md` (project root). It records the goal, stack, standing decisions, and the daily log — the user and any AI read/write it every session from now on.
+
+> The interview feeds everything downstream: the research brief, the scorecard, the PRD, and the TODO list. Skipping it means guessing — and the skill never guesses silently.
+
+### Stage 1 — Research the idea (don't build on vibes alone)
+
+Goal: one **`idea-brief.md`** (from `scripts/research-idea.mjs`) that proves (or disproves) demand. In existing-project mode, the research validates the **change** you're planning, not a from-scratch product.
 
 ```bash
 node scripts/research-idea.mjs --niche "saas for freelancers" --subreddits "freelance,Entrepreneur,webdev" --geo US
 ```
 
-- **0a — keyless signals:** Reddit top-of-day (real pain + user language) + Google Trends (rising topics). Copy the scaffold to the project root as the live `idea-brief.md`.
-- **0b — agent web research:** Product Hunt, Hacker News, X, competitor sites → competition, pricing, open gaps.
-- **0c — brainstorm ≥5 product angles**, pick the best **problem-to-effort** winner (section 4 of the brief).
+- **1a — keyless signals:** Reddit top-of-day (real pain + user language) + Google Trends (rising topics). Copy the scaffold to the project root as the live `idea-brief.md`.
+- **1b — agent web research:** Product Hunt, Hacker News, X, competitor sites → competition, pricing, open gaps.
+- **1c — brainstorm ≥5 product angles**, pick the best **problem-to-effort** winner (section 4 of the brief). For existing projects: ≥5 extension angles on the current app.
 
-### Stage 1 — Analyze the idea + stack, then evaluate
+### Stage 2 — Analyze the idea + stack, then evaluate
 
-**Analyze (extract — ask ≤3 questions if vague, never guess silently):**
+**Analyze (extract — the interview already captured most of this; only re-ask if something is still vague):**
 
 | Field | Extract / default |
 |---|---|
@@ -83,7 +123,7 @@ node scripts/research-idea.mjs --niche "saas for freelancers" --subreddits "free
 | **Monetized?** | yes (which model) / no |
 | **Constraints** | timeline, existing accounts, must-have features |
 
-**Stack analysis:** if the user named a stack, check it against the idea (e.g. "Next.js" fits a SaaS; "Vite+React+Express+SQLite" fits a small tool; Astro fits content sites). If it fits, **lock it into the pack as-is**. If it fights the idea, say so in one line and recommend the default (`templates/backend-architecture.md` §1) — but the user's choice wins unless it can't do the job.
+**Stack analysis:** if the user named a stack, check it against the idea (e.g. "Next.js" fits a SaaS; "Vite+React+Express+SQLite" fits a small tool; Astro fits content sites). If it fits, **lock it into the pack as-is**. If it fights the idea, say so in one line and recommend the default (`templates/backend-architecture.md` §1) — but the user's choice wins unless it can't do the job. **In existing-project mode the existing stack is the default** — no re-platforming unless the user insists and the scan justifies it.
 
 **Evaluate — the SaaS scorecard (1–5 each, /35):**
 
@@ -93,53 +133,74 @@ node scripts/research-idea.mjs --niche "saas for freelancers" --subreddits "free
 | Market size & reachability | Enough buyers you can actually reach? |
 | Competition | Crowded me-too (low) vs differentiated gap (high)? |
 | Monetization | Would they pay? (skip for non-monetized apps) |
-| Technical feasibility | Buildable fast with vibe-coding on the locked stack? |
+| Technical feasibility | Buildable fast with vibe-coding on the locked stack? (existing projects: how much of it already exists in the scan?) |
 | Moat / why not copyable | Network effects, data, workflow lock-in? |
-| Time-to-MVP | Honest weeks-to-first-user |
+| Time-to-MVP | Honest weeks-to-first-user (existing projects: often shorter — you're extending) |
 
 **Verdict:** ≥ 30 **BUILD** · 25–29 **ITERATE** (sharpen scope) · < 25 **PIVOT or KILL** — share the verdict + top 3 risks before going further.
 
-### Stage 2 — Write the BUILD PACK and STOP for approval (the gate)
+### Stage 3 — Write the BUILD PACK + TODO list, and STOP for approval (the gate)
 
-The **build pack** is what makes vibe coding distraction-free: every decision is already made. Two files:
+The **build pack** is what makes vibe coding distraction-free: every decision is already made, and the work is broken into a task list you own. Three files:
 
-**`PRD.md`** ← `templates/prd-template.md` — what to build: problem, personas, MVP must-haves, flows, data model, auth/payments, KPIs, decisions.
+**`PRD.md`** ← `templates/prd-template.md` — what to build: problem, personas, MVP must-haves, flows, data model, auth/payments, KPIs, decisions. *(Existing-project mode: the PRD describes the EXTENSION — what changes in the existing app, what stays untouched.)*
 
 **`stack-blueprint.md`** ← `templates/stack-blueprint-template.md` — exactly HOW:
-- **Stack lock** — one row per layer, versions, zero open decisions
-- **Design system** (from `templates/design-system.md`) — tokens, fonts, page→component map; open-source, applied as-is
+- **Stack lock** — one row per layer, versions, zero open decisions *(existing projects: locked to the scanned stack + what's added)*
+- **Design system** (from `templates/design-system.md`) — tokens, fonts, page→component map; open-source, applied as-is *(existing projects: reuse the app's existing design tokens if present — the scan says so)*
 - **Backend architecture** (from `templates/backend-architecture.md`) — folder structure, auth flow, payments flow, security, ops
-- **Data model** — paste-ready SQL/Drizzle tables with FK + index rules
+- **Data model** — paste-ready SQL/Drizzle tables with FK + index rules *(existing projects: only the NEW tables/changes; existing schema stays)*
 - **Build order** — numbered steps with a "definition of done" each; never skip ahead
 - **Handoff prompts** — CLI prompt + Lovable/Bolt/v0 mega-prompt + re-prompt, pre-filled with the app's real details
 
-Then **present both files and wait**. The user may **approve** (→ Stage 3), **edit** (revise + re-present), or **reject** (stop). No scaffolding before approval.
+**`TODO.md`** ← `templates/todo.md` + managed by **`scripts/todo.mjs`** — the build plan as a task list the user owns:
 
-> A vague prompt ("make an app for productivity") → ask ≤3 questions (audience? monetized? stack?) and default the rest. A prompt with a stack ("Next.js + Supabase") → analyze, validate, and lock it.
+```bash
+node scripts/todo.mjs init                                # create TODO.md
+node scripts/todo.mjs list                                # view, grouped by priority
+node scripts/todo.mjs add "build the invoice form" --p P0 --ref PRD-4
+node scripts/todo.mjs priority 3 P0                       # user re-prioritizes anytime
+node scripts/todo.mjs doing 2 / done 2 / blocked 2        # status tracking
+node scripts/todo.mjs confirm                             # user approves → build may start
+```
 
-### Stage 3 — Build ANYWHERE (the pack works in every tool)
+Every build-order step becomes a TODO task (P0 = do first, P1 = important, P2 = nice to have). Extra ideas from the interview go to P2 (or `NEXT.md`).
+
+Then **present all three files and wait**. The user may **approve** (agent runs `todo.mjs confirm` — the gate), **edit** (revise + re-present), or **reject** (stop). **No scaffolding before the user approves the pack AND the todo list.**
+
+> A vague prompt ("make an app for productivity") → the interview extracts the details (audience? monetized? stack?) and defaults the rest. A prompt with a stack ("Next.js + Supabase") → analyze, validate, and lock it. In an existing project → scan first, then plan the extension.
+
+### Stage 4 — Build ANYWHERE, STEP BY STEP (work the confirmed TODO list)
 
 Hand the approved pack to whichever builder the user wants — it's tool-agnostic by design:
 
 | Builder | How the pack is used |
 |---|---|
-| **CLI agents** (Claude Code, Cursor, Codex, Gemini CLI, Freebuff…) | Agent builds in the repo: scaffold → follow the build order → run/verify/commit each step (craft rules below) |
+| **CLI agents** (Claude Code, Cursor, Codex, Gemini CLI, Freebuff…) | Copy `templates/vibe-coder-instructions.md` → `BUILD.md` in the repo, then build **step by step** from it: session-start ritual → golden loop (one task at a time) → memory + report rules (craft rules below) |
 | **Lovable / Bolt / v0** | Paste the handoff mega-prompt from `stack-blueprint.md` §7-B (it carries pages, design tokens, data model, auth/payments, feature order) |
 | **Hybrid** | CLI agent builds; user opens the result in a web builder for UI tweaks — same pack, same contract |
 
+**The vibe coder's step-by-step instructions** (`templates/vibe-coder-instructions.md` → `BUILD.md`) tell the builder exactly how to work, and cover **both new and existing projects**:
+1. **Session-start ritual** — read `MEMORY.md` → check the TODO gate (NO confirmation = STOP) → read `PRD.md` + `stack-blueprint.md` + `TODO.md`.
+2. **The golden loop, per task** — pick highest-priority open task → read its scope (`— ref:`) → implement the smallest change → **run** the app → verify the definition of done → `todo.mjs done <id>` (only when verified) → commit → append `build-report.md` → log lasting decisions to `MEMORY.md`.
+3. **Build order** — `stack-blueprint.md` §6, never skipped ahead; never two steps before the app runs again.
+4. **Memory + reports** — append `MEMORY.md` (Did/Decided/Blocked/Next) and a **detailed `build-report.md` session entry** (what/where/evidence) at the end of every session.
+
 **Vibe-coding craft rules** (CLI builds — the pack makes them easy):
 1. **Run early, run often** — the app must start after every change, not at the end.
-2. **One feature at a time** — implement → run → verify → commit. Follow the blueprint's build order.
-3. **No gold-plating** — build the PRD must-haves; extra ideas go in `NEXT.md`.
+2. **Work the TODO list, one task at a time** — implement → run → verify → `node scripts/todo.mjs done <id>` → commit. Follow the priorities.
+3. **No gold-plating** — build the PRD must-haves; extra ideas go in `NEXT.md` (or P2 tasks).
 4. **Secrets never in code** — `process.env` only, `.env.example` committed, `.env` gitignored.
 5. **Tests for the money paths** — auth, billing, anything that deletes data.
-6. **Commit after every working feature.**
+6. **Commit after every working feature.** Update `MEMORY.md` + `build-report.md` at the end of each session.
 
-### Stage 4 — Audit for production (works on ANY builder's output)
+**The user is the PM, mid-build:** at any point the user can say *"make task 4 P0"* or *"add a task: …"* → the agent runs `node scripts/todo.mjs priority 4 P0` / `add "…" --p P1`, says what changed, and works the new order. If the change contradicts the confirmed PRD, the agent re-confirms scope with the user first.
+
+### Stage 5 — Audit for production (works on ANY builder's output)
 
 The audit is marker-based, not framework-based — run it on whatever folder the CLI agent or Lovable/Bolt produced.
 
-**4a — run the script:**
+**5a — run the script:**
 
 ```bash
 node scripts/audit-webapp.mjs --dir . --name {app} --payments   # --payments only if monetized
@@ -147,7 +208,7 @@ node scripts/audit-webapp.mjs --dir . --name {app} --payments   # --payments onl
 
 Scans for app entry, run/build scripts, `.gitignore`, `.env.example`, hardcoded secrets, auth, database, payments, error handling, validation, CORS/rate-limit, tests, lint, CI, deploy config, analytics, SEO → `audit-report.md` with PASS/WARN/FAIL + auditor section. Exit 1 on any FAIL.
 
-**4b — spawn the auditor subagent** (fresh eyes — never audit your own work):
+**5b — spawn the auditor subagent** (fresh eyes — never audit your own work):
 
 ```
 You are the web-app auditor for the project at {dir} ({name}).
@@ -161,13 +222,79 @@ You are the web-app auditor for the project at {dir} ({name}).
 3. Report the verdict + the audit-report.md path.
 ```
 
-**4c — fix loop.** Any FAIL (or auditor-flagged WARN) → fix → re-run → re-submit. **Nothing is delivered until the auditor signs off PASS.**
+**5c — fix loop.** Any FAIL (or auditor-flagged WARN) → fix → re-run → re-submit. **Nothing is delivered until the auditor signs off PASS.**
 
-### Stage 5 — Deliver
+### Stage 6 — Report, then the EVERYTHING-auditor (final review), then fix
 
-- Working app + `PRD.md` + `stack-blueprint.md` + `idea-brief.md` + `audit-report.md` (PASS).
+The reports must be **proper and detailed** — they are what the final review is judged on. Three artifacts: `audit-report.md` (automated, Stage 5), `build-report.md` (per-session, evidence-backed), `MEMORY.md` (daily).
+
+**6a — Write the detailed build report.** `build-report.md` ← `templates/build-report.md`: per session — tasks worked (mapped to TODO ids), what was built with exact file paths, verification evidence (commands + output), deviations from the blueprint (and whether the blueprint was updated), decisions, tests, risks, next steps. A vague report is sent back.
+
+**6b — Spawn the EVERYTHING-auditor subagent** (fresh eyes — the final gate. It analyzes ALL of it, not just the code):
+
+```
+You are the FINAL REVIEW auditor for the vibe-coded app at {dir} ({name}).
+Analyze EVERYTHING, then make changes where needed:
+1. THE APP — read output/audit/audit-report.md; confirm the production verdict
+   (secrets, actually runs, broken/half-built screens, error states, mobile,
+   accessibility).
+2. THE PLAN — read PRD.md + stack-blueprint.md + TODO.md: was every confirmed
+   must-have actually built? Scope drift? Half-built features? Gaps?
+3. THE INSTRUCTIONS — read SKILL.md + templates + BUILD.md: were the
+   step-by-step instructions followed? Where did they cause friction or
+   missing steps? (This is feedback to improve the skill itself.)
+4. MEMORY — read MEMORY.md: does it reflect reality? Standing decisions
+   captured? Today's entry present?
+5. REPORTS — read build-report.md: is it detailed and evidence-backed?
+Then produce:
+- VERDICT: PASS / CHANGES NEEDED
+- FIX LIST, three kinds:
+  a. HARDENING — production issues (from the audit or your review): concrete fixes
+  b. TEST HARNESS — tests missing for money paths (auth/billing/delete): list
+  c. BRAINSTORM — 3–5 new feature angles/improvements from what exists → NEXT.md / P2
+- SKILL FEEDBACK — concrete suggested edits to SKILL.md/templates so the next
+  build goes smoother (submit to the user; apply only with their approval).
+Report the verdict, the fix list, and the paths you reviewed.
+```
+
+**6c — Fix loop (harness + brainstorming).** Apply the auditor's **hardening** fixes and **test-harness** gaps → re-run `audit-webapp.mjs` → re-submit. Add the **brainstormed** angles to `NEXT.md` (and P2 tasks via `todo.mjs add` if the user wants them). If the auditor flagged **instruction** problems, apply the user-approved **skill feedback** edits. **Nothing ships until the everything-auditor signs off PASS.**
+
+### Stage 7 — Deliver
+
+- Working app + `PRD.md` + `stack-blueprint.md` + `TODO.md` (confirmed, done-state) + `BUILD.md` + `build-report.md` (detailed, auditor-signed) + `idea-brief.md` + `idea-answers.md` + (existing projects) `project-scan.md` + `audit-report.md` (PASS) + `MEMORY.md` (today's entry written).
 - A production README: what it is, setup, env vars, deploy + rollback runbook.
-- Tell the user: the one-line pitch, the scorecard total + verdict, what was built, what's in `NEXT.md`, and how to rebuild/tweak it in their favorite tool (paste the blueprint's handoff prompt).
+- Tell the user: the one-line pitch, the scorecard total + verdict, what was built (map to the confirmed TODO), the auditor's verdict + what the fix loop changed, what's in `NEXT.md`, and how to rebuild/tweak it in their favorite tool (paste the blueprint's handoff prompt).
+
+---
+
+## Memory — the daily shared brain (`MEMORY.md`)
+
+**The web-app building process is done — memory keeps it going.** `MEMORY.md` (project root, from `templates/memory.md`) is the project's shared memory: the **user and any AI** read and write it every day, in any tool, so no session ever starts from zero.
+
+| When | Who | What |
+|---|---|---|
+| Session start | AI | Read `MEMORY.md` first → greet with *"Picking up from {last date}: next is …"* — never re-ask decided things |
+| During session | Both | Lasting decisions append to **Standing decisions** immediately |
+| Session end | AI | Append `## YYYY-MM-DD` → **Did / Decided / Blocked / Next** (≤8 bullets, tool-neutral) |
+| Anytime | User | Add their own lines under today's date ("remember: pricing is $9, not $12") |
+| Daily | Both | **User or AI uses the memory daily** — it is the continuity between sessions and between tools |
+
+If `MEMORY.md` is missing → initialize it from the template (Stage 0c). **Memory is cheap, rediscovery is expensive:** when in doubt, check `MEMORY.md` first.
+
+---
+
+## Todo — the user-owned task list (`TODO.md`)
+
+| Command | What it does |
+|---|---|
+| `node scripts/todo.mjs list` | Show tasks grouped by priority + confirmation status |
+| `node scripts/todo.mjs add "task" --p P1 --ref PRD-4` | User or AI adds a task (stable `#id`) |
+| `node scripts/todo.mjs priority <id> P0` | User re-prioritizes anytime — even mid-build |
+| `node scripts/todo.mjs doing/done/blocked/todo <id>` | Status tracking (done only when verified) |
+| `node scripts/todo.mjs remove <id>` | Remove a task |
+| `node scripts/todo.mjs confirm` | **The gate** — only after the user approves (pack + list together) |
+
+Rules: the **user owns the list** · `P0` do first / `P1` important / `P2` nice-to-have · a task is `done` only when it runs and is verified · the list stays in sync with `PRD.md` + `stack-blueprint.md` (contradictions → update both + re-confirm).
 
 ---
 
@@ -189,31 +316,48 @@ You are the web-app auditor for the project at {dir} ({name}).
 
 ## Example session
 
-**User:** "I want to build something like a freelancer invoicing tool, with Next.js. Run it through the skill."
+**Existing project + new feature, with memory:**
 
-**Agent:** *(Stage 0)* `node scripts/research-idea.mjs --niche "freelancer invoicing" --subreddits "freelance,Entrepreneur"` → Reddit pain "I chase clients for 6 weeks" · Trends: "invoice software" → `idea-brief.md`, winner: **InvoiceFlow**.
+**User:** "I want to add a subscription tier to my existing app. Also, remember where we left off."
 
-**Agent:** *(Stage 1)* Stack: **Next.js — fits, locked.** Scorecard: 5/4/3/4/5/2/4 → **29/35 → ITERATE** → sharpens to "one-time invoices + Stripe link, no subscriptions in MVP" → **BUILD**.
+**Agent:** *(Start)* Reads `MEMORY.md` → "Picking up from yesterday: the app is live, last task was fixing the invoice PDF export. The confirmed TODO has 2 open items." Then runs the scan: `node scripts/scan-project.mjs --dir . --name invoiceflow` → `project-scan.md`: Next.js 15 + Drizzle/Postgres + Auth.js already wired, Stripe one-time checkout present, no subscription logic.
 
-**Agent:** *(Stage 2)* Writes `PRD.md` + `stack-blueprint.md` (design system pack applied: neutral tokens + indigo accent, Geist, page map; architecture pack applied: Drizzle schema, Auth.js, Stripe webhook; build order 1–8; handoff prompts filled). Presents both, waits. **User:** "approve — build it here."
+**Agent:** *(Stage 0 — interview)* Asks the existing-project questions (8.1–8.4): what to ADD (subscriptions + a plans page), what must NOT break (current one-time invoices), records answers to `output/idea/idea-answers.md`.
 
-**Agent:** *(Stage 3)* Builds per the blueprint's build order: scaffold → tokens → schema → auth → invoice form → Stripe checkout → status dashboard; runs after every step; commits each feature; tests auth + webhook.
+**Agent:** *(Stage 1)* `research-idea.mjs --niche "freelancer invoicing subscriptions"` → brief confirms competitors all moved to recurring → angle: "usage-based paid plan".
 
-**Agent:** *(Stage 4)* `audit-webapp.mjs --dir . --name invoiceflow --payments` → 1 FAIL (no CI) + 3 WARN → fixes → auditor signs **PASS**.
+**Agent:** *(Stage 2)* Scorecard: 5/4/4/5/5/3/4 → **30/35 → BUILD** (feasibility boosted by what already exists in the scan).
 
-**Agent:** *(Stage 5)* Delivers: running app + the full build pack + audit-report (PASS) + README with the Vercel runbook and the **Lovable/Bolt handoff prompt** so the user can also open the same app in a web builder.
+**Agent:** *(Stage 3)* Writes `PRD.md` (extension: plans page + Stripe subscriptions + entitlement gate), `stack-blueprint.md` (stack locked to the existing one; new `subscriptions` table; build order 1–6), and builds the `TODO.md` from the build order with priorities. Presents all three, waits. **User:** "approve, and make task 4 P0 — I want the plans page first." Agent runs `node scripts/todo.mjs priority 4 P0` then `node scripts/todo.mjs confirm`.
+
+**Agent:** *(Stage 4)* Works the confirmed TODO in priority order: plans page → checkout → webhook → entitlements → tests. Runs after every task, `todo.mjs done <id>` when verified, commits each feature. **User mid-build:** "add a task — annual discount." → `node scripts/todo.mjs add "annual discount (20%)" --p P1 --ref PRD-6`, continues.
+
+**Agent:** *(Stage 5)* `audit-webapp.mjs --dir . --name invoiceflow --payments` → 1 FAIL (webhook secret in code) → fixes → auditor signs **PASS**.
+
+**Agent:** *(Stage 6 — report + everything-auditor)* Writes `build-report.md` (tasks → files → evidence, deviations, tests, risks). Spawns the everything-auditor: it reviews the app (PASS), the plan (all confirmed must-haves built; 1 gap: no cancel-subscription path in the PRD → added as P2), the instructions (BUILD.md flow worked; suggested one edit: call out Stripe test keys earlier in the blueprint), memory (accurate), reports (detailed). Fix loop: hardening (webhook idempotency guard) + test harness (subscription-cancel test) applied; brainstorm → `NEXT.md`: churn emails, usage metering, annual invoicing; skill feedback edit approved by the user and applied to the blueprint.
+
+**Agent:** *(Stage 7)* Delivers: extension live, `TODO.md` all done, `MEMORY.md` today's entry appended ("Shipped subscriptions; next: churn emails"), plus the handoff prompt so the user can tweak in Lovable/Bolt.
 
 ---
 
 ## Production checklist
 
-- [ ] Idea + stack preference **analyzed** (user's words kept; stack validated and locked)
+- [ ] Mode detected: **new project** vs **existing project** (code in the folder?)
+- [ ] Existing project → `scan-project.mjs` ran; `project-scan.md` completed (features, gaps, extension opportunities)
+- [ ] **Detailed idea interview** ran (`idea-interview.md`); verbatim answers in `idea-answers.md`; "skip — you decide" used for defaults, never silent guessing
+- [ ] `MEMORY.md` initialized (first session) from `templates/memory.md`
 - [ ] `idea-brief.md` written: signals dated + sourced, ≥5 angles, winner locked
 - [ ] SaaS scorecard applied (/35); BUILD / ITERATE / PIVOT verdict shared
-- [ ] ≤3 clarifying questions if vague; no silent guessing
 - [ ] **Build pack** written: `PRD.md` + `stack-blueprint.md` (stack lock, design system, architecture, paste-ready data model, numbered build order, filled handoff prompts)
-- [ ] **Approval gate: user explicitly approved the build pack before ANY code**
-- [ ] Built per the blueprint (CLI craft rules) or pasted into the user's chosen builder (Lovable/Bolt/v0) via the handoff prompt
+- [ ] **`TODO.md` built from the build order with priorities (P0/P1/P2)**; `todo.mjs list` shows it
+- [ ] **Approval gate: user explicitly approved the pack AND the todo list** (`todo.mjs confirm`) before ANY code
+- [ ] Built per the blueprint + TODO list (CLI craft rules) or pasted into the user's chosen builder (Lovable/Bolt/v0) via the handoff prompt
+- [ ] User additions/re-prioritizations mid-build handled via `todo.mjs` and re-confirmed if scope changed
 - [ ] `audit-webapp.mjs` ran on the delivered folder: PASS/WARN/FAIL + `audit-report.md`
 - [ ] Auditor subagent signed off **PASS**; any FAIL fixed and re-audited
-- [ ] Delivered: working app + `PRD.md` + `stack-blueprint.md` + `idea-brief.md` + `audit-report.md` + production README
+- [ ] **`BUILD.md`** (vibe-coder instructions) copied to the project root; build followed its golden loop
+- [ ] **`build-report.md` written — detailed and evidence-backed** (what/where/evidence, deviations, tests, risks)
+- [ ] **Everything-auditor subagent ran** (app + plan + instructions + memory + reports): verdict recorded, hardening + test-harness fixes applied, brainstorm → `NEXT.md`, skill feedback submitted/approved
+- [ ] Everything-auditor signed off **PASS** after the fix loop
+- [ ] **`MEMORY.md` today's entry appended (Did / Decided / Blocked / Next)**
+- [ ] Delivered: working app + `PRD.md` + `stack-blueprint.md` + `TODO.md` + `BUILD.md` + `build-report.md` + `idea-brief.md` + `audit-report.md` + production README
