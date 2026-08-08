@@ -14,6 +14,7 @@ Open-source agent skills for creating **short-form video content and carousel po
 | **video-asset-reels** | Build reels from your own video clips & images — understand the prompt, cut assets to beats, overlay kinetic text, sync a voiceover, render 4K (see [PLAN.md](PLAN.md)) |
 | **video-product-pipeline** | The viral-engineered gatekeeper for every video request: hunt trending topics (`trend-hunt.mjs` + web research) → brainstorm + score angles → analyze ANY prompt (sloppy or not) → write a `video-product.md` spec → **get your approval** → generate (text-motion / asset reels) → audit the frames with a script + dedicated auditor subagent (spelling, text overlap, safe zones, style, readability) |
 | **carousel-post-images** | Scroll-stopping carousel posts (LinkedIn/Instagram) as image sets — **one script, two CLI modes**: **browser render** (slides.html → deterministic 4K PNGs, any CLI) or **native image-model generation** (same deck exports photoreal 4K prompts for Antigravity / Codex `image_gen` / Grok `/imagine`). Photorealistic real-life visuals, viral anti-fluff copywriting, 4 trending styles (Cinematic Real-Life default), per-platform `caption.md` |
+| **vibe-code-webapp** | Build **production-ready vibe-coded web apps** (SaaS / tools / MVPs / internal apps) — **research** demand (`research-idea.mjs`, no API key) → **SaaS evaluator** scorecard (BUILD / ITERATE / PIVOT) → `PRD.md` **approval gate** → build with vibe-coding craft rules (runnable at every step, one feature at a time) → **production audit** (`audit-webapp.mjs` + auditor subagent). Ships copy-paste prompts for any CLI + PRD & production-checklist templates |
 
 The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline).
 
@@ -35,7 +36,7 @@ Run this **inside your project folder**:
 npx skills add Deepak-ai-93/deepak-skill --all
 ```
 
-That's it. It installs all six skills into `.agents/skills/` — no heavy media, no demo files.
+That's it. It installs all seven skills into `.agents/skills/` — no heavy media, no demo files.
 
 ### 3. Use it with any CLI
 
@@ -56,6 +57,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **video-asset-reels only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill video-asset-reels` |
 | **video-product-pipeline only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill video-product-pipeline` |
 | **carousel-post-images only** (self-contained — SKILL.md + scripts/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images` |
+| **vibe-code-webapp only** (self-contained — SKILL.md + scripts/ + templates/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill vibe-code-webapp` |
 | Install globally (any project, any machine) | `npx skills add Deepak-ai-93/deepak-skill --all -g` |
 | Target specific agents | `npx skills add Deepak-ai-93/deepak-skill --all -a claude-code -a cursor` |
 | Install from a local clone | `npx skills add ./deepak-skill --all` |
@@ -66,6 +68,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 ls .agents/skills/
 # carousel-post-images  hook-storyboard-retention  text-motion-reels
 # video-asset-reels  video-product-pipeline  voice-sfx-audio
+# vibe-code-webapp
 ```
 
 **Update:** `npx skills update` • **Remove:** `npx skills remove <skill-name>`
@@ -140,6 +143,21 @@ Built-in examples — **"Day in the life of an AI developer"** (`examples/day-in
 
 > "Make a carousel: 3 money rules nobody told you. Real scenes, image-model mode, 8 slides, 4K, LinkedIn."
 > → choose mode → `prompts.md` → 4K images → `caption.md` → auditor check → deliver
+
+### Vibe-code web apps (`vibe-code-webapp`)
+
+Build **production-ready vibe-coded web apps** (SaaS, tools, MVPs, internal apps) on any CLI — research demand, evaluate the idea before writing code, approve a PRD, build, then audit:
+
+1. **Research** — `node scripts/research-idea.mjs --niche "saas for freelancers" --subreddits "freelance,Entrepreneur" --geo US` → `idea-brief.md` (Reddit pain + Google Trends, no API key)
+2. **Evaluate** — SaaS scorecard (/35) → **BUILD / ITERATE / PIVOT** verdict shared with you
+3. **`PRD.md`** from the template → **your approval** — nothing is coded before you say "approve"
+4. **Build** with vibe-coding craft rules (runnable at every step, one feature at a time, tests on auth/billing)
+5. **Audit** — `node scripts/audit-webapp.mjs --dir . --name app --payments` → auditor subagent signs **PASS** → deliver
+
+Ships `templates/prompts.md` (copy-paste prompts for any CLI), `templates/prd-template.md`, and `templates/production-checklist.md`.
+
+> "Build me a SaaS for freelancers to get paid faster. Next.js + Stripe. Run the full pipeline."
+> → research → evaluate → PRD → approve → build → audit → deliver
 
 ---
 

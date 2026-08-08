@@ -1,6 +1,6 @@
 # Prompt Examples — deepak-skill 🎬
 
-Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit.
+Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit.
 
 Two rules that make these prompts work:
 
@@ -143,6 +143,20 @@ Two rules that make these prompts work:
 **Idea sparks:** unboxing reveal · "designed in a garage" origin story · feature close-ups with macro pacing · limited-drop urgency (word-pop).
 
 ---
+
+## 11. Vibe-coded web apps 🧱
+
+*Runs through **`vibe-code-webapp`**: research → evaluate → `PRD.md` → approval → build → production audit.*
+
+| Prompt | Type |
+|---|---|
+| "build me an app for productivity" | sloppy |
+| "Vibe-code a SaaS: invoices freelancers actually get paid on — Next.js + Supabase + Stripe, $12/mo. Run the full pipeline (research → evaluate → PRD → approve → build → audit)." | premium |
+| "SaaS evaluator only: is a local-business review widget worth building? Score it honestly on the scorecard and tell me BUILD / ITERATE / PIVOT with top 3 risks." | evaluate only |
+| "Build a landing page + waitlist for my AI-meeting-notes idea — Vite + Tailwind, SEO + analytics ready, deploy to Vercel. Skip payments." | premium (non-SaaS) |
+| "Keep the vibe loop going: from my current app state, build the next PRD must-have, run it, commit." | iterate |
+
+**Idea sparks:** "freelancer payment pain" · "AI tool for X" · "internal tool that kills a spreadsheet" · "waitlist-first SaaS" · "the app nobody built well yet".
 
 ## Asset & audio-only prompts
 

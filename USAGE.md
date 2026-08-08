@@ -40,7 +40,7 @@ The deciding factor is: **does the product let an agent run terminal commands?**
 # in your project folder — a single skill
 npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images
 
-# or everything (all 6 skills)
+# or everything (all 7 skills)
 npx skills add Deepak-ai-93/deepak-skill --all
 
 # or install globally for every project
