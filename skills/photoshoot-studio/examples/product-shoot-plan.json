@@ -1,0 +1,71 @@
+{
+  "title": "Brew & Co Tumbler — E-commerce Shoot",
+  "kind": "product",
+  "platform": "flow",
+  "aspect": "1:1",
+  "grade": "Grade: bright high-key commercial look, pure white seamless background, crisp even exposure, zero shadows, ultra-clean.",
+  "craft": "Craft: shot on Phase One XF IQ4 medium format, 100mm macro lens, f/11 edge-to-edge sharpness, octabox key light with rim separation, flawless reflections, crisp detail, commercial catalog standard, no artifacts.",
+  "subject": "Subject: a matte-black insulated coffee tumbler by Brew & Co, brushed steel finish, made of double-wall stainless steel with a soft-touch rubber sleeve, with a minimalist white logo plate on the front, label reads \"BREW & CO · 500ML\".",
+  "references": [
+    "tumbler-hero-45.png",
+    "tumbler-topdown.png",
+    "tumbler-detail.png"
+  ],
+  "shots": [
+    {
+      "id": "hero",
+      "type": "generation",
+      "style": "Commercial product photography",
+      "placement": "Hero shot at a 45-degree angle, centered",
+      "setting": "Pure white seamless studio background",
+      "props": "none",
+      "lighting": "High-key, zero background shadows",
+      "aspect": "1:1",
+      "edit": "rotate the tumbler to face directly front"
+    },
+    {
+      "id": "floating",
+      "type": "generation",
+      "style": "Dynamic product photography",
+      "placement": "Levitating mid-air, slightly angled, with a subtle splash of water frozen below",
+      "setting": "Matte charcoal gradient background",
+      "props": "water splash",
+      "lighting": "High-speed flash effect with a cool blue gel accent from below",
+      "aspect": "1:1",
+      "edit": "remove the water splash"
+    },
+    {
+      "id": "detail-macro",
+      "type": "generation",
+      "style": "Detail macro photography",
+      "placement": "Extreme close-up of the white logo plate",
+      "setting": "Textured brushed-metal surface",
+      "props": "none",
+      "lighting": "Single soft spot, shallow depth of field",
+      "aspect": "4:5",
+      "edit": "increase the sharpness of the logo text"
+    },
+    {
+      "id": "lifestyle",
+      "type": "generation",
+      "style": "Lifestyle product photography",
+      "placement": "Resting on a rustic oak desk beside a laptop and an open notebook",
+      "setting": "Sun-drenched home office, morning light, warm bokeh",
+      "props": "laptop, notebook, pen",
+      "lighting": "Soft directional window light from the left",
+      "aspect": "3:2",
+      "edit": "add a small green plant to the desk"
+    },
+    {
+      "id": "packaging-flatlay",
+      "type": "generation",
+      "style": "Packaging photography",
+      "placement": "Flat-lay top-down with the box lid open beside the tumbler",
+      "setting": "Light grey textured concrete surface, soft even overhead light",
+      "props": "product box, kraft tissue paper",
+      "lighting": "Even overhead studio light, high-key",
+      "aspect": "1:1",
+      "edit": "close the box lid and move it to the lower left corner"
+    }
+  ]
+}

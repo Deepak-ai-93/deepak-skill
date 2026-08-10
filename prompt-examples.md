@@ -1,6 +1,6 @@
 # Prompt Examples — deepak-skill 🎬
 
-Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit. Email prompts (section 12) run through **`email-marketing`**: subject-line pack → bulletproof HTML + plain text → spam/compliance validation → preview → auditor sign-off. Long-form + brand prompts (section 13) run through **`podcast-to-shorts` / `youtube-video-pipeline` / `blog-seo-content` / `linkedin-personal-brand`**: score → approve → generate → audit. Google Flow/Veo scene-prompt prompts (section 14) run through **`veo-cinematic-reels`**: character sheet → scene script → self-verified copy-paste prompt pack.
+Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit. Email prompts (section 12) run through **`email-marketing`**: subject-line pack → bulletproof HTML + plain text → spam/compliance validation → preview → auditor sign-off. Long-form + brand prompts (section 13) run through **`podcast-to-shorts` / `youtube-video-pipeline` / `blog-seo-content` / `linkedin-personal-brand`**: score → approve → generate → audit. Google Flow/Veo scene-prompt prompts (section 14) run through **`veo-cinematic-reels`**: character sheet → scene script → self-verified copy-paste prompt pack. AI-photoshoot prompts (section 15) run through **`photoshoot-studio`**: subject sheet → shot list → self-verified copy-paste image prompt pack (person + product modes, edit/inpaint prompts).
 
 Two rules that make these prompts work:
 
@@ -208,6 +208,21 @@ Two rules that make these prompts work:
 | "Audit my scene-plan.json — regenerate the prompt pack and flag any scene that drifts from the character block." | audit/fix |
 
 **Idea sparks:** cinematic brand reels · action sequences · emotional storytelling · product hero reels · character-led series (same character, new episode each week).
+
+## 15. AI photoshoots 📸🧍🛍️
+
+*Runs through **`photoshoot-studio`**: analyze + lock grade/craft → **subject sheet** (verbatim person OR product block + Nano Banana reference-image prompts → upload as Flow Ingredients / Midjourney `--cref` / Flux reference) → **shot list** (hero → detail → lifestyle → closing) → **prompts.md** — one copy-paste image prompt per shot, every prompt carrying the identical subject block + grade token + craft token, **self-verified** by `shot-prompts.mjs` (exits 1 on drift), plus localized **`Edit:`** inpainting prompts.*
+
+| Prompt | Type |
+|---|---|
+| "give me photoshoot prompts" | sloppy |
+| "AI photoshoot of a person — same face in EVERY shot: a 29-year-old startup founder, chestnut hair, cream blazer. Editorial look, 5 shots (hero, beauty close-up, full body, candid, environmental), 4:5, warm Kodak grade, edit prompts for background swaps." | premium (person) |
+| "Product photoshoot prompts for my matte-black coffee tumbler (label reads BREW & CO · 500ML) — hero on white, floating with a water splash, detail macro, lifestyle on a desk, packaging flat-lay. High-key commercial grade, 1:1." | premium (product) |
+| "Subject sheet only: female marine biologist, tropical field vibe — 3 reference-image prompts for Nano Banana + a verbatim block I can reuse in every shot." | subject sheet only |
+| "I have reference photos of the person — build a 6-shot editorial pack around her, keep her EXACTLY the same in all shots, 5 different outfits + backgrounds, with an Edit prompt per shot." | premium (reference image) |
+| "Audit my shoot-plan.json — regenerate the prompt pack and flag any shot that drifts from the subject block." | audit/fix |
+
+**Idea sparks:** founder/creator editorial packs · model portfolios · beauty close-ups · product hero + floating + packaging sets · lifestyle in-use shots · brand campaign series (same product, new scene each shot).
 
 ## Asset & audio-only prompts
 

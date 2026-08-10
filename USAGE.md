@@ -40,7 +40,7 @@ The deciding factor is: **does the product let an agent run terminal commands?**
 # in your project folder — a single skill
 npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images
 
-# or everything (all 14 skills)
+# or everything (all 15 skills)
 npx skills add Deepak-ai-93/deepak-skill --all
 
 # or install globally for every project
@@ -83,6 +83,9 @@ cd skills/skill-builder && node scripts/scaffold-skill.mjs --name my-skill --des
 
 # Google Flow / Veo: scene prompts with locked character consistency
 cd skills/veo-cinematic-reels && node scripts/scene-prompts.mjs --plan scene-plan.json --out prompts.md
+
+# AI photoshoots: person + product prompt packs with locked subject consistency
+cd skills/photoshoot-studio && node scripts/shot-prompts.mjs --plan shoot-plan.json --out prompts.md
 ```
 
 > "Make a reel with scenes and Google Flow prompts — same character every scene, IMAX cinematic look" — the skill builds the character sheet → scene script → self-verified copy-paste prompt pack, then you generate scene by scene in Flow.

@@ -1,0 +1,71 @@
+{
+  "title": "Ava — Founder Editorial Shoot",
+  "kind": "person",
+  "platform": "flow",
+  "aspect": "4:5",
+  "grade": "Grade: warm golden Kodak Portra 400 look, soft natural skin tones, gentle halation, creamy film grain, sun-kissed highlights.",
+  "craft": "Craft: shot on Hasselblad X2D medium format, 85mm f/1.8 portrait lens, shallow depth of field, creamy bokeh, three-point studio lighting (softbox key, rim, fill), rich dynamic range, crisp detail, premium photographic finish, no warping, no artifacts.",
+  "subject": "Subject: Ava, a 29-year-old startup founder, slim athletic build with a defined jawline, warm hazel eyes and a subtle confident expression, long chestnut-brown wavy hair, wearing a tailored cream blazer over a black silk top and straight-leg trousers, gold hoop earrings. Distinctive detail: a small freckle above her left eyebrow.",
+  "references": [
+    "ava-front-portrait.png",
+    "ava-three-quarter.png",
+    "ava-full-body.png"
+  ],
+  "shots": [
+    {
+      "id": "hero-editorial",
+      "type": "generation",
+      "style": "Editorial fashion photography",
+      "pose": "Walking toward the camera, chin slightly raised, direct confident gaze",
+      "setting": "Rooftop at dusk, warm string lights softly blurred in the background",
+      "props": "none",
+      "lighting": "Golden-hour side light with soft shadows",
+      "aspect": "4:5",
+      "edit": "replace the rooftop background with a minimalist grey studio backdrop"
+    },
+    {
+      "id": "beauty-closeup",
+      "type": "generation",
+      "style": "Beauty photography",
+      "pose": "Three-quarter view, looking slightly past camera, subtle smile",
+      "setting": "Plain textured plaster wall, warm neutral tones",
+      "props": "none",
+      "lighting": "Butterfly lighting, soft even beauty light",
+      "aspect": "4:5",
+      "edit": "swap the warm plaster wall for a cool sage-green backdrop"
+    },
+    {
+      "id": "fullbody-outfit",
+      "type": "generation",
+      "style": "Street-style fashion photography",
+      "pose": "Full body, standing with weight on one hip, one hand in trouser pocket",
+      "setting": "Sun-drenched city sidewalk, soft morning light, gentle bokeh",
+      "props": "none",
+      "lighting": "Diffused window-light quality, natural soft shadows",
+      "aspect": "3:2",
+      "edit": "change her trousers to tailored navy trousers, keep the blazer"
+    },
+    {
+      "id": "candid-lifestyle",
+      "type": "generation",
+      "style": "Candid lifestyle photography",
+      "pose": "Seated at a café table, laughing mid-conversation, holding a coffee cup",
+      "setting": "Warm café interior, wooden tables, morning sun through the window",
+      "props": "coffee cup, open notebook",
+      "lighting": "Soft directional window light from the left",
+      "aspect": "1:1",
+      "edit": "add a second coffee cup on the table"
+    },
+    {
+      "id": "closing-environmental",
+      "type": "generation",
+      "style": "Environmental portrait",
+      "pose": "Standing at a floor-to-ceiling window, looking out at the city, arms crossed",
+      "setting": "Modern high-rise office with city skyline at dusk through the glass",
+      "props": "none",
+      "lighting": "Cool city light mixed with warm interior fill",
+      "aspect": "16:9",
+      "edit": "change the city skyline to a mountain view at golden hour"
+    }
+  ]
+}

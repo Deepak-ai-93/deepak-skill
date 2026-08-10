@@ -21,6 +21,7 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 | **linkedin-personal-brand** | Founder/creator LinkedIn presence that compounds — **capture the user's real voice first** (`voice-capture.md`), then headline + About rewrite, a weekly post calendar (story/teaching/contrarian/win/question roles, one CTA each), and a comment + connection strategy |
 | **skill-builder** (meta) | Scaffold **new skills** the deepak-skill way — `scaffold-skill.mjs` generates the folder, SKILL.md contract (quality bar + workflow + checklist), Deepak-branded scripts, templates and examples, then wires the skill into README/USAGE/prompt-examples |
 | **veo-cinematic-reels** | Reel scripts + **scene-by-scene Google Flow / Veo 3.1 video prompts** — manual copy-paste workflow with **character consistency locked** (reference-image ingredients + a verbatim character block in EVERY prompt, self-verified by `scene-prompts.mjs`), **IMAX-level cinematic language**, locked color grading (film-stock tokens), and native dialogue/SFX audio |
+| **photoshoot-studio** | **AI photoshoot prompt packs for people AND products** (Google Flow / Nano Banana Pro, Midjourney, Flux) — manual copy-paste workflow with **subject consistency locked** (reference-image ingredients + a verbatim person/product block in EVERY prompt, self-verified by `shot-prompts.mjs`), **professional photography language** (camera body, lens, f-stop, lighting setup, film stock), locked grade per shoot, per-platform aspect ratios, and short **edit/inpaint prompts** for re-posing / re-outfitting / re-lighting |
 | **vibe-code-webapp** | Build **or extend** production-ready vibe-coded web apps — **detailed idea interview** first, and in **existing projects** a structure scan (`scan-project.mjs` → `project-scan.md`) so the plan extends what's already there → **evaluate** (SaaS scorecard → BUILD / ITERATE / PIVOT) → **Build Pack** (`PRD.md` + `stack-blueprint.md` + **`sitemap.md`** — full sitemap, every frontend page, backend architecture, workflows — + **`TODO.md`** with P0/P1/P2 priorities via `todo.mjs`) → **you approve the pack AND the todo list** (add/re-prioritize anytime) → the vibe coder builds **step by step** from `vibe-coder-instructions.md` (BUILD.md) filing **detailed `build-report.md`** reports → **production audit** → **everything-auditor** final review (app + plan + instructions + memory + reports → hardening / tests / brainstorming / skill feedback) → **daily `MEMORY.md`** keeps you and any AI in sync across sessions |
 
 The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets / thumbnails) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline) → **multiplied** (podcast→shorts, YouTube packaging, SEO blog, LinkedIn, email).
@@ -29,7 +30,7 @@ The skills are a complete production pipeline: **what's trending** (research + b
 
 ## Quick start — install in your project (3 steps)
 
-> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 14 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
+> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 15 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
 
 ### 1. Prerequisites
 
@@ -45,7 +46,7 @@ Run this **inside your project folder**:
 npx skills add Deepak-ai-93/deepak-skill --all
 ```
 
-That's it. It installs all fourteen skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
+That's it. It installs all fifteen skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
 
 ### 3. Use it with any CLI
 
@@ -74,6 +75,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **linkedin-personal-brand only** (self-contained — SKILL.md + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill linkedin-personal-brand` |
 | **skill-builder only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill skill-builder` |
 | **veo-cinematic-reels only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill veo-cinematic-reels` |
+| **photoshoot-studio only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill photoshoot-studio` |
 | Install globally (any project, any machine) | `npx skills add Deepak-ai-93/deepak-skill --all -g` |
 | Target specific agents | `npx skills add Deepak-ai-93/deepak-skill --all -a claude-code -a cursor` |
 | Install from a local clone | `npx skills add ./deepak-skill --all` |
@@ -83,9 +85,9 @@ The agent will run the format wizard, build the composition, and render your 4K 
 ```bash
 ls .agents/skills/
 # blog-seo-content  carousel-post-images  email-marketing  hook-storyboard-retention
-# linkedin-personal-brand  podcast-to-shorts  skill-builder  text-motion-reels
-# veo-cinematic-reels  video-asset-reels  video-product-pipeline  vibe-code-webapp
-# voice-sfx-audio  youtube-video-pipeline
+# linkedin-personal-brand  photoshoot-studio  podcast-to-shorts  skill-builder
+# text-motion-reels  veo-cinematic-reels  video-asset-reels  video-product-pipeline
+# vibe-code-webapp  voice-sfx-audio  youtube-video-pipeline
 ```
 
 **Update:** `npx skills update` • **Remove:** `npx skills remove <skill-name>`
@@ -246,6 +248,20 @@ Deliverables: `character-sheet.md` (verbatim character/world/grade blocks + 2–
 
 > "Make a cinematic action reel with scenes and Google Flow prompts — same character in every scene, IMAX look, great color grading."
 > → character sheet → scene script → prompt pack (self-verified) → paste into Flow → audit → deliver
+
+### AI photoshoots (`photoshoot-studio`)
+
+**Copy-paste image prompts for person AND product photoshoots** — Google Flow / Nano Banana Pro, Midjourney, Flux — engineered so the **same person or the same product never changes** between shots (reference-image ingredients uploaded once + a verbatim subject block in EVERY prompt, self-verified word-by-word):
+
+```bash
+cd skills/photoshoot-studio
+node scripts/shot-prompts.mjs --plan shoot-plan.json --out prompts.md   # builds + verifies the prompt pack
+```
+
+Deliverables: `subject-sheet.md` (verbatim person OR product block + 2–3 reference-image prompts) → `shot-list.md` (hero → detail → lifestyle → closing) → `prompts.md` (professional photography language — camera body, lens, f-stop, lighting setup, film stock; locked grade token; per-platform aspect ratios; localized `Edit:` prompts for re-posing / re-outfitting / re-lighting). Built-in examples — **"Ava — Founder Editorial Shoot"** (person, warm Kodak Portra grade) and **"Brew & Co Tumbler — E-commerce Shoot"** (product, high-key commercial grade).
+
+> "Give me AI photoshoot prompts — same person in every shot, different outfits and backgrounds, editorial look. Also a product photoshoot for my tumbler store."
+> → subject sheet → shot list → prompt pack (self-verified) → paste into Flow / Midjourney → audit → deliver
 
 ### Vibe-code web apps (`vibe-code-webapp`)
 
