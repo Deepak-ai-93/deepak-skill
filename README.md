@@ -1,6 +1,6 @@
 # deepak-skill 🎬
 
-Open-source agent skills for creating **short-form video content, carousel posts, and high-deliverability email marketing** — text-only motion graphic reels, viral hook copywriting, storyboarding, retention engineering, AI voiceover + sound design, native-image-model carousels, and spam-free HTML emails with high-CTR subject lines. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
+Open-source agent skills for the **full content-creator stack** — short-form video (text-motion + asset reels), viral hooks & storyboards, AI voiceover + sound design, native-image-model carousels, spam-free HTML emails with high-CTR subject lines, **long-form repurposing** (podcast→shorts, YouTube packaging, SEO blog content), **LinkedIn personal branding**, vibe-coded web apps, and a meta **skill-builder** that scaffolds new skills. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
 
 [![skills.sh](https://skills.sh/b/Deepak-ai-93/deepak-skill)](https://skills.sh/Deepak-ai-93/deepak-skill)
 
@@ -15,9 +15,14 @@ Open-source agent skills for creating **short-form video content, carousel posts
 | **video-product-pipeline** | The viral-engineered gatekeeper for every video request: hunt trending topics (`trend-hunt.mjs` + web research) → brainstorm + score angles → analyze ANY prompt (sloppy or not) → write a `video-product.md` spec → **get your approval** → generate (text-motion / asset reels) → audit the frames with a script + dedicated auditor subagent (spelling, text overlap, safe zones, style, readability) |
 | **carousel-post-images** | Scroll-stopping carousel posts (LinkedIn/Instagram) as image sets — **one script, two CLI modes**: **browser render** (slides.html → deterministic 4K PNGs, any CLI) or **native image-model generation** (same deck exports photoreal 4K prompts for Antigravity / Codex `image_gen` / Grok `/imagine`). Photorealistic real-life visuals, viral anti-fluff copywriting, 4 trending styles (Cinematic Real-Life default), per-platform `caption.md` |
 | **email-marketing** | High-converting, **spam-free HTML emails** for Brevo / MailerLite / Mailchimp / Klaviyo — bulletproof responsive code, anti-fluff copywriting, **E-E-A-T trust signals** (real author + credentials + proof), and a **high-CTR subject line pack** (33–50 char formulas + A/B plan). Validated by `validate-email.mjs` (spam-trigger scan, CAN-SPAM compliance, EEAT signals → `validation-report.md`) and previewed at desktop + mobile via `preview-email.mjs` before send |
+| **podcast-to-shorts** | Turn long-form podcast/video content into **viral-ready vertical clips** — `clip-finder.mjs` scores every transcript moment on a virality scorecard (hook/emotion/controversy/quotability), picks the standalone winners, and generates the exact **FFmpeg 9:16 cut commands** — plus a hook + caption per clip |
+| **youtube-video-pipeline** | Plan long-form YouTube videos end-to-end: researched `video-brief.md` → retention-engineered script (hook in 30s, open loops) → **10-variant title pack** scored on CTR formulas + 60-char limit (`title-pack.mjs`) → thumbnail brief + image-gen prompt → description + chapters + tags |
+| **blog-seo-content** | SEO articles that rank **and** get cited by AI search (GEO) — `keyword-outline.mjs` builds the keyword cluster + intent scores + outline scaffold → approved `seo-brief.md` → E-E-A-T-rich article (named author, cited stats, quotable blocks) + meta title/description pack |
+| **linkedin-personal-brand** | Founder/creator LinkedIn presence that compounds — **capture the user's real voice first** (`voice-capture.md`), then headline + About rewrite, a weekly post calendar (story/teaching/contrarian/win/question roles, one CTA each), and a comment + connection strategy |
+| **skill-builder** (meta) | Scaffold **new skills** the deepak-skill way — `scaffold-skill.mjs` generates the folder, SKILL.md contract (quality bar + workflow + checklist), Deepak-branded scripts, templates and examples, then wires the skill into README/USAGE/prompt-examples |
 | **vibe-code-webapp** | Build **or extend** production-ready vibe-coded web apps — **detailed idea interview** first, and in **existing projects** a structure scan (`scan-project.mjs` → `project-scan.md`) so the plan extends what's already there → **evaluate** (SaaS scorecard → BUILD / ITERATE / PIVOT) → **Build Pack** (`PRD.md` + `stack-blueprint.md` + **`sitemap.md`** — full sitemap, every frontend page, backend architecture, workflows — + **`TODO.md`** with P0/P1/P2 priorities via `todo.mjs`) → **you approve the pack AND the todo list** (add/re-prioritize anytime) → the vibe coder builds **step by step** from `vibe-coder-instructions.md` (BUILD.md) filing **detailed `build-report.md`** reports → **production audit** → **everything-auditor** final review (app + plan + instructions + memory + reports → hardening / tests / brainstorming / skill feedback) → **daily `MEMORY.md`** keeps you and any AI in sync across sessions |
 
-The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline).
+The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets / thumbnails) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline) → **multiplied** (podcast→shorts, YouTube packaging, SEO blog, LinkedIn, email).
 
 ---
 
@@ -29,7 +34,7 @@ The skills are a complete production pipeline: **what's trending** (research + b
 - **Google Chrome** — used to render frames
 - **FFmpeg** — assembles the final MP4 (only needed for video output)
 
-### 2. Install the video skills
+### 2. Install the skills
 
 Run this **inside your project folder**:
 
@@ -37,7 +42,7 @@ Run this **inside your project folder**:
 npx skills add Deepak-ai-93/deepak-skill --all
 ```
 
-That's it. It installs all eight skills into `.agents/skills/` — no heavy media, no demo files.
+That's it. It installs all thirteen skills into `.agents/skills/` — no heavy media, no demo files.
 
 ### 3. Use it with any CLI
 
@@ -60,6 +65,11 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **carousel-post-images only** (self-contained — SKILL.md + scripts/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images` |
 | **vibe-code-webapp only** (self-contained — SKILL.md + scripts/ + templates/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill vibe-code-webapp` |
 | **email-marketing only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill email-marketing` |
+| **podcast-to-shorts only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill podcast-to-shorts` |
+| **youtube-video-pipeline only** (self-contained — SKILL.md + scripts/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill youtube-video-pipeline` |
+| **blog-seo-content only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill blog-seo-content` |
+| **linkedin-personal-brand only** (self-contained — SKILL.md + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill linkedin-personal-brand` |
+| **skill-builder only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill skill-builder` |
 | Install globally (any project, any machine) | `npx skills add Deepak-ai-93/deepak-skill --all -g` |
 | Target specific agents | `npx skills add Deepak-ai-93/deepak-skill --all -a claude-code -a cursor` |
 | Install from a local clone | `npx skills add ./deepak-skill --all` |
@@ -68,8 +78,10 @@ The agent will run the format wizard, build the composition, and render your 4K 
 
 ```bash
 ls .agents/skills/
-# carousel-post-images  email-marketing  hook-storyboard-retention  text-motion-reels
+# blog-seo-content  carousel-post-images  email-marketing  hook-storyboard-retention
+# linkedin-personal-brand  podcast-to-shorts  skill-builder  text-motion-reels
 # video-asset-reels  video-product-pipeline  vibe-code-webapp  voice-sfx-audio
+# youtube-video-pipeline
 ```
 
 **Update:** `npx skills update` • **Remove:** `npx skills remove <skill-name>`
@@ -153,6 +165,69 @@ Built-in example — **"Meet Replays" product launch** (`examples/product-launch
 
 > "Write a product-launch email for our SaaS — audience: existing customers, goal: demo clicks. Make it spam-free with high-CTR subject lines and strong E-E-A-T."
 > → subject line pack → `email.html` + `plain.txt` → `validate-email.mjs` report → preview screenshots → auditor sign-off → deliver
+
+### Podcast → Shorts (`podcast-to-shorts`)
+
+Long-form content → **viral-ready vertical clips**. The pipeline scores, picks, and cuts:
+
+```bash
+cd skills/podcast-to-shorts
+node scripts/clip-finder.mjs --transcript transcript.txt --clips 5 --out clip-plan.md   # score moments
+node scripts/clip-finder.mjs --cuts clip-plan.md --input episode.mp4 --run               # cut 1080x1920 clips
+```
+
+The transcript is auto-scored on hook/emotion/controversy/quotability; only standalone moments above the cutoff become clips. Each clip gets a hook + platform caption → `captions.md`. Built-in example: `examples/transcript-sample.txt` + `examples/clip-plan.md`.
+
+> "Turn this 1-hour podcast episode into 5 shorts — clip the most viral moments."
+> → transcript → score → clip-plan → FFmpeg cuts → captions → auditor check → deliver
+
+### YouTube pipeline (`youtube-video-pipeline`)
+
+Plan long-form YouTube videos end-to-end: researched angle → retention-engineered script (hook in the first 30s) → a **10-variant title pack** (scored on CTR formulas + the 60-char mobile limit):
+
+```bash
+cd skills/youtube-video-pipeline
+node scripts/title-pack.mjs --topic "saas pricing" --angle "3 pricing mistakes founders make" --out titles.md
+```
+
+Then the agent writes the thumbnail brief (+ image-gen prompt), description with chapters, and tags — all matching the script's promise (no clickbait mismatch). Built-in example: `examples/titles.md`.
+
+> "Plan a YouTube video: 3 SaaS pricing mistakes founders make — script, 10 titles, thumbnail brief, description."
+> → brief → approve → script → title pack → thumbnail → metadata → auditor check → deliver
+
+### SEO blog content (`blog-seo-content`)
+
+Articles that rank on search **and** get cited by AI search engines:
+
+```bash
+cd skills/blog-seo-content
+node scripts/keyword-outline.mjs --seed "saas onboarding" --out seo-brief.md
+```
+
+Keyword cluster + intent scores + outline scaffold → **your approval** → E-E-A-T-rich article (named author, every stat cited, quotable "Bottom line" block) + meta title/description/slug pack.
+
+> "Write a blog post about saas onboarding that ranks and gets cited by ChatGPT — EEAT-heavy, one keyword, meta pack."
+> → seo-brief → approve → article.md → meta.md → auditor check → deliver
+
+### LinkedIn personal brand (`linkedin-personal-brand`)
+
+Build a founder/creator presence that compounds — **your real voice captured first** (never template-speak), then a headline + About rewrite, a weekly post calendar (varied roles, one CTA each), and a comment + connection strategy. Ships `templates/voice-capture.md`, `templates/post-formulas.md`, and a week-one calendar example.
+
+> "Help me build my LinkedIn — capture my voice, rewrite my bio, and give me a week of posts."
+> → voice capture → voice-profile.md → bio.md → calendar.md → engagement.md → auditor check → deliver
+
+### Build new skills (`skill-builder`)
+
+Scaffold the next skill in the repo's conventions — quality-bar SKILL.md, Deepak-branded scripts, templates, examples:
+
+```bash
+cd skills/skill-builder
+node scripts/scaffold-skill.mjs --name my-new-skill --desc "one-liner" --scripts tool-a,tool-b --templates guide --example 1
+node scripts/scaffold-skill.mjs --list   # show every skill in skills/
+```
+
+> "Add a new skill for {topic} to the repo."
+> → scaffold → fill the placeholders → wire into README/USAGE/prompt-examples → validate → audit
 
 ### Vibe-code web apps (`vibe-code-webapp`)
 

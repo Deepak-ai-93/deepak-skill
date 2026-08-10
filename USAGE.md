@@ -40,7 +40,7 @@ The deciding factor is: **does the product let an agent run terminal commands?**
 # in your project folder — a single skill
 npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images
 
-# or everything (all 8 skills)
+# or everything (all 13 skills)
 npx skills add Deepak-ai-93/deepak-skill --all
 
 # or install globally for every project
@@ -63,6 +63,26 @@ cd email-marketing && node scripts/preview-email.mjs --html email.html --dark   
 > "Using the email-marketing skill, write a promo email for our Black Friday launch — Brevo, audience: warm leads, goal: sales. Spam-free, high-CTR subject lines, strong E-E-A-T."
 
 The agent plans the email, writes the subject line pack, builds `email.html` + `plain.txt`, runs the spam/compliance validator, renders desktop + mobile previews, and has an auditor subagent sign off before delivering. In **web chat** (no terminal), paste the SKILL.md and the agent still delivers the full creative pack — subject lines, HTML, plain text, and copy — just without the automated screenshots.
+
+The long-form repurposing skills follow the same pattern — score, approve, generate, audit:
+
+```bash
+# Podcast → shorts: score the transcript, then cut
+cd skills/podcast-to-shorts && node scripts/clip-finder.mjs --transcript transcript.txt --clips 5
+cd skills/podcast-to-shorts && node scripts/clip-finder.mjs --cuts clip-plan.md --input episode.mp4 --run
+
+# YouTube: title pack → script → thumbnail → metadata
+cd skills/youtube-video-pipeline && node scripts/title-pack.mjs --topic "saas pricing" --angle "3 pricing mistakes"
+
+# SEO blog: keyword cluster + outline brief → approve → article
+cd skills/blog-seo-content && node scripts/keyword-outline.mjs --seed "saas onboarding"
+
+# LinkedIn: voice capture → bio → calendar → engagement
+# Skill builder: scaffold a new skill in the repo's conventions
+cd skills/skill-builder && node scripts/scaffold-skill.mjs --name my-skill --desc "…"
+```
+
+> "Turn this podcast episode into 5 shorts" · "Plan a YouTube video with 10 title options" · "Write an SEO blog post that AI search cites" · "Build my LinkedIn presence in my voice" — each runs score → approve → generate → audit.
 
 Other skills follow the same pattern (text-motion reels, video-asset reels, voice/SFX, viral pipeline). See the [README](README.md) for the full install table and per-skill commands.
 

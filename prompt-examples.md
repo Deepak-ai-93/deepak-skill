@@ -1,6 +1,6 @@
 # Prompt Examples — deepak-skill 🎬
 
-Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit. Email prompts (section 12) run through **`email-marketing`**: subject-line pack → bulletproof HTML + plain text → spam/compliance validation → preview → auditor sign-off.
+Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit. Email prompts (section 12) run through **`email-marketing`**: subject-line pack → bulletproof HTML + plain text → spam/compliance validation → preview → auditor sign-off. Long-form + brand prompts (section 13) run through **`podcast-to-shorts` / `youtube-video-pipeline` / `blog-seo-content` / `linkedin-personal-brand`**: score → approve → generate → audit.
 
 Two rules that make these prompts work:
 
@@ -176,6 +176,23 @@ Two rules that make these prompts work:
 | "Give me 5 subject lines for an abandoned-cart email — recipient-specific, no spam words, under 50 chars, with an A/B plan." | subject lines only |
 
 **Idea sparks:** product launches · welcome/onboarding flows · abandoned-cart recovery · weekly newsletters · Black Friday promos · event invitations · re-engagement win-back emails.
+
+## 13. Long-form repurposing + LinkedIn ✂️🎥📝💼
+
+*Runs through the four long-form/brand skills: **`podcast-to-shorts`** (transcript → virality-scored clips → FFmpeg 9:16 cuts + captions), **`youtube-video-pipeline`** (brief → script → 10-title pack → thumbnail brief → metadata), **`blog-seo-content`** (keyword cluster → approved brief → E-E-A-T article → meta pack), **`linkedin-personal-brand`** (voice capture → bio → weekly calendar → engagement strategy).*
+
+| Prompt | Type |
+|---|---|
+| "turn my podcast into shorts" | sloppy |
+| "Turn this 1-hour podcast episode into 5 viral shorts — transcript in assets/, cut them 9:16, hook + caption per clip." | premium (podcast→shorts) |
+| "Plan a YouTube video: 3 SaaS pricing mistakes founders make — script (hook in 30s), 10 title options under 60 chars, thumbnail brief, description with chapters." | premium (YouTube) |
+| "Write a blog post about saas onboarding that ranks AND gets cited by AI search — one keyword, EEAT-heavy (named author + cited stats), meta title/description pack. Approve the brief first." | premium (SEO) |
+| "Help me build my LinkedIn presence — capture my voice from these 2 posts I wrote, rewrite my headline + About, and give me a week of posts with one CTA each." | premium (LinkedIn) |
+| "Score this podcast transcript for the most viral moments — which 3 clips should I cut first?" | clips only |
+| "Give me 10 YouTube titles for a video about {topic} — under 60 chars, 4+ formulas, no clickbait." | titles only |
+| "Audit my LinkedIn bio — rewrite it in my voice with proof, no buzzwords, one CTA." | audit/fix |
+
+**Idea sparks:** podcast episodes → 5 shorts/week · YouTube deep-dives repurposed into shorts · SEO article → email newsletter → LinkedIn threads (one idea, full stack).
 
 ## Asset & audio-only prompts
 
