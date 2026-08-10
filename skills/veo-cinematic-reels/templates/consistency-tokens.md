@@ -53,4 +53,24 @@ Generate **2–3 images** with the SAME character block, clean background, consi
 - Only the ACTION, CAMERA, and CONTEXT change per scene.
 
 ## 5. Bridge notes (seamless cuts)
-When Scene B must cut cleanly from Scene A: generate A → export A's **last frame** → set it as B's **start frame** in Flow (Frames→video). The scene-plan marks these scenes with `"bridge": true`.
+When Scene B must cut cleanly from Scene A: generate A → export A's **last frame** → set it as B's **start frame** (Flow: Frames→video · Kling: start-frame · Runway/Luma: first-frame image). The scene-plan marks these scenes with `"bridge": true`.
+
+## 6. Reference-image mechanics per tool (upload ONCE, reuse for every scene)
+
+| Tool | Where the reference images go |
+|---|---|
+| **Google Flow / Veo 3.1** | **Ingredients** panel — 2–3 clean images (front / ¾ / full body) |
+| **Kling AI** | **Elements** — upload 1–4 refs and tag `<<<element_1>>>` (etc.) in each prompt |
+| **Luma Dream Machine** | image-to-video: the first frame is the reference image |
+| **Runway Gen-4/4.5** | image-to-video: reference image as the start frame |
+| **Hailuo / MiniMax** | upload the reference image alongside the text prompt |
+| **Vidu** | reference-to-video from a master character image |
+| **Pika 2.5** | image + prompt; fix drift with Modify Region |
+| **PixVerse V6** | image reference + prompt |
+
+Same principle everywhere: **the same 2–3 reference images feed every scene**, and the verbatim character block anchors the model on top of them.
+
+## 7. Seed + negative (consistency multipliers)
+
+- **Seed (API only):** set `plan.seed` (e.g. `482913`) and reuse it across every scene — identical priors, less drift. UI tools ignore it.
+- **Negative prompt:** the pack appends a labeled `Negative prompt:` line per scene. Tools with a negative field (Kling, Luma, Hailuo, Vidu, Pika, Runway) take it verbatim; prompt-only tools read it as plain text. Override per scene with `scene.negative` when one shot needs different exclusions (e.g. "no rain").

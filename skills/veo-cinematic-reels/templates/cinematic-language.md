@@ -1,9 +1,9 @@
-# Cinematic Language — Veo prompt vocabulary
+# Cinematic Language — rich long-form prompt vocabulary
 
-The 5-part formula for every Veo scene prompt:
-`Cinematography + Subject + Action + Context + Style & Ambiance` (+ native audio lines).
+The 7-part formula for every scene prompt (works in any video generator):
+`Cinematography + Lens + Tempo + Subject + Action + Context/Lighting + Style & Ambiance` (+ native audio lines + negative prompt + seed).
 
-Never write vague "cinematic shot" — be specific. Pick ONE term per element per scene.
+Each scene prompt should read **~150–250 words** — the locked tokens (character + grade + IMAX + world) alone run ~140 words, so the scene-specific detail (shot size, camera motion, lens, tempo, lighting state, action, context, audio) sits on top. Never write vague "cinematic shot" — be specific. Pick ONE term per element per scene.
 
 ---
 
@@ -14,9 +14,14 @@ Never write vague "cinematic shot" — be specific. Pick ONE term per element pe
 | **Shot size** | extreme close-up · close-up · medium shot · medium-wide · full body · wide establishing · aerial |
 | **Camera motion** | slow push-in · dolly-in · tracking shot (follows subject) · crane up · 180° arc · orbiting · handheld urgency · locked-off static · whip pan |
 | **Lens / optics** | 24mm wide · 35mm · 50mm · 85mm portrait · 100mm macro · anamorphic flare · shallow depth of field · deep focus |
-| **Speed** | slow-motion (50%) · real-time · speed-ramp |
+| **Tempo** | slow-motion (50%) · real-time · speed-ramp |
 
 **Action direction** is written in plain language: "she turns to camera", "he walks toward the lens", "the car drifts left across frame".
+
+**Lens + tempo + lighting go INSIDE the prompt** (the builder weaves them in when the plan provides them):
+- Lens: `85mm portrait lens, shallow depth of field` · `24mm wide lens, deep focus`
+- Tempo: `Tempo: slow-motion (50% speed)` · `Tempo: real-time` · `Tempo: speed-ramp`
+- Lighting: `Lighting: warm golden-hour side light, long shadows` (carry it across scene boundaries)
 
 ## 2. The IMAX token block (verbatim, every prompt)
 
@@ -54,7 +59,19 @@ Write the light state explicitly and carry it across scene boundaries:
 
 ---
 
-## Negative phrasing (do it contextually, not as a list)
+## 6. Negative prompt + seed (appended per scene)
 
-Instead of `no cars, no blur`: `a quiet coastal road entirely free of traffic, rendered in crisp focus.`
-Phrase negatives as part of the scene description — abrupt word lists confuse the model.
+Every scene block ends with a labeled `Negative prompt:` line and — when a seed is locked — a `Seed:` line:
+
+```
+Negative prompt: no warping, no morphing, no extra limbs, no extra fingers, no distorted faces, no flickering, no watermark, no text overlay, no logo, no camera shake, no jitter, no motion blur, no low resolution, no compression artifacts.
+Seed: 482913
+```
+
+- **Tools with a negative field** (Kling, Luma, Hailuo, Vidu, Pika, Runway): paste the `Negative prompt:` line into that field verbatim.
+- **Prompt-only tools** (Flow/Veo): leave the line in the prompt — it reads as harmless plain text.
+- **Seed:** reuse the same seed across every scene for identical priors (API tools only; UI tools ignore it).
+
+## Negative phrasing inside the scene (contextual, not just the list)
+
+In addition to the labeled negative prompt, phrase key negatives inside the scene description: instead of `no cars, no blur`, write `a quiet coastal road entirely free of traffic, rendered in crisp focus.` Abrupt word lists confuse the model.

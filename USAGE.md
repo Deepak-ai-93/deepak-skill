@@ -81,7 +81,7 @@ cd skills/blog-seo-content && node scripts/keyword-outline.mjs --seed "saas onbo
 # Skill builder: scaffold a new skill in the repo's conventions
 cd skills/skill-builder && node scripts/scaffold-skill.mjs --name my-skill --desc "…"
 
-# Google Flow / Veo: scene prompts with locked character consistency
+# Google Flow / Veo: rich long-form scene prompts, any video generator (Flow/Veo, Kling, Luma, Runway, Hailuo, Vidu, Pika, PixVerse) — locked character consistency + negative prompt + seed
 cd skills/veo-cinematic-reels && node scripts/scene-prompts.mjs --plan scene-plan.json --out prompts.md
 
 # Episodic story series: story bible → per-episode prompt pack + voiceover sheet

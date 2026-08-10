@@ -196,7 +196,7 @@ Two rules that make these prompts work:
 
 ## 14. Google Flow / Veo cinematic reels 🎬🎥
 
-*Runs through **`veo-cinematic-reels`**: analyze + lock grade/world → **character sheet** (verbatim character/world/grade blocks + Nano Banana reference-image prompts → upload to Flow's Ingredients) → **scene script** (hook → agitate → payoff → CTA/loop with continuity) → **prompts.md** — one copy-paste Veo 3.1 prompt per scene, every prompt carrying the identical character block + grade token + IMAX token, **self-verified** by `scene-prompts.mjs` (exits 1 on drift).*
+*Runs through **`veo-cinematic-reels`**: analyze + lock grade/world → **character sheet** (verbatim character/world/grade blocks + Nano Banana reference-image prompts) → **scene script** (hook → agitate → payoff → CTA/loop with continuity) → **prompts.md** — one **rich long-form copy-paste prompt per scene (~150–250 words)** that works in **any video generator** (Flow/Veo 3.1, Kling, Luma, Runway, Hailuo, Vidu, Pika, PixVerse), every prompt carrying the identical character block + grade token + IMAX token + world token, per-scene lens/tempo/lighting, native dialogue/SFX, a labeled **negative prompt** + locked **seed**, and per-tool upload instructions (Ingredients / Elements / image-to-video) — **self-verified** by `scene-prompts.mjs` (exits 1 on drift).*
 
 | Prompt | Type |
 |---|---|

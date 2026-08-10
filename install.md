@@ -26,7 +26,7 @@ The **deepak-skill** repo ships a **branded installer** that prints the **DEEPAK
   • hook-storyboard-retention→ scroll-stopping hooks + retention storyboards
   • voice-sfx-audio           → open-source voiceovers + SFX + mixing
   • carousel-post-images      → LinkedIn/Instagram carousels at 4K
-  • veo-cinematic-reels       → Google Flow/Veo scene prompts, IMAX + consistency
+  • veo-cinematic-reels       → rich scene prompts for ANY video gen (Flow/Veo, Kling, Luma...), IMAX + consistency
   • serial-story-reels        → episodic story series: bible + episode prompts + VO
   • photoshoot-studio         → AI photoshoot prompts: people + products
   • paid-ads-studio           → Meta + Google ad campaigns: creatives + forecast
