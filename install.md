@@ -16,10 +16,10 @@ The **deepak-skill** repo ships a **branded installer** that prints the **DEEPAK
    ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
    ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
 
-  deepak-skill — 15 agent skills crafted by Deepak 🎬
+  deepak-skill — 16 agent skills crafted by Deepak 🎬
   install once · use in any AI coding agent · MIT license
 
-  15 skills installed:
+  16 skills installed:
   • text-motion-reels         → text-only motion graphic reels (4K)
   • video-asset-reels         → reels from your own clips & images
   • video-product-pipeline    → viral-engineered video workflow + audit
@@ -28,6 +28,7 @@ The **deepak-skill** repo ships a **branded installer** that prints the **DEEPAK
   • carousel-post-images      → LinkedIn/Instagram carousels at 4K
   • veo-cinematic-reels       → Google Flow/Veo scene prompts, IMAX + consistency
   • photoshoot-studio         → AI photoshoot prompts: people + products
+  • paid-ads-studio           → Meta + Google ad campaigns: creatives + forecast
   • email-marketing           → spam-free HTML emails + high-CTR subject lines
   • blog-seo-content          → SEO articles that rank and get AI-cited
   • youtube-video-pipeline    → script, 10-title pack, thumbnail, metadata
@@ -58,7 +59,7 @@ npx skills add Deepak-ai-93/deepak-skill --all
 ### Step 2 — Run the branded installer
 
 ```bash
-./install.sh              # prints the DEEPAK banner + installs all 15 skills
+./install.sh              # prints the DEEPAK banner + installs all 16 skills
 ```
 
 > 💡 On Windows use **Git Bash** (not cmd/PowerShell) to run `./install.sh`. No clone? Skip straight to the `npx` command — the skills still work; you just don't get the banner.
@@ -79,7 +80,7 @@ The agent loads the skill and runs its pipeline (with the **deepak-skill — cra
 
 | Command | What it does |
 |---|---|
-| `./install.sh` | Install **all 15 skills** into `.agents/skills/` in the current project |
+| `./install.sh` | Install **all 16 skills** into `.agents/skills/` in the current project |
 | `./install.sh --skill <name>` | Install a **single skill** (e.g. `--skill podcast-to-shorts`) |
 | `./install.sh --all` | Same as no args (all skills) |
 | `./install.sh --global` | Install **globally** (`-g`) — available in every project on your machine |

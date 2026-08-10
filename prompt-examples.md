@@ -1,6 +1,6 @@
 # Prompt Examples — deepak-skill 🎬
 
-Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit. Email prompts (section 12) run through **`email-marketing`**: subject-line pack → bulletproof HTML + plain text → spam/compliance validation → preview → auditor sign-off. Long-form + brand prompts (section 13) run through **`podcast-to-shorts` / `youtube-video-pipeline` / `blog-seo-content` / `linkedin-personal-brand`**: score → approve → generate → audit. Google Flow/Veo scene-prompt prompts (section 14) run through **`veo-cinematic-reels`**: character sheet → scene script → self-verified copy-paste prompt pack. AI-photoshoot prompts (section 15) run through **`photoshoot-studio`**: subject sheet → shot list → self-verified copy-paste image prompt pack (person + product modes, edit/inpaint prompts).
+Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit. Email prompts (section 12) run through **`email-marketing`**: subject-line pack → bulletproof HTML + plain text → spam/compliance validation → preview → auditor sign-off. Long-form + brand prompts (section 13) run through **`podcast-to-shorts` / `youtube-video-pipeline` / `blog-seo-content` / `linkedin-personal-brand`**: score → approve → generate → audit. Google Flow/Veo scene-prompt prompts (section 14) run through **`veo-cinematic-reels`**: character sheet → scene script → self-verified copy-paste prompt pack. AI-photoshoot prompts (section 15) run through **`photoshoot-studio`**: subject sheet → shot list → self-verified copy-paste image prompt pack (person + product modes, edit/inpaint prompts). Paid-ad prompts (section 16) run through **`paid-ads-studio`**: forecast first → product-block consistency tokens → self-verified Veo 3.1 video + image ad prompt pack → char-limit-safe copy → Meta + Google campaign blueprint → cost plan → compliance checklist → launch checklist.
 
 Two rules that make these prompts work:
 
@@ -223,6 +223,23 @@ Two rules that make these prompts work:
 | "Audit my shoot-plan.json — regenerate the prompt pack and flag any shot that drifts from the subject block." | audit/fix |
 
 **Idea sparks:** founder/creator editorial packs · model portfolios · beauty close-ups · product hero + floating + packaging sets · lifestyle in-use shots · brand campaign series (same product, new scene each shot).
+
+## 16. Paid ad campaigns 📈💰
+
+*Runs through **`paid-ads-studio`**: interview + lock brief → **forecast first** (`forecast-ads.mjs` — conservative/base/aggressive scenarios: impressions, clicks, conversions, CPA, ROAS, shown BEFORE any creative) → lock the **product block + grade + craft** consistency tokens (reference-image Ingredients) → **`prompts.md`** — copy-paste **Veo 3.1 video ad prompts** (9:16 Reels, 16:9 in-stream, 6s bumper) + **image ad prompts** (Nano Banana Pro / Midjourney / Flux at 1:1, 4:5, 1.91:1), every prompt carrying the verbatim product block, **self-verified** by `ad-prompts.mjs` (exits 1 on drift) → **`copy.md`** — hook-first copy inside Meta (≤125/≤40/≤30) and Google (≤30/≤90) char limits, anti-fluff enforced by `ad-copy.mjs` (exits 1 on violation) → **`campaign-blueprint.md`** (Meta ODAX + Advantage+ audiences · Google Demand Gen + PMax + Search) → **`cost-plan.md`** (ramp, learning phase, kill/scale rules) → **`guidelines-checklist.md`** (2026 AI-content compliance) → **`launch-checklist.md`** (manual copy-paste launch order) → **audit harness** — `audit-ads.mjs` runs the automated checks (hooks, char limits, fluff, consistency, forecast, compliance → `ad-audit.md`, exit 1 on any FAIL) then a fresh **ads-auditor subagent** scores hook worthiness (/50, ≥35 = worth running) and signs **PASS / FIX NEEDED** before delivery.*
+
+| Prompt | Type |
+|---|---|
+| "make me an ad campaign" | sloppy |
+| "Build a full paid campaign pack for my tumbler store — Meta + Google, $80/day, sales goal, US. Forecast first, then Veo video ads + image ads + copy + blueprint + compliance." | premium (full pack) |
+| "Meta-only: Advantage+ sales campaign, $50/day, ecommerce, AOV $40 — forecast, 3 creative concepts, ad copy within char limits." | premium (Meta) |
+| "Google-only: Demand Gen prospecting + PMax capture for $30/day — audience signals, asset group copy, AI labels, forecast." | premium (Google) |
+| "Forecast only: is a $50/day Meta sales campaign viable for a $40 product? Conservative to aggressive scenarios with CPA and ROAS." | forecast only |
+| "Veo video ads only: 9:16 Reels hook + 16:9 in-stream + 6s bumper for my product — same product in every clip, copy-paste prompts." | creatives only |
+| "Audit my ads-plan.json — regenerate the prompt pack and flag any ad that drifts from the product block." | audit/fix |
+| "Run the full audit harness on my campaign folder — automated checks first, then spawn the ads-auditor subagent with the hook-worthiness scorecard and give me the PASS/FIX NEEDED verdict." | audit (harness) |
+
+**Idea sparks:** product launches · seasonal promos (Black Friday, summer) · app installs · local business leads · SaaS free-trial signups · retargeting creative refreshes (the `Edit:` variant bank) · cross-platform retargeting stacks.
 
 ## Asset & audio-only prompts
 

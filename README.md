@@ -22,15 +22,16 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 | **skill-builder** (meta) | Scaffold **new skills** the deepak-skill way — `scaffold-skill.mjs` generates the folder, SKILL.md contract (quality bar + workflow + checklist), Deepak-branded scripts, templates and examples, then wires the skill into README/USAGE/prompt-examples |
 | **veo-cinematic-reels** | Reel scripts + **scene-by-scene Google Flow / Veo 3.1 video prompts** — manual copy-paste workflow with **character consistency locked** (reference-image ingredients + a verbatim character block in EVERY prompt, self-verified by `scene-prompts.mjs`), **IMAX-level cinematic language**, locked color grading (film-stock tokens), and native dialogue/SFX audio |
 | **photoshoot-studio** | **AI photoshoot prompt packs for people AND products** (Google Flow / Nano Banana Pro, Midjourney, Flux) — manual copy-paste workflow with **subject consistency locked** (reference-image ingredients + a verbatim person/product block in EVERY prompt, self-verified by `shot-prompts.mjs`), **professional photography language** (camera body, lens, f-stop, lighting setup, film stock), locked grade per shoot, per-platform aspect ratios, and short **edit/inpaint prompts** for re-posing / re-outfitting / re-lighting |
+| **paid-ads-studio** | **The paid engine** — end-to-end ad campaign production for **Meta + Google**: copy-paste **Veo 3.1 video ad prompts** + **image ad prompts** (Nano Banana Pro / Midjourney / Flux) with **locked brand consistency** (verbatim product block in EVERY prompt, self-verified by `ad-prompts.mjs`), **hook-first ad copy** inside every platform's char limits (anti-fluff enforced by `ad-copy.mjs`), **campaign blueprints** (Meta ODAX + Advantage+ audiences · Google Demand Gen + PMax + Search, audience signals ≠ targeting), **2026 AI-content compliance checklists**, a **cost-management plan** (ramp / learning / kill / scale), a **benchmark-driven forecast** of expected results — impressions, clicks, conversions, CPA, ROAS across conservative/base/aggressive scenarios (`forecast-ads.mjs`) — **and an audit harness**: `audit-ads.mjs` (automated hook/char/consistency/compliance checks → `ad-audit.md`) + a fresh **ads-auditor subagent** scoring hook worthiness (/50) and signing PASS / FIX NEEDED before anything ships. Built-in example: **"Brew & Co Tumbler — Paid Launch"** (full launch-ready pack). |
 | **vibe-code-webapp** | Build **or extend** production-ready vibe-coded web apps — **detailed idea interview** first, and in **existing projects** a structure scan (`scan-project.mjs` → `project-scan.md`) so the plan extends what's already there → **evaluate** (SaaS scorecard → BUILD / ITERATE / PIVOT) → **Build Pack** (`PRD.md` + `stack-blueprint.md` + **`sitemap.md`** — full sitemap, every frontend page, backend architecture, workflows — + **`TODO.md`** with P0/P1/P2 priorities via `todo.mjs`) → **you approve the pack AND the todo list** (add/re-prioritize anytime) → the vibe coder builds **step by step** from `vibe-coder-instructions.md` (BUILD.md) filing **detailed `build-report.md`** reports → **production audit** → **everything-auditor** final review (app + plan + instructions + memory + reports → hardening / tests / brainstorming / skill feedback) → **daily `MEMORY.md`** keeps you and any AI in sync across sessions |
 
-The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets / thumbnails) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline) → **multiplied** (podcast→shorts, YouTube packaging, SEO blog, LinkedIn, email).
+The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets / thumbnails) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline) → **multiplied** (podcast→shorts, YouTube packaging, SEO blog, LinkedIn, email) → **paid** (Meta + Google ad campaigns with forecast-first economics via paid-ads-studio).
 
 ---
 
 ## Quick start — install in your project (3 steps)
 
-> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 15 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
+> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 16 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
 
 ### 1. Prerequisites
 
@@ -46,7 +47,7 @@ Run this **inside your project folder**:
 npx skills add Deepak-ai-93/deepak-skill --all
 ```
 
-That's it. It installs all fifteen skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
+That's it. It installs all sixteen skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
 
 ### 3. Use it with any CLI
 
@@ -76,6 +77,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **skill-builder only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill skill-builder` |
 | **veo-cinematic-reels only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill veo-cinematic-reels` |
 | **photoshoot-studio only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill photoshoot-studio` |
+| **paid-ads-studio only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill paid-ads-studio` |
 | Install globally (any project, any machine) | `npx skills add Deepak-ai-93/deepak-skill --all -g` |
 | Target specific agents | `npx skills add Deepak-ai-93/deepak-skill --all -a claude-code -a cursor` |
 | Install from a local clone | `npx skills add ./deepak-skill --all` |
@@ -85,7 +87,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 ```bash
 ls .agents/skills/
 # blog-seo-content  carousel-post-images  email-marketing  hook-storyboard-retention
-# linkedin-personal-brand  photoshoot-studio  podcast-to-shorts  skill-builder
+# linkedin-personal-brand  paid-ads-studio  photoshoot-studio  podcast-to-shorts  skill-builder
 # text-motion-reels  veo-cinematic-reels  video-asset-reels  video-product-pipeline
 # vibe-code-webapp  voice-sfx-audio  youtube-video-pipeline
 ```
@@ -262,6 +264,31 @@ Deliverables: `subject-sheet.md` (verbatim person OR product block + 2–3 refer
 
 > "Give me AI photoshoot prompts — same person in every shot, different outfits and backgrounds, editorial look. Also a product photoshoot for my tumbler store."
 > → subject sheet → shot list → prompt pack (self-verified) → paste into Flow / Midjourney → audit → deliver
+
+### Paid ad campaigns (`paid-ads-studio`)
+
+The **paid engine** for Meta + Google — a launch-ready campaign pack from one brief, with a **forecast of expected results before a dollar is spent**:
+
+```bash
+cd skills/paid-ads-studio
+node scripts/forecast-ads.mjs --platform meta --objective sales --daily-budget 50 --aov 40 --niche ecommerce --days 30 --margin 40   # → forecast.md (conservative/base/aggressive)
+node scripts/ad-prompts.mjs --plan ads-plan.json --out prompts.md        # Veo 3.1 video + image ad prompts, self-verified
+node scripts/ad-copy.mjs --brief copy-brief.json --out copy.md          # hook-first copy, char limits + anti-fluff enforced
+```
+
+Deliverables: `campaign-brief.md` → `forecast.md` (shown BEFORE creatives — if the economics don't clear, adjust the brief) → `prompts.md` (copy-paste Veo 3.1 video ads + Nano Banana Pro / Midjourney / Flux image ads, verbatim product block in every prompt) → `copy.md` (Meta ≤125/≤40/≤30, Google ≤30/≤90, no fluff) → `campaign-blueprint.md` (Meta ODAX + Advantage+ audiences · Google Demand Gen + PMax + Search) → `cost-plan.md` (ramp, learning phase, kill/scale rules) → `guidelines-checklist.md` (2026 AI-content compliance) → `launch-checklist.md` (manual copy-paste launch order) → **`ad-audit.md`** (the audit harness output). Built-in example: **"Brew & Co Tumbler — Paid Launch"** (full pack in `examples/brew-co-launch/`).
+
+**The audit harness ("is it worthy?" before you spend):** after the pack is built, run the automated check then spawn a fresh auditor:
+
+```bash
+cd skills/paid-ads-studio
+node scripts/audit-ads.mjs --pack examples/brew-co-launch --out ad-audit.md   # automated: hooks, char limits, fluff, consistency, forecast, compliance
+# then spawn a fresh ads-auditor subagent (see SKILL.md Stage 8 / templates/ads-auditor-brief.md)
+# → completes the hook-worthiness scorecard (/50, ≥35 = worth running) → signs PASS or FIX NEEDED
+```
+
+> "Build me a full paid ad campaign for my tumbler store — Meta + Google, $80/day, sales goal. Forecast first, then creatives, copy, blueprint, compliance, and audit the hooks before delivery."
+> → forecast → approve → creative pack (self-verified) → copy → blueprint + cost plan → `audit-ads.mjs` → ads-auditor subagent (hook-worthiness scorecard, PASS/FIX NEEDED) → deliver
 
 ### Vibe-code web apps (`vibe-code-webapp`)
 

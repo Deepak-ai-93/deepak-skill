@@ -40,7 +40,7 @@ The deciding factor is: **does the product let an agent run terminal commands?**
 # in your project folder — a single skill
 npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images
 
-# or everything (all 15 skills)
+# or everything (all 16 skills)
 npx skills add Deepak-ai-93/deepak-skill --all
 
 # or install globally for every project
@@ -86,6 +86,12 @@ cd skills/veo-cinematic-reels && node scripts/scene-prompts.mjs --plan scene-pla
 
 # AI photoshoots: person + product prompt packs with locked subject consistency
 cd skills/photoshoot-studio && node scripts/shot-prompts.mjs --plan shoot-plan.json --out prompts.md
+
+# Paid ads: forecast first, then Veo video + image ad prompts + compliant copy
+cd skills/paid-ads-studio && node scripts/forecast-ads.mjs --platform meta --objective sales --daily-budget 50 --aov 40
+cd skills/paid-ads-studio && node scripts/ad-prompts.mjs --plan ads-plan.json --out prompts.md
+cd skills/paid-ads-studio && node scripts/ad-copy.mjs --brief copy-brief.json --out copy.md
+cd skills/paid-ads-studio && node scripts/audit-ads.mjs --pack <campaign-folder> --out ad-audit.md   # automated audit → spawn ads-auditor subagent
 ```
 
 > "Make a reel with scenes and Google Flow prompts — same character every scene, IMAX cinematic look" — the skill builds the character sheet → scene script → self-verified copy-paste prompt pack, then you generate scene by scene in Flow.

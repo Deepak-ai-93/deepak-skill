@@ -1,0 +1,88 @@
+{
+  "title": "Brew & Co Tumbler — Paid Launch",
+  "brand": "Brand: Brew & Co — a matte-black 500ml vacuum-insulated stainless steel tumbler, tapered silhouette with a brushed-steel rim and a silicone grip ring, an engraved label reading \"BREW & CO · 500ML\" on the front, and a hero claim: keeps drinks hot for 8 hours or iced for 12",
+  "grade": "Grade: high-key commercial product photography, crisp whites, soft seamless gradients, premium product glow, clean highlights, subtle film grain",
+  "craft": "Craft: shot on a Hasselblad X2D medium format, 85mm f/2.8 lens, focus-stacked macro sharpness, softbox key light, white V-flat bounce fill",
+  "references": [
+    "tumbler-hero.png",
+    "tumbler-lifestyle.png",
+    "tumbler-detail.png"
+  ],
+  "videos": [
+    {
+      "id": "reels-hook",
+      "placement": "9:16 Reels/Shorts",
+      "duration": 8,
+      "camera": "Locked-off medium close-up, slow push-in on a 50mm lens",
+      "action": "A hand in a charcoal sleeve lifts the tumbler toward camera; steam rises gently from the open lid",
+      "setting": "Bright minimalist kitchen at morning golden hour",
+      "lighting": "soft window light from the left, warm backlight rim",
+      "audio": "Dialogue: \"Eight hours. Still hot.\" SFX: subtle lid click, warm room tone",
+      "style": "commercial lifestyle"
+    },
+    {
+      "id": "in-stream-demo",
+      "placement": "16:9 YouTube in-stream",
+      "duration": 15,
+      "camera": "0-4s wide establishing on a desk; 4-9s dolly-in to medium close-up; 9-15s macro ECU on the rim",
+      "action": "Coffee is poured from the tumbler into a cup at 5s; at 12s the tumbler sits closed on the desk, steam visible",
+      "setting": "Modern home office at dusk, warm desk lamp glow",
+      "lighting": "mixed warm lamp light + soft window light from the right",
+      "audio": "Dialogue: \"Made it at 8am. Still hot at 4pm.\" SFX: pour sound, gentle room ambience",
+      "style": "commercial lifestyle"
+    },
+    {
+      "id": "bumper-6s",
+      "placement": "16:9 bumper (non-skippable)",
+      "duration": 6,
+      "camera": "Static macro ECU on the engraved label, then a quick pull-back",
+      "action": "The label \"BREW & CO · 500ML\" catches the light; the tumbler pulls back into focus on a white studio background",
+      "setting": "Clean white product studio",
+      "lighting": "high-key softbox, even and shadowless",
+      "audio": "SFX: crisp metallic ring, soft whoosh",
+      "style": "studio commercial"
+    }
+  ],
+  "images": [
+    {
+      "id": "hero-square",
+      "format": "1:1",
+      "tool": "nanobanana",
+      "style": "Commercial product photography",
+      "scene": "Hero shot: the tumbler centered on a matte stone pedestal, a frozen water splash arcing off the brushed-steel rim",
+      "props": "scattered coffee beans at the base",
+      "lighting": "high-key studio softbox from above",
+      "edit": "replace the stone pedestal with a wooden desk scene and morning window light"
+    },
+    {
+      "id": "lifestyle-4x5",
+      "format": "4:5",
+      "tool": "nanobanana",
+      "style": "Lifestyle photography",
+      "scene": "The tumbler on a crowded home-office desk next to a laptop, a notebook and a ceramic cup, casual morning chaos",
+      "props": "open notebook, glasses",
+      "lighting": "soft window light from the left, warm tones",
+      "edit": "change the notebook to a branded to-do pad and add a second tumbler in another color"
+    },
+    {
+      "id": "flatlay-191x1",
+      "format": "1.91:1",
+      "tool": "midjourney",
+      "style": "E-commerce flat-lay",
+      "scene": "Overhead flat-lay: the tumbler lying on a light-grey linen background with its lid beside it and a coffee cup ring in the frame",
+      "props": "coffee beans, a steel spoon",
+      "lighting": "even diffused daylight, soft shadows",
+      "edit": "swap the linen for a deep charcoal felt surface and add a bold seasonal accent"
+    },
+    {
+      "id": "detail-macro",
+      "format": "1:1",
+      "tool": "flux",
+      "style": "Macro product photography",
+      "scene": "Extreme close-up of the brushed-steel rim and the engraved label text, razor-sharp texture, shallow focus falling off to a blurred dark studio",
+      "props": "",
+      "lighting": "single side softbox, dramatic highlight on the metal",
+      "edit": "re-render with a matte-black powder-coat finish on the body instead of brushed steel"
+    }
+  ]
+}

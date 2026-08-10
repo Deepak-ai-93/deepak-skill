@@ -15,7 +15,7 @@
 #    ./install.sh --help                # this help
 #
 #  Examples:
-#    ./install.sh                       → all 15 skills into .agents/skills/
+#    ./install.sh                       → all 16 skills into .agents/skills/
 #    ./install.sh --skill podcast-to-shorts
 #    ./install.sh --skill email-marketing --global
 # ═══════════════════════════════════════════════════════════════════════════
@@ -40,7 +40,7 @@ ${C_CYAN}${C_BOLD}
    ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
    ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
 ${C_RESET}
-${C_CYAN}${C_BOLD}  deepak-skill — 15 agent skills crafted by Deepak 🎬${C_RESET}
+${C_CYAN}${C_BOLD}  deepak-skill — 16 agent skills crafted by Deepak 🎬${C_RESET}
 ${C_YELLOW}  install once · use in any AI coding agent · MIT license${C_RESET}
 EOF
   echo ""
@@ -56,6 +56,7 @@ SKILLS=(
   "carousel-post-images     → LinkedIn/Instagram carousels at 4K"
   "veo-cinematic-reels      → Google Flow/Veo scene prompts, IMAX + consistency"
   "photoshoot-studio        → AI photoshoot prompts: people + products"
+  "paid-ads-studio          → Meta + Google ad campaigns: creatives + forecast"
   "email-marketing          → spam-free HTML emails + high-CTR subject lines"
   "blog-seo-content         → SEO articles that rank and get AI-cited"
   "youtube-video-pipeline   → script, 10-title pack, thumbnail, metadata"
@@ -66,7 +67,7 @@ SKILLS=(
 )
 
 show_skills() {
-  echo "${C_BOLD}  15 skills installed:${C_RESET}"
+  echo "${C_BOLD}  16 skills installed:${C_RESET}"
   for s in "${SKILLS[@]}"; do
     printf "  ${C_GREEN}•${C_RESET} %s\n" "$s"
   done
@@ -116,7 +117,7 @@ banner
 show_skills
 
 if [ "$LIST_ONLY" = "1" ]; then
-  echo "${C_GREEN}✅ Installer ready — run ./install.sh to install all 15 skills.${C_RESET}"
+  echo "${C_GREEN}✅ Installer ready — run ./install.sh to install all 16 skills.${C_RESET}"
   exit 0
 fi
 
