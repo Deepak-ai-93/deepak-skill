@@ -1,6 +1,6 @@
 # Prompt Examples — deepak-skill 🎬
 
-Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit.
+Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit. Email prompts (section 12) run through **`email-marketing`**: subject-line pack → bulletproof HTML + plain text → spam/compliance validation → preview → auditor sign-off.
 
 Two rules that make these prompts work:
 
@@ -160,6 +160,22 @@ Two rules that make these prompts work:
 | "Final review: spawn the everything-auditor — check the app, the plan, the instructions, memory and reports, then apply hardening + test fixes, brainstorm next ideas, and suggest skill improvements." | final review |
 
 **Idea sparks:** "freelancer payment pain" · "AI tool for X" · "internal tool that kills a spreadsheet" · "waitlist-first SaaS" · "the app nobody built well yet".
+
+## 12. Email marketing ✉️
+
+*Runs through **`email-marketing`**: plan (goal + audience + ESP + sender) → **subject-line pack** (3–5 high-CTR variants + A/B plan) → **bulletproof responsive `email.html`** (tables + inline CSS + dark mode + compliance footer) + **`plain.txt`** → **`validate-email.mjs`** (spam-trigger scan, CAN-SPAM compliance, E-E-A-T signals → `validation-report.md`) → **`preview-email.mjs`** desktop + mobile screenshots → auditor subagent sign-off → deliverable folder.*
+
+| Prompt | Type |
+|---|---|
+| "write me an email" | sloppy |
+| "Write a product-launch email for our SaaS — audience: existing customers, goal: demo clicks, ESP: Brevo. Spam-free, high-CTR subject lines, strong E-E-A-T (real author + proof)." | premium |
+| "Promo email for our Black Friday sale — audience: warm leads who opened last month, goal: sales. No fake urgency, honest deadline, physical address + unsubscribe in the footer." | premium (promo) |
+| "Welcome email for new signups — MailerLite, personalized with first name, one CTA, subject line under 50 chars. Make it feel like a real person wrote it." | premium (lifecycle) |
+| "Newsletter issue #14 for a finance newsletter — hook-first, one metric with a source, author bio, one CTA. Goal: replies." | premium (newsletter) |
+| "Why do our emails land in spam? Audit email.html with the email-marketing skill and fix everything that's failing." | audit/fix |
+| "Give me 5 subject lines for an abandoned-cart email — recipient-specific, no spam words, under 50 chars, with an A/B plan." | subject lines only |
+
+**Idea sparks:** product launches · welcome/onboarding flows · abandoned-cart recovery · weekly newsletters · Black Friday promos · event invitations · re-engagement win-back emails.
 
 ## Asset & audio-only prompts
 

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--
+  EXAMPLE — Product Launch Email (email-marketing skill)
+  "Meet Replays: on-page session replays that ship in 6 minutes."
+
+  Built from templates/email-template.html. Placeholders {{...}} stay for the
+  skill's deliverable; swap to your ESP's merge-tag syntax before sending
+  (Brevo {{contact.FIRSTNAME}} · MailerLite {{first_name}} · Mailchimp *|FNAME|*).
+
+  Subject (winner from subject-lines.md):
+    "Meet Replays: watch visitors fumble your signup"
+  Preheader:
+    "It found 41 dead-ends in your funnel — here's the 6-minute setup."
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <title>Meet Replays: watch visitors fumble your signup</title>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      .dark-bg        { background-color: #0f1115 !important; }
+      .dark-card      { background-color: #1a1d24 !important; }
+      .dark-text      { color: #e6e8eb !important; }
+      .dark-muted     { color: #9aa3af !important; }
+      .dark-border    { border-color: #2c313a !important; }
+      a.dark-link     { color: #8ab4f8 !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f5f7; -webkit-text-size-adjust:100%;">
+  <!-- ============ PREHEADER ============ -->
+  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#f4f5f7;">
+    It found 41 dead-ends in your funnel — here's the 6-minute setup.&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  </div>
+
+  <!-- ============ WRAPPER ============ -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f5f7;" class="dark-bg">
+    <tr>
+      <td align="center" style="padding:24px 12px 40px 12px;">
+
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; width:100%;">
+
+          <!-- ---------- HEADER / LOGO ---------- -->
+          <tr>
+            <td align="center" style="padding:0 0 20px 0;">
+              <a href="{{WEBSITE_URL}}" style="text-decoration:none;">
+                <img src="https://your-cdn.com/logo.png" alt="Northbeam Analytics" width="160" height="40" border="0" style="display:block; width:160px; height:40px; border:0; outline:none;">
+              </a>
+            </td>
+          </tr>
+
+          <!-- ---------- CARD ---------- -->
+          <tr>
+            <td>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff; border:1px solid #e4e6eb; border-radius:12px;" class="dark-card">
+                <tr>
+                  <td style="padding:36px 40px 40px 40px; font-family:Arial, Helvetica, sans-serif; color:#1a1d24;" class="dark-text">
+
+                    <p style="margin:0 0 16px 0; font-size:16px; line-height:24px; color:#1a1d24;" class="dark-text">
+                      Hi {{FIRST_NAME}},
+                    </p>
+
+                    <!-- HOOK — specific, names the pain -->
+                    <h1 style="margin:0 0 12px 0; font-family:Arial, Helvetica, sans-serif; font-size:28px; line-height:36px; font-weight:bold; color:#0f1115;" class="dark-text">
+                      Your signup page is leaking. Now you can watch it happen.
+                    </h1>
+                    <p style="margin:0 0 20px 0; font-size:16px; line-height:26px; color:#1a1d24;" class="dark-text">
+                      Today we're shipping <strong>Replays</strong> — session recordings of real visitors on your site, from the first click to the moment they leave. No heatmap guesses. You finally see <em>why</em> people drop off.
+                    </p>
+
+                    <!-- VALUE — three benefits, each one idea + proof -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 0 24px 0;">
+                      <tr>
+                        <td style="padding:0 0 12px 0; font-size:16px; line-height:26px; color:#1a1d24;" class="dark-text">
+                          <span style="color:#2563eb; font-weight:bold;" class="dark-link">✓</span>
+                          <strong>See the exact dead-end</strong> — the replay shows the moment a visitor stalls, clicks away, or rage-closes your form.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:0 0 12px 0; font-size:16px; line-height:26px; color:#1a1d24;" class="dark-text">
+                          <span style="color:#2563eb; font-weight:bold;" class="dark-link">✓</span>
+                          <strong>Setup in 6 minutes</strong> — one snippet, no engineering ticket, works on any stack.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:0 0 24px 0; font-size:16px; line-height:26px; color:#1a1d24;" class="dark-text">
+                          <span style="color:#2563eb; font-weight:bold;" class="dark-link">✓</span>
+                          <strong>Privacy-safe by default</strong> — PII is masked automatically, so you can watch without the compliance headache.
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- E-E-A-T: real proof — firsthand experience + metric -->
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f8fafc; border-left:4px solid #2563eb; margin:0 0 28px 0;" class="dark-card dark-border">
+                      <tr>
+                        <td style="padding:16px 20px; font-size:15px; line-height:24px; color:#1a1d24; font-style:italic;" class="dark-text">
+                          “We ran Replays on our own signup flow before shipping it — across 2,400 sessions it surfaced 41 concrete dead-ends, and fixing the top three lifted our completion rate 11% in a week.”
+                          <span style="display:block; margin-top:8px; font-style:normal; font-weight:bold;">— Maya Chen, Product Lead at Northbeam</span>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- ONE CTA -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 12px auto;">
+                      <tr>
+                        <td align="center" style="border-radius:8px; background-color:#2563eb;" bgcolor="#2563eb">
+                          <!--[if mso]>
+                          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{CTA_URL}}" style="height:52px;v-text-anchor:middle;width:260px;" arcsize="15%" stroke="f" fillcolor="#2563eb">
+                            <w:anchorlock/>
+                            <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">Watch your first replay</center>
+                          </v:roundrect>
+                          <![endif]-->
+                          <a href="{{CTA_URL}}" target="_blank" style="display:inline-block; padding:15px 40px; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; color:#ffffff; text-decoration:none; border-radius:8px; background-color:#2563eb;">
+                            <!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->Watch your first replay<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <p style="margin:0 0 28px 0; text-align:center; font-size:14px; line-height:22px;">
+                      <a href="{{SECONDARY_URL}}" style="color:#2563eb; text-decoration:underline;" class="dark-link">See how it works (2-minute demo)</a>
+                    </p>
+
+                    <!-- Sign-off — real person + credential -->
+                    <p style="margin:0; font-size:15px; line-height:24px; color:#1a1d24;" class="dark-text">
+                      — <strong>Maya Chen</strong>, Product Lead at Northbeam<br>
+                      <span style="color:#6b7280; font-size:13px;" class="dark-muted">
+                        I led the redesign this shipped from — reply to this email and you get me, not a bot.
+                      </span>
+                    </p>
+
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ---------- FOOTER / COMPLIANCE ---------- -->
+          <tr>
+            <td style="padding:24px 20px 0 20px; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:20px; color:#6b7280;" class="dark-muted">
+              <p style="margin:0 0 12px 0; text-align:center;">
+                Northbeam Analytics · 1124 Congress Ave, Suite 210, Austin, TX 78701
+              </p>
+              <p style="margin:0 0 12px 0; text-align:center;">
+                You're receiving this because you signed up for Northbeam updates or joined the Replays Beta waitlist.
+                <a href="{{PREFERENCES_URL}}" style="color:#6b7280; text-decoration:underline;" class="dark-link">Update preferences</a> ·
+                <a href="{{UNSUBSCRIBE_URL}}" style="color:#6b7280; text-decoration:underline;" class="dark-link">Unsubscribe</a>
+              </p>
+              <p style="margin:0; text-align:center; font-size:11px;">
+                © {{YEAR}} Northbeam Analytics. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,43 @@
+Subject: Meet Replays: watch visitors fumble your signup
+Preheader: It found 41 dead-ends in your funnel — here's the 6-minute setup.
+
+Hi {{FIRST_NAME}},
+
+Your signup page is leaking. Now you can watch it happen.
+
+Today we're shipping Replays — session recordings of real visitors on your
+site, from the first click to the moment they leave. No heatmap guesses.
+You finally see WHY people drop off.
+
+What you get:
+- See the exact dead-end — the replay shows the moment a visitor stalls,
+  clicks away, or rage-closes your form.
+- Setup in 6 minutes — one snippet, no engineering ticket, works on any stack.
+- Privacy-safe by default — PII is masked automatically, so you can watch
+  without the compliance headache.
+
+"We ran Replays on our own signup flow before shipping it — across 2,400
+sessions it surfaced 41 concrete dead-ends, and fixing the top three lifted
+our completion rate 11% in a week."
+— Maya Chen, Product Lead at Northbeam
+
+Watch your first replay:
+{{CTA_URL}}
+
+See how it works (2-minute demo):
+{{SECONDARY_URL}}
+
+— Maya Chen, Product Lead at Northbeam
+I led the redesign this shipped from — reply to this email and you get me,
+not a bot.
+
+---
+Northbeam Analytics · 1124 Congress Ave, Suite 210, Austin, TX 78701
+
+You're receiving this because you signed up for Northbeam updates or joined
+the Replays Beta waitlist.
+
+Update preferences: {{PREFERENCES_URL}}
+Unsubscribe: {{UNSUBSCRIBE_URL}}
+
+© {{YEAR}} Northbeam Analytics. All rights reserved.

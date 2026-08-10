@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!--
+  email-template.html — bulletproof responsive email for Brevo / MailerLite /
+  Mailchimp / Klaviyo / any ESP.
+
+  Rules honored (see SKILL.md § HTML email engineering):
+    • Table-based layout + inline styles only (Gmail-safe; one <style> block for dark mode).
+    • 600px max container, centered, web-safe fonts.
+    • Alt text + width/height on every image. Absolute image URLs in the live send.
+    • Preheader as the FIRST element in <body>.
+    • Bulletproof CTA button (VML fallback for Outlook).
+    • Compliance footer: permission line + physical address + unsubscribe (ESP merge-tag).
+
+  Personalization: keep {{UPPERCASE}} tags in the file, then swap for your ESP:
+    Brevo:    {{contact.FIRSTNAME}} · MailerLite: {{first_name}}
+    Mailchimp: *|FNAME|*   · Klaviyo: {{ first_name }} · HubSpot: {{ contact.firstname }}
+  Unsubscribe: replace {{UNSUBSCRIBE_URL}} with the ESP's GLOBAL unsubscribe merge-tag
+  (e.g. Brevo {{unsubscribe}} / MailerLite {{unsubscribe}} / Mailchimp *|UNSUB|*).
+  ⚠️ Never hardcode an unsubscribe URL — use the ESP's tag so it's honored everywhere.
+
+  Use: copy → replace placeholder copy/URLs/images → validate-email.mjs → preview-email.mjs.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Dark-mode support: color-scheme meta + media query (see the <style> below). -->
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <title>{{PREHEADER}}</title>
+  <style>
+    /* ONLY dark-mode overrides live here — everything else is inline. */
+    @media (prefers-color-scheme: dark) {
+      .dark-bg        { background-color: #0f1115 !important; }
+      .dark-card      { background-color: #1a1d24 !important; }
+      .dark-text      { color: #e6e8eb !important; }
+      .dark-muted     { color: #9aa3af !important; }
+      .dark-border    { border-color: #2c313a !important; }
+      .dark-footer    { background-color: #14171c !important; }
+      a.dark-link     { color: #8ab4f8 !important; }
+    }
+  </style>
+</head>
+<body style="margin:0; padding:0; background-color:#f4f5f7; -webkit-text-size-adjust:100%;">
+  <!-- ============ PREHEADER (first element — extends the subject, hidden) ============ -->
+  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#f4f5f7;">
+    {{PREHEADER}}&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;
+  </div>
+
+  <!-- ============ WRAPPER (full-width ghost table) ============ -->
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f5f7;" class="dark-bg">
+    <tr>
+      <td align="center" style="padding:24px 12px 40px 12px;">
+
+        <!-- ============ MAIN CONTAINER (600px max) ============ -->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; width:100%;">
+
+          <!-- ---------- HEADER / LOGO ---------- -->
+          <tr>
+            <td align="center" style="padding:0 0 20px 0;">
+              <!-- Replace src with your hosted logo URL (absolute). Add alt text. -->
+              <a href="{{WEBSITE_URL}}" style="text-decoration:none;">
+                <img src="https://your-cdn.com/logo.png" alt="{{COMPANY_NAME}}" width="160" height="40" border="0" style="display:block; width:160px; height:40px; border:0; outline:none;">
+              </a>
+            </td>
+          </tr>
+
+          <!-- ---------- CARD ---------- -->
+          <tr>
+            <td>
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff; border:1px solid #e4e6eb; border-radius:12px;" class="dark-card">
+                <tr>
+                  <td style="padding:36px 40px 40px 40px; font-family:Arial, Helvetica, sans-serif; color:#1a1d24;" class="dark-text">
+
+                    <!-- Greeting (personalized — swap {{FIRST_NAME}} for your ESP tag) -->
+                    <p style="margin:0 0 16px 0; font-size:16px; line-height:24px; color:#1a1d24;" class="dark-text">
+                      Hi {{FIRST_NAME}},
+                    </p>
+
+                    <!-- HOOK — first 2 lines earn the read. Specific, not fluffy. -->
+                    <h1 style="margin:0 0 12px 0; font-family:Arial, Helvetica, sans-serif; font-size:28px; line-height:36px; font-weight:bold; color:#0f1115;" class="dark-text">
+                      {{HEADLINE — the one specific promise}}
+                    </h1>
+                    <p style="margin:0 0 20px 0; font-size:16px; line-height:26px; color:#1a1d24;" class="dark-text">
+                      {{HOOK — the pain or the payoff in one or two lines. Specific beats generic.}}
+                    </p>
+
+                    <!-- VALUE — 2–4 benefit bullets, each one idea, bold the payoff -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="width:100%; margin:0 0 24px 0;">
+                      <tr>
+                        <td style="padding:0 0 12px 0; font-size:16px; line-height:26px; color:#1a1d24;" class="dark-text">
+                          <span style="color:#2563eb; font-weight:bold;" class="dark-link">✓</span>
+                          <strong>{{BENEFIT 1 — outcome}}</strong> — {{proof/why it matters}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:0 0 12px 0; font-size:16px; line-height:26px; color:#1a1d24;" class="dark-text">
+                          <span style="color:#2563eb; font-weight:bold;" class="dark-link">✓</span>
+                          <strong>{{BENEFIT 2 — outcome}}</strong> — {{proof/why it matters}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:0 0 24px 0; font-size:16px; line-height:26px; color:#1a1d24;" class="dark-text">
+                          <span style="color:#2563eb; font-weight:bold;" class="dark-link">✓</span>
+                          <strong>{{BENEFIT 3 — outcome}}</strong> — {{proof/why it matters}}
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- E-E-A-T: real proof — a metric with a source, or a genuine testimonial -->
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f8fafc; border-left:4px solid #2563eb; margin:0 0 28px 0;" class="dark-card dark-border">
+                      <tr>
+                        <td style="padding:16px 20px; font-size:15px; line-height:24px; color:#1a1d24; font-style:italic;" class="dark-text">
+                          “{{REAL TESTIMONIAL OR METRIC — e.g. 'We cut setup from 40 minutes to 6 for 4,000 signups last month.'}}”
+                          <span style="display:block; margin-top:8px; font-style:normal; font-weight:bold;">— {{REAL NAME}}, {{ROLE}} at {{COMPANY}}</span>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- ONE CTA — bulletproof button (VML for Outlook + padded <a> everywhere else) -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 12px auto;">
+                      <tr>
+                        <td align="center" style="border-radius:8px; background-color:#2563eb;" bgcolor="#2563eb">
+                          <!--[if mso]>
+                          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{CTA_URL}}" style="height:52px;v-text-anchor:middle;width:260px;" arcsize="15%" stroke="f" fillcolor="#2563eb">
+                            <w:anchorlock/>
+                            <center style="color:#ffffff;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;">{{CTA — ONE VERB + ONE BENEFIT}}</center>
+                          </v:roundrect>
+                          <![endif]-->
+                          <a href="{{CTA_URL}}" target="_blank" style="display:inline-block; padding:15px 40px; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:bold; color:#ffffff; text-decoration:none; border-radius:8px; background-color:#2563eb;">
+                            <!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->{{CTA — ONE VERB + ONE BENEFIT}}<!--[if mso]>&nbsp;&nbsp;&nbsp;&nbsp;<![endif]-->
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- One supporting link max -->
+                    <p style="margin:0 0 28px 0; text-align:center; font-size:14px; line-height:22px;">
+                      <a href="{{SECONDARY_URL}}" style="color:#2563eb; text-decoration:underline;" class="dark-link">{{optional supporting link — descriptive anchor}}</a>
+                    </p>
+
+                    <!-- Sign-off from a real person (EEAT: experience + expertise) -->
+                    <p style="margin:0; font-size:15px; line-height:24px; color:#1a1d24;" class="dark-text">
+                      — <strong>{{REAL NAME}}</strong>, {{ROLE}} at {{COMPANY_NAME}}<br>
+                      <span style="color:#6b7280; font-size:13px;" class="dark-muted">
+                        {{ONE-LINE CREDENTIAL, e.g. 'led the redesign; reply and you get me, not a bot.'}}
+                      </span>
+                    </p>
+
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- ---------- FOOTER / COMPLIANCE ---------- -->
+          <tr>
+            <td style="padding:24px 20px 0 20px; font-family:Arial, Helvetica, sans-serif; font-size:12px; line-height:20px; color:#6b7280;" class="dark-muted">
+              <p style="margin:0 0 12px 0; text-align:center;">
+                {{COMPANY_NAME}} · {{FULL PHYSICAL POSTAL ADDRESS, e.g. 123 Main St, Suite 4, Austin, TX 78701}}
+              </p>
+              <p style="margin:0 0 12px 0; text-align:center;">
+                You're receiving this because {{PERMISSION LINE, e.g. "you joined the Beta waitlist or subscribed on our site"}}. 
+                <a href="{{PREFERENCES_URL}}" style="color:#6b7280; text-decoration:underline;" class="dark-link">Update preferences</a> ·
+                <a href="{{UNSUBSCRIBE_URL}}" style="color:#6b7280; text-decoration:underline;" class="dark-link">Unsubscribe</a>
+              </p>
+              <p style="margin:0; text-align:center; font-size:11px;">
+                © {{YEAR}} {{COMPANY_NAME}}. All rights reserved.
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

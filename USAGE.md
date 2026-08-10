@@ -40,7 +40,7 @@ The deciding factor is: **does the product let an agent run terminal commands?**
 # in your project folder — a single skill
 npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images
 
-# or everything (all 7 skills)
+# or everything (all 8 skills)
 npx skills add Deepak-ai-93/deepak-skill --all
 
 # or install globally for every project
@@ -53,6 +53,17 @@ Then just talk to it:
 
 The agent **presents the two-mode choice** (browser render vs image-model generation), plans the slides with real-life scenes, then either renders 4K PNGs (`--4k`) or exports per-slide image-model prompts (`--mode model`) for the CLI's image tool.
 
+For email campaigns, the `email-marketing` skill has its own validation + preview pipeline:
+
+```bash
+cd email-marketing && node scripts/validate-email.mjs --html email.html --subject "Meet Replays: watch visitors fumble your signup"
+cd email-marketing && node scripts/preview-email.mjs --html email.html --dark   # needs Chrome + playwright
+```
+
+> "Using the email-marketing skill, write a promo email for our Black Friday launch — Brevo, audience: warm leads, goal: sales. Spam-free, high-CTR subject lines, strong E-E-A-T."
+
+The agent plans the email, writes the subject line pack, builds `email.html` + `plain.txt`, runs the spam/compliance validator, renders desktop + mobile previews, and has an auditor subagent sign off before delivering. In **web chat** (no terminal), paste the SKILL.md and the agent still delivers the full creative pack — subject lines, HTML, plain text, and copy — just without the automated screenshots.
+
 Other skills follow the same pattern (text-motion reels, video-asset reels, voice/SFX, viral pipeline). See the [README](README.md) for the full install table and per-skill commands.
 
 ---
@@ -60,7 +71,7 @@ Other skills follow the same pattern (text-motion reels, video-asset reels, voic
 ## 4. Claude.ai web chat / ChatGPT web — partial (copy-paste mode)
 
 **What works without a terminal:**
-1. Paste the skill as instructions: *"Follow this skill: [paste the contents of `skills/carousel-post-images/SKILL.md`]"* (or paste the GitHub link — the chat can read the repo).
+1. Paste the skill as instructions: *"Follow this skill: [paste the contents of `skills/carousel-post-images/SKILL.md`]"* (or paste the GitHub link — the chat can read the repo). For emails: *"Follow this skill: [paste `skills/email-marketing/SKILL.md`]"*.
 2. The model delivers: **slide plan with scenes → viral anti-fluff copy per slide → Mode 2 image prompts (4K) → `caption.md` for 5 platforms → audit checklist.**
 3. Because both Claude and ChatGPT have **built-in image generation**, Mode 2 is usable: ask it to "generate slide 1 now" and it produces the photoreal image; you download each one manually.
 

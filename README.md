@@ -1,6 +1,6 @@
 # deepak-skill 🎬
 
-Open-source agent skills for creating **short-form video content and carousel posts** — text-only motion graphic reels, viral hook copywriting, storyboarding, retention engineering, AI voiceover + sound design, and native-image-model carousels. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
+Open-source agent skills for creating **short-form video content, carousel posts, and high-deliverability email marketing** — text-only motion graphic reels, viral hook copywriting, storyboarding, retention engineering, AI voiceover + sound design, native-image-model carousels, and spam-free HTML emails with high-CTR subject lines. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
 
 [![skills.sh](https://skills.sh/b/Deepak-ai-93/deepak-skill)](https://skills.sh/Deepak-ai-93/deepak-skill)
 
@@ -14,6 +14,7 @@ Open-source agent skills for creating **short-form video content and carousel po
 | **video-asset-reels** | Build reels from your own video clips & images — understand the prompt, cut assets to beats, overlay kinetic text, sync a voiceover, render 4K (see [PLAN.md](PLAN.md)) |
 | **video-product-pipeline** | The viral-engineered gatekeeper for every video request: hunt trending topics (`trend-hunt.mjs` + web research) → brainstorm + score angles → analyze ANY prompt (sloppy or not) → write a `video-product.md` spec → **get your approval** → generate (text-motion / asset reels) → audit the frames with a script + dedicated auditor subagent (spelling, text overlap, safe zones, style, readability) |
 | **carousel-post-images** | Scroll-stopping carousel posts (LinkedIn/Instagram) as image sets — **one script, two CLI modes**: **browser render** (slides.html → deterministic 4K PNGs, any CLI) or **native image-model generation** (same deck exports photoreal 4K prompts for Antigravity / Codex `image_gen` / Grok `/imagine`). Photorealistic real-life visuals, viral anti-fluff copywriting, 4 trending styles (Cinematic Real-Life default), per-platform `caption.md` |
+| **email-marketing** | High-converting, **spam-free HTML emails** for Brevo / MailerLite / Mailchimp / Klaviyo — bulletproof responsive code, anti-fluff copywriting, **E-E-A-T trust signals** (real author + credentials + proof), and a **high-CTR subject line pack** (33–50 char formulas + A/B plan). Validated by `validate-email.mjs` (spam-trigger scan, CAN-SPAM compliance, EEAT signals → `validation-report.md`) and previewed at desktop + mobile via `preview-email.mjs` before send |
 | **vibe-code-webapp** | Build **or extend** production-ready vibe-coded web apps — **detailed idea interview** first, and in **existing projects** a structure scan (`scan-project.mjs` → `project-scan.md`) so the plan extends what's already there → **evaluate** (SaaS scorecard → BUILD / ITERATE / PIVOT) → **Build Pack** (`PRD.md` + `stack-blueprint.md` + **`sitemap.md`** — full sitemap, every frontend page, backend architecture, workflows — + **`TODO.md`** with P0/P1/P2 priorities via `todo.mjs`) → **you approve the pack AND the todo list** (add/re-prioritize anytime) → the vibe coder builds **step by step** from `vibe-coder-instructions.md` (BUILD.md) filing **detailed `build-report.md`** reports → **production audit** → **everything-auditor** final review (app + plan + instructions + memory + reports → hardening / tests / brainstorming / skill feedback) → **daily `MEMORY.md`** keeps you and any AI in sync across sessions |
 
 The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline).
@@ -36,7 +37,7 @@ Run this **inside your project folder**:
 npx skills add Deepak-ai-93/deepak-skill --all
 ```
 
-That's it. It installs all seven skills into `.agents/skills/` — no heavy media, no demo files.
+That's it. It installs all eight skills into `.agents/skills/` — no heavy media, no demo files.
 
 ### 3. Use it with any CLI
 
@@ -58,6 +59,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **video-product-pipeline only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill video-product-pipeline` |
 | **carousel-post-images only** (self-contained — SKILL.md + scripts/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images` |
 | **vibe-code-webapp only** (self-contained — SKILL.md + scripts/ + templates/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill vibe-code-webapp` |
+| **email-marketing only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill email-marketing` |
 | Install globally (any project, any machine) | `npx skills add Deepak-ai-93/deepak-skill --all -g` |
 | Target specific agents | `npx skills add Deepak-ai-93/deepak-skill --all -a claude-code -a cursor` |
 | Install from a local clone | `npx skills add ./deepak-skill --all` |
@@ -66,9 +68,8 @@ The agent will run the format wizard, build the composition, and render your 4K 
 
 ```bash
 ls .agents/skills/
-# carousel-post-images  hook-storyboard-retention  text-motion-reels
-# video-asset-reels  video-product-pipeline  voice-sfx-audio
-# vibe-code-webapp
+# carousel-post-images  email-marketing  hook-storyboard-retention  text-motion-reels
+# video-asset-reels  video-product-pipeline  vibe-code-webapp  voice-sfx-audio
 ```
 
 **Update:** `npx skills update` • **Remove:** `npx skills remove <skill-name>`
@@ -143,6 +144,15 @@ Built-in examples — **"Day in the life of an AI developer"** (`examples/day-in
 
 > "Make a carousel: 3 money rules nobody told you. Real scenes, image-model mode, 8 slides, 4K, LinkedIn."
 > → choose mode → `prompts.md` → 4K images → `caption.md` → auditor check → deliver
+
+### Emails (`email-marketing`)
+
+High-converting, **spam-free HTML emails** for Brevo / MailerLite / Mailchimp / Klaviyo and any ESP — one folder per campaign with **five files**: a **high-CTR subject line pack** (`subject-lines.md` — 3–5 variants from proven formulas, winner marked, A/B plan), a **bulletproof responsive `email.html`** (tables + inline CSS, dark-mode aware, preheader, compliance footer), a **`plain.txt`** fallback, a **`validation-report.md`** from `validate-email.mjs` (spam-trigger scan, ALL-CAPS/`!!!` check, unsubscribe + physical-address compliance, alt text, text:image ratio, E-E-A-T signals — real author, proof, social proof, human reply-to), and **`preview/` screenshots** (desktop 600px + mobile 320px) for the visual audit.
+
+Built-in example — **"Meet Replays" product launch** (`examples/product-launch/`): full email + subject pack + copy breakdown (why every line is there) + plain text + the ESP merge-tag swap sheet.
+
+> "Write a product-launch email for our SaaS — audience: existing customers, goal: demo clicks. Make it spam-free with high-CTR subject lines and strong E-E-A-T."
+> → subject line pack → `email.html` + `plain.txt` → `validate-email.mjs` report → preview screenshots → auditor sign-off → deliver
 
 ### Vibe-code web apps (`vibe-code-webapp`)
 
