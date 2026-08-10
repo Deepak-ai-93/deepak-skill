@@ -8,7 +8,7 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 
 | Skill | What it does |
 |---|---|
-| **text-motion-reels** | Create trending text-only motion graphic reels (kinetic typography) as HyperFrames HTML compositions — 6 trending formats, design styles, viral formulas. Starts with an interactive **format wizard** and renders at **4K** — **audit harness**: `audit-reel.mjs` (format slug, GSAP timeline, determinism, output, captions → `reel-audit.md`) + a fresh **reel-auditor subagent** signing PASS / FIX NEEDED |
+| **text-motion-reels** | Create trending text-only motion graphic reels (kinetic typography) as HyperFrames HTML compositions — 11 trending formats (Word Pop · Highlighter · 3D Editorial · Card Listicle · Chat Thriller · SVG Ambient · **Micro-Fiction · Quiz Trap · Day Counter · Notification Drop · Thread Court**), design styles, viral formulas. Starts with an interactive **format wizard** and renders at **4K** — **audit harness**: `audit-reel.mjs` (format slug, GSAP timeline, determinism, output, captions → `reel-audit.md`) + a fresh **reel-auditor subagent** signing PASS / FIX NEEDED |
 | **hook-storyboard-retention** | Write scroll-stopping hooks, engineer watch-time, and build beat-by-beat storyboards with script ↔ video timeline in sync — **audit harness**: `audit-storyboard.mjs` (hook/beat/sync/retention/determinism → `storyboard-audit.md`) + a fresh **storyboard-auditor subagent** signing PASS / FIX NEEDED |
 | **voice-sfx-audio** | Open-source TTS voiceovers (Kokoro, Piper, etc.), royalty-free SFX/music sources with license guidance, FFmpeg audio ducking, and a **deep-voice recipe** (Tier 1: Kokoro male voice + FFmpeg pitch/EQ — see [voice-plan.md](voice-plan.md)) — **audit harness**: `audit-audio.mjs` (license compliance, mix contract, loudness → `audio-audit.md`) + a fresh **audio-auditor subagent** signing PASS / FIX NEEDED |
 | **video-asset-reels** | Build reels from your own video clips & images — understand the prompt, cut assets to beats, overlay kinetic text, sync a voiceover, render 4K (see [PLAN.md](PLAN.md)) — **audit harness**: `audit-asset-reel.mjs` (storyboard, cuts, HTML determinism, output, captions → `asset-reel-audit.md`) + a fresh **asset-reel-auditor subagent** signing PASS / FIX NEEDED |
@@ -106,7 +106,7 @@ See the [skills.sh docs](https://www.skills.sh/docs) for more options (`--list`,
 
 ### Format wizard + 4K rendering (`text-motion-reels`)
 
-The `text-motion-reels` skill starts with an **interactive format wizard** — the agent asks you to pick one of 6 trending text-only formats before building anything:
+The `text-motion-reels` skill starts with an **interactive format wizard** — the agent asks you to pick one of 11 trending text-only formats before building anything:
 
 1. **Word Pop** — Hormozi-style high-impact captions (business, hot takes)
 2. **Highlighter** — Vox-style analytical explainer (psychology, facts)
@@ -114,6 +114,11 @@ The `text-motion-reels` skill starts with an **interactive format wizard** — t
 4. **Card Listicle** — numbered save-bait grid (finance, productivity)
 5. **Chat Thriller** — text-message storytime (reddit, drama)
 6. **SVG Ambient** — animated SVG backgrounds (mindset, aesthetic, brand)
+7. **Micro-Fiction** — word-by-word story reveal, cliffhanger endings (horror, sci-fi, drama)
+8. **Quiz Trap** — countdown riddle / "only 2% can…" (trivia, psychology, watch-twice)
+9. **Day Counter** — "Day 1 vs Day 90" metric timeline (finance, fitness, growth)
+10. **Notification Drop** — simulated phone notification skits (humor, relatable)
+11. **Thread Court** — Reddit-style post + verdict reveal (AITA, drama, comment bait)
 
 After you pick a format, the agent builds the composition to that format's spec, generates a **beat-synced voiceover** (Kokoro), renders it at **vertical 4K (2160x3840)** into a proper folder, and writes a ready-to-post `caption.md`:
 

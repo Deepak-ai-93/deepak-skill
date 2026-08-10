@@ -36,12 +36,17 @@ Never start coding a composition without first running the **format selection wi
 
 ```
 [Agent]: Welcome to the Text-Motion Reel Generator. Pick a trending format:
-        (1) Word Pop       — Hormozi-style high-impact captions (business, hot takes)
-        (2) Highlighter    — Vox-style analytical explainer (psychology, facts)
-        (3) 3D Editorial   — Luxury quiet minimalist (mindset, stoic)
-        (4) Card Listicle  — Numbered save-bait grid (finance, productivity)
-        (5) Chat Thriller  — Text-message storytime (reddit, drama)
-        (6) SVG Ambient    — Animated SVG backgrounds (mindset, aesthetic, brand)
+        (1)  Word Pop           — Hormozi-style high-impact captions (business, hot takes)
+        (2)  Highlighter        — Vox-style analytical explainer (psychology, facts)
+        (3)  3D Editorial       — Luxury quiet minimalist (mindset, stoic)
+        (4)  Card Listicle      — Numbered save-bait grid (finance, productivity)
+        (5)  Chat Thriller      — Text-message storytime (reddit, drama)
+        (6)  SVG Ambient        — Animated SVG backgrounds (mindset, aesthetic, brand)
+        (7)  Micro-Fiction      — Word-by-word story reveal (horror, sci-fi, cliffhangers)
+        (8)  Quiz Trap          — Countdown riddle / "only 2% can…" (trivia, psychology)
+        (9)  Day Counter        — "Day 1 vs Day 90" metric timeline (finance, fitness, growth)
+        (10) Notification Drop  — Simulated phone notification skits (humor, relatable)
+        (11) Thread Court       — Reddit-style post + verdict reveal (AITA, drama)
 
 [User]: 3
 
@@ -54,7 +59,7 @@ Never start coding a composition without first running the **format selection wi
 
 ### Wizard rules
 
-1. **Ask first.** Present the 1–6 menu and wait for the user's selection before writing any HTML.
+1. **Ask first.** Present the 1–11 menu and wait for the user's selection before writing any HTML.
 2. **Always confirm the format slug** — it is reused for the output filename (see Rendering to 4K).
 3. Collect topic, hook, duration, and audio preference after the format is locked in.
 4. Build the composition using ONLY the chosen format's spec below (typography, palette, motion, effects). Do not mix format styles.
@@ -65,8 +70,9 @@ Never start coding a composition without first running the **format selection wi
 
 ```
 Act as a text-motion reel engineer using the text-motion-reels skill.
-1. Run the format wizard: ask the user to pick format 1-6 (Word Pop / Highlighter /
-   3D Editorial / Card Listicle / Chat Thriller / SVG Ambient) and gather topic, hook, duration, audio.
+1. Run the format wizard: ask the user to pick format 1-11 (Word Pop / Highlighter /
+   3D Editorial / Card Listicle / Chat Thriller / SVG Ambient / Micro-Fiction / Quiz Trap /
+   Day Counter / Notification Drop / Thread Court) and gather topic, hook, duration, audio.
 2. Build the 1080x1920 HTML composition strictly per the chosen format's spec.
 3. Register the paused GSAP timeline on window.__timelines.reel.
 4. Generate the voiceover and sync every line to its text beat (see Always-on voiceover).
@@ -100,7 +106,7 @@ Act as a text-motion reel engineer using the text-motion-reels skill.
 
 ---
 
-## The 6 Trending Text-Only Formats (format library)
+## The 11 Trending Text-Only Formats (format library)
 
 Pick ONE format via the wizard and build the composition strictly to its spec below.
 
@@ -171,6 +177,61 @@ Pick ONE format via the wizard and build the composition strictly to its spec be
 - **Retention device:** ambient motion keeps the frame alive between text beats; loop ending mirrors frame 1 for rewatch.
 - **4K perf:** max 4 SVG containers, ~20 nodes total, transforms only — never animate `fill`/`stroke` per frame.
 
+### Format 7 — Micro-Fiction (`micro-fiction`)
+*Word-by-word serialized story reveal. Horror, sci-fi, thriller — the #1 fastest-growing faceless niche (10–50M view formats).*
+
+- **Best for:** Horror / sci-fi / thriller micro-stories, "wrong number from 2045" prompts, true-crime-style teases. **Hook:** Open loop / cliffhanger.
+- **Typography:** Condensed heavy sans (Anton / Bebas Neue / Montserrat Black) for story beats + small mono caption line, `clamp(3rem, 7vw, 6rem)`.
+- **Palette:** bg near-black `#050507`, text `#e8e8ec`, accent danger red `#ff3b30` (or acid green `#39ff14`); static film-grain overlay.
+- **Layout:** One short line (1–4 words) per beat, centered in the reading column; mono "CHAPTER 01" / timestamp label top-left; cliffhanger line is the final beat.
+- **Motion system (GSAP):** word-by-word reveal (`opacity 0→1`, `y 24→0`, `scale 1.06→1`, `power3.out`) — transform/opacity only, no per-frame filters per the 4K rules; on "twist" beats a full-frame white/red flash (0.08s) + micro shake (`x ±4px`); slow camera push-in across the whole reel; heartbeat pulse on horror words (`scale 1 → 1.06 → 1`, 0.12s).
+- **Signature effects:** VHS/glitch jitter on key words (transform-only x-skew hops, no per-frame filters); red vignette pulse on tension beats; typewriter mono captions; "TO BE CONTINUED…" stinger with a Part 2 arrow CTA.
+- **Retention device:** The final frame ends on an unresolved beat ("…and then the door opened.") → forces rewatch + "Part 2?" comment bait; loop ending mirrors frame 1 so the story restarts seamlessly.
+
+### Format 8 — Quiz Trap (`quiz-trap`)
+*"Only 2% can…" interactive riddle with countdown. Watch-twice mechanics, comment bait.*
+
+- **Best for:** Trivia, brain teasers, "find the odd one out", psychology mini-quizzes. **Hook:** Challenge / curiosity gap.
+- **Typography:** Bold sans numerals (Inter / Montserrat ExtraBold), `clamp(3rem, 7vw, 6rem)` for the question; answer options in smaller card text.
+- **Palette:** bg `#0a0a12`, text `#ffffff`, accent electric violet `#7c5cff`; correct answer flashes green `#39ff14`, wrong flashes red `#ff3b30`.
+- **Layout:** Question centered in the upper reading zone; 2–4 answer option cards stacked below; countdown ring top-right; answer-reveal card replaces the options.
+- **Motion system (GSAP):** question types in letter-by-letter; countdown ring drains (`scale` on a conic-gradient ring or `stroke-dashoffset` on an SVG ring, transform-only); options pop in staggered (`y 40→0`, `back.out(1.7)`); on reveal the correct option scales 1.1 + green ring + micro shake, wrong options dim to 20%.
+- **Signature effects:** ticking countdown (audio cue), ring drain, reveal card with a "✅ Correct — only 12% get this" receipt line, end frame = "How many did YOU get?" comment CTA.
+- **Retention device:** The countdown + answer reveal forces a second watch (viewers re-check the answer); loop ending re-asks the question for seamless rewatch.
+
+### Format 9 — Day Counter (`day-counter`)
+*"Day 1 vs Day 90 (+$15,400)" transformation timeline. Metric proof = save bait.*
+
+- **Best for:** Finance (debt-free, savings), fitness transformations, business growth, habit streaks. **Hook:** Results-first / specific number.
+- **Typography:** Big tabular numerals (Inter / Montserrat Bold, `font-variant-numeric: tabular-nums`), `clamp(4rem, 10vw, 9rem)` for the big number; small sans labels.
+- **Palette:** bg `#0b0b0d`, text `#f5f2ea`, accent emerald `#2ecc71` (up-trend) or champagne `#e5c158`; chart line drawn in the accent.
+- **Layout:** Big "DAY 034" counter top-center; a line-chart of the metric in the middle band; milestone rows bottom ("Day 30 — first $1k").
+- **Motion system (GSAP):** day number counts up per beat — drive the `textContent` snap from the paused timeline's `onUpdate`/progress (never `setInterval`, so scrubbing stays deterministic) with a `scale 1.2→1` pop per increment; the chart line draws itself (`stroke-dashoffset`); milestone rows slide in left→right staggered with checkmark ticks.
+- **Signature effects:** count-up numerals, self-drawing chart line, milestone checkmarks, confetti burst (GSAP particle scales, transform-only) on the final number, end frame = full "Day 1 → Day 90" before/after save-bait card.
+- **Retention device:** The count-up itself is the reward — viewers stay to see the final number; metrics drive saves; loop ending mirrors Day 1.
+
+### Format 10 — Notification Drop (`notification-drop`)
+*Simulated phone notifications + witty takes. The notification reflex hooks in frame 1.*
+
+- **Best for:** Humor, relatable takes, "me convincing myself…" meme energy, life observations. **Hook:** Pattern interrupt / relatability.
+- **Typography:** System UI stack (`-apple-system, Segoe UI, Roboto`), notification title bold + body regular, `clamp(1.5rem, 3.2vw, 2.4rem)`.
+- **Palette:** bg dark charcoal `#0d0d12`; notification cards `#1a1a22` with 1px `rgba(255,255,255,0.08)` borders; app-icon color dots (bank blue, WhatsApp green, etc.).
+- **Layout:** A notification banner drops from the top edge (like a real notification) at each beat and stacks downward; the punchline/take text pops in below the banner as the "caption".
+- **Motion system (GSAP):** banner slides `y: -120% → 0` with `back.out(1.2)` + slight overshoot; older banners compress upward; the take-text pops below (`scale 0.9→1`, `opacity 0→1`); micro shake on the punchline.
+- **Signature effects:** app icon + timestamp per banner, phone bezel frame, swipe-away micro-interaction on old banners, haptic-style shake on the punchline, end frame = full notification stack as save-bait.
+- **Retention device:** The notification reflex grabs the eye instantly; each new banner raises "what's next?"; the punchline lands late for the laugh; loop ending = a new notification = clean restart.
+
+### Format 11 — Thread Court (`thread-court`)
+*Reddit-style post + comment reactions + verdict reveal. AITA energy for drama niches.*
+
+- **Best for:** AITA-style drama, Reddit story verdicts, "who's the jerk?" debates, roommate/relationship drama. **Hook:** Verdict tease / open loop.
+- **Typography:** Reddit-style stack: bold title (Inter / Segoe UI), body regular, mono username + karma, `clamp(1.6rem, 3.4vw, 2.6rem)`.
+- **Palette:** light-mode card look — bg `#f6f7f8`, post card `#ffffff` with 1px `#d3d6da` border, upvote accent `#ff4500` (Reddit orange); verdict stamp green `#39ff14` or red `#ff3b30`.
+- **Layout:** Top = post card (title + body excerpt + upvote count); middle = 2–3 comment-reaction cards that slide in; bottom = big VERDICT stamp card.
+- **Motion system (GSAP):** post card slides in from top (`y: -80 → 0`); upvote count counts up; comment cards slide in staggered from the right with username + vote; verdict card slams in (`scale 1.6→1`, `back.out(2)`, `rotation -8→0`); red/green full-frame tint flash on the verdict.
+- **Signature effects:** upvote/downvote arrows, comment karma counts, "NTA / YTA" stamp effect (border + rotation), full-frame tint on verdict, end frame = "What's your verdict? Comment below" CTA.
+- **Retention device:** The verdict IS the open loop — viewers stay to see who's right; comment cards pre-tease the outcome; the end CTA drives the comments (the whole point of the format).
+
 ### Format cheat-sheet
 
 | # | Format | Slug | Pace | Best niche | Signature motion |
@@ -181,6 +242,11 @@ Pick ONE format via the wizard and build the composition strictly to its spec be
 | 4 | Card Listicle | `card-listicle` | Medium | Finance | flip cards, progress dots |
 | 5 | Chat Thriller | `chat-thriller` | Medium-fast | Storytime | bubbles, typing dots |
 | 6 | SVG Ambient | `svg-ambient` | Slow-medium | Mindset / Brand | animated rings, morph blobs, particles |
+| 7 | Micro-Fiction | `micro-fiction` | Slow-burn | Horror / Sci-fi | word-by-word reveal, twist flash, cliffhanger |
+| 8 | Quiz Trap | `quiz-trap` | Medium | Trivia / Psychology | countdown ring, answer reveal |
+| 9 | Day Counter | `day-counter` | Medium | Finance / Fitness | count-up numerals, chart draw, confetti |
+| 10 | Notification Drop | `notification-drop` | Fast | Humor / Relatable | banner drops, stacking, punchline shake |
+| 11 | Thread Court | `thread-court` | Medium-fast | Drama / Reddit | post card, comment slides, verdict stamp |
 
 ## Animated SVG backgrounds (no text overlap)
 
@@ -370,6 +436,11 @@ Outputs (one proper folder per video):
 | 3D Editorial | mental clarity | `3d-editorial_mental-clarity_4k.mp4` |
 | Card Listicle | 5 habits | `card-listicle_5-habits_4k.mp4` |
 | Chat Thriller | reddit roommate | `chat-thriller_reddit-roommate_4k.mp4` |
+| Micro-Fiction | 2045 wrong number | `micro-fiction_2045-wrong-number_4k.mp4` |
+| Quiz Trap | odd one out | `quiz-trap_odd-one-out_4k.mp4` |
+| Day Counter | 90 day savings | `day-counter_90-day-savings_4k.mp4` |
+| Notification Drop | 6am texts | `notification-drop_6am-texts_4k.mp4` |
+| Thread Court | roommate drama | `thread-court_roommate-drama_4k.mp4` |
 
 A voiceover is ALWAYS generated and synced to the beats (see Always-on voiceover), mixed with the `voice-sfx-audio` skill, and muxed at render time with `--audio assets/full_mix.m4a`.
 

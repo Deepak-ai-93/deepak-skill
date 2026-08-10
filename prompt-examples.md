@@ -16,7 +16,7 @@ Two rules that make these prompts work:
 | **Niche / topic** | SaaS onboarding, AI tools, web dev life | asked |
 | **Audience** | startup founders, indie hackers, devs | general |
 | **Duration** | 15s, 20s, 30s | 15s |
-| **Style / format** | word-pop · highlighter · 3d-editorial · card-listicle · chat-thriller · svg-ambient | by niche |
+| **Style / format** | word-pop · highlighter · 3d-editorial · card-listicle · chat-thriller · svg-ambient · micro-fiction · quiz-trap · day-counter · notification-drop · thread-court | by niche |
 | **Hook direction** | "stop the scroll with a stat" | trend-brief winner |
 | **Assets** | `assets/clips/…` folder (video-asset-reels) | text-only |
 | **Voice / music** | kokoro am_fenrir (deep male), CC0 bed | kokoro am_fenrir, no bed |
@@ -30,60 +30,65 @@ Two rules that make these prompts work:
 
 ## 1. SaaS company 🏢
 
-*Best formats:* word-pop (hottakes, metrics), card-listicle (pricing/rules), highlighter (explainers).
+*Best formats:* word-pop (hottakes, metrics), card-listicle (pricing/rules), highlighter (explainers), day-counter (founder growth metrics).
 
 | Prompt | Type |
 |---|---|
 | "make a vid for my saas" | sloppy |
 | "15s reel for our SaaS onboarding tool — audience: startup founders who hate setup. Hook: 'Your onboarding is leaking users.' Style: word-pop, Kokoro voice, no music. Goal: signups." | premium |
 | "3 SaaS pricing mistakes founders make — card-listicle, 15s, hook: 'Pricing wrong = dead startup.' Save-bait ending." | premium |
+| "Day-counter 18s: 'MRR from $0 to $40k in 90 days' — count-up numerals, self-drawing chart, milestone rows, confetti on the final number, save-bait end card." | premium |
 
 **Idea sparks:** onboarding → churn → revenue stat hooks · "the pricing page trick agencies hate" · founder 0→1 story (results-first) · "SaaS metrics that actually matter" (highlighter receipts) · feature-drop reveal (svg-ambient, luxury).
 
 ## 2. AI niche 🤖
 
-*Best formats:* highlighter (tool explainers), card-listicle (tool stacks), chat-thriller (AI stories), word-pop (hot takes).
+*Best formats:* highlighter (tool explainers), card-listicle (tool stacks), chat-thriller (AI stories), micro-fiction (AI sci-fi stories), word-pop (hot takes).
 
 | Prompt | Type |
 |---|---|
 | "ai video" | sloppy |
 | "Highlighter-style 15s: 'AI tools that feel illegal to know' — audience: creators, psychology angle (why AI feels like cheating), numbered cards, stat count-ups, Kokoro voice." | premium |
 | "Chat-thriller 18s: 'I asked an AI to run my life for 30 days' — reddit-story energy, typing dots, cliffhanger loop ending." | premium |
+| "Micro-fiction 20s: 'A wrong number text from the year 2045…' — word-by-word reveal, red flash on the twist, 'TO BE CONTINUED' stinger, Part 2 comment bait." | premium |
 
 **Idea sparks:** "your AI prompt is weak — do this" · "AI workflow in 60 seconds" · "the agent that does your boring job" · "don't build a wrapper, do this instead" (contrarian).
 
 ## 3. Web developer life 💻
 
-*Best formats:* chat-thriller (war stories), card-listicle (tips), word-pop (hot takes), svg-ambient (aesthetic).
+*Best formats:* chat-thriller (war stories), notification-drop (dev humor), card-listicle (tips), word-pop (hot takes), svg-ambient (aesthetic).
 
 | Prompt | Type |
 |---|---|
 | "dev reel" | sloppy |
 | "Chat-thriller 15s from my screenshots: 'the moment production broke at 2am' — dev humor, bold captions, typing suspense, cliffhanger ending." | premium |
+| "Notification-drop 15s: '[New message] deploy on Friday?' — phone banners dropping with witty takes, punchline shake, relatable dev pain." | premium |
 | "3 CSS habits that instantly make you look senior — card-listicle, 15s, hook: '#3 feels illegal.' Save-bait final frame." | premium |
 
 **Idea sparks:** "deploy on Friday? watch this" · "junior vs senior code review" (chat-thriller) · "your portfolio is bad and here's why" (contrarian) · "the 10x dev myth" · aesthetic "code is art" (svg-ambient).
 
 ## 4. Money & personal finance 💰
 
-*Best formats:* word-pop (rules), card-listicle (lists), highlighter (stats with receipts).
+*Best formats:* word-pop (rules), card-listicle (lists), day-counter (debt-free / savings timelines), highlighter (stats with receipts).
 
 | Prompt | Type |
 |---|---|
 | "money reel" | sloppy |
 | "15s word-pop: 'Your savings are leaking. Fix these 3 rules.' — audience: people in debt, calm Kokoro voice, dark bg + neon accent, save-bait CTA." | premium |
 | "Highlighter 20s: 'The 60/30/10 rule, with receipts' — stat count-ups, monospace labels, cream + yellow palette." | premium |
+| "Day-counter 20s: 'I paid off $28k of debt in 18 months' — DAY counter counting up, chart draw, milestone rows, emerald accents, end card 'Day 1 vs Day 540' save-bait." | premium |
 
 **Idea sparks:** debt-free stories (results-first) · "nobody told you about compound interest" · "how banks actually make money" (contrarian) · "3 money rules that feel illegal to know" (listicle).
 
 ## 5. Psychology & facts 🧠
 
-*Best formats:* highlighter (facts/studies), word-pop (micro-lessons).
+*Best formats:* highlighter (facts/studies), quiz-trap (riddles / "only 2% can"), word-pop (micro-lessons).
 
 | Prompt | Type |
 |---|---|
 | "psychology facts reel" | sloppy |
 | "Highlighter 15s: 'Your brain does this every time you scroll' — one study per beat, count-up stats, yellow highlighter sweeps, curiosity-gap hook." | premium |
+| "Quiz-trap 15s: 'Only 2% can spot the hidden word in 3 seconds' — countdown ring drain, option cards, green/red reveal flash, rewatch loop, 'how many did you get?' comment CTA." | premium |
 
 **Idea sparks:** cognitive biases that sell to you · "why you procrastinate (it's not laziness)" · "the dopamine loop explained" · "fake it till you make it — the science" (contrarian).
 
@@ -122,12 +127,13 @@ Two rules that make these prompts work:
 
 ## 9. Storytime / Reddit / drama 🍿
 
-*Best formats:* chat-thriller (always), montage (screenshots).
+*Best formats:* chat-thriller (always), thread-court (AITA-style verdicts), montage (screenshots).
 
 | Prompt | Type |
 |---|---|
 | "reddit story reel" | sloppy |
 | "Chat-thriller 20s from the screenshots in assets/story/: 'I read this and couldn't sleep' — typing suspense, read receipts, cliffhanger final bubble that forces a rewatch." | premium |
+| "Thread-court 20s: 'AITA for refusing to invite my sister to my wedding?' — post card, upvote count-up, comment reaction slides, VERDICT stamp slam, red/green flash, 'what's your verdict?' comment CTA." | premium |
 
 **Idea sparks:** roommate/office drama · "my first client ghosted me" · "the message I should never have sent".
 

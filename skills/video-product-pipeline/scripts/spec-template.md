@@ -17,7 +17,7 @@
 
 | Field | Value |
 |---|---|
-| **Format / style** | {word-pop / highlighter / 3d-editorial / card-listicle / chat-thriller / svg-ambient / documentary / aesthetic / montage} |
+| **Format / style** | {word-pop / highlighter / 3d-editorial / card-listicle / chat-thriller / svg-ambient / micro-fiction / quiz-trap / day-counter / notification-drop / thread-court / documentary / aesthetic / montage} |
 | **Style slug** | {format-slug} |
 | **Hook formula** | {curiosity gap / contrarian / results-first / listicle / PAS} |
 | **Trend winner** | {from trend-brief.md — the winning angle + its score /35} |

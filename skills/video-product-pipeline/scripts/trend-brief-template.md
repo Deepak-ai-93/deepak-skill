@@ -44,7 +44,7 @@ Viral scorecard (1–5 each, /35): Relatability · Curiosity gap · Hook strengt
 
 ## 5. Format fit + risk
 
-- **Format:** {word-pop / highlighter / 3d-editorial / card-listicle / chat-thriller / svg-ambient / documentary / aesthetic / montage}
+- **Format:** {word-pop / highlighter / 3d-editorial / card-listicle / chat-thriller / svg-ambient / micro-fiction / quiz-trap / day-counter / notification-drop / thread-court / documentary / aesthetic / montage}
 - **Trend risk:** {rising vs decayed — expected shelf life}
 - **Loop ending:** {last frame mirrors first — rewatch counts as a second view}
 

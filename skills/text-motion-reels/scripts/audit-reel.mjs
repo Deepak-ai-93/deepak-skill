@@ -57,7 +57,7 @@ const results = []; // { status: "PASS"|"FAIL"|"WARN", check, detail }
 const add = (status, check, detail) => results.push({ status, check, detail });
 let auditSections = [];
 
-const FORMAT_SLUGS = ["word-pop", "highlighter", "3d-editorial", "card-listicle", "chat-thriller", "svg-ambient"];
+const FORMAT_SLUGS = ["word-pop", "highlighter", "3d-editorial", "card-listicle", "chat-thriller", "svg-ambient", "micro-fiction", "quiz-trap", "day-counter", "notification-drop", "thread-court"];
 
 // ─── find the HTML composition ──────────────────────────────────────────────
 let htmlPath = null;
@@ -79,7 +79,7 @@ if (!html) {
   const name = basename(htmlPath).toLowerCase();
   const slug = FORMAT_SLUGS.find((s) => name.includes(s));
   if (slug) add("PASS", "format slug", `composition named for format '${slug}'`);
-  else add("WARN", "format slug", "no known format slug (word-pop/highlighter/3d-editorial/card-listicle/chat-thriller/svg-ambient) in the filename");
+  else add("WARN", "format slug", "no known format slug (word-pop/highlighter/3d-editorial/card-listicle/chat-thriller/svg-ambient/micro-fiction/quiz-trap/day-counter/notification-drop/thread-court) in the filename");
   if (/window\.__timelines\s*=\s*window\.__timelines\s*\|\|\s*\{\}/.test(html) && /__timelines\.reel/.test(html)) {
     add("PASS", "GSAP timeline", "paused timeline registered on window.__timelines.reel");
   } else {
