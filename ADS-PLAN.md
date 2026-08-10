@@ -38,7 +38,7 @@ The agent's job: interview → research → build the pack → **show the foreca
 ```
 user brief (product, offer, audience, budget, goal, platforms)
    │
-   ▼ 1. INTERVIEW — ≤3 questions, then lock the brief
+   ▼ 1. ADS WIZARD — exactly 3 questions (platform → goal → budget/AOV), then lock the brief
 brief.json   (product, offer, price/AOV, margin, goal, daily budget, platforms, geo, dates)
    │
    ▼ 2. RESEARCH — forecast-ads.mjs fetches niche/platform benchmarks (built-in tables)
@@ -96,6 +96,7 @@ All paths relative to the skill folder, zero external deps, deterministic where 
 | `skills/paid-ads-studio/scripts/ad-copy.mjs` | **to build** | generates copy.md from a brief (hook formulas, char-limit enforcement, anti-fluff blocklist) |
 | `skills/paid-ads-studio/scripts/audit-ads.mjs` | ✅ built | the audit harness — automated pack checks (hooks, char limits, fluff, consistency, forecast, compliance) → `ad-audit.md` scaffold for the ads-auditor subagent |
 | `skills/paid-ads-studio/templates/ads-auditor-brief.md` | ✅ built | the exact subagent brief + hook-worthiness scorecard (/50, ≥35 = worth running) |
+| `skills/paid-ads-studio/templates/ads-wizard.md` | ✅ built | the 3-question onboarding wizard (platform → goal → budget/AOV, options + defaults) — every "I want to create X ads" prompt runs this first |
 | `skills/paid-ads-studio/templates/*.md` | **to build** | copy-paste reference docs: benchmarks, hook formulas, Veo 7-layer template, product-block grammar, compliance checklist |
 | `skills/paid-ads-studio/examples/` | **to build** | one complete worked example (see §11) |
 | `README.md` / `USAGE.md` / `prompt-examples.md` | + small changes | wire the skill in (repo now 16) |
@@ -317,7 +318,7 @@ Scenarios vary CPM (lower with better creative/learning) and CTR/CVR (better cre
 2. `skills/paid-ads-studio/scripts/ad-prompts.mjs` — Veo + image prompt builder with self-verify
 3. `skills/paid-ads-studio/scripts/ad-copy.mjs` — copy generator with char-limit/anti-fluff enforcement
 4. `skills/paid-ads-studio/SKILL.md` — the skill playbook (quality bar + 8-stage workflow + checklist)
-5. `skills/paid-ads-studio/templates/` — benchmarks, hook formulas, Veo 7-layer template, product-block grammar, compliance checklist
+5. `skills/paid-ads-studio/templates/` — benchmarks, hook formulas, Veo 7-layer template, product-block grammar, compliance checklist, ads-wizard.md (the 3-question onboarding wizard)
 6. `skills/paid-ads-studio/examples/` — Brew & Co paid-launch pack
 7. `skills/paid-ads-studio/scripts/audit-ads.mjs` + `templates/ads-auditor-brief.md` — the subagent audit harness (Stage 8)
 8. `README.md` / `USAGE.md` / `prompt-examples.md` — wire in (repo now 16)

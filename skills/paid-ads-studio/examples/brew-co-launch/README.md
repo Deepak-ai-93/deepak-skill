@@ -1,6 +1,6 @@
 # Example — Brew & Co Tumbler Paid Launch 🎬
 
-A complete launch-ready paid campaign pack for a **$40 matte-black insulated tumbler** — generated with the `paid-ads-studio` skill pipeline (forecast first → consistency tokens → creatives → copy → plan → compliance → launch).
+A complete launch-ready paid campaign pack for a **$40 matte-black insulated tumbler** — generated with the `paid-ads-studio` skill pipeline (**Ads Wizard** — platform: Meta · goal: sales · budget $50/day + AOV $40 → forecast first → consistency tokens → creatives → copy → plan → compliance → audit harness → launch).
 
 ## What's in the pack
 

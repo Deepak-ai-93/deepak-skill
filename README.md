@@ -267,7 +267,7 @@ Deliverables: `subject-sheet.md` (verbatim person OR product block + 2–3 refer
 
 ### Paid ad campaigns (`paid-ads-studio`)
 
-The **paid engine** for Meta + Google — a launch-ready campaign pack from one brief, with a **forecast of expected results before a dollar is spent**:
+The **paid engine** for Meta + Google — a launch-ready campaign pack from one brief, with a **forecast of expected results before a dollar is spent**. Every "I want to create ads for X" prompt starts with the **Ads Wizard — exactly 3 questions** (1. platform: Meta / Google / Both · 2. goal: Sales / Leads / Traffic · 3. budget + AOV, with defaults if skipped) before anything is built:
 
 ```bash
 cd skills/paid-ads-studio
@@ -287,8 +287,7 @@ node scripts/audit-ads.mjs --pack examples/brew-co-launch --out ad-audit.md   # 
 # → completes the hook-worthiness scorecard (/50, ≥35 = worth running) → signs PASS or FIX NEEDED
 ```
 
-> "Build me a full paid ad campaign for my tumbler store — Meta + Google, $80/day, sales goal. Forecast first, then creatives, copy, blueprint, compliance, and audit the hooks before delivery."
-> → forecast → approve → creative pack (self-verified) → copy → blueprint + cost plan → `audit-ads.mjs` → ads-auditor subagent (hook-worthiness scorecard, PASS/FIX NEEDED) → deliver
+> "I want to create ads for my tumbler store" → Ads Wizard (3 questions: platform → goal → budget/AOV) → `campaign-brief.md` → forecast → approve → creative pack (self-verified) → copy → blueprint + cost plan → `audit-ads.mjs` → ads-auditor subagent (hook-worthiness scorecard, PASS/FIX NEEDED) → deliver
 
 ### Vibe-code web apps (`vibe-code-webapp`)
 

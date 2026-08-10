@@ -19,6 +19,7 @@ description: End-to-end paid ad campaign production for Meta (Facebook/Instagram
 | **Char limits + anti-fluff (hard-enforced)** | Meta: primary text ≤125 chars, headline ≤40, description ≤30. Google: headline ≤30, description ≤90. No fluff words (unlock, game-changer, amazing, guaranteed, !!!…) — `ad-copy.mjs` exits 1 on any violation. |
 | **2026 platform correctness** | Meta blueprints use ODAX objectives + Advantage+ audiences (inputs are *suggestions*, not rules; ≥50 conversions/week learning target). Google uses Demand Gen (prospecting) + Performance Max (conversion capture) + Search, with audience *signals* ≠ hard targeting and AI-content transparency labels. |
 | **Forecast honesty** | The forecast is an **estimate** from 2026 benchmarks, never a guarantee — every `forecast.md` ends with an assumptions list + a re-forecast workflow with real data after week 1 (`--overrides`). |
+| **Never guess silently (the Ads Wizard)** | Every "I want to create X ads" prompt runs the **3-question Ads Wizard** (`templates/ads-wizard.md`) before anything is built: platform (Meta/Google/Both) → goal (Sales/Leads/Traffic) → budget + AOV. Answers already in the prompt are marked answered; anything missing gets a sensible default flagged in the brief's **Decisions** section. No creative is written until the wizard is complete. |
 | **Audited by fresh eyes before delivery (the harness)** | After the pack is built, `audit-ads.mjs` runs the automated checks (hooks, char limits, fluff, consistency, forecast, compliance), then a **fresh ads-auditor subagent** (never self-audit) completes the hook-worthiness scorecard (/50) and signs **PASS / FIX NEEDED** in `ad-audit.md`. Nothing is delivered until PASS. |
 | **Never touches the ad account** | No credentials, no API writes, no automated campaign creation. The deliverable is launch-ready files the user pastes into the platform UIs. |
 
@@ -26,6 +27,7 @@ description: End-to-end paid ad campaign production for Meta (Facebook/Instagram
 
 ## When to use
 
+- "I want to create ads for my product" / "make me X ads" (→ runs the 3-question Ads Wizard)
 - "Make me a full paid ad campaign pack for Meta and Google for my product"
 - "Veo video ad prompts + image ads + ad copy for my offer"
 - "Meta Advantage+ campaign structure and forecast for a $50/day budget"
@@ -73,8 +75,17 @@ Append every layer, one prompt per ad, pure copy-paste:
 
 ## Workflow (8 stages)
 
-### Stage 1 — Interview + lock the brief
-Extract: **product** (what it is, price/AOV) · **offer** (discount, free shipping, bundle) · **audience** · **goal** (sales / leads / traffic) · **daily budget** · **platforms** (Meta, Google, or both — default both) · **geo + dates** · **niche** (ecommerce / saas / app / local, for benchmarks) · **existing assets** (photos, videos, reference images). Ask ≤3 questions if any are vague. Write `campaign-brief.md`.
+### Stage 1 — The Ads Wizard (3 questions, always) + lock the brief
+
+**Trigger:** any prompt like *"I want to create ads for X"* / *"make me X ads"* / *"run ads for my product"*. Run the wizard from `templates/ads-wizard.md` — **exactly 3 questions, in order, one at a time, with the options shown**:
+
+| # | Question | Options | Default if skipped |
+|---|---|---|---|
+| 1 | **Platform** — where do the ads run? | Meta · Google · Both | both |
+| 2 | **Goal** — what should they achieve? | Sales · Leads · Traffic/awareness | sales |
+| 3 | **Budget + AOV** — daily budget, and AOV for sales | budget · AOV · days · niche | $50/day · $40 AOV · 30 days · ecommerce |
+
+Rules: never guess silently · if an answer is already in the prompt, mark it answered and don't re-ask · anything still missing after all three (audience, geo, offer, dates…) gets a sensible default the agent picks (geo US · audience broad · offer as-is · 30 days) + a **Decisions** note in the brief. **If the platform is Both, Stage 2 runs the forecast twice** (Meta + Google) and presents both. Then write `campaign-brief.md` from the answers (product, offer, audience, goal, budget, platforms, geo, dates, niche) and proceed to Stage 2.
 
 ### Stage 2 — Forecast first (show the economics before the creatives)
 ```bash
@@ -141,8 +152,45 @@ You are the ads-auditor for the paid ad campaign pack at {pack-folder}/.
 
 ---
 
+## Example session (the wizard in action)
+
+**User:** "i want to create ads for my tumbler"
+
+**Agent:** *(Stage 1 — Ads Wizard, Q1)*
+
+> **1/3 — Which platform should the ads run on?**
+> 1. **Meta** (Facebook + Instagram) — Advantage+ audiences, Reels/Feed/Stories
+> 2. **Google** (Search + Display + YouTube) — intent + Demand Gen + PMax
+> 3. **Both** (recommended — full funnel: Meta prospecting + Google capture)
+
+**User:** "meta"
+
+**Agent:** *(Q2)*
+
+> **2/3 — What's the primary goal?**
+> 1. **Sales** (default) 2. **Leads** 3. **Traffic / awareness**
+
+**User:** "sales"
+
+**Agent:** *(Q3)*
+
+> **3/3 — Daily budget, and AOV (average order value)?** (defaults: $50/day · AOV $40 · 30 days · niche ecommerce)
+
+**User:** "$50, aov 40, 30 days"
+
+**Agent:** *(writes `campaign-brief.md` — product: tumbler, platform: Meta, goal: sales, $50/day · AOV $40 · 30 days — then Stage 2)*
+
+> `forecast.md` — Meta sales ecommerce $50/day · base: ~43 conversions over 30 days · CPA ~$31 · ROAS ~1.15× cold (with the learning discount) — shown before any creative. **Approve the economics? (edit?)**
+
+**User:** "approve"
+
+**Agent:** *(Stage 3 → product block → Stage 4 → `ad-prompts.mjs` 7/7 verified → Stage 5 → `ad-copy.mjs` → Stage 6 plan files → Stage 7 approval gate → Stage 8 `audit-ads.mjs` + ads-auditor subagent → PASS → deliver)*
+
+---
+
 ## Production checklist
 
+- [ ] **Ads Wizard ran (Stage 1)**: 3 questions asked in order with options — platform (Meta/Google/both), goal (sales/leads/traffic), budget + AOV; no silent guessing; defaults + Decisions noted
 - [ ] `campaign-brief.md`: product, offer, audience, goal, budget, platforms, geo, dates, niche
 - [ ] `forecast.md` from `forecast-ads.mjs` — shown to the user BEFORE creatives; assumptions + re-forecast note included
 - [ ] `product-block.md`: verbatim product block + grade token + craft token + 2-3 reference-image prompts
