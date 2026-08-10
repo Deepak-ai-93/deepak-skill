@@ -87,6 +87,7 @@ cd skills/veo-cinematic-reels && node scripts/scene-prompts.mjs --plan scene-pla
 # Episodic story series: story bible → per-episode prompt pack + voiceover sheet
 cd skills/serial-story-reels && node scripts/series-arc.mjs --plan series-plan.json --bible story-bible.md
 cd skills/serial-story-reels && node scripts/episode-prompts.mjs --plan series-plan.json --out prompts.md --vo voiceover.md
+cd skills/serial-story-reels && node scripts/audit-series.mjs --pack <series-folder> --out series-audit.md   # automated audit → spawn series-auditor subagent
 
 # AI photoshoots: person + product prompt packs with locked subject consistency
 cd skills/photoshoot-studio && node scripts/shot-prompts.mjs --plan shoot-plan.json --out prompts.md

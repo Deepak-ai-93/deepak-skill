@@ -20,6 +20,7 @@ description: Create EPISODIC story video series with Google Flow / Veo 3.1 — a
 | **Voiceover always directed** | Every scene with speech has **dialogue in quotes with delivery tone** (native Veo audio) OR a **VO line with delivery direction** for the Kokoro post pass. The voiceover sheet (`--vo`) lists every line per episode with delivery notes. |
 | **One grade, one world, whole series** | ONE grade token (film stock + palette) and ONE world block (overall setting/lighting) chosen at Stage 1 and appended verbatim to EVERY prompt in the series — never two grades, never a world switch. |
 | **Copy-paste ready, zero API writes** | Every prompt is pure copy-paste into Flow (no meta-commentary inside). The skill never touches accounts or renders video — the user generates scene by scene in Flow. |
+| **Audited before delivery** | Stage 7 is a harness, never a self-check: `audit-series.mjs` runs the automated checks (arc, per-scene tokens, voiceover coverage, cinematic language) → a FRESH series-auditor subagent scores consistency-worthiness (/50, ≥35 = good to go) → fix loop until signed **PASS** in `series-audit.md`. |
 
 ---
 
@@ -116,14 +117,16 @@ The script assembles **one full Veo prompt per scene**, grouped by episode (with
 ### Stage 6 — Approval gate
 Show the user: **story bible + prompt pack + voiceover sheet**. They say **approve / edit / reject**. Edits go back to the affected stage (bible, character sheet, or plan) and re-run the scripts.
 
-### Stage 7 — Audit + deliver (subagent, before delivery)
-Spawn a fresh subagent to check:
-1. **Cross-episode consistency** — every prompt contains the verbatim character blocks of its scene + grade + cinematic (re-run `episode-prompts.mjs` verify if unsure); character sheet has reference-image prompts or the user's uploads; Ingredients note present.
-2. **Serialized arc** — ≥2 episodes; every episode has a hook + cliffhanger (re-run `series-arc.mjs`); continuity written across episode boundaries (last-frame bridging).
-3. **Cinematic action** — camera language specific (no "cinematic shot" vagueness); action = one dominant motion per clip; physics/motion blur present where action happens.
-4. **Voiceover** — dialogue in quotes with delivery tone; VO sheet covers every speaking scene; voice-anchor note present.
-5. **Prompt quality** — one idea per scene; pure copy-paste (no meta-commentary inside).
-Any FAIL → fix → regenerate → re-audit.
+### Stage 7 — Audit + deliver (harness: script → subagent → fix loop)
+**7a. Run the automated harness** — it scans the whole pack and checks everything a script can check:
+```bash
+node scripts/audit-series.mjs --pack <series-folder> --out series-audit.md
+```
+The script checks: **arc re-validation** (≥2 episodes · hooks + cliffhangers · characters defined · tokens locked) · **per-scene token consistency** (every scene prompt still carries the VERBATIM character blocks + grade + cinematic + world tokens — word-level, catching hand-edits that drifted) · **self-verify + bridge markers** (✅/❌ counts, 🔗 vs planned bridges) · **cinematic-action language** (no vague "cinematic shot") · **voiceover coverage** (every speaking scene has a line + voice-anchor note) · **character sheet** (reference-image prompts + upload note + anti-drift rules) · **story bible** (locked tokens + episode titles). Writes `series-audit.md` with automated verdicts + an AUDITOR section. **Exit 0 = clean, 1 = FAIL (fix + re-run), 2 = usage.**
+
+**7b. Spawn the series-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/series-auditor-brief.md`: reads `series-audit.md` + all pack files, completes the **consistency-worthiness scorecard** (10 criteria, /50 — **≥ 35 = good to go**, with verdict bands), makes the creative judgment calls the script can't (hook/cliffhanger pull, render-risk prompts, voiceover tone, continuity jumps), and signs **PASS / FIX NEEDED** with per-file fixes.
+
+**7c. Fix loop** — any FAIL or real WARN → fix the file → re-run `audit-series.mjs` (and `series-arc.mjs` / `episode-prompts.mjs` if the plan changed) → re-submit to a fresh auditor → loop until **PASS**. Only then deliver.
 
 ---
 
@@ -139,5 +142,6 @@ Any FAIL → fix → regenerate → re-audit.
 - [ ] `prompts.md`: one copy-paste Veo prompt per scene, grouped by episode, pure prompts (no meta-commentary)
 - [ ] `voiceover.md`: every speaking scene has a line + delivery direction; voice-anchor note present
 - [ ] Approval gate: user approved bible + prompt pack + voiceover before delivery
-- [ ] Auditor subagent signed off: cross-episode consistency, arc, cinematic action, voiceover, prompt quality
-- [ ] Delivery: `story-bible.md` + `character-sheet.md` + `prompts.md` + `voiceover.md` + continuity/assembly notes
+- [ ] `audit-series.mjs` ran clean (exit 0): arc re-validated, per-scene tokens verified, voiceover coverage, cinematic language, sheet + bible present
+- [ ] Fresh **series-auditor subagent** completed the scorecard (/50, ≥35) + verdict in `series-audit.md` → **PASS** (fix loop until then)
+- [ ] Delivery: `story-bible.md` + `character-sheet.md` + `prompts.md` + `voiceover.md` + `series-audit.md` + continuity/assembly notes

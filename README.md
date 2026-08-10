@@ -266,7 +266,16 @@ node scripts/episode-prompts.mjs --plan series-plan.json --out prompts.md --vo v
 Deliverables: `story-bible.md` (season arc, per-episode hooks + cliffhangers, locked grade/world/cinematic tokens, cast blocks) → `character-sheet.md` (verbatim character blocks + 2–3 reference-image prompts per character → upload to Flow's Ingredients ONCE, reuse for the whole series) → `prompts.md` (ONE cinematic Veo 3.1 prompt per scene, grouped by episode, every prompt carrying the verbatim character blocks + grade + cinematic tokens, **self-verified word-by-word**, first/last-frame bridging 🔗 across scenes AND episodes) → `voiceover.md` (every line per episode with delivery direction — native Veo audio or a Kokoro post pass). Built-in example: **"Neon Hearts"** — a 3-episode comic love-story action series (2 characters, 12 scenes, full pack in `examples/neon-hearts/`).
 
 > "Make me an episodic comic love story — 3 episodes, same 2 characters in every episode, cinematic action and proper voiceover, Google Flow prompts."
-> → interview (≤3 questions) → story bible (arc validated) → character sheets → episode prompt pack (self-verified) → voiceover sheet → paste into Flow → audit → deliver
+> → interview (≤3 questions) → story bible (arc validated) → character sheets → episode prompt pack (self-verified) → voiceover sheet → **audit harness** → paste into Flow → deliver
+
+**The audit harness ("is it good to go?" before you generate):** after the pack is built, run the automated check then spawn a fresh auditor:
+
+```bash
+cd skills/serial-story-reels
+node scripts/audit-series.mjs --pack examples/neon-hearts --out series-audit.md   # automated: arc re-validation, per-scene token consistency, verify/bridge counts, voiceover coverage, cinematic language, sheet + bible
+# then spawn a fresh series-auditor subagent (see SKILL.md Stage 7 / templates/series-auditor-brief.md)
+# → completes the consistency-worthiness scorecard (/50, ≥35 = good to go) → signs PASS or FIX NEEDED
+```
 
 ### AI photoshoots (`photoshoot-studio`)
 
