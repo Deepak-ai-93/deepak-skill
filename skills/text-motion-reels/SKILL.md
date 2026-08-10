@@ -312,6 +312,7 @@ Native SVG `<animate>` tags cannot be scrubbed by the paused GSAP timeline (`tl.
 6. **Preview** — live-reload browser preview.
 7. **Render** — deterministic vertical 4K MP4 (2160x3840) via headless Chrome + FFmpeg into the proper output folder (see below).
 8. **Caption pack** — write `caption.md` into the output folder (see Caption pack section).
+9. **Audit harness** — run `node scripts/audit-reel.mjs --pack <reel-folder> --out reel-audit.md` (automated: format slug, GSAP timeline, determinism, beat windows, MP4 + frames, caption), then spawn a FRESH **reel-auditor subagent** with `templates/reel-auditor-brief.md` (reel-worthiness scorecard /50, ≥ 35 = worth posting, signs **PASS / FIX NEEDED**). Fix loop until PASS — `reel-audit.md` ships with the folder.
 
 ## Always-on voiceover (text ↔ voice sync contract)
 
@@ -749,3 +750,5 @@ Count every section before finalizing (`wc -m`). Each section MUST land in the *
 - [ ] Rendered 4K into the proper folder `output/{name}/` with MP4 + frames
 - [ ] `caption.md` written into the output folder — per-platform sections, no hashtags, under char limits
 - [ ] `hyperframes check` passes successfully
+- [ ] **Audit harness run:** `audit-reel.mjs` → automated checks (format slug, timeline, determinism, output, caption) — exit 0
+- [ ] **Reel-auditor subagent** (fresh eyes) completed the reel-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `reel-audit.md`

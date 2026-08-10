@@ -83,14 +83,46 @@ cd skills/skill-builder && node scripts/scaffold-skill.mjs --name my-skill --des
 
 # Google Flow / Veo: rich long-form scene prompts, any video generator (Flow/Veo, Kling, Luma, Runway, Hailuo, Vidu, Pika, PixVerse) — locked character consistency + negative prompt + seed
 cd skills/veo-cinematic-reels && node scripts/scene-prompts.mjs --plan scene-plan.json --out prompts.md
+cd skills/veo-cinematic-reels && node scripts/audit-reels.mjs --pack <reel-folder> --out reels-audit.md   # automated audit → spawn reel-auditor subagent
+
+# AI photoshoots: person + product prompt packs with locked subject consistency
+cd skills/photoshoot-studio && node scripts/shot-prompts.mjs --plan shoot-plan.json --out prompts.md
+cd skills/photoshoot-studio && node scripts/audit-shoot.mjs --pack <shoot-folder> --out shoot-audit.md   # automated audit → spawn shoot-auditor subagent
 
 # Episodic story series: story bible → per-episode prompt pack + voiceover sheet
 cd skills/serial-story-reels && node scripts/series-arc.mjs --plan series-plan.json --bible story-bible.md
 cd skills/serial-story-reels && node scripts/episode-prompts.mjs --plan series-plan.json --out prompts.md --vo voiceover.md
 cd skills/serial-story-reels && node scripts/audit-series.mjs --pack <series-folder> --out series-audit.md   # automated audit → spawn series-auditor subagent
 
-# AI photoshoots: person + product prompt packs with locked subject consistency
-cd skills/photoshoot-studio && node scripts/shot-prompts.mjs --plan shoot-plan.json --out prompts.md
+# Podcast → shorts: score + cut, then audit the clip pack
+cd skills/podcast-to-shorts && node scripts/clip-finder.mjs --transcript transcript.txt --clips 5
+cd skills/podcast-to-shorts && node scripts/audit-clips.mjs --pack <clips-folder> --out clips-audit.md   # automated audit → spawn clips-auditor subagent
+
+# YouTube: title pack → script → thumbnail → metadata, then audit the pack
+cd skills/youtube-video-pipeline && node scripts/title-pack.mjs --topic "saas pricing" --angle "3 pricing mistakes"
+cd skills/youtube-video-pipeline && node scripts/audit-video-plan.mjs --pack <pack-folder> --out video-plan-audit.md   # automated audit → spawn video-plan-auditor subagent
+
+# SEO blog: keyword cluster + outline brief → approve → article, then audit
+cd skills/blog-seo-content && node scripts/keyword-outline.mjs --seed "saas onboarding"
+cd skills/blog-seo-content && node scripts/audit-blog.mjs --pack <blog-folder> --out blog-audit.md   # automated audit → spawn blog-auditor subagent
+
+# LinkedIn: voice capture → bio → calendar → engagement, then audit
+cd skills/linkedin-personal-brand && node scripts/audit-brand.mjs --pack <brand-folder> --out brand-audit.md   # automated audit → spawn brand-auditor subagent
+
+# Carousels: render/generate, then audit the deck + captions
+cd skills/carousel-post-images && node scripts/render-carousel.mjs --html slides.html --out carousel/ --4k
+cd skills/carousel-post-images && node scripts/audit-carousel.mjs --pack <carousel-folder> --out carousel-audit.md   # automated audit → spawn carousel-auditor subagent
+
+# Text-motion + asset reels: render, then audit the composition + output
+cd skills/text-motion-reels && node scripts/audit-reel.mjs --pack <reel-folder> --out reel-audit.md   # automated audit → spawn reel-auditor subagent
+cd skills/video-asset-reels && node scripts/audit-asset-reel.mjs --pack <reel-folder> --out asset-reel-audit.md   # automated audit → spawn asset-reel-auditor subagent
+
+# Storyboards + audio: audit the deliverables
+cd skills/hook-storyboard-retention && node scripts/audit-storyboard.mjs --pack <storyboard-folder> --out storyboard-audit.md   # automated audit → spawn storyboard-auditor subagent
+cd skills/voice-sfx-audio && node scripts/audit-audio.mjs --pack <audio-folder> --out audio-audit.md   # automated audit → spawn audio-auditor subagent
+
+# Skill builder: audit a new scaffold against the repo contract
+cd skills/skill-builder && node scripts/audit-scaffold.mjs --pack skills/<new-skill> --docs --out scaffold-audit.md   # automated audit → spawn scaffold-auditor subagent
 
 # Paid ads: forecast first, then Veo video + image ad prompts + compliant copy
 cd skills/paid-ads-studio && node scripts/forecast-ads.mjs --platform meta --objective sales --daily-budget 50 --aov 40

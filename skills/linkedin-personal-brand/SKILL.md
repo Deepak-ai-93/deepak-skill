@@ -19,6 +19,7 @@ description: Build a founder/creator LinkedIn presence that compounds — captur
 | **Hook first, one idea, one CTA** | First 2 lines stop the scroll (hook formulas from the repo's playbook). One idea per post. One CTA max ("Comment your take" / "Repost if useful" / "DM for the template"). |
 | **No engagement-bait slop** | No "Agree? 👇", no "Who else feels this?", no fake vulnerability, no hashtag walls (3 max, relevant). LinkedIn's algorithm + readers punish it. |
 | **Consistency calendar** | A weekly plan (2–5 posts) with a clear role per post (story / teaching / contrarian / win / question) — not five of the same kind. |
+| **Audited before delivery (the harness)** | Stage 5 is a harness, never a self-check: `audit-brand.mjs` runs the automated checks (voice, bio, calendar, engagement, blocklists) → a FRESH brand-auditor subagent scores brand-worthiness (/50, ≥ 35 = worth posting) → fix loop until signed **PASS** in `brand-audit.md`. |
 
 ---
 
@@ -57,14 +58,16 @@ Write **2–5 posts for week one**, each with: role (story/teaching/contrarian/w
 - **Connection strategy:** who to connect with (capped at realistic), the personalized connection note template.
 - **Profile CTA plan:** what the profile should drive to this month (newsletter signup / free consult / waitlist).
 
-### Stage 5 — Validate + audit (subagent, before delivery)
-Spawn a fresh subagent to check:
-1. **Voice** — every post matches the voice profile (their words, their experience); no template-speak.
-2. **E-E-A-T** — each post has a specific proof element (number, story, outcome); bio has credentials + numbers.
-3. **Hook + CTA** — hook in the first 2 lines; one idea; one CTA; no engagement-bait.
-4. **Anti-fluff** — blocklist clear ("passionate", "guru", "synergy", "game-changer", "elevate"…).
-5. **Calendar realism** — 2–5 posts, varied roles, posting times set, CTA mapped.
-Any FAIL → fix → re-audit.
+### Stage 5 — Audit harness (automated checks + brand-auditor subagent, before delivery)
+**Step 5a — run the automated audit harness:**
+```bash
+node scripts/audit-brand.mjs --pack <brand-folder> --out brand-audit.md
+```
+`audit-brand.mjs` scans the pack and checks everything a script can: voice-profile.md (positioning, tone rules, pillars + proof), bio.md (headline length, proof, CTA, buzzword blocklist), calendar.md (2–5 posts, role variety, CTAs, posting times, blocklist), and engagement.md (comment targets, connection note, monthly CTA, no lazy-comment pattern). Writes `brand-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+
+**Step 5b — spawn the brand-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/brand-auditor-brief.md`: reads `brand-audit.md` + all pack files, completes the **brand-worthiness scorecard** (10 criteria, /50 — **≥ 35 = worth posting**, with verdict bands), makes the creative judgment calls the script can't (voice authenticity, E-E-A-T credibility, CTA taste), and signs **PASS / FIX NEEDED** with per-file fixes.
+
+**Step 5c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the file → re-run `audit-brand.mjs` → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `brand-audit.md` ships with the pack.
 
 ### Stage 6 — Deliver + iterate
 Deliver `voice-profile.md` + `bio.md` + `calendar.md` + `engagement.md`. Set a cadence: after week one, the user reports which posts performed (views, comments, profile visits) and the calendar for week two adjusts — doubling down on what the data says their audience clicks.
@@ -78,5 +81,6 @@ Deliver `voice-profile.md` + `bio.md` + `calendar.md` + `engagement.md`. Set a c
 - [ ] `bio.md`: headline (~220 chars) + About (tight, story → proof → CTA), their voice, no buzzwords
 - [ ] `calendar.md`: 2–5 posts, varied roles, hook first 2 lines, one idea + one CTA each, posting times
 - [ ] `engagement.md`: comment targets + how-to-comment, connection note template, monthly CTA
-- [ ] Auditor subagent signed off: voice, E-E-A-T, hook+CTA, anti-fluff, calendar realism
-- [ ] Delivery: `voice-profile.md` + `bio.md` + `calendar.md` + `engagement.md` + week-2 iteration plan
+- [ ] **Audit harness run:** `audit-brand.mjs` → automated checks (voice, bio, calendar, engagement, blocklists) — exit 0
+- [ ] **Brand-auditor subagent** (fresh eyes) completed the brand-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `brand-audit.md`
+- [ ] Delivery: `voice-profile.md` + `bio.md` + `calendar.md` + `engagement.md` + `brand-audit.md` + week-2 iteration plan

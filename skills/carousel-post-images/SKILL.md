@@ -23,6 +23,7 @@ Every carousel must clear all three rails. If a slide fails any of them, regener
 | **4K resolution** | Generate/render at **≥ 4000px on the long edge** (4:5 → `4320×5400`, 1:1 → `4096×4096`). Never deliver below that. Posting size stays 1080px; 4K source survives re-encoding. |
 | **Real-life visuals** | Every slide shows **one real scenario from the target's actual life** — photorealistic, specific, emotionally true. A person, a place, a moment, a prop. No abstract gradients, no floating 3D shapes as the main visual, no stock-photo clichés (no gold bars, no hand-on-chin thinking, no shaking hands). The scene IS the visual; the text rides on top. |
 | **Copy that hits** | Every headline follows the anti-fluff contract (§ Copywriting): specific beats generic, numbers beat adjectives, ≤ 8 words, one idea, an open loop on the cover and a payoff per slide. If the copy reads like it could describe any brand, it's fluff — rewrite it. |
+| **Audited before delivery (the harness)** | Stage 6 is a harness, never a self-check: `audit-carousel.mjs` runs the automated checks (deck, copy limits, fluff, output, captions) → a FRESH carousel-auditor subagent scores carousel-worthiness (/50, ≥ 35 = worth posting) → fix loop until signed **PASS** in `carousel-audit.md`. |
 
 ---
 
@@ -188,15 +189,16 @@ Pick exactly one of the 4 styles. Then write `slides.html` — **the single sour
 ### Stage 5 — Caption pack → `caption.md`
 Write `caption.md` next to the images: one section per platform (**LinkedIn, Instagram, X, Threads, Facebook**), each **500–900 chars (aim ~700)**, **no hashtags**, **hook-first**, **one CTA** ("Save this", "Follow for part 2", "Comment your #"), and a "swipe" cue. Include a slide-recap table (headline + scene) so the post and images never drift apart. (Same rules as `generate-caption.mjs` in this repo.)
 
-### Stage 6 — Audit (subagent, before delivery)
-Spawn a fresh subagent to check, on every slide:
-1. **Text accuracy** — every on-image character is exactly the planned copy (no garbling, no invented words).
-2. **Copy punch** — no blocklisted fluff; headline ≤ 8 words; specific > generic; cover loop open; CTA present.
-3. **Scene authenticity** — the visual shows the planned real-life moment; consistent world across the deck; no clichés.
-4. **Text overflow / contrast** — nothing clipped; text readable at phone size (≥ 4.5:1 on the scrim).
-5. **Style consistency** — same palette/type/scrim/accent across all slides.
-6. **4K check** — every file's long edge ≥ 4000px (script + image check).
-Any FAIL → fix → re-generate/re-render → re-audit.
+### Stage 6 — Audit harness (automated checks + carousel-auditor subagent, before delivery)
+**Step 6a — run the automated audit harness:**
+```bash
+node scripts/audit-carousel.mjs --pack <carousel-folder> --out carousel-audit.md
+```
+`audit-carousel.mjs` scans the pack and checks everything a script can: slides.html (slide count 8–10, headline ≤ 8 words, sub ≤ 20, fluff blocklist, scene tags, cover-loop/CTA), the carousel/ output (Mode 1 PNGs or Mode 2 prompts.md with 4K canvas + per-slide blocks), and caption.md (sections, zero hashtags, CTA, 500–900 char markers, slide recap). Writes `carousel-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+
+**Step 6b — spawn the carousel-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/carousel-auditor-brief.md`: reads `carousel-audit.md` + all pack files + the actual images, completes the **carousel-worthiness scorecard** (10 criteria, /50 — **≥ 35 = worth posting**, with verdict bands), makes the creative judgment calls the script can't (on-image text accuracy, scene authenticity, 4K visual check, contrast), and signs **PASS / FIX NEEDED** with per-slide fixes.
+
+**Step 6c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the deck → re-run `audit-carousel.mjs` (re-render with `render-carousel.mjs` if the HTML changed) → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `carousel-audit.md` ships with the pack.
 
 ---
 
@@ -211,5 +213,6 @@ Any FAIL → fix → re-generate/re-render → re-audit.
 - [ ] Mode 1: rendered with `render-carousel.mjs --4k` → `carousel/slide_01.png …` (4320×5400 / 4320×4320) **or** Mode 2: `--mode model` → prompts dispatched to the image tool at 4K
 - [ ] On-image text visually verified (no garbled characters — regenerate or fall back to the browser render)
 - [ ] `caption.md`: 500–900 chars per platform, no hashtags, hook first, one CTA, slide recap incl. scenes
-- [ ] Auditor subagent signed off: text accuracy, copy punch, scene authenticity, contrast/safe zones, style consistency, 4K size
-- [ ] Deliverables: `carousel/*.png` (4K) + `caption.md`
+- [ ] **Audit harness run:** `audit-carousel.mjs` → automated checks (deck, copy limits, fluff, output, captions) — exit 0
+- [ ] **Carousel-auditor subagent** (fresh eyes) completed the carousel-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `carousel-audit.md`
+- [ ] Deliverables: `carousel/*.png` (4K) + `caption.md` + `carousel-audit.md`

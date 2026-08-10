@@ -108,7 +108,21 @@ Content and video generation work together **line by line**. Every script clause
 
 ---
 
-## 5. Generating the video from the storyboard (HyperFrames)
+## 5. Audit harness (automated checks + storyboard-auditor subagent, before delivery)
+
+**Step 5a — run the automated audit harness:**
+```bash
+node scripts/audit-storyboard.mjs --pack <storyboard-folder> --out storyboard-audit.md
+```
+`audit-storyboard.mjs` checks everything a script can: hook in the first 2s + a recognized formula, beat structure (hook → agitate → payoff → CTA/loop), the script ↔ timeline sync contract (data-start/data-duration), retention devices (open loop, CTA/loop), and — if the composition HTML is present — the GSAP timeline registration + determinism (no Math.random, no SMIL). Writes `storyboard-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+
+**Step 5b — spawn the storyboard-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/storyboard-auditor-brief.md`: completes the **storyboard-worthiness scorecard** (10 criteria, /50 — **≥ 35 = worth building**, with verdict bands), makes the creative judgment calls the script can't (hook pull, watch-time engineering, payoff quality), and signs **PASS / FIX NEEDED** with per-beat fixes.
+
+**Step 5c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the storyboard → re-run `audit-storyboard.mjs` → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `storyboard-audit.md` ships with the deliverable.
+
+---
+
+## 6. Generating the video from the storyboard (HyperFrames)
 
 The storyboard IS the composition map. Each beat becomes a `.clip` element with `data-start` / `data-duration`; each script clause becomes a GSAP timeline position.
 
@@ -148,4 +162,6 @@ The storyboard IS the composition map. Each beat becomes a `.clip` element with 
 - [ ] Readable on mute (60–80% watch without sound)
 - [ ] Loop ending: last frame ≈ first frame
 - [ ] Storyboard timings match `data-start`/`data-duration` and GSAP positions exactly
+- [ ] **Audit harness run:** `audit-storyboard.mjs` → automated checks (hook, beats, sync, retention, determinism) — exit 0
+- [ ] **Storyboard-auditor subagent** (fresh eyes) completed the storyboard-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `storyboard-audit.md`
 - [ ] `hyperframes check` passes, preview OK, render deterministic

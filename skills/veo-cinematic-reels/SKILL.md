@@ -17,6 +17,7 @@ description: Create reel scripts with scene-by-scene video-generation prompts fo
 | **Character consistency (the #1 rail)** | The same character across every scene. Enforced TWO ways, both mandatory: (1) the user uploads the character **reference-image ingredients** (from the character sheet, § Workflow Stage 2) into Flow's Ingredients panel, AND (2) the **exact same character block text** appears VERBATIM in every scene prompt — never reworded, never trimmed. The script self-verifies this; if a prompt misses a word, regenerate it. |
 | **One prompt per scene, copy-paste ready** | Every scene gets ONE complete prompt following the **7-part formula** (cinematography + lens + tempo + subject + action + context/lighting + style), with the consistency tokens appended. No instructions, no meta-commentary inside the prompt — the user copies and pastes it as-is into their video generator. |
 | **Rich long-form prompts (~150–250 words)** | Each scene prompt is written full-length and cinematic: shot size, camera motion, lens + focal length, tempo (slow-motion / real-time / speed-ramp), explicit lighting state, action in plain motion language, native audio lines. The locked tokens (character + grade + IMAX + world) alone run ~140 words — the builder prints the total per scene so an under-specified scene is obvious. |
+| **Audited before delivery (the harness)** | Stage 6 is a harness, never a self-check: `audit-reels.mjs` runs the automated checks (per-scene token consistency, verify markers, lengths, negative/seed, bridges, cinematic language, sheets) → a FRESH reel-auditor subagent scores reel-worthiness (/50, ≥ 35 = good to go) → fix loop until signed **PASS** in `reels-audit.md`. |
 | **Tool-agnostic** | The same prompt pastes into Google Flow / Veo 3.1, Kling, Luma, Runway, Hailuo, Vidu, Pika and PixVerse. Reference-image mechanics differ per tool — the pack's header tells the user exactly where to upload for their tool (Ingredients / Elements / image-to-video), and every scene block ends with a labeled **`Negative prompt:`** line (Kling/Luma/Hailuo/Vidu/Pika/Runway have dedicated negative fields; prompt-only tools ignore it) plus a **`Seed:`** line when a seed is locked. |
 | **IMAX-level cinematic language** | Camera language is explicit and large-format: camera motion (dolly/tracking/crane/push-in/arc), lens + focal length, depth of field, framing (wide/medium/close-up/ECU), and the **IMAX token block** (below) — never vague "cinematic shot". Vertical 9:16 for reels (native on every tool listed). |
 | **Color grading locked per reel** | ONE grade token block (film stock + palette + contrast/grain) chosen at the start and appended verbatim to every prompt — teal-and-orange, warm Kodak, cold sci-fi, etc. Never two grades in one reel. |
@@ -116,15 +117,16 @@ node scripts/scene-prompts.mjs --plan scene-plan.json --out prompts.md
 3. For bridged scenes, export the previous scene's last frame and set it as the start frame (Flow: Frames→video · Kling: start-frame · Runway/Luma: first-frame).
 4. Regenerate any scene where the face drifts; do NOT fix it by editing the character block mid-run (rewording breaks consistency — regenerate with the identical prompt + same reference images).
 
-### Stage 6 — Audit + deliver (subagent, before delivery)
-Spawn a fresh subagent to check:
-1. **Consistency** — every scene prompt contains the verbatim character block + grade token + IMAX token + world token (re-run `scene-prompts.mjs` verify if unsure); character sheet has 2–3 reference-image prompts; bridge flags present.
-2. **Prompt quality** — 7-part formula complete per scene; camera language specific (no "cinematic shot" vagueness); lens + tempo + lighting present; ~150–250 words per scene; one idea per scene.
-3. **Reel arc** — hook in scene 1 (0–3s), payoff before the last scene, CTA/loop ending; scene count × duration in the 30–60s target.
-4. **Audio** — dialogue in quotes with delivery tone; SFX/ambient labeled; voice consistent per character.
-5. **Continuity** — lighting hand-offs written between scenes; no wardrobe/hair state contradictions.
-6. **Safety nets** — negative prompt present per scene; seed locked across scenes (when API); tool header instructions match the user's generator.
-Any FAIL → fix the plan → regenerate → re-audit.
+### Stage 6 — Audit harness (automated checks + reel-auditor subagent, before delivery)
+**Step 6a — run the automated audit harness:**
+```bash
+node scripts/audit-reels.mjs --pack <reel-folder> --out reels-audit.md
+```
+`audit-reels.mjs` scans the whole pack and checks everything a script can: plan integrity (title/grade/character/scenes), **per-scene token consistency** (every prompt still carries the VERBATIM character block + grade + IMAX + world tokens — word-level, catching hand-edits that drifted), verify markers, prompt lengths in the rich long-form band, negative prompt + seed lines per scene, bridge flags vs plan, cinematic language (no vague "cinematic shot"), character sheet (reference images + upload note + anti-drift), and the scene script (arc + continuity). Writes `reels-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+
+**Step 6b — spawn the reel-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/reel-auditor-brief.md`: reads `reels-audit.md` + all pack files, completes the **reel-worthiness scorecard** (10 criteria, /50 — **≥ 35 = good to go**, with verdict bands), makes the creative judgment calls the script can't (hook pull, render-risk prompts, continuity jumps, tool fit), and signs **PASS / FIX NEEDED** with per-file fixes.
+
+**Step 6c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the file → re-run `audit-reels.mjs` (and `scene-prompts.mjs` if the plan changed) → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `reels-audit.md` ships with the pack.
 
 ---
 
@@ -160,5 +162,6 @@ If the user's tool isn't listed: same prompt, upload 2–3 clean reference image
 - [ ] Header tells the user exactly where to upload reference images for THEIR tool (Ingredients / Elements / image-to-video)
 - [ ] Bridge flags set where seamless cuts are needed (first/last-frame in Flow)
 - [ ] Every prompt is pure copy-paste (no meta-commentary inside)
-- [ ] Auditor subagent signed off: consistency, prompt quality, reel arc, audio, continuity
-- [ ] Delivery: `character-sheet.md` + `scene-script.md` + `prompts.md` + assembly/stitching notes
+- [ ] **Audit harness run:** `audit-reels.mjs` → automated checks (per-scene token consistency, verify markers, lengths, negative/seed, bridges, cinematic language, sheets) — exit 0
+- [ ] **Reel-auditor subagent** (fresh eyes) completed the reel-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `reels-audit.md`
+- [ ] Delivery: `character-sheet.md` + `scene-script.md` + `prompts.md` + `reels-audit.md` + assembly/stitching notes

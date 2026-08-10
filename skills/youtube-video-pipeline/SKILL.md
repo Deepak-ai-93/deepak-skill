@@ -19,6 +19,7 @@ description: Plan long-form YouTube videos that get clicked and watched — topi
 | **Title pack depth** | 10 variants, each ≤ 60 chars (mobile truncates), hook in the first ~5 words, from at least 4 different formulas (question / number / curiosity / how-to / contrarian). No ALL-CAPS walls, no spam words ("shocking", "guaranteed"). |
 | **Thumbnail = one idea** | One subject, one emotion, 3–5 words of text max, readable at 160px, consistent channel style. Delivered as a brief + image-gen prompt. |
 | **Description + metadata** | Description: hook line + what you'll learn + chapters with timestamps + links. Tags from the research. Closed captions/subs recommended. |
+| **Audited before delivery (the harness)** | Stage 6 is a harness, never a self-check: `audit-video-plan.mjs` runs the automated checks (brief, script hook, title pack, thumbnail, metadata) → a FRESH video-plan-auditor subagent scores the video pack (/50, ≥ 35 = worth producing) → fix loop until signed **PASS** in `video-plan-audit.md`. |
 
 ---
 
@@ -59,14 +60,16 @@ The script generates and scores **10 title variants** (CTR formula, length check
 ### Stage 5 — Description + metadata → `metadata.md`
 Description: the hook line + "In this video:" bullet list of sections + chapters with `[timestamps]` + links (related video, website, socials). Tags: the research terms + synonyms (8–15). Subtitle/CAPTION note: upload a clean transcript as captions (helps SEO + accessibility).
 
-### Stage 6 — Audit (subagent, before delivery)
-Spawn a fresh subagent to check:
-1. **Hook** — first 30s states payoff + raises a specific question; no cold open that loses new viewers.
-2. **Title ↔ content** — every open loop in the script is paid off; the winner title matches the script's promise exactly.
-3. **Title pack** — 10 variants, ≤ 60 chars, ≥ 4 formulas, no spam words / ALL-CAPS walls.
-4. **Thumbnail** — one idea, ≤ 5 words, readable at 160px, consistent with channel style, matches the title.
-5. **Metadata** — description hook-first, chapters match script timestamps, tags from research, captions note.
-Any FAIL → fix → re-audit.
+### Stage 6 — Audit harness (automated checks + video-plan-auditor subagent, before delivery)
+**Step 6a — run the automated audit harness:**
+```bash
+node scripts/audit-video-plan.mjs --pack <pack-folder> --out video-plan-audit.md
+```
+`audit-video-plan.mjs` scans the pack and checks everything a script can: video-brief (angle + search terms), script (hook section, timestamps, CTA, anti-fluff), titles.md (10 variants, ≤ 60 chars, ≥ 4 formulas, no spam/ALL-CAPS, winner marked), thumbnail.md (image-gen prompt, ≤ 5-word text, 160px note), and metadata.md (chapters + timestamps, tags, links, captions note). Writes `video-plan-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+
+**Step 6b — spawn the video-plan-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/video-plan-auditor-brief.md`: reads `video-plan-audit.md` + all pack files, completes the **video-pack scorecard** (10 criteria, /50 — **≥ 35 = worth producing**, with verdict bands), makes the creative judgment calls the script can't (title ↔ content truth, hook pull, open-loop payoff), and signs **PASS / FIX NEEDED** with per-file fixes.
+
+**Step 6c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the file → re-run `audit-video-plan.mjs` (and `title-pack.mjs` if the titles changed) → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `video-plan-audit.md` ships with the pack.
 
 ---
 
@@ -78,5 +81,6 @@ Any FAIL → fix → re-audit.
 - [ ] `titles.md`: 10 variants, ≤ 60 chars, ≥ 4 formulas, no spam words; winner + alternates with rationale
 - [ ] `thumbnail.md`: one idea, ≤ 5 words on the graphic, 160px-readable, matches winner title, image-gen prompt ready
 - [ ] `metadata.md`: hook-first description, chapters with timestamps, tags from research, links, captions note
-- [ ] Auditor subagent signed off: hook, title↔content truth, pack depth, thumbnail, metadata
-- [ ] Delivery: `video-brief.md` + `script.md` + `titles.md` + `thumbnail.md` + `metadata.md`
+- [ ] **Audit harness run:** `audit-video-plan.mjs` → automated checks (brief, script hook, title pack, thumbnail, metadata) — exit 0
+- [ ] **Video-plan-auditor subagent** (fresh eyes) completed the video-pack scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `video-plan-audit.md`
+- [ ] Delivery: `video-brief.md` + `script.md` + `titles.md` + `thumbnail.md` + `metadata.md` + `video-plan-audit.md`

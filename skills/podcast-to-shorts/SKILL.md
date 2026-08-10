@@ -19,6 +19,7 @@ description: Turn long-form podcast or video content into viral-ready vertical s
 | **Hook in the first 2s** | Every short starts with a punch: a bold claim, a specific number, a story tease, or a pattern interrupt — never "So in this episode we talked about…". |
 | **Captions + safe zones** | On-screen captions on every clip (most views are sound-off); text inside 9:16 safe zones (x 8–92%, y 15–85%); accurate to the audio. |
 | **Deliverability of output** | Deliver: `clips/` folder (one MP4 per clip at 1080×1920) + `captions.md` (hook-first caption per platform, no hashtags) + `clip-plan.md` (score table). |
+| **Audited before delivery (the harness)** | Stage 6 is a harness, never a self-check: `audit-clips.mjs` runs the automated checks (transcript, scored moments, cut commands, clips output, captions) → a FRESH clips-auditor subagent scores clip-worthiness (/50, ≥ 35 = worth posting) → fix loop until signed **PASS** in `clips-audit.md`. |
 
 ---
 
@@ -60,14 +61,16 @@ Generates the exact FFmpeg commands (or runs them with `--run`): vertical **9:16
 ### Stage 5 — Captions on video (optional but recommended)
 Add burned-in captions to each clip (ass tools / FFmpeg `subtitles` filter, or a `caption.srt` per clip that the platform's auto-caption can ingest). Verify text fits safe zones.
 
-### Stage 6 — Audit (subagent, before delivery)
-Spawn a fresh subagent to check, on every clip:
-1. **Standalone** — makes sense without the episode (hook → payoff in 60s).
-2. **Hook** — first 2 seconds punch, matches the clip's actual content (no clickbait mismatch).
-3. **Score honesty** — the clip-plan score matches what's actually in the clip.
-4. **Technical** — 1080×1920, audio clean, captions legible + inside safe zones, no hard cuts mid-word.
-5. **Captions.md** — hook first, no hashtags, one CTA, correct per-platform lengths.
-Any FAIL → re-cut / re-write → re-audit.
+### Stage 6 — Audit harness (automated checks + clips-auditor subagent, before delivery)
+**Step 6a — run the automated audit harness:**
+```bash
+node scripts/audit-clips.mjs --pack <clips-folder> --out clips-audit.md
+```
+`audit-clips.mjs` scans the pack and checks everything a script can: transcript presence + timestamps, clip-plan scored moment blocks + scores + FFmpeg cut commands + hooks, the clips/ output folder, and captions.md (zero hashtags, sections, CTA, per-platform length markers). Writes `clips-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+
+**Step 6b — spawn the clips-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/clips-auditor-brief.md`: reads `clips-audit.md` + all pack files, completes the **clip-worthiness scorecard** (10 criteria, /50 — **≥ 35 = worth posting**, with verdict bands), makes the creative judgment calls the script can't (standalone value, hook punch, score honesty, technical cuts), and signs **PASS / FIX NEEDED** with per-file fixes.
+
+**Step 6c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the file → re-run `audit-clips.mjs` (and `clip-finder.mjs` if the plan changed) → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `clips-audit.md` ships with the pack.
 
 ### Stage 7 — Deliver
 `clip-plan.md` (scores) + `clips/*.mp4` + `captions.md` (+ `caption.srt` files if burned). Note in delivery: post 2–3 clips over a week (not all at once), put the full episode link in the caption, and reply to comments with the episode timestamp.
@@ -82,5 +85,6 @@ Any FAIL → re-cut / re-write → re-audit.
 - [ ] `captions.md`: hook-first captions, no hashtags, one CTA, per-platform lengths, quote the clip line
 - [ ] Clips cut 1080×1920 via the generated FFmpeg commands (verified `--run` output)
 - [ ] Captions burned or per-clip SRT provided; text inside safe zones
-- [ ] Auditor subagent signed off: standalone, hook, score honesty, technical, captions
-- [ ] Delivery: `clip-plan.md` + `clips/` + `captions.md` + posting cadence note
+- [ ] **Audit harness run:** `audit-clips.mjs` → automated checks (transcript, scored moments, cut commands, clips output, captions) — exit 0
+- [ ] **Clips-auditor subagent** (fresh eyes) completed the clip-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `clips-audit.md`
+- [ ] Delivery: `clip-plan.md` + `clips/` + `captions.md` + `clips-audit.md` + posting cadence note

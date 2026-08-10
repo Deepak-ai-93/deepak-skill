@@ -100,6 +100,17 @@ node scripts/generate-caption.mjs --name {name} --topic "{topic}" --format {form
 ```
 Writes `output/{name}/caption.md` — every platform section auto-checked into the **500–900 char window**, no hashtags.
 
+### Stage 7 — Audit harness (automated checks + asset-reel-auditor subagent, before delivery)
+**Step 7a — run the automated audit harness:**
+```bash
+node scripts/audit-asset-reel.mjs --pack <reel-folder> --out asset-reel-audit.md
+```
+`audit-asset-reel.mjs` scans the pack and checks everything a script can: storyboard.json (beat fields, hook in beat 1, CTA in the last beat, 3–6 words per beat, 9:16 spec, timing continuity), cut assets (assets/cuts/*), the HTML composition (GSAP timeline, no SMIL/Math.random/audio-in-HTML, asset layers), and the rendered output + caption pack. Writes `asset-reel-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+
+**Step 7b — spawn the asset-reel-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/asset-reel-auditor-brief.md`: reads `asset-reel-audit.md` + all pack files, completes the **asset-reel scorecard** (10 criteria, /50 — **≥ 35 = worth posting**, with verdict bands), makes the creative judgment calls the script can't (asset ↔ beat fit, cut quality, voiceover sync), and signs **PASS / FIX NEEDED** with per-file fixes.
+
+**Step 7c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the storyboard/composition → re-run `audit-asset-reel.mjs` → re-cut/re-render → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `asset-reel-audit.md` ships with the pack.
+
 ---
 
 ## Styles (wizard picks one)
@@ -231,3 +242,5 @@ Just ask any agent CLI (Claude Code, Cursor, Codex, Gemini CLI, …) once the sk
 - [ ] Rendered 4K into `output/{name}/` with `--scale 2` (+ `--audio` for the mix)
 - [ ] `caption.md` written via `generate-caption.mjs` — all sections 500–900 chars, no hashtags
 - [ ] `hyperframes check` passes; two identical renders are identical
+- [ ] **Audit harness run:** `audit-asset-reel.mjs` → automated checks (storyboard, cuts, HTML determinism, output, caption) — exit 0
+- [ ] **Asset-reel-auditor subagent** (fresh eyes) completed the asset-reel scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `asset-reel-audit.md`

@@ -135,6 +135,20 @@ Audio lives in the composition as `<audio>` tracks with timing + volume:
 
 ---
 
+## 5. Audit harness (automated checks + audio-auditor subagent, before delivery)
+
+**Step 5a — run the automated audit harness:**
+```bash
+node scripts/audit-audio.mjs --pack <audio-folder> --out audio-audit.md
+```
+`audit-audio.mjs` checks everything a script can: license compliance (no CC-NC / BBC / F5-TTS / XTTS / Edge-TTS as choices for monetized work), commercial-safe sources (CC0 / MIT / Apache), CC-BY attribution notes, the voice engine choice, the mix contract (ducking, levels voice 100 / music ~30 / SFX ~80, -14 LUFS), local-freeze note, and the assets/ audio files. Writes `audio-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+
+**Step 5b — spawn the audio-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/audio-auditor-brief.md`: completes the **audio-worthiness scorecard** (10 criteria, /50 — **≥ 35 = worth shipping**, with verdict bands), makes the creative judgment calls the script can't (voice quality, emotion fit, sync accuracy, SFX taste), and signs **PASS / FIX NEEDED** with per-file fixes.
+
+**Step 5c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the plan/mix → re-run `audit-audio.mjs` → re-mix → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `audio-audit.md` ships with the deliverable.
+
+---
+
 ## Production checklist
 
 - [ ] Voiceover: Kokoro (Apache 2.0) or MIT engine chosen — no NC-licensed models for monetized work
@@ -146,3 +160,5 @@ Audio lives in the composition as `<audio>` tracks with timing + volume:
 - [ ] Final loudness ≈ -14 LUFS
 - [ ] Attributed CC-BY sources in video description
 - [ ] Audio files frozen locally in the project folder
+- [ ] **Audit harness run:** `audit-audio.mjs` → automated checks (licenses, sources, voice, mix contract, loudness, local files) — exit 0
+- [ ] **Audio-auditor subagent** (fresh eyes) completed the audio-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `audio-audit.md`

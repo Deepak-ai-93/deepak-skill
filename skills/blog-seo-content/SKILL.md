@@ -19,6 +19,7 @@ description: Write SEO-optimized, E-E-A-T-rich blog articles that rank on search
 | **Search + AI-citable structure** | H1 = the primary keyword question · answer it in the first 100 words · H2/H3 per subtopic · tables/lists for quotable facts · a "Bottom line" summary block (AI engines quote these). |
 | **Anti-fluff copywriting** | No filler introductions ("In today's fast-paced world"), no weak claims, specific beats generic, one idea per H2, internal links where relevant. Same blocklist as the repo's other skills. |
 | **Meta pack delivered** | Meta title (≤ 60 chars, keyword front-loaded), meta description (≤ 155 chars with a CTA), slug, and 3–5 suggested internal/external links. |
+| **Audited before delivery (the harness)** | Stage 5 is a harness, never a self-check: `audit-blog.mjs` runs the automated checks (brief, headings, EEAT, citations, quotable blocks, anti-fluff, meta) → a FRESH blog-auditor subagent scores blog-worthiness (/50, ≥ 35 = worth publishing) → fix loop until signed **PASS** in `blog-audit.md`. |
 
 ---
 
@@ -58,14 +59,16 @@ Write against the brief: answer the question in the first 100 words, then one H2
 ### Stage 4 — Meta pack + internal links
 Write `meta.md`: meta title (≤ 60 chars, keyword first) · meta description (≤ 155 chars, includes the payoff + a CTA) · slug · 3–5 internal links (anchor text descriptive) · 2–3 external authority links. Add an image alt-text list if images are planned.
 
-### Stage 5 — Validate + audit (subagent, before delivery)
-Spawn a fresh subagent to check:
-1. **SEO** — primary keyword in H1 + first 100 words + meta title; heading hierarchy clean (no skipped levels); one intent served.
-2. **EEAT** — named author + credential + bio link; every stat cited; experience present or flagged as missing.
-3. **GEO/quotability** — a "Bottom line" block, at least one table or list, first-100-word direct answer.
-4. **Copy quality** — anti-fluff blocklist clear, no filler intros, specific > generic, internal links actually relevant.
-5. **Meta pack** — title ≤ 60, description ≤ 155, slug clean, links correct.
-Any FAIL → fix → re-audit.
+### Stage 5 — Audit harness (automated checks + blog-auditor subagent, before delivery)
+**Step 5a — run the automated audit harness:**
+```bash
+node scripts/audit-blog.mjs --pack <blog-folder> --out blog-audit.md
+```
+`audit-blog.mjs` scans the pack and checks everything a script can: seo-brief (keyword cluster + intent + outline), article.md (heading hierarchy without skips, first-100-word answer, named author/credential, cited stats with sources, quotable blocks — Bottom line/tables/lists, anti-fluff blocklist), and meta.md (title ≤ 60 keyword-first, description ≤ 155 with CTA, slug + links). Writes `blog-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+
+**Step 5b — spawn the blog-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/blog-auditor-brief.md`: reads `blog-audit.md` + all pack files, completes the **blog-worthiness scorecard** (10 criteria, /50 — **≥ 35 = worth publishing**, with verdict bands), makes the creative judgment calls the script can't (EEAT credibility, GEO quotability, rank feasibility), and signs **PASS / FIX NEEDED** with per-file fixes.
+
+**Step 5c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the file → re-run `audit-blog.mjs` (and `keyword-outline.mjs` if the brief changed) → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `blog-audit.md` ships with the pack.
 
 ### Stage 6 — Deliver
 `seo-brief.md` (approved) + `article.md` + `meta.md`. Note in delivery: suggested publishing cadence (topical-authority clusters, not one-off posts), and how to wire the article into email (reuse `email-marketing` for a newsletter issue).
@@ -80,5 +83,6 @@ Any FAIL → fix → re-audit.
 - [ ] Article: answer in first 100 words · one H2 per subtopic · every stat cited · firsthand experience · quotable blocks
 - [ ] Anti-fluff blocklist cleared; no filler intros; specific > generic
 - [ ] `meta.md`: title ≤ 60 chars (keyword first), description ≤ 155 chars, slug, internal + external links
-- [ ] Auditor subagent signed off: SEO, EEAT, GEO, copy, meta
-- [ ] Delivery: `seo-brief.md` + `article.md` + `meta.md` + cadence note
+- [ ] **Audit harness run:** `audit-blog.mjs` → automated checks (brief, headings, EEAT, citations, quotable blocks, anti-fluff, meta) — exit 0
+- [ ] **Blog-auditor subagent** (fresh eyes) completed the blog-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `blog-audit.md`
+- [ ] Delivery: `seo-brief.md` + `article.md` + `meta.md` + `blog-audit.md` + cadence note

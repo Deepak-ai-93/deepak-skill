@@ -67,10 +67,16 @@ Update so the skill is discoverable and installable:
 - `USAGE.md` — add the skill to the "all N skills" count and a short usage blurb.
 - `prompt-examples.md` — add a numbered section with example prompts (sloppy + premium).
 
-### Stage 5 — Validate + audit
-1. Run every new script: banner prints, `--help`/usage exits 2, happy-path exits 0.
-2. Spawn the auditor subagent to check the scaffold against the contract: frontmatter present, quality bar, workflow stages, production checklist, banner on every script, docs wired with the right skill count.
-3. Fix FAILs → deliver. Optionally commit + push (only after user says so).
+### Stage 5 — Audit harness (automated checks + scaffold-auditor subagent, before delivery)
+**Step 5a — run the automated audit harness:**
+```bash
+node scripts/audit-scaffold.mjs --pack skills/<skill-name> --docs --out scaffold-audit.md
+```
+`audit-scaffold.mjs` checks the new skill against the repo contract: SKILL.md (frontmatter name+description, # skill header, quality bar, when-to-use, numbered stages, an audit stage, production checklist), scripts/ (brand banner, opt() parser), templates/ + examples/ presence, and — with `--docs` — the repo docs wiring (README row + install row, USAGE, prompt-examples, install.sh/install.md, consistent skill count). Writes `scaffold-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+
+**Step 5b — spawn the scaffold-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/scaffold-auditor-brief.md`: completes the **scaffold-worthiness scorecard** (10 criteria, /50 — **≥ 35 = worth shipping**, with verdict bands), makes the creative judgment calls the script can't (methodology quality, rail enforceability, ship-readiness), and signs **PASS / FIX NEEDED** with per-file fixes.
+
+**Step 5c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the scaffold → re-run `audit-scaffold.mjs` → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `scaffold-audit.md` ships with the skill folder. Then optionally commit + push (only after user says so).
 
 ---
 
@@ -85,5 +91,6 @@ Update so the skill is discoverable and installable:
 - [ ] USAGE.md: skill count updated
 - [ ] prompt-examples.md: new numbered section with sloppy + premium prompts
 - [ ] All new scripts run clean (banner + exit codes verified)
-- [ ] Auditor subagent signed off against the contract
+- [ ] **Audit harness run:** `audit-scaffold.mjs --pack skills/<name> --docs` → automated checks (contract, scripts, templates/examples, docs wiring) — exit 0
+- [ ] **Scaffold-auditor subagent** (fresh eyes) completed the scaffold-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `scaffold-audit.md`
 - [ ] Skill count in all three docs is consistent

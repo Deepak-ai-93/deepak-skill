@@ -20,6 +20,7 @@ description: Create professional photoshoot prompt packs for AI image tools (Goo
 | **Color grading locked per shoot** | ONE grade token block (film stock + palette + grain) chosen at the start and appended verbatim to every prompt — warm Kodak Portra, cool Fuji, high-key clean, moody chiaroscuro, etc. Never two grades in one shoot. |
 | **Aspect ratio per platform** | One aspect per shot, chosen for the platform: `4:5` (Instagram feed / editorials) · `1:1` (e-commerce grids) · `9:16` (Stories/TikTok) · `16:9` (banners) · `3:2` (print/portfolio). Written into the prompt AND the pack header. |
 | **Edit prompts for retouching** | Beyond the generation prompts, each shot that needs a retouch gets a SHORT localized edit/inpaint prompt that describes ONLY what changes (outfit, background, light, pose) — never the whole scene — so the tool's lasso/inpaint keeps everything else intact. |
+| **Audited before delivery (the harness)** | Stage 6 is a harness, never a self-check: `audit-shoot.mjs` runs the automated checks (per-shot token consistency, verify markers, aspects, edit prompts, sheets) → a FRESH shoot-auditor subagent scores shoot-worthiness (/50, ≥ 35 = good to go) → fix loop until signed **PASS** in `shoot-audit.md`. |
 
 ---
 
@@ -114,14 +115,16 @@ node scripts/shot-prompts.mjs --plan shoot-plan.json --out prompts.md
 3. For retouches, select the region (Flow Select/Lasso, Midjourney Editor) and paste the short `Edit:` prompt — it changes only that region.
 4. Regenerate any shot where the subject drifts; do NOT fix it by editing the subject block mid-run (rewording breaks consistency — regenerate with the identical prompt + same ingredients).
 
-### Stage 6 — Audit + deliver (subagent, before delivery)
-Spawn a fresh subagent to check:
-1. **Consistency** — every prompt contains the verbatim subject block + grade token + craft token (re-run `shot-prompts.mjs` verify if unsure); subject sheet has 2–3 reference-image prompts.
-2. **Prompt quality** — 6-part formula + aspect complete per shot; camera/lens/lighting specific (no "professional photo" vagueness); one idea per shot.
-3. **Shoot arc** — hero first, detail + lifestyle middle, closing/CTA last; shot count matches the plan.
-4. **Aspect ratios** — every shot's aspect matches its platform (4:5 feed, 1:1 grid, 9:16 stories, 16:9 banner).
-5. **Edit prompts** — each one describes ONLY the change (no subject re-description); flagged as `Edit:`.
-Any FAIL → fix the plan → regenerate → re-audit.
+### Stage 6 — Audit harness (automated checks + shoot-auditor subagent, before delivery)
+**Step 6a — run the automated audit harness:**
+```bash
+node scripts/audit-shoot.mjs --pack <shoot-folder> --out shoot-audit.md
+```
+`audit-shoot.mjs` scans the whole pack and checks everything a script can: plan integrity (title/grade/craft/subject block/shots), **per-shot token consistency** (every prompt still carries the VERBATIM subject block + grade + craft tokens — word-level, catching hand-edits that drifted), verify markers, aspect-ratio coverage, Edit: prompts, the subject sheet (reference images + upload note + anti-drift), and the shot list (arc + aspects). Writes `shoot-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+
+**Step 6b — spawn the shoot-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/shoot-auditor-brief.md`: reads `shoot-audit.md` + all pack files, completes the **shoot-worthiness scorecard** (10 criteria, /50 — **≥ 35 = good to go**, with verdict bands), makes the creative judgment calls the script can't (subject-likeness plan, forced poses, retouch risk), and signs **PASS / FIX NEEDED** with per-file fixes.
+
+**Step 6c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the file → re-run `audit-shoot.mjs` (and `shot-prompts.mjs` if the plan changed) → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `shoot-audit.md` ships with the pack.
 
 ---
 
@@ -135,5 +138,6 @@ Any FAIL → fix the plan → regenerate → re-audit.
 - [ ] `prompts.md` from `shot-prompts.mjs` — every prompt self-verified to contain the full subject block + grade + craft tokens
 - [ ] Edit prompts are short and localized (only the change, labeled `Edit:`)
 - [ ] Every prompt is pure copy-paste (no meta-commentary inside)
-- [ ] Auditor subagent signed off: consistency, prompt quality, shoot arc, aspects, edit prompts
-- [ ] Delivery: `subject-sheet.md` + `shot-list.md` + `prompts.md` + tool notes (ingredients / `--cref` / reference image)
+- [ ] **Audit harness run:** `audit-shoot.mjs` → automated checks (per-shot token consistency, verify markers, aspects, edit prompts, sheets) — exit 0
+- [ ] **Shoot-auditor subagent** (fresh eyes) completed the shoot-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `shoot-audit.md`
+- [ ] Delivery: `subject-sheet.md` + `shot-list.md` + `prompts.md` + `shoot-audit.md` + tool notes (ingredients / `--cref` / reference image)
