@@ -1,6 +1,6 @@
 # Prompt Examples — deepak-skill 🎬
 
-Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit. Email prompts (section 12) run through **`email-marketing`**: subject-line pack → bulletproof HTML + plain text → spam/compliance validation → preview → auditor sign-off. Long-form + brand prompts (section 13) run through **`podcast-to-shorts` / `youtube-video-pipeline` / `blog-seo-content` / `linkedin-personal-brand`**: score → approve → generate → audit. Google Flow/Veo scene-prompt prompts (section 14) run through **`veo-cinematic-reels`**: character sheet → scene script → self-verified copy-paste prompt pack. AI-photoshoot prompts (section 15) run through **`photoshoot-studio`**: subject sheet → shot list → self-verified copy-paste image prompt pack (person + product modes, edit/inpaint prompts). Paid-ad prompts (section 16) run through **`paid-ads-studio`**: forecast first → product-block consistency tokens → self-verified Veo 3.1 video + image ad prompt pack → char-limit-safe copy → Meta + Google campaign blueprint → cost plan → compliance checklist → launch checklist.
+Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit. Email prompts (section 12) run through **`email-marketing`**: subject-line pack → bulletproof HTML + plain text → spam/compliance validation → preview → auditor sign-off. Long-form + brand prompts (section 13) run through **`podcast-to-shorts` / `youtube-video-pipeline` / `blog-seo-content` / `linkedin-personal-brand`**: score → approve → generate → audit. Google Flow/Veo scene-prompt prompts (section 14) run through **`veo-cinematic-reels`**: character sheet → scene script → self-verified copy-paste prompt pack. Episodic story-series prompts (section 17) run through **`serial-story-reels`**: story bible (arc validated) → character sheets → per-episode prompt pack + voiceover sheet, all self-verified. AI-photoshoot prompts (section 15) run through **`photoshoot-studio`**: subject sheet → shot list → self-verified copy-paste image prompt pack (person + product modes, edit/inpaint prompts). Paid-ad prompts (section 16) run through **`paid-ads-studio`**: forecast first → product-block consistency tokens → self-verified Veo 3.1 video + image ad prompt pack → char-limit-safe copy → Meta + Google campaign blueprint → cost plan → compliance checklist → launch checklist.
 
 Two rules that make these prompts work:
 
@@ -243,7 +243,22 @@ Two rules that make these prompts work:
 
 **Idea sparks:** product launches · seasonal promos (Black Friday, summer) · app installs · local business leads · SaaS free-trial signups · retargeting creative refreshes (the `Edit:` variant bank) · cross-platform retargeting stacks.
 
-## Asset & audio-only prompts
+## 17. Episodic story series 📖🎬
+
+*Runs through **`serial-story-reels`**: ≤3 clarifying questions (story idea → genre from `genre-presets.md` → characters: original or the user's uploaded reference images → episodes/scenes/aspect with defaults 3/4/9:16) → lock ONE grade + world + cinematic token → **story bible** (season arc + per-episode hooks + cliffhangers, validated by `series-arc.mjs`, exit 1 on any missing hook/cliffhanger/undefined character) → **character sheet** (verbatim character blocks + 2–3 reference-image prompts per character → upload to Flow's Ingredients ONCE, reuse for EVERY episode) → **`prompts.md`** — one copy-paste **Veo 3.1 prompt per scene**, grouped by episode, every prompt carrying the VERBATIM character blocks + grade + cinematic token, **self-verified word-by-word** by `episode-prompts.mjs` (exits 1 on drift), first/last-frame bridging 🔗 across scenes AND episode boundaries → **`voiceover.md`** (every line per episode with delivery direction — native Veo audio or Kokoro post pass with voice-anchor note).*
+
+| Prompt | Type |
+|---|---|
+| "make me a story series with episodes" | sloppy → ≤3 questions (story → genre → characters) |
+| "Create an episodic love story — 3 episodes, same 2 characters in every episode, cinematic action + proper voiceover, Google Flow / Veo prompts, 9:16." | premium (love-story-action) |
+| "Comic story series: a rookie hero vs. a villain — 3 episodes, hook + cliffhanger each, comic-pop grade, punchy VO." | premium (comic) |
+| "I have photos of 2 characters — build a 3-episode thriller series around them, keep them EXACTLY the same in every episode." | premium (user uploads) |
+| "Episodes 4–6: continue my series — same characters, same grade, new arc with a mid-season cliffhanger. Keep everything consistent." | premium (season 2) |
+| "Story bible only: 4-episode fantasy arc — logline, season arc, hooks + cliffhangers, cast list. Validate it with series-arc.mjs." | bible only |
+| "Character sheet only: two characters for a series — verbatim blocks + 3 reference-image prompts each, locked world + grade." | character sheet only |
+| "Audit my series-plan.json — regenerate the prompt pack and flag any prompt that drifts from the character blocks or the grade." | audit/fix |
+
+**Idea sparks:** episodic love stories (meet → grow → fracture → reconcile) · comic origins (origin → training → big fight) · action sagas (setup → escalation → finale) · thriller serials (incident → dig → trap → reveal) · fantasy journeys (call → journey → confrontation) · character-led brands (the same founder in a new episode each week).
 
 | Skill | Example prompt |
 |---|---|

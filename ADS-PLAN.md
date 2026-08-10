@@ -307,7 +307,7 @@ Scenarios vary CPM (lower with better creative/learning) and CTR/CVR (better cre
 - [ ] All three scripts print the 🎬 Deepak brand banner, zero external deps
 - [ ] Compliance checklist dated + covers Meta (synthetic media) and Google (AI labels) 2026 rules
 - [ ] Examples folder has the complete Brew & Co pack
-- [ ] README (16 skills), USAGE.md count, prompt-examples.md (new section) all wired
+- [ ] README (17 skills), USAGE.md count, prompt-examples.md (new section) all wired
 - [ ] Auditor subagent signed off against the skill-builder contract
 
 ---

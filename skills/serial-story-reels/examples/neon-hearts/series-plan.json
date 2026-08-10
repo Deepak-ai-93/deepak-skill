@@ -1,0 +1,169 @@
+{
+  "title": "Neon Hearts",
+  "genre": "comic-love-story-action",
+  "logline": "A midnight bike courier who carries secret cargo falls for the comic-book artist who has been drawing her face for months — while a masked collector hunts the pages she just delivered.",
+  "aspect": "9:16",
+  "scenes_per_episode": 4,
+  "scene_duration": 6,
+  "grade": "Grade: vivid comic-pop palette, saturated primaries, bold inky outlines, halftone shading accents, clean highlights, punchy contrast, slight cel-shaded feel.",
+  "cinematic": "Cinematic: IMAX-style cinematic scale, large-format digital cinema camera, full-frame sensor look, anamorphic-style widescreen feel adapted to vertical 9:16, smooth gimbal-stabilized camera motion, rich dynamic range, crisp highlight rolloff, premium film-grain finish, realistic physics and motion blur on fast action, no camera shake, no warping, no morphing artifacts.",
+  "world": "World: a neon-soaked city at night, oversized comic-book architecture, bold graphic shadows, floating motion lines in the air, rain-slick streets reflecting pink and cyan light. One recurring element: a glowing neon heart sign always visible on the skyline.",
+  "characters": [
+    {
+      "id": "maya",
+      "name": "Maya",
+      "block": "Character: Maya, a 26-year-old bike courier, lean athletic build with a sharp jawline and fierce amber eyes, long black hair in a high ponytail, wearing a red leather jacket over a black hoodie, dark jeans, scuffed combat boots. Distinctive detail: a small lightning-bolt tattoo behind her left ear."
+    },
+    {
+      "id": "leo",
+      "name": "Leo",
+      "block": "Character: Leo, a 24-year-old comic-book artist, lanky build with soft hazel eyes behind round glasses, messy dark-brown hair, wearing a paint-splattered denim jacket over a mustard-yellow t-shirt, a silver ring on his right thumb. Distinctive detail: ink-stained fingers and a crescent-moon tattoo on his wrist."
+    }
+  ],
+  "episodes": [
+    {
+      "id": "e1",
+      "title": "The First Beat",
+      "hook": "A red-jacket courier leans into a rain-slick turn, a masked van inches from her rear wheel.",
+      "cliffhanger": "The masked figure pulls a glowing comic page from her bag — it is the exact page Leo has been missing for a year.",
+      "scenes": [
+        {
+          "id": "s1",
+          "action": "Maya's bike leans into a sharp turn, spraying a sheet of water, the masked collector's van clipping a dumpster behind her",
+          "camera": "low-angle tracking shot, 24mm wide, speed-ramp on the turn",
+          "context": "rain-slick neon street at night, the glowing neon heart sign on the skyline, puddles reflecting pink light",
+          "dialogue": "She mutters, breathless, \"Not today. Not this package.\"",
+          "sfx": "SFX: tires screeching, water spraying, a metal dumpster crunching. Ambient: rain and distant sirens.",
+          "characters": ["maya"],
+          "bridge": false
+        },
+        {
+          "id": "s2",
+          "action": "the van doors burst open, two masked figures leap out reaching for the courier bag; Maya swerves between market stalls",
+          "camera": "handheld urgency, whip pan across the stalls",
+          "context": "open-air night market, canvas awnings, fairy lights, steam rising from food carts, neon heart sign still glowing above",
+          "dialogue": "She shouts over the commotion, \"Not today!\"",
+          "sfx": "SFX: screeching tires, canvas tearing, stall wood splintering, shouting. Ambient: market crowd noise.",
+          "characters": ["maya"],
+          "bridge": true
+        },
+        {
+          "id": "s3",
+          "action": "Maya crashes into Leo's comic stall, scattering prints; Leo catches her by the arm, staring — he recognizes her face from his drawings",
+          "camera": "slow-motion 85mm close-up on their eyes meeting, rain dripping off the awning edge",
+          "context": "comic stall under a striped awning, warm lamp light, comic prints flying through the air, puddles outside",
+          "dialogue": "Leo says, soft and disbelieving, \"I know that face. I've been drawing it all month.\"",
+          "sfx": "SFX: paper fluttering, rain on the awning, her breathing. Ambient: distant market music.",
+          "characters": ["maya", "leo"],
+          "bridge": false
+        },
+        {
+          "id": "s4",
+          "action": "one of the masked figures peels back a glowing comic page from her bag; Leo sees his own missing original art and freezes",
+          "camera": "extreme close-up on the page, slow push-in, then rack focus to Leo's shocked face",
+          "context": "market edge, rain easing, the neon heart sign flickering overhead, the van idling in the background",
+          "dialogue": "Leo whispers, frozen, \"That's 'The Heart Thief' #1. My pages. My stolen pages.\"",
+          "sfx": "SFX: rain easing, a van engine idling, paper crinkling. Ambient: the heart sign buzzing.",
+          "characters": ["maya", "leo"],
+          "bridge": false
+        }
+      ]
+    },
+    {
+      "id": "e2",
+      "title": "Ink and Asphalt",
+      "hook": "A fist pounds the studio door in the middle of the night.",
+      "cliffhanger": "The collector raises his mask — it is the gallery owner who launched Leo's show.",
+      "scenes": [
+        {
+          "id": "s1",
+          "action": "Maya paces Leo's tiny studio, rain hammering the skylight; she flips through his sketchbook and finds page after page of her face",
+          "camera": "slow push-in, shallow depth of field, warm lamp light on the pages",
+          "context": "cluttered artist studio at night, sketchbooks and ink bottles, fairy lights, the neon heart sign glowing through the window",
+          "dialogue": "She says, quiet, \"You really have been drawing me. For months.\"",
+          "sfx": "SFX: rain hammering the skylight, pages turning. Ambient: a kettle hissing.",
+          "characters": ["maya", "leo"],
+          "bridge": false
+        },
+        {
+          "id": "s2",
+          "action": "Leo explains the pages were stolen from his gallery debut; Maya realizes her anonymous courier job carried the stolen art",
+          "camera": "medium two-shot, subtle dolly-in as the realization lands",
+          "context": "same studio, rain continuing, warm lamp light, the sketchbook open between them",
+          "dialogue": "He says, low and urgent, \"That run tonight? You carried the theft. The collector who hired you stole my show.\"",
+          "sfx": "SFX: rain steady, a chair creaking. Ambient: the kettle clicking off.",
+          "characters": ["maya", "leo"],
+          "bridge": false
+        },
+        {
+          "id": "s3",
+          "action": "a fist pounds the studio door; the collector's men shout through it; Maya grabs Leo's hand and they bolt onto the fire escape",
+          "camera": "handheld urgency, low-angle as they burst through the window frame",
+          "context": "fire escape in neon rain, wet metal, the heart sign flickering, rain bouncing off the rails",
+          "dialogue": "She shouts, \"Trust me. I've outrun worse.\"",
+          "sfx": "SFX: pounding fist, glass rattling, boots on wet metal. Ambient: sirens approaching.",
+          "characters": ["maya", "leo"],
+          "bridge": true
+        },
+        {
+          "id": "s4",
+          "action": "on the rooftop the collector corners them and raises his mask — it is the gallery owner who launched Leo's show",
+          "camera": "locked-off wide shot, slow push-in on the unmasking",
+          "context": "rain-soaked rooftop at night, the neon heart sign behind the collector, steam rising from vents",
+          "dialogue": "The collector says, cold and clipped, \"The courier was never the target. You were. Those pages are worth more than your show.\"",
+          "sfx": "SFX: rain on metal, a coat rustling, distant sirens. Ambient: the heart sign buzzing behind them.",
+          "characters": ["maya", "leo"],
+          "bridge": false
+        }
+      ]
+    },
+    {
+      "id": "e3",
+      "title": "Neon Hearts",
+      "hook": "Black ink explodes across a billboard as two silhouettes sprint across the rooftops.",
+      "cliffhanger": "Under the neon heart, a glowing page settles into place — page one of their new story.",
+      "scenes": [
+        {
+          "id": "s1",
+          "action": "Maya and Leo sprint across rain-soaked rooftops, the collector's men in pursuit; Leo lobs a can of black ink that explodes across a billboard, spraying the pursuers",
+          "camera": "wide tracking shot, speed-ramp on the ink burst",
+          "context": "rain-soaked rooftops, neon signs and billboards, the heart sign glowing ahead, puddles shattering under boots",
+          "dialogue": "He laughs, breathless, \"Art school, finally paying off!\"",
+          "sfx": "SFX: ink can clattering, paint splattering across the billboard, boots on wet concrete. Ambient: wind and rain.",
+          "characters": ["maya", "leo"],
+          "bridge": true
+        },
+        {
+          "id": "s2",
+          "action": "Maya rides her bike down a fire escape onto the street and slides under a truck; the collector's van skids and flips in a spray of water",
+          "camera": "180-degree arc around the slide, slow-motion 50% on the flip",
+          "context": "neon intersection, rain-glossed asphalt, steam rising from manholes, the heart sign above the intersection",
+          "dialogue": "She shouts, triumphant, \"That's for my delivery record!\"",
+          "sfx": "SFX: metal grinding on asphalt, a truck horn, the van flipping, water spraying. Ambient: crowd gasping.",
+          "characters": ["maya", "leo"],
+          "bridge": false
+        },
+        {
+          "id": "s3",
+          "action": "the collector staggers out, mask torn; Leo grabs the stolen pages from his jacket as Maya blocks his exit, police lights swirling in the distance",
+          "camera": "locked-off wide, slow push-in on Leo reclaiming the pages",
+          "context": "wet street, the neon heart sign flickering above, police strobes washing over the scene, steam curling",
+          "dialogue": "Leo says, calm now, \"The show opens Friday. You're invited — as the exhibit's cautionary tale.\"",
+          "sfx": "SFX: police sirens, paper crinkling, rain easing. Ambient: the heart sign steadying.",
+          "characters": ["maya", "leo"],
+          "bridge": false
+        },
+        {
+          "id": "s4",
+          "action": "Maya and Leo stand under the neon heart sign, rain easing; he shows her the first page of the new comic — a courier with a lightning-bolt tattoo — and she kisses him as the page glows",
+          "camera": "85mm slow push-in on the kiss, soft halation, shallow depth of field",
+          "context": "the glowing neon heart sign above, rain stopping, the wet street reflecting pink light, their silhouettes against the glow",
+          "dialogue": "She says, warm and teasing, \"Page one of your new issue — I expect royalties.\"",
+          "sfx": "SFX: rain fading to silence, a soft electronic hum from the sign. Ambient: distant city night.",
+          "characters": ["maya", "leo"],
+          "bridge": false
+        }
+      ]
+    }
+  ]
+}

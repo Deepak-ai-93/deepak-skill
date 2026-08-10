@@ -15,7 +15,7 @@
 #    ./install.sh --help                # this help
 #
 #  Examples:
-#    ./install.sh                       → all 16 skills into .agents/skills/
+#    ./install.sh                       → all 17 skills into .agents/skills/
 #    ./install.sh --skill podcast-to-shorts
 #    ./install.sh --skill email-marketing --global
 # ═══════════════════════════════════════════════════════════════════════════
@@ -55,6 +55,7 @@ SKILLS=(
   "voice-sfx-audio          → open-source voiceovers + SFX + mixing"
   "carousel-post-images     → LinkedIn/Instagram carousels at 4K"
   "veo-cinematic-reels      → Google Flow/Veo scene prompts, IMAX + consistency"
+  "serial-story-reels       → episodic story series: bible + episode prompts + VO"
   "photoshoot-studio        → AI photoshoot prompts: people + products"
   "paid-ads-studio          → Meta + Google ad campaigns: creatives + forecast"
   "email-marketing          → spam-free HTML emails + high-CTR subject lines"
@@ -67,7 +68,7 @@ SKILLS=(
 )
 
 show_skills() {
-  echo "${C_BOLD}  16 skills installed:${C_RESET}"
+  echo "${C_BOLD}  17 skills installed:${C_RESET}"
   for s in "${SKILLS[@]}"; do
     printf "  ${C_GREEN}•${C_RESET} %s\n" "$s"
   done
@@ -117,7 +118,7 @@ banner
 show_skills
 
 if [ "$LIST_ONLY" = "1" ]; then
-  echo "${C_GREEN}✅ Installer ready — run ./install.sh to install all 16 skills.${C_RESET}"
+  echo "${C_GREEN}✅ Installer ready — run ./install.sh to install all 17 skills.${C_RESET}"
   exit 0
 fi
 

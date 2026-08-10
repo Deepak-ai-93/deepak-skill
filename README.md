@@ -21,6 +21,7 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 | **linkedin-personal-brand** | Founder/creator LinkedIn presence that compounds — **capture the user's real voice first** (`voice-capture.md`), then headline + About rewrite, a weekly post calendar (story/teaching/contrarian/win/question roles, one CTA each), and a comment + connection strategy |
 | **skill-builder** (meta) | Scaffold **new skills** the deepak-skill way — `scaffold-skill.mjs` generates the folder, SKILL.md contract (quality bar + workflow + checklist), Deepak-branded scripts, templates and examples, then wires the skill into README/USAGE/prompt-examples |
 | **veo-cinematic-reels** | Reel scripts + **scene-by-scene Google Flow / Veo 3.1 video prompts** — manual copy-paste workflow with **character consistency locked** (reference-image ingredients + a verbatim character block in EVERY prompt, self-verified by `scene-prompts.mjs`), **IMAX-level cinematic language**, locked color grading (film-stock tokens), and native dialogue/SFX audio |
+| **serial-story-reels** | **EPISODIC story video series** for Google Flow / Veo 3.1 — comic, love story, action, thriller or fantasy (or the user's own characters via image uploads): a **story bible** (season arc + per-episode hooks + cliffhangers, validated by `series-arc.mjs`) → **character sheets** (verbatim blocks + reference-image prompts) → a **self-verified copy-paste prompt pack for EVERY scene of EVERY episode** (`episode-prompts.mjs`, exits 1 on drift) so the SAME characters stay consistent ACROSS episodes — plus cinematic action/motion language, native Veo dialogue/SFX, and a **voiceover line sheet** for a Kokoro post pass |
 | **photoshoot-studio** | **AI photoshoot prompt packs for people AND products** (Google Flow / Nano Banana Pro, Midjourney, Flux) — manual copy-paste workflow with **subject consistency locked** (reference-image ingredients + a verbatim person/product block in EVERY prompt, self-verified by `shot-prompts.mjs`), **professional photography language** (camera body, lens, f-stop, lighting setup, film stock), locked grade per shoot, per-platform aspect ratios, and short **edit/inpaint prompts** for re-posing / re-outfitting / re-lighting |
 | **paid-ads-studio** | **The paid engine** — end-to-end ad campaign production for **Meta + Google**: copy-paste **Veo 3.1 video ad prompts** + **image ad prompts** (Nano Banana Pro / Midjourney / Flux) with **locked brand consistency** (verbatim product block in EVERY prompt, self-verified by `ad-prompts.mjs`), **hook-first ad copy** inside every platform's char limits (anti-fluff enforced by `ad-copy.mjs`), **campaign blueprints** (Meta ODAX + Advantage+ audiences · Google Demand Gen + PMax + Search, audience signals ≠ targeting), **2026 AI-content compliance checklists**, a **cost-management plan** (ramp / learning / kill / scale), a **benchmark-driven forecast** of expected results — impressions, clicks, conversions, CPA, ROAS across conservative/base/aggressive scenarios (`forecast-ads.mjs`) — **and an audit harness**: `audit-ads.mjs` (automated hook/char/consistency/compliance checks → `ad-audit.md`) + a fresh **ads-auditor subagent** scoring hook worthiness (/50) and signing PASS / FIX NEEDED before anything ships. Built-in example: **"Brew & Co Tumbler — Paid Launch"** (full launch-ready pack). |
 | **vibe-code-webapp** | Build **or extend** production-ready vibe-coded web apps — **detailed idea interview** first, and in **existing projects** a structure scan (`scan-project.mjs` → `project-scan.md`) so the plan extends what's already there → **evaluate** (SaaS scorecard → BUILD / ITERATE / PIVOT) → **Build Pack** (`PRD.md` + `stack-blueprint.md` + **`sitemap.md`** — full sitemap, every frontend page, backend architecture, workflows — + **`TODO.md`** with P0/P1/P2 priorities via `todo.mjs`) → **you approve the pack AND the todo list** (add/re-prioritize anytime) → the vibe coder builds **step by step** from `vibe-coder-instructions.md` (BUILD.md) filing **detailed `build-report.md`** reports → **production audit** → **everything-auditor** final review (app + plan + instructions + memory + reports → hardening / tests / brainstorming / skill feedback) → **daily `MEMORY.md`** keeps you and any AI in sync across sessions |
@@ -31,7 +32,7 @@ The skills are a complete production pipeline: **what's trending** (research + b
 
 ## Quick start — install in your project (3 steps)
 
-> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 16 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
+> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 17 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
 
 ### 1. Prerequisites
 
@@ -47,7 +48,7 @@ Run this **inside your project folder**:
 npx skills add Deepak-ai-93/deepak-skill --all
 ```
 
-That's it. It installs all sixteen skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
+That's it. It installs all seventeen skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
 
 ### 3. Use it with any CLI
 
@@ -76,6 +77,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **linkedin-personal-brand only** (self-contained — SKILL.md + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill linkedin-personal-brand` |
 | **skill-builder only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill skill-builder` |
 | **veo-cinematic-reels only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill veo-cinematic-reels` |
+| **serial-story-reels only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill serial-story-reels` |
 | **photoshoot-studio only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill photoshoot-studio` |
 | **paid-ads-studio only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill paid-ads-studio` |
 | Install globally (any project, any machine) | `npx skills add Deepak-ai-93/deepak-skill --all -g` |
@@ -87,7 +89,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 ```bash
 ls .agents/skills/
 # blog-seo-content  carousel-post-images  email-marketing  hook-storyboard-retention
-# linkedin-personal-brand  paid-ads-studio  photoshoot-studio  podcast-to-shorts  skill-builder
+# linkedin-personal-brand  paid-ads-studio  photoshoot-studio  podcast-to-shorts  serial-story-reels  skill-builder
 # text-motion-reels  veo-cinematic-reels  video-asset-reels  video-product-pipeline
 # vibe-code-webapp  voice-sfx-audio  youtube-video-pipeline
 ```
@@ -250,6 +252,21 @@ Deliverables: `character-sheet.md` (verbatim character/world/grade blocks + 2–
 
 > "Make a cinematic action reel with scenes and Google Flow prompts — same character in every scene, IMAX look, great color grading."
 > → character sheet → scene script → prompt pack (self-verified) → paste into Flow → audit → deliver
+
+### Episodic story series (`serial-story-reels`)
+
+The **serialized sibling of veo-cinematic-reels** — multi-episode story video series (comic, love story, action, thriller, fantasy — or the user's own character photos) where the SAME characters stay consistent ACROSS every episode:
+
+```bash
+cd skills/serial-story-reels
+node scripts/series-arc.mjs --plan series-plan.json --bible story-bible.md   # validates the arc + writes the story bible
+node scripts/episode-prompts.mjs --plan series-plan.json --out prompts.md --vo voiceover.md   # builds + self-verifies the prompt pack + VO sheet
+```
+
+Deliverables: `story-bible.md` (season arc, per-episode hooks + cliffhangers, locked grade/world/cinematic tokens, cast blocks) → `character-sheet.md` (verbatim character blocks + 2–3 reference-image prompts per character → upload to Flow's Ingredients ONCE, reuse for the whole series) → `prompts.md` (ONE cinematic Veo 3.1 prompt per scene, grouped by episode, every prompt carrying the verbatim character blocks + grade + cinematic tokens, **self-verified word-by-word**, first/last-frame bridging 🔗 across scenes AND episodes) → `voiceover.md` (every line per episode with delivery direction — native Veo audio or a Kokoro post pass). Built-in example: **"Neon Hearts"** — a 3-episode comic love-story action series (2 characters, 12 scenes, full pack in `examples/neon-hearts/`).
+
+> "Make me an episodic comic love story — 3 episodes, same 2 characters in every episode, cinematic action and proper voiceover, Google Flow prompts."
+> → interview (≤3 questions) → story bible (arc validated) → character sheets → episode prompt pack (self-verified) → voiceover sheet → paste into Flow → audit → deliver
 
 ### AI photoshoots (`photoshoot-studio`)
 
