@@ -1,6 +1,6 @@
 # deepak-skill 🎬
 
-Open-source agent skills for the **full content-creator stack** — short-form video (text-motion + asset reels), viral hooks & storyboards, AI voiceover + sound design, native-image-model carousels, spam-free HTML emails with high-CTR subject lines, **long-form repurposing** (podcast→shorts, YouTube packaging, SEO blog content), **LinkedIn personal branding**, vibe-coded web apps, and a meta **skill-builder** that scaffolds new skills. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
+Open-source agent skills for the **full content-creator stack** — short-form video (text-motion + asset reels), **Google Flow / Veo cinematic scene prompts**, viral hooks & storyboards, AI voiceover + sound design, native-image-model carousels, spam-free HTML emails with high-CTR subject lines, **long-form repurposing** (podcast→shorts, YouTube packaging, SEO blog content), **LinkedIn personal branding**, vibe-coded web apps, and a meta **skill-builder** that scaffolds new skills. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
 
 [![skills.sh](https://skills.sh/b/Deepak-ai-93/deepak-skill)](https://skills.sh/Deepak-ai-93/deepak-skill)
 
@@ -20,6 +20,7 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 | **blog-seo-content** | SEO articles that rank **and** get cited by AI search (GEO) — `keyword-outline.mjs` builds the keyword cluster + intent scores + outline scaffold → approved `seo-brief.md` → E-E-A-T-rich article (named author, cited stats, quotable blocks) + meta title/description pack |
 | **linkedin-personal-brand** | Founder/creator LinkedIn presence that compounds — **capture the user's real voice first** (`voice-capture.md`), then headline + About rewrite, a weekly post calendar (story/teaching/contrarian/win/question roles, one CTA each), and a comment + connection strategy |
 | **skill-builder** (meta) | Scaffold **new skills** the deepak-skill way — `scaffold-skill.mjs` generates the folder, SKILL.md contract (quality bar + workflow + checklist), Deepak-branded scripts, templates and examples, then wires the skill into README/USAGE/prompt-examples |
+| **veo-cinematic-reels** | Reel scripts + **scene-by-scene Google Flow / Veo 3.1 video prompts** — manual copy-paste workflow with **character consistency locked** (reference-image ingredients + a verbatim character block in EVERY prompt, self-verified by `scene-prompts.mjs`), **IMAX-level cinematic language**, locked color grading (film-stock tokens), and native dialogue/SFX audio |
 | **vibe-code-webapp** | Build **or extend** production-ready vibe-coded web apps — **detailed idea interview** first, and in **existing projects** a structure scan (`scan-project.mjs` → `project-scan.md`) so the plan extends what's already there → **evaluate** (SaaS scorecard → BUILD / ITERATE / PIVOT) → **Build Pack** (`PRD.md` + `stack-blueprint.md` + **`sitemap.md`** — full sitemap, every frontend page, backend architecture, workflows — + **`TODO.md`** with P0/P1/P2 priorities via `todo.mjs`) → **you approve the pack AND the todo list** (add/re-prioritize anytime) → the vibe coder builds **step by step** from `vibe-coder-instructions.md` (BUILD.md) filing **detailed `build-report.md`** reports → **production audit** → **everything-auditor** final review (app + plan + instructions + memory + reports → hardening / tests / brainstorming / skill feedback) → **daily `MEMORY.md`** keeps you and any AI in sync across sessions |
 
 The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets / thumbnails) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline) → **multiplied** (podcast→shorts, YouTube packaging, SEO blog, LinkedIn, email).
@@ -27,6 +28,8 @@ The skills are a complete production pipeline: **what's trending** (research + b
 ---
 
 ## Quick start — install in your project (3 steps)
+
+> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 14 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
 
 ### 1. Prerequisites
 
@@ -42,7 +45,7 @@ Run this **inside your project folder**:
 npx skills add Deepak-ai-93/deepak-skill --all
 ```
 
-That's it. It installs all thirteen skills into `.agents/skills/` — no heavy media, no demo files.
+That's it. It installs all fourteen skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
 
 ### 3. Use it with any CLI
 
@@ -70,6 +73,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **blog-seo-content only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill blog-seo-content` |
 | **linkedin-personal-brand only** (self-contained — SKILL.md + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill linkedin-personal-brand` |
 | **skill-builder only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill skill-builder` |
+| **veo-cinematic-reels only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill veo-cinematic-reels` |
 | Install globally (any project, any machine) | `npx skills add Deepak-ai-93/deepak-skill --all -g` |
 | Target specific agents | `npx skills add Deepak-ai-93/deepak-skill --all -a claude-code -a cursor` |
 | Install from a local clone | `npx skills add ./deepak-skill --all` |
@@ -80,8 +84,8 @@ The agent will run the format wizard, build the composition, and render your 4K 
 ls .agents/skills/
 # blog-seo-content  carousel-post-images  email-marketing  hook-storyboard-retention
 # linkedin-personal-brand  podcast-to-shorts  skill-builder  text-motion-reels
-# video-asset-reels  video-product-pipeline  vibe-code-webapp  voice-sfx-audio
-# youtube-video-pipeline
+# veo-cinematic-reels  video-asset-reels  video-product-pipeline  vibe-code-webapp
+# voice-sfx-audio  youtube-video-pipeline
 ```
 
 **Update:** `npx skills update` • **Remove:** `npx skills remove <skill-name>`
@@ -228,6 +232,20 @@ node scripts/scaffold-skill.mjs --list   # show every skill in skills/
 
 > "Add a new skill for {topic} to the repo."
 > → scaffold → fill the placeholders → wire into README/USAGE/prompt-examples → validate → audit
+
+### Google Flow / Veo reels (`veo-cinematic-reels`)
+
+Reel scripts + **copy-paste video prompts for Google Flow / Veo 3.1** — one prompt per scene, engineered so the **character never changes** between scenes (reference-image ingredients uploaded once + a verbatim character block in EVERY prompt, self-verified word-by-word):
+
+```bash
+cd skills/veo-cinematic-reels
+node scripts/scene-prompts.mjs --plan scene-plan.json --out prompts.md   # builds + verifies the prompt pack
+```
+
+Deliverables: `character-sheet.md` (verbatim character/world/grade blocks + 2–3 reference-image prompts for Nano Banana Pro) → `scene-script.md` (hook → agitate → payoff → CTA/loop with continuity written across boundaries) → `prompts.md` (IMAX-scale camera language, locked film-grade token, native dialogue/SFX). Built-in example — **"The Last Courier"** cinematic action reel (full character sheet + scene plan + generated prompt pack).
+
+> "Make a cinematic action reel with scenes and Google Flow prompts — same character in every scene, IMAX look, great color grading."
+> → character sheet → scene script → prompt pack (self-verified) → paste into Flow → audit → deliver
 
 ### Vibe-code web apps (`vibe-code-webapp`)
 

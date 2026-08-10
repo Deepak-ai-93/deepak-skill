@@ -1,0 +1,51 @@
+{
+  "title": "The Last Courier — cinematic action reel",
+  "duration": 6,
+  "grade": "Grade: cinematic teal-and-orange, cool shadows, warm skin tones, contrast-rich, 35mm Kodak Vision3 500T film stock, subtle grain.",
+  "world": "World: a rain-soaked night in a near-future megacity, neon reflections on wet asphalt, perpetual low cloud, amber streetlight pools, distant sirens.",
+  "character": "Character: Kai, a 28-year-old elite courier, athletic build with a chiseled jaw and intense dark eyes, short black hair, wearing a matte black tactical jacket with a glowing cyan circuit strip on the chest, black cargo pants, a silver data-drive on a lanyard around his neck. Distinctive detail: a thin cyan scar along his right cheek.",
+  "imax": "IMAX-style cinematic scale: large-format digital cinema camera, full-frame sensor look, anamorphic-style widescreen feel adapted to vertical 9:16, smooth gimbal-stabilized camera motion, rich dynamic range, crisp highlight rolloff, premium film-grain finish, no camera shake, no warping, no morphing artifacts.",
+  "ingredients": [
+    "kai-front-portrait.png",
+    "kai-three-quarter.png",
+    "kai-full-body.png"
+  ],
+  "scenes": [
+    {
+      "id": "hook",
+      "camera": "Extreme close-up on the glowing cyan circuit strip, slow push-in",
+      "action": "Kai's chest breathes fast; his hand reaches for the silver data-drive on the lanyard",
+      "dialogue": "He whispers, tense and urgent, \"Sixty seconds. Don't fail me.\"",
+      "context": "Alley at night, rain dripping off a neon sign overhead, cyan light pulsing on his jacket",
+      "sfx": "SFX: heavy rain on metal, a low electronic hum from the circuit strip. Ambient: distant sirens.",
+      "bridge": false
+    },
+    {
+      "id": "agitate",
+      "camera": "Medium tracking shot following Kai as he sprints left across frame",
+      "action": "Kai sprints through the rain, boots slapping wet asphalt, glancing back over his shoulder",
+      "dialogue": "He mutters under his breath, \"They found the building.\"",
+      "context": "Narrow alley between glowing billboards, rain streaks through the light beams, same cyan strip glowing",
+      "sfx": "SFX: rapid footsteps splashing, rain hissing, a distant metallic clang. Ambient: city night hum.",
+      "bridge": false
+    },
+    {
+      "id": "payoff",
+      "camera": "Slow-motion 180-degree arc around Kai as he slides under a closing shutter door",
+      "action": "Kai drops to a slide, the data-drive swinging on its lanyard, cyan scar catching the light as he looks up",
+      "dialogue": "He shouts over the alarm, \"Kai out. Data secure.\"",
+      "context": "Industrial shutter door closing behind him, orange sparks from a sparking junction box, rain still visible behind",
+      "sfx": "SFX: grinding shutter door, an alarm klaxon, his fast breathing. Ambient: rain fading as the door closes.",
+      "bridge": true
+    },
+    {
+      "id": "cta-loop",
+      "camera": "Wide establishing shot, slow crane up from street level",
+      "action": "Kai stands catching his breath, steam rising from his jacket in the cold rain, then turns to camera with a determined look",
+      "dialogue": "He says, calm now, \"The city never stops. Neither do I.\"",
+      "context": "Rain-soaked street corner, neon signs reflecting in puddles, the cyan circuit strip dimming as he walks into the glow",
+      "sfx": "SFX: rain steady, footsteps walking away, a single low electronic beat. Ambient: distant traffic.",
+      "bridge": false
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Prompt Examples — deepak-skill 🎬
 
-Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit. Email prompts (section 12) run through **`email-marketing`**: subject-line pack → bulletproof HTML + plain text → spam/compliance validation → preview → auditor sign-off. Long-form + brand prompts (section 13) run through **`podcast-to-shorts` / `youtube-video-pipeline` / `blog-seo-content` / `linkedin-personal-brand`**: score → approve → generate → audit.
+Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini CLI, …) once the skills are installed. Every video prompt runs through the **`video-product-pipeline`**: trend research → brainstorm + viral scorecard → `video-product.md` → **your approval** → generate → audit. Web-app prompts (section 11) run through **`vibe-code-webapp`** instead: research → evaluate → `PRD.md` → **your approval** → build → audit. Email prompts (section 12) run through **`email-marketing`**: subject-line pack → bulletproof HTML + plain text → spam/compliance validation → preview → auditor sign-off. Long-form + brand prompts (section 13) run through **`podcast-to-shorts` / `youtube-video-pipeline` / `blog-seo-content` / `linkedin-personal-brand`**: score → approve → generate → audit. Google Flow/Veo scene-prompt prompts (section 14) run through **`veo-cinematic-reels`**: character sheet → scene script → self-verified copy-paste prompt pack.
 
 Two rules that make these prompts work:
 
@@ -193,6 +193,21 @@ Two rules that make these prompts work:
 | "Audit my LinkedIn bio — rewrite it in my voice with proof, no buzzwords, one CTA." | audit/fix |
 
 **Idea sparks:** podcast episodes → 5 shorts/week · YouTube deep-dives repurposed into shorts · SEO article → email newsletter → LinkedIn threads (one idea, full stack).
+
+## 14. Google Flow / Veo cinematic reels 🎬🎥
+
+*Runs through **`veo-cinematic-reels`**: analyze + lock grade/world → **character sheet** (verbatim character/world/grade blocks + Nano Banana reference-image prompts → upload to Flow's Ingredients) → **scene script** (hook → agitate → payoff → CTA/loop with continuity) → **prompts.md** — one copy-paste Veo 3.1 prompt per scene, every prompt carrying the identical character block + grade token + IMAX token, **self-verified** by `scene-prompts.mjs` (exits 1 on drift).*
+
+| Prompt | Type |
+|---|---|
+| "make a veo reel" | sloppy |
+| "Make a cinematic action reel — scenes + Google Flow prompts, same character in every scene, IMAX look, teal-orange grade, native dialogue. ~24s, 9:16." | premium (action) |
+| "Veo reel for a luxury brand — 6 scenes, editorial grade, slow push-ins, one character in a signature outfit. Give me copy-paste prompts." | premium (luxury) |
+| "Character sheet only: my character is a female marine biologist, tropical setting — 3 reference-image prompts for Nano Banana, verbatim block I can reuse." | character sheet only |
+| "I have a reference image of the character — build a 30s emotional reel around her, keep her EXACTLY the same in all scenes." | premium (reference image) |
+| "Audit my scene-plan.json — regenerate the prompt pack and flag any scene that drifts from the character block." | audit/fix |
+
+**Idea sparks:** cinematic brand reels · action sequences · emotional storytelling · product hero reels · character-led series (same character, new episode each week).
 
 ## Asset & audio-only prompts
 

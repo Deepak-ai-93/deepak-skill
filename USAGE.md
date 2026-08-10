@@ -40,7 +40,7 @@ The deciding factor is: **does the product let an agent run terminal commands?**
 # in your project folder — a single skill
 npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images
 
-# or everything (all 13 skills)
+# or everything (all 14 skills)
 npx skills add Deepak-ai-93/deepak-skill --all
 
 # or install globally for every project
@@ -80,7 +80,12 @@ cd skills/blog-seo-content && node scripts/keyword-outline.mjs --seed "saas onbo
 # LinkedIn: voice capture → bio → calendar → engagement
 # Skill builder: scaffold a new skill in the repo's conventions
 cd skills/skill-builder && node scripts/scaffold-skill.mjs --name my-skill --desc "…"
+
+# Google Flow / Veo: scene prompts with locked character consistency
+cd skills/veo-cinematic-reels && node scripts/scene-prompts.mjs --plan scene-plan.json --out prompts.md
 ```
+
+> "Make a reel with scenes and Google Flow prompts — same character every scene, IMAX cinematic look" — the skill builds the character sheet → scene script → self-verified copy-paste prompt pack, then you generate scene by scene in Flow.
 
 > "Turn this podcast episode into 5 shorts" · "Plan a YouTube video with 10 title options" · "Write an SEO blog post that AI search cites" · "Build my LinkedIn presence in my voice" — each runs score → approve → generate → audit.
 
