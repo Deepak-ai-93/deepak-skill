@@ -70,20 +70,32 @@ A rendered frame is a **pure function of time t**. Therefore:
 > **Scripts:** all commands below use `scripts/` — the scripts bundled inside this skill (work standalone in any project). In a repo clone, the identical scripts also live in `render/`; either path works.
 
 ### Stage 1 — Ingest, trend-check & beat sheet
-Research what is **rising** in the niche before writing anything (if `video-product-pipeline` is installed, run its `trend-hunt.mjs` + web-research TikTok Creative Center / X / YouTube; freshness rule: rising > peaked, nothing older than ~14 days), brainstorm ≥5 angles, score them (relatability · curiosity · hook · format fit · momentum · mute-first · loopability) and lock the winner. Then read the prompt, pick a style (see Styles), and build the beat sheet: hook → agitate → payoff → CTA. One beat = one asset + 3–6 words of text. Beat count ≈ seconds ÷ 2. Write `storyboard.json`:
+Research what is **rising** in the niche before writing anything (if `video-product-pipeline` is installed, run its `trend-hunt.mjs` + web-research TikTok Creative Center / X / YouTube; freshness rule: rising > peaked, nothing older than ~14 days), brainstorm ≥5 angles, score them (relatability · curiosity · hook · format fit · momentum · mute-first · loopability) and lock the winner. Then read the prompt, pick a style (see Styles), and build the beat sheet: hook → agitate → payoff → CTA. One beat = one asset + 3–6 words of text. Beat count ≈ seconds ÷ 2. Stage 1b writes the draft `storyboard.json` for you — same schema as below, with per-beat `alias` fields:
 
 ```json
 {
   "out": "assets/cuts",
   "width": 1080, "height": 1920, "fps": 30,
   "beats": [
-    { "id": "beat_01", "src": "assets/clips/sunrise.mp4", "in": 1.5, "duration": 3.0, "start": 0.0, "text": "Nobody teaches you this." },
-    { "id": "beat_02", "src": "assets/photos/desk.jpg",  "duration": 2.5, "start": 3.0, "text": "Clarity is curated." }
+    { "id": "beat_01", "alias": "asset_01", "src": "assets/clips/sunrise.mp4", "in": 1.5, "duration": 3.0, "start": 0.0, "text": "Nobody teaches you this." },
+    { "id": "beat_02", "alias": "asset_02", "src": "assets/photos/desk.jpg",  "duration": 2.5, "start": 3.0, "text": "Clarity is curated." }
   ]
 }
 ```
-- `in` = in-point inside the source clip (videos only), `duration` = beat window, `start` = beat start in the reel timeline.
+- `in` = in-point inside the source clip (videos only), `duration` = beat window, `start` = beat start in the reel timeline. (`alias` is set by Stage 1b — the script/cut/audit ignore it, but it keeps the original filenames clean.)
 - Text: 3–6 words per beat, hook in beat 1, CTA in the last beat.
+
+### Stage 1b — Check assets & auto-arrange (the asset gate, no guessing)
+Scan the assets folder, probe every file with ffprobe, validate it against the 9:16 spec, alias it, and auto-arrange the best-fit assets into a draft `storyboard.json` + `assets-report.md`:
+
+```bash
+node scripts/check-assets.mjs --dir assets --duration 15 --text "Nobody teaches you this.|Clarity is curated.|Save this."
+```
+
+- `--dir` = the assets folder (videos + images) · `--duration` = target reel length (default 15s) · `--text "a|b|c"` = one line per beat (hook first, CTA last) · `--beats N` = cap the beat count · `--dry-run` = print the plan without writing.
+- **The "perfect video" rules the script uses:** real videos beat images · portrait beats landscape (landscape is cover-cropped) · higher resolution wins · the best asset lands on the hook beat · every beat window is capped at the source clip's length so **no beat can ever render black frames**.
+- **Original filenames are never touched** — each asset gets an alias (`asset_01`, `asset_02`, …) used inside `storyboard.json`; `assets-report.md` lists the inventory, every check verdict (unreadable, low-res, landscape-cover-crop, odd names) and the arrangement plan.
+- **Agent rule:** fill any empty beat texts (`--text` or edit `storyboard.json`), swap a beat's `src`/`alias` only when the content clearly fights the beat text (unused assets are listed in the report), then continue to Stage 2.
 
 ### Stage 2 — Cut assets
 ```bash
@@ -232,8 +244,8 @@ Just ask any agent CLI (Claude Code, Cursor, Codex, Gemini CLI, …) once the sk
 ### What the agent does after your prompt
 
 1. Runs a mini-wizard: picks a style (Documentary / Aesthetic / Montage), confirms beat count
-2. Writes `storyboard.json` — one beat per asset, with in-points, durations, text, and reel timings
-3. Cuts assets → `node scripts/cut-assets.mjs storyboard.json`
+2. Runs the asset gate: `node scripts/check-assets.mjs --dir assets` — probes + validates + aliases every asset and auto-arranges the best-fit ones into a draft `storyboard.json` + `assets-report.md` (original filenames kept)
+3. Fills the per-beat texts (or uses the ones you gave) and swaps any content mismatch — then cuts: `node scripts/cut-assets.mjs storyboard.json`
 4. Composes the 1080x1920 HTML (asset layer + text overlay + grain) with a paused GSAP timeline
 5. Renders 4K → `output/{name}/` (+ muxes the -14 LUFS voice+bed mix)
 6. Writes `caption.md` (all sections 500–900 chars, no hashtags)
@@ -249,6 +261,7 @@ Just ask any agent CLI (Claude Code, Cursor, Codex, Gemini CLI, …) once the sk
 ## Production checklist
 
 - [ ] Beat sheet: hook → agitate → payoff → CTA; one asset per beat; 3–6 words text per beat
+- [ ] `check-assets.mjs` run on the assets folder → `assets-report.md` + draft `storyboard.json`; every beat text filled (hook in beat 1, CTA in the last)
 - [ ] `storyboard.json` written; every beat has `id, src, in (videos), duration, start, text`
 - [ ] `cut-assets.mjs` produced one clip per beat (1080x1920, H.264, muted, exact duration)
 - [ ] HTML: assets at z-index 1, backplate z-2, text z-3, grain z-10; videos `muted playsinline preload="auto"`
