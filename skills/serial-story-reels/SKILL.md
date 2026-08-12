@@ -3,6 +3,22 @@ name: serial-story-reels
 description: Create EPISODIC story video series with Google Flow / Veo 3.1 — a story bible (season arc + episode hooks/cliffhangers), character sheets with verbatim blocks (original or user's uploaded reference images → Flow Ingredients), and a self-verified copy-paste Veo prompt pack for every scene of every episode, engineered so the SAME characters stay consistent ACROSS episodes (verbatim character block + grade + cinematic token in every prompt). Cinematic action/motion language (fights, chases, physics), native Veo dialogue/SFX + a Kokoro voiceover line sheet, and genre presets (comic, love story, action, thriller, fantasy).
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: serial-story-reels
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `serial-story-reels` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: serial-story-reels
 
 **Name:** Serial Story Reels — episodic story video series for Google Flow / Veo 3.1

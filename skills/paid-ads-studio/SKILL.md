@@ -3,6 +3,22 @@ name: paid-ads-studio
 description: End-to-end paid ad campaign production for Meta (Facebook/Instagram) and Google Ads — ad creatives (Veo 3.1 / Flow video prompts + Nano Banana Pro / Midjourney / Flux image prompts with locked brand consistency), hook-first ad copy within platform char limits, campaign blueprints (Advantage+ audiences, PMax/Demand Gen, bidding), 2026 AI-content compliance checklists, cost-management rules, and a benchmark-driven forecast of expected results (impressions, clicks, conversions, CPA, ROAS) before a dollar is spent.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: paid-ads-studio
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `paid-ads-studio` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: paid-ads-studio
 
 **Name:** Paid Ads Studio — the paid engine (everything else in this repo is organic)

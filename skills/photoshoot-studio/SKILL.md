@@ -3,6 +3,22 @@ name: photoshoot-studio
 description: Create professional photoshoot prompt packs for AI image tools (Google Flow / Nano Banana, Midjourney, Flux) — person photoshoots AND product photoshoots. Manual copy-paste workflow: one fully-engineered image-generation prompt per shot. Locks subject consistency (the same person or the same product across every shot) via reference-image ingredients + a verbatim subject block in every prompt, professional photography language (camera body, lens, f-stop, lighting setup, film stock), locked color grading per shoot, and an automated prompt-pack builder that self-verifies every prompt carries the consistency tokens. Includes localized edit/inpaint prompts for re-posing, re-outfitting, re-lighting and background swaps.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: photoshoot-studio
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `photoshoot-studio` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: photoshoot-studio
 
 **Name:** Photoshoot Studio — AI photoshoot prompt packs (people + products)

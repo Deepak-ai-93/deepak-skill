@@ -3,6 +3,22 @@ name: email-marketing
 description: Design high-converting, spam-free HTML marketing emails for Brevo, MailerLite, Mailchimp, Klaviyo and any ESP — bulletproof responsive code, anti-fluff copywriting, E-E-A-T trust signals (experience, expertise, authority, trustworthiness), and high-CTR subject lines. Includes a validation script (spam-trigger scan, compliance, EEAT signals) and a desktop/mobile preview renderer for visual auditing before send.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: email-marketing
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `email-marketing` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: email-marketing
 
 **Name:** Email Marketing Design + Copywriting (Brevo / MailerLite / any ESP)

@@ -141,6 +141,8 @@ Other skills follow the same pattern (text-motion reels, video-asset reels, voic
 
 ## 4. Claude.ai web chat / ChatGPT web — partial (copy-paste mode)
 
+**Full browser walkthrough (claude.com):** [`CLAUDE-COM.md`](CLAUDE-COM.md) — the complete step-by-step guide with ready-to-paste prompts for every skill and a hybrid render workflow.
+
 **What works without a terminal:**
 1. Paste the skill as instructions: *"Follow this skill: [paste the contents of `skills/carousel-post-images/SKILL.md`]"* (or paste the GitHub link — the chat can read the repo). For emails: *"Follow this skill: [paste `skills/email-marketing/SKILL.md`]"*.
 2. The model delivers: **slide plan with scenes → viral anti-fluff copy per slide → Mode 2 image prompts (4K) → `caption.md` for 5 platforms → audit checklist.**

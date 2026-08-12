@@ -3,6 +3,22 @@ name: video-asset-reels
 description: Create proper reels from user-supplied video clips and images with HyperFrames — understand the prompt, cut assets to beats, overlay kinetic text, sync a voiceover, and render a deterministic 4K MP4 with a caption pack. Complements text-motion-reels (visuals reuse its design system) without touching it.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: video-asset-reels
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `video-asset-reels` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: video-asset-reels
 
 **Name:** Video/Image Asset Reels (HyperFrames) — cut, overlay, render

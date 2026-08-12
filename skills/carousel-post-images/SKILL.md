@@ -3,6 +3,22 @@ name: carousel-post-images
 description: Create scroll-stopping carousel posts (LinkedIn + Instagram) as image sets. ONE script, TWO CLI modes — Mode 1 browser render (slides.html → headless Chrome → pixel-perfect 4K PNGs on any agent) or Mode 2 native image-model generation (the same deck exports 4K photoreal prompts for Antigravity CLI / Codex image_gen / Grok /imagine). Photorealistic real-life scenario visuals, viral anti-fluff copywriting (hook formulas + a fluff blocklist), four trending design styles (Cinematic Real-Life default), per-platform caption pack, and an auditor stage.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: carousel-post-images
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `carousel-post-images` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: carousel-post-images
 
 **Name:** Carousel Post Images (LinkedIn / Instagram) — two-mode generation

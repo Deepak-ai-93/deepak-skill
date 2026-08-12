@@ -3,6 +3,22 @@ name: video-product-pipeline
 description: Viral-engineered production workflow for ANY short-form video request (reels, TikTok, Shorts) — hunt trending viral topics for the prompt (trend-hunt.mjs + web research), brainstorm and score angles with a viral scorecard, write a video-product.md spec, STOP and wait for user approval, then generate using text-motion-reels / video-asset-reels / voice-sfx-audio, and finally audit the finished composition with an automated script plus a dedicated auditor subagent (spelling, text overlap, safe zones, style, readability). Use for every video-generation request.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: video-product-pipeline
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `video-product-pipeline` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: video-product-pipeline
 
 **Name:** Trend Research → Brainstorm → Video Product → Approval → Generation → Audit pipeline

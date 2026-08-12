@@ -3,6 +3,22 @@ name: youtube-video-pipeline
 description: Plan long-form YouTube videos that get clicked and watched — topic + search research → script with retention hooks → 10-variant title pack (CTR-tested formulas) → thumbnail brief (and image-gen prompt) → description + chapters + tags. Includes a title-pack script (scores variants against CTR formulas + length limits) and reuses the repo's hook and anti-fluff playbooks for the video's opening 30 seconds.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: youtube-video-pipeline
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `youtube-video-pipeline` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: youtube-video-pipeline
 
 **Name:** YouTube Video Pipeline — script, title, thumbnail, description

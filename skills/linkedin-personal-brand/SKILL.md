@@ -3,6 +3,22 @@ name: linkedin-personal-brand
 description: Build a founder/creator LinkedIn presence that compounds — capture the user's real voice from their writing, then produce a weekly post calendar (thought-leadership sequences with hooks + story + one CTA), a profile bio + headline rewrite, and a comment strategy. Includes a voice-capture template (questions that extract the user's actual phrasing) and reuses the repo's anti-fluff + E-E-A-T playbook for professional credibility.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: linkedin-personal-brand
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `linkedin-personal-brand` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: linkedin-personal-brand
 
 **Name:** LinkedIn Personal Brand — posts, bio, voice, strategy

@@ -3,6 +3,22 @@ name: vibe-code-webapp
 description: Build or EXTEND production-ready vibe-coded web apps. The skill ONBOARDS the user with a detailed idea interview (idea-interview.md), and in EXISTING projects first SCANS the current structure (scan-project.mjs → project-scan.md) so the plan extends what's already there instead of starting from zero. Then it ANALYZES the idea + stack, EVALUATES it on the SaaS scorecard (BUILD / ITERATE / PIVOT), and produces a complete distraction-free BUILD PACK — PRD.md + stack-blueprint.md (locked open-source design system + backend architecture, paste-ready data model, build order) + sitemap.md (full sitemap, every frontend page, the backend architecture and all workflows in one markdown) + a TODO.md task list with P0/P1/P2 priorities managed by todo.mjs. The user CONFIRMS the pack AND the todo list (gate) before any code, and can add/re-prioritize tasks mid-build. The vibe coder then builds STEP-BY-STEP from vibe-coder-instructions.md (flowchart + golden loop + memory rules) and files a DETAILED evidence-backed build-report.md per session. Research (research-idea.mjs) + production audit (audit-webapp.mjs + auditor subagent) included, and a final EVERYTHING-AUDITOR subagent reviews the app, the plan, the instructions, the memory and the reports — then applies hardening fixes, adds tests, brainstorms next ideas, and feeds skill improvements back. A daily MEMORY.md protocol keeps the user and the AI in sync across every session and any tool.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: vibe-code-webapp
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `vibe-code-webapp` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: vibe-code-webapp
 
 **Name:** Vibe-Coding Web App Builder (onboard → scan existing → research → evaluate → build pack + todo → confirm → build step-by-step → audit → report + everything-auditor → deliver)

@@ -1,5 +1,16 @@
 # deepak-skill 🎬
 
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 Open-source agent skills for the **full content-creator stack** — short-form video (text-motion + asset reels), **Google Flow / Veo cinematic scene prompts**, viral hooks & storyboards, AI voiceover + sound design, native-image-model carousels, spam-free HTML emails with high-CTR subject lines, **long-form repurposing** (podcast→shorts, YouTube packaging, SEO blog content), **LinkedIn personal branding**, vibe-coded web apps, and a meta **skill-builder** that scaffolds new skills. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
 
 [![skills.sh](https://skills.sh/b/Deepak-ai-93/deepak-skill)](https://skills.sh/Deepak-ai-93/deepak-skill)
@@ -35,6 +46,8 @@ The skills are a complete production pipeline: **what's trending** (research + b
 ## Quick start — install in your project (3 steps)
 
 > **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 17 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
+>
+> **Using the claude.com website (browser, no terminal)?** No install needed — copy-paste the skill instructions and Claude follows them in the chat. Step-by-step: [`CLAUDE-COM.md`](CLAUDE-COM.md).
 
 ### 1. Prerequisites
 

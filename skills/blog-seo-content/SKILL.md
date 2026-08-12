@@ -3,6 +3,22 @@ name: blog-seo-content
 description: Write SEO-optimized, E-E-A-T-rich blog articles that rank on search AND get cited by AI search (GEO) — keyword research → intent mapping → data-backed outline → full long-form article with meta title/description, heading hierarchy, internal links, and source citations. Includes a keyword/outline script (keyword difficulty + intent analysis + outline scaffold) and reuses the repo's EEAT + anti-fluff copywriting playbook.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: blog-seo-content
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `blog-seo-content` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: blog-seo-content
 
 **Name:** Blog SEO Content — articles that rank and get cited

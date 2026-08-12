@@ -3,6 +3,22 @@ name: skill-builder
 description: Scaffold new Agent Skills that match the deepak-skill repo conventions — generates the folder, SKILL.md (frontmatter + quality bar + workflow stages + production checklist), scripts (with the Deepak brand banner), templates, and examples, then validates the scaffold and wires it into README/USAGE/prompt-examples. Use whenever the user wants to add a new skill to this repo or build a standalone skill for skills.sh.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: skill-builder
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `skill-builder` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: skill-builder
 
 **Name:** Skill Builder (meta) — scaffold new skills the deepak-skill way

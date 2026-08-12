@@ -3,6 +3,22 @@ name: veo-cinematic-reels
 description: Create reel scripts with scene-by-scene video-generation prompts for ANY modern video generator (Google Flow / Veo 3.1, Kling, Luma, Runway, Hailuo, Vidu, Pika, PixVerse) — manual copy-paste workflow, one rich long-form prompt per scene. Locks character consistency (no face/wardrobe drift) via reference-image ingredients + a verbatim character block in every prompt, IMAX-level cinematic language (large-format camera, lens, motion, tempo), great color grading (film stock + palette tokens), native dialogue/SFX audio, plus a labeled negative prompt and locked seed per scene — and an automated prompt-pack builder that self-verifies every prompt carries the consistency tokens.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: veo-cinematic-reels
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `veo-cinematic-reels` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: veo-cinematic-reels
 
 **Name:** Veo Cinematic Reels — scene scripts + copy-paste prompts for any video generator

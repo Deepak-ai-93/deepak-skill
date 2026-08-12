@@ -3,6 +3,22 @@ name: podcast-to-shorts
 description: Turn long-form podcast or video content into viral-ready vertical shorts (Reels / TikTok / Shorts) — transcript → find the highest-virality moments → write per-clip hooks + captions → cut the clips with FFmpeg → sync captions. Includes a clip-scoring script (transcript analysis → ranked moments with timestamps), FFmpeg cut commands, and a Deepak-branded pipeline that reuses the repo's reel/caption conventions.
 ---
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     🎬 deepak-skill — crafted by Deepak · skill: podcast-to-shorts
+     https://github.com/Deepak-ai-93/deepak-skill · MIT license
+     ════════════════════════════════════════════════════════════════════════ -->
+
+```
+   ██████╗ ███████╗███████╗██████╗  █████╗ ██╗  ██╗
+   ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
+   ██║  ██║█████╗  █████╗  ██████╔╝███████║█████╔╝
+   ██║  ██║██╔══╝  ██╔══╝  ██╔══██╗██╔══██║██╔═██╗
+   ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
+   ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
+```
+
+**🎬 deepak-skill — crafted by Deepak** · skill: `podcast-to-shorts` · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
+
 # skill: podcast-to-shorts
 
 **Name:** Podcast-to-Shorts — long-form → viral vertical clips
