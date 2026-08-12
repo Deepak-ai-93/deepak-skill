@@ -16,7 +16,8 @@
 | **App name / one-liner** | {e.g. InvoiceFlow — invoices freelancers actually get paid on} |
 | **Idea given by user** | {their raw words, verbatim} |
 | **Stack preference given** | {Next.js / Vite / none} |
-| **Evaluation verdict** | {score /35 → BUILD / ITERATE / PIVOT} |
+| **Evaluation verdict** | {score /35 → BUILD / ITERATE / PIVOT} (from `validation.md`, computed by `saas-score.mjs`) |
+| **Kill guardrail** | {if < X by date → iterate/pivot/kill} (from `validation.md`) |
 | **Audience** | {e.g. freelance designers & devs} |
 | **Monetized?** | {yes — plan · no} |
 
@@ -36,11 +37,16 @@
 
 > If the user gave a different stack preference, honor it — but lock it here exactly the same way.
 
-## 3. Design system (open-source, applied as-is)
+## 3. Design — source of truth + design system (applied as-is)
 
+- **Design source of truth (pick ONE — never "TBD"):** `templates/frontend-design.md`
+  - **Figma file:** `{paste the Figma link}` → agent connects via the **Figma Developer MCP** and extracts real tokens/layout (`get_design_context` + `get_variable_defs`); screens match the frames.
+  - **Google Stitch:** `{link to the Stitch canvas}` → UI generated from the sitemap; `DESIGN.md` extracted and mapped to tokens.
+  - **Open-source pack** (no design): the defaults below.
 - **Reference:** `templates/design-system.md` — tokens, typography, layout, components.
 - **Full sitemap + page map:** see `sitemap.md` (every route, every page block, all workflows). The quick table below is the summary — fill BOTH from the same list of pages.
-- **Palette:** neutral shadcn tokens + one accent (`--primary` hue only): `{243 75% 59%}`.
+- **Palette:** neutral shadcn tokens + one accent (`--primary` hue only): `{243 75% 59%}` (mapped from the design source's colors — `frontend-design.md` §4).
+- **Design parity:** every screen is visually checked against the source of truth (browser-MCP screenshot vs Figma/Stitch) at 375/768/1280 — `frontend-design.md` §3/§5.
 - **Pages & components map (summary — full blocks in `sitemap.md` §2):**
 
 | Page/Route | Components (shadcn) | Notes |
@@ -57,6 +63,16 @@
 - **Route handlers:** `app/api/stripe/webhook/route.ts` (+ `/api/health`).
 - **Auth:** `lib/auth.ts` + `middleware.ts` guarding `/dashboard/:path*` and `/api/:path*`.
 - **Payments flow:** Checkout Session (`metadata.userId`) → webhook → `subscriptions.status` → `currentPlan()` gate.
+
+### 4.1 AI features (ONLY if the PRD has AI — else delete this section)
+
+- **Reference:** `templates/ai-logic.md` — the locked AI rails (stack, streaming, prompts-as-code, cost, evals).
+- **AI SDK + models:** `{Vercel AI SDK + provider}` · cheap model `{gpt-4o-mini}` for `{easy tasks}`, strong model `{gpt-4.1}` for `{hard tasks}`.
+- **Streaming:** `streamText` → `{toUIMessageStreamResponse}`; stop button + AbortController + timeout per request.
+- **Prompts as code:** `lib/ai/prompts/{feature}.ts` with zod schemas + versioning — no literals in components.
+- **Cost rails:** maxTokens per request, per-user/day budget, prompt + response caching, Upstash rate limit per user.
+- **Evals:** `tests/ai/evals/` golden set (5–10 cases) + `npm run eval` in CI.
+- **Env vars:** `OPENAI_API_KEY` / `ANTHROPIC_API_KEY` (server-only — never `NEXT_PUBLIC_`).
 
 ## 5. Data model (paste-ready)
 
@@ -86,15 +102,16 @@ Rules: `user_id` FK on every owned table · `created_at` default now() · indexe
 ## 6. Build order (the distraction-free sequence — do NOT skip ahead)
 
 1. Scaffold `create-next-app` (TS, Tailwind, App Router) → `npm run dev` works → commit.
-2. Design tokens + fonts + theme provider + base layout → landing page renders → commit.
+2. **Design tokens from the source of truth** (Figma variables via MCP / Stitch `DESIGN.md` / pack) + fonts + theme provider + base layout → landing renders per design → commit.
 3. Drizzle schema + migrations + db client → `db:check` passes → commit.
 4. Auth (lib/auth + middleware + login/signup pages + session) → protected route redirects → commit.
-5. Feature 1 (highest PRD value) → Feature 2 … each: run → verify → commit.
+5. Feature 1 (highest PRD value) → Feature 2 … each: run → verify → **design parity check** → commit.
 6. Payments (if monetized): Checkout → webhook → status UI → test with `stripe listen`.
-7. Analytics + SEO meta + error states + empty states + polish (micro-interactions).
-8. Tests for auth/billing → CI → production audit → deploy.
+7. AI features (if any, per `ai-logic.md` §9): streaming route → prompts+zod+evals → UX (stop/timeout/errors) → cost rails → observability.
+8. Analytics + SEO meta + error states + empty states + polish (micro-interactions).
+9. Tests for auth/billing/AI evals → CI → production audit → deploy.
 
-**Definition of done per step:** the app runs (`npm run dev`), the step's flow works end-to-end, committed. Never 2 steps before running.
+**Definition of done per step:** the app runs (`npm run dev`), the step's flow works end-to-end (and matches the design for UI steps), committed. Never 2 steps before running.
 
 ## 7. Handoff prompts — paste the pack into ANY builder
 
@@ -138,7 +155,10 @@ next item from PRD.md's must-haves exactly as scoped; run it; verify; commit.
 ## 8. Definition of done (before this pack is "ready")
 
 - [ ] Every field in §1–§6 filled; stack locked; no open decisions left
+- [ ] **Design source of truth chosen (Figma link / Stitch DESIGN.md / pack) — not "TBD"**; tokens mapped per `frontend-design.md`
 - [ ] Data model SQL paste-ready; build order numbered and complete
+- [ ] **AI section present iff the PRD has AI features** (else removed) — rails locked per `ai-logic.md`
 - [ ] Handoff prompts filled in with the real app details
 - [ ] PRD.md must-haves match the build order 1:1
+- [ ] `validation.md` verdict recorded (BUILD only — or user's explicit override after seeing the risks)
 - [ ] Nothing in the pack references a tool-specific feature (works in CLI + web builders)

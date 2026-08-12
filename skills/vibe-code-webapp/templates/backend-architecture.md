@@ -83,7 +83,29 @@ src/
 - CI: GitHub Actions — install, lint, `drizzle-kit check`, test, build on push.
 - Uptime: host handles it (Vercel); add UptimeRobot ping of `/api/health` if you want an inbox alert.
 
-## 9. Alternatives (when the PRD picks a different path)
+## 9. AI features (when the PRD has them — see `templates/ai-logic.md` for the full pack)
+
+Add this section to the backend architecture ONLY when the PRD includes an AI feature.
+
+| Layer | Choice | Why |
+|---|---|---|
+| AI SDK | **Vercel AI SDK** (`ai` + provider package) or provider SDK | streaming + tools + model-agnostic, one canonical path |
+| Models | cheap model for easy tasks, strong for hard ones | cost routing — see `ai-logic.md` §5 |
+| Streaming | `streamText` → `toUIMessageStreamResponse` | the user feels the first token, not a spinner |
+| Prompts | `lib/ai/prompts/*` files + zod schemas, versioned | prompts as code, never literals in components |
+| Vector store | **pgvector** (Postgres already in the stack) or Upstash Vector | no new infra when Postgres exists |
+| Caching | provider prompt caching + response cache (Redis/Upstash) | AI is metered — cache aggressively |
+| Rate limit | Upstash `@upstash/ratelimit` per user on AI routes | a leaked key is a bill you pay |
+| Evals | `tests/ai/evals/` golden set + `npm run eval` in CI | invisible regressions without a golden set |
+
+**Security:** AI keys server-only (`process.env` — never `NEXT_PUBLIC_`), ownership
+checks on AI endpoints, zod-validated structured output, injection guardrails,
+AbortController + timeouts on every call.
+
+> The audit checks these with `audit-webapp.mjs --ai` (SDK present, streaming,
+> abort/timeout, env-key hygiene, rate limits, evals).
+
+## 10. Alternatives (when the PRD picks a different path)
 
 | Case | Stack |
 |---|---|

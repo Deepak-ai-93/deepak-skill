@@ -74,3 +74,27 @@ Neutral shadcn palette — works for every product. Accent = your brand color **
 - Mobile responsive at 375px — sidebar becomes `sheet`, tables get horizontal scroll (`overflow-x-auto`).
 - Accessibility: every `input` has a `label`; icons get `aria-label`; contrast `>= 4.5:1`; focus rings via `--ring`.
 - No custom colors/fonts per page — tokens only. One design language, every screen.
+
+## 8. Design source of truth (Figma / Google Stitch / pack)
+
+Every app picks ONE design source — see `templates/frontend-design.md` for the full
+workflow (Figma Developer MCP, Google Stitch `DESIGN.md`, browser-MCP QA). This
+section is the token mapping contract so a real design and this pack never fight:
+
+| Design input | Maps to this pack | Rule |
+|---|---|---|
+| Figma color variables | `--background`, `--foreground`, `--primary` (hue only), `--destructive`… | One accent — override `--primary` hue only |
+| Figma spacing / auto-layout gaps | Tailwind `gap-*`/`space-y-*`/`p-*` scale (4/8/12/16/24/32/48) | Snap to the 4px scale; never bespoke px |
+| Figma type styles | `text-xs`…`text-6xl` + Geist family | Headings 600–700 tight; body 400 relaxed |
+| Figma radius | `--radius` (`0.5rem` controls, `0.75rem` cards, `0.625rem` buttons) | No per-component radius tokens |
+| Stitch `DESIGN.md` rules | Same as above — extract tokens, then map | `DESIGN.md` becomes the blueprint's §3 reference |
+| No design at all | Use §1–§7 as-is | Zero design meetings |
+
+- **Token extraction (Figma):** via the Figma Developer MCP — `get_variable_defs`
+  returns the file's variables; map them once, in the blueprint §3, and never add
+  a new token per screen.
+- **Visual parity:** a browser MCP screenshots the built screen and is compared
+  to the Figma frame / Stitch export at 375 / 768 / 1280 — this is a BUILD.md
+  golden-loop step for UI tasks, not an afterthought.
+- **Dark mode:** the design's dark theme maps to the `--*-foreground` inverse
+  tokens — one toggle, persisted, `next-themes` class strategy.

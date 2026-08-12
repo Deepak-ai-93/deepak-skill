@@ -81,6 +81,24 @@ Won't do (non-goals):
 - {User said "…" → interpreted as …}
 - {Defaulted stack to … because …}
 
+## 12. AI features (only if the app has them — else delete this section)
+
+> Rails locked in `stack-blueprint.md` §4.1 from `templates/ai-logic.md`.
+
+| Feature | What the user gets | Model (cheap/strong) | Streaming? | Cost rail | Eval cases |
+|---|---|---|---|---|---|
+| {e.g. chat copilot} | {answers questions about their data} | {strong for reasoning} | yes | {maxTokens + per-user budget} | {5 golden prompts} |
+
+- **Non-AI fallback:** {what the user sees when the model fails/times out — a retry, a default, a helpful error}
+- **Kill guardrail for AI:** {if cost/user exceeds $X or error rate > 5% → route to cheaper model / restrict scope}
+
+## 13. Design source of truth (from `templates/frontend-design.md`)
+
+- **Source picked:** {Figma file link / Google Stitch canvas / open-source design pack}
+- **Tokens:** {colors/spacing/type mapped to the design system — one accent hue}
+- **Design parity:** {screens are visually checked against the source at 375/768/1280 — browser MCP vs Figma/Stitch}
+- **Validation verdict:** {from `validation.md` — score /35 → BUILD / ITERATE / PIVOT + kill guardrail}
+
 ---
 
 > **Status: awaiting user approval** — reply **approve** to build, **edit** to revise, or **reject** to stop.

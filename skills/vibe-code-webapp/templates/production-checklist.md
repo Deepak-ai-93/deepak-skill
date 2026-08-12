@@ -46,6 +46,23 @@
 - [ ] Mobile responsive at phone width; empty/loading/error states on every view
 - [ ] Accessibility basics: labels on inputs, contrast, keyboard navigation
 
+## F. Design source of truth (from `frontend-design.md`)
+
+- [ ] Design source chosen and recorded in the blueprint §3: **Figma link / Stitch `DESIGN.md` / open-source pack** — never "TBD"
+- [ ] Tokens mapped (Figma variables / Stitch tokens → design system) — one accent, no raw per-page colors
+- [ ] **Design parity** verified per screen: layout, spacing, type, states match the source (browser-MCP screenshot vs Figma/Stitch) at 375/768/1280
+- [ ] Dark mode renders + persists; empty/loading/error states on every async view
+- [ ] Deviations from the design logged with the user's sign-off
+
+## G. AI features (only if the PRD has them — from `ai-logic.md`)
+
+- [ ] AI SDK wired; keys server-only (`process.env`, never `NEXT_PUBLIC_`); `.env.example` documents them
+- [ ] **Streaming UX**: tokens stream, stop button + AbortController + timeout, distinct error states (network/provider/refusal/empty)
+- [ ] **Cost rails**: maxTokens, per-user budget, prompt/response caching, rate limit on AI routes
+- [ ] **Prompts as code**: versioned prompt files + zod schema per structured output
+- [ ] **Evals**: golden set + `npm run eval` — an AI feature without evals ships invisible regressions
+- [ ] `audit-webapp.mjs --ai` passes (SDK, streaming, abort/timeout, env keys, rate limits, evals)
+
 ---
 
-> Run `node scripts/audit-webapp.mjs --dir . --name {app} {--payments}` → complete the report → auditor subagent signs off **PASS** → deliver.
+> Run `node scripts/audit-webapp.mjs --dir . --name {app} {--payments} {--ai}` → complete the report → auditor subagent signs off **PASS** → deliver.

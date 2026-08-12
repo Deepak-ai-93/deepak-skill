@@ -6,11 +6,13 @@
 // audit-report.md for the auditor subagent to complete and sign off.
 //
 // Usage:
-//   node scripts/audit-webapp.mjs --dir . --name my-app [--payments] [--out output/audit]
+//   node scripts/audit-webapp.mjs --dir . --name my-app [--payments] [--ai] [--out output/audit]
 //
 //   --dir <path>      project folder to audit (default: ".")
 //   --name <slug>     report label (default: folder name)
 //   --payments        also audit for payment/billing integration
+//   --ai              also audit AI features (LLM SDK, streaming, abort/timeout,
+//                     env-key hygiene, rate limits, evals) — from ai-logic.md
 //   --out <dir>       where audit-report.md is written (default: output/audit)
 //
 // Checks are marker-based: PASS = marker found, WARN = worth a human look,
@@ -32,6 +34,7 @@ const opt = (name, fallback) => {
 const DIR = resolve(process.cwd(), opt("dir", "."));
 const NAME = opt("name", basename(DIR) || "webapp");
 const WITH_PAYMENTS = args.includes("--payments");
+const WITH_AI = args.includes("--ai");
 const OUT_DIR = resolve(process.cwd(), opt("out", "output/audit"));
 
 // --- walk the project -----------------------------------------------------------
@@ -167,6 +170,34 @@ if (WITH_PAYMENTS) {
   add("payments", "Payments / billing", someMatch(/\b(stripe|paddle|lemonsqueezy|lemon-squeezy|razorpay|paypal|squareup|billing|subscription|checkout)\b/i) ? "PASS" : "WARN", someMatch(/\b(stripe|paddle|lemonsqueezy|razorpay|paypal|billing|subscription|checkout)\b/i) ? "payment markers found" : "--payments requested but no payment/billing markers found");
 }
 
+// 5b. AI features (from templates/ai-logic.md) — only when --ai
+const aiSdk = someMatch(/\b(ai\b|from\s+["']ai["']|@ai-sdk\/|openai\b|anthropic\b|@anthropic-ai|langchain|langgraph|google-genai|@google\/genai|gemini|huggingface|cohere\b|mistral\b|ollama\b|groq\b|bedrock|vertexai)\b/i) ||
+  (pkg && /(openai|anthropic|ai-sdk|langchain|genai|cohere|mistral|ollama|groq|bedrock)/i.test(JSON.stringify(pkg.dependencies || {})));
+if (WITH_AI) {
+  const streaming = someMatch(/\b(streamText|toDataStreamResponse|toUIMessageStream|ReadableStream|stream\.toText|generative\s*ui)\b/i);
+  const abort = someMatch(/\b(AbortController|abort\s*\(|signal\s*[:=]|timeout\s*\()/i);
+  // Only flag literal key ASSIGNMENTS (e.g. OPENAI_API_KEY = "sk-..."), never the
+  // legitimate process.env.OPENAI_API_KEY read — the general secretRx already
+  // catches raw sk-/AIza- values, so this catches provider-key names with values.
+  const aiKeys = textFiles
+    .filter((f) => !isConfig(f.rel) && !/^\.env\./i.test(basename(f.rel)))
+    .filter((f) => /(OPENAI_API_KEY|ANTHROPIC_API_KEY|GOOGLE_GENERATIVE_AI_API_KEY|GEMINI_API_KEY|AI_API_KEY)\s*[:=]\s*["'][A-Za-z0-9_\-]{15,}["']/i.test(f.content));
+  const aiEnvDoc = anyOf([".env.example", ".env.sample", ".env.template"]) &&
+    someMatch(/(OPENAI_API_KEY|ANTHROPIC_API_KEY|GOOGLE_GENERATIVE_AI_API_KEY|GEMINI_API_KEY)/i);
+  const aiRate = someMatch(/\b(rate-?limit|ratelimit|upstash|redis)\b/i);
+  const aiEvals = someMatch(/\b(evals?|golden\s*set|tests?\/ai|promptfooconfig|evaluate\(|\.eval\b)/i);
+  const aiPublic = someMatch(/NEXT_PUBLIC_(OPENAI|ANTHROPIC|GEMINI|AI_)/i);
+
+  add("ai-sdk", "AI SDK / provider", aiSdk ? "PASS" : "WARN", aiSdk ? "AI SDK markers found" : "--ai requested but no LLM/AI SDK markers found");
+  add("ai-streaming", "AI streaming UX", streaming ? "PASS" : "WARN", streaming ? "streaming markers found" : "no streaming markers — users waiting on a spinner for the full response is a broken-feeling UX (ai-logic.md §3)");
+  add("ai-abort", "Abort / timeout handling", abort ? "PASS" : "WARN", abort ? "abort/timeout markers found" : "no AbortController/timeout — a hanging model call = support ticket (ai-logic.md §3)");
+  add("ai-env", "AI keys in env (not hardcoded)", aiKeys.length ? "FAIL" : "PASS", aiKeys.length ? `AI key literal(s) in ${aiKeys[0].rel} — move to env vars immediately` : "no hardcoded AI keys found");
+  add("ai-env-doc", "AI keys documented (.env.example)", aiEnvDoc ? "PASS" : "WARN", aiEnvDoc ? "AI keys documented in .env.example" : "no .env.example documenting AI keys");
+  add("ai-rate", "Rate limiting on AI endpoints", aiRate ? "PASS" : "WARN", aiRate ? "rate-limit/Redis markers found" : "no rate limiting on AI routes — a leaked key is a bill you pay (ai-logic.md §5)");
+  add("ai-evals", "AI evals / tests", aiEvals ? "PASS" : "WARN", aiEvals ? "eval/test markers found" : "no evals or AI tests — AI regressions are invisible without a golden set (ai-logic.md §6)");
+  add("ai-public", "No NEXT_PUBLIC_ AI keys", aiPublic ? "FAIL" : "PASS", aiPublic ? "NEXT_PUBLIC_ AI key found — server-only keys must never ship to the client" : "no client-exposed AI keys");
+}
+
 // 6. Robustness
 add("errors", "Error handling", someMatch(/\btry\s*\{|\bcatch\s*\(|ErrorBoundary|componentDidCatch|process\.on\(['"]unhandledRejection|app\.use\([^)]*error|onUnhandledError|logging\.(error|exception)/) ? "PASS" : "WARN", "error-handling markers found or none — confirm crashes surface to the user/logs");
 add("validation", "Input validation", someMatch(/\b(zod|joi|yup|valibot|class-validator|express-validator|pydantic|sanitize-html|validator)\b/i) ? "PASS" : "WARN", "validation library found or none — user input must be validated/sanitized");
@@ -199,7 +230,7 @@ const md = `# Web App Audit — ${NAME}
 
 - **Date:** ${new Date().toISOString().slice(0, 10)}
 - **Project dir:** ${DIR} · **Source files:** ${srcCount} · **Files scanned:** ${textFiles.length}
-- **Flags:** ${WITH_PAYMENTS ? "payments audit on" : "payments audit off (add --payments if monetized)"}
+- **Flags:** ${WITH_PAYMENTS ? "payments audit on" : "payments audit off (add --payments if monetized)"} · ${WITH_AI ? "AI-feature audit on" : "AI-feature audit off (add --ai if the app has LLM features)"}
 - **Automated verdict:** **${verdict}** (${pass} PASS · ${warn} WARN · ${fail} FAIL)
 
 ## 1. Automated checks (script verdicts)

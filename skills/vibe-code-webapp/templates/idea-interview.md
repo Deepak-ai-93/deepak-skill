@@ -75,8 +75,18 @@
 | 8.3 | New idea, or a next phase of the current product? | Changes the research brief | next phase of current product |
 | 8.4 | Are the existing features/bugs on the scan report accurate? Anything missing? | Ground-truth check | assume accurate |
 
+## 9. Design & AI (new projects — helps the design source + AI rails)
+
+| # | Question | Why it matters | Default if skipped |
+|---|---|---|---|
+| 9.1 | Do you have a **Figma design** (link?), a **Google Stitch** canvas, or should we use the design pack / generate a design? | Locks the design source of truth (`frontend-design.md`) | open-source pack; agent can offer Stitch |
+| 9.2 | Does the app have an **AI feature**? (chat, copilot, autocomplete, extraction, summarization…) | Adds the AI rails section (`ai-logic.md`) to the blueprint | no AI — keep the stack simple |
+| 9.3 | Any model/provider preference for the AI feature? (OpenAI / Anthropic / Google / local) | Locks the AI stack choice | provider default from `ai-logic.md` §2 |
+| 9.4 | Are you willing to talk to 5 potential users or run a landing+waitlist before/during the build? | The validator's validation moves (`saas-validator.md` §6) | yes, if the verdict is ITERATE |
+
 ---
 
-> **After the interview:** answers → `output/idea/idea-answers.md`, then Stage 1 (research the idea),
-> Stage 2 (scorecard), Stage 3 (build pack + `TODO.md` + confirmation gate).
+> **After the interview:** answers → `output/idea/idea-answers.md`, then Stage 1 (expert research
+> per `research-playbook.md`), Stage 2 (SaaS validator → `validation.md`), Stage 3 (design source of
+> truth + build pack + `TODO.md` + confirmation gate).
 > Remember the invariant: **no code before the user approves the pack AND the todo list.**

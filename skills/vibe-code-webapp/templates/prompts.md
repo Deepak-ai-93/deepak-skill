@@ -204,6 +204,62 @@ Works in Claude Code, Cursor, Windsurf, Codex CLI, Gemini CLI, Antigravity, Grok
 > PRD must-have appears as a route + a workflow. Add it to the build pack before
 > presenting it for approval.
 
+## 21. SaaS validator only (Stage 2 — expert go/no-go gate)
+
+> Using the **vibe-code-webapp** skill, validate **{idea}** for **{audience}**
+> before we build: follow `templates/saas-validator.md` end-to-end — score it
+> 1–5 on all 7 criteria **with evidence** (from research), run
+> `node scripts/saas-score.mjs --scores <7 numbers>` for the deterministic
+> verdict, check the **kill criteria** honestly, sanity-check the **unit
+> economics** (margin, CAC, payback, LTV), write the **kill guardrail**, and
+> recommend ≥1 **validation move** (interviews / landing+waitlist / fake-door /
+> pilot). Write `validation.md`. Be brutally honest — I'd rather kill it now
+> than build a dud. If the verdict is PIVOT/KILL, stop and brainstorm the pivot;
+> don't write a build pack.
+
+## 22. Design-first build — from a Figma file (Stage 3 design source)
+
+> Using the **vibe-code-webapp** skill, design-first mode: here is the Figma
+> design — **{paste the Figma link}**. Connect the **Figma Developer MCP**
+> (remote `https://mcp.figma.com/mcp`), run `get_design_context` +
+> `get_variable_defs` on the key frames, and map the real tokens into the build
+> pack per `templates/frontend-design.md` (design source of truth §1 + token
+> mapping §4). Every page block in `sitemap.md` must describe the **actual
+> layout from the file**, not a generic template. Then finish the pack (PRD +
+> blueprint + sitemap + TODO) and wait for my approval. During the build,
+> require design parity per screen.
+
+## 23. Design-first build — generate the design with Google Stitch
+
+> Using the **vibe-code-webapp** skill, I have **no design yet** — generate one
+> with **Google Stitch** (`stitch.withgoogle.com`) before the build pack:
+> prompt the Stitch canvas with the page list from the sitemap (landing → auth
+> → dashboard → …), get back multi-screen UI + **`DESIGN.md`**, map its tokens
+> into the locked design system per `templates/frontend-design.md` §2/§4, and
+> record Stitch + `DESIGN.md` as the blueprint's design source of truth. Then
+> write the full build pack + TODO and wait for my approval.
+
+## 24. Build with AI features (AI rails — `ai-logic.md`)
+
+> Using the **vibe-code-webapp** skill, the approved PRD includes **{AI feature:
+> chat / copilot / extraction / …}**. Lock the **AI rails** from
+> `templates/ai-logic.md` into the blueprint: AI SDK + model routing (cheap for
+> easy, strong for hard), **streaming UX** (streamText + stop button +
+> AbortController + timeout), **prompts as code** (versioned files + zod
+> schemas), **cost rails** (maxTokens, per-user budget, caching, rate limit),
+> **evals** (golden set + `npm run eval` in CI). Build the feature step by step
+> per `ai-logic.md` §9 — never commit a mocked AI response as done. Finish with
+> `node scripts/audit-webapp.mjs --dir . --name {app} --ai` and the auditor
+> sign-off.
+
+## 25. Audit with AI features (Stage 5 + `--ai`)
+
+> Using the **vibe-code-webapp** skill, run the production audit on this app
+> (it has AI features): `node scripts/audit-webapp.mjs --dir . --name {app}
+> --ai {--payments}`, then spawn the auditor subagent per the skill brief —
+> confirm the AI rails held (streaming, abort/timeout, keys env-only, rate
+> limits, evals), fix everything it flags, re-audit until PASS.
+
 ---
 
 ## The vibe-coding craft rules (what these prompts enforce)

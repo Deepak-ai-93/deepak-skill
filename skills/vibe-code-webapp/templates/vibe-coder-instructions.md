@@ -95,10 +95,12 @@ Session start ──► read MEMORY.md ──► check TODO confirmed? ──NO�
 3. **Implement** the smallest change that satisfies that scope. One feature at a time — no mega-branches.
 4. **Run** the app (`npm run dev` / the blueprint's run command). It must start. If it doesn't, fix it before moving on.
 5. **Verify** the task's definition of done works end-to-end (click through / call the API / run the test).
-6. **Mark done** — `node scripts/todo.mjs done <id>` — **only after it runs and is verified**, not when the code is merely written.
-7. **Commit** with a message naming the task (`feat: invoice form (#4)`).
-8. **Report** — append to `build-report.md` (section 3 format: what / where / evidence).
-9. **Memory** — if a lasting decision came up ("we use X because…"), add it to `MEMORY.md` → **Standing decisions** immediately.
+6. **Design parity (UI tasks)** — the screen matches the design source of truth (Figma frame / Stitch export / pack tokens): layout, spacing, tokens, states. Screenshot + compare (browser MCP), don't eyeball — `frontend-design.md` §3.
+7. **AI tasks** — follow the AI rails (`ai-logic.md`): stream tokens, wire stop/abort + timeout, zod-validate output, stay inside cost caps, run evals. **Never commit a mocked AI response as done** — verify with a real call.
+8. **Mark done** — `node scripts/todo.mjs done <id>` — **only after it runs and is verified**, not when the code is merely written.
+9. **Commit** with a message naming the task (`feat: invoice form (#4)`).
+10. **Report** — append to `build-report.md` (section 3 format: what / where / evidence).
+11. **Memory** — if a lasting decision came up ("we use X because…"), add it to `MEMORY.md` → **Standing decisions** immediately.
 
 > If a task is genuinely blocked, mark it `blocked` (`todo.mjs blocked <id>`) and say why in the report + memory — don't silently skip it.
 
@@ -109,10 +111,11 @@ Session start ──► read MEMORY.md ──► check TODO confirmed? ──NO�
 | Step | What | Definition of done | Done when |
 |---|---|---|---|
 | 1 | {scaffold / set up} | {app starts, dev server green} | {ref} |
-| 2 | {tokens + base layout} | {landing renders} | {ref} |
+| 2 | {design tokens from the source of truth + base layout} | {landing renders per design} | {ref} |
 | 3 | {schema + migrations} | {db:check passes} | {ref} |
 | 4 | {auth} | {protected route redirects} | {ref} |
-| … | {feature n} | {flow works end-to-end} | {ref} |
+| … | {feature n} | {flow works end-to-end + design parity} | {ref} |
+| … | {AI feature n — per ai-logic.md §9} | {streams, aborts, cost-capped, evals pass} | {ref} |
 
 Each step = one or more TODO tasks. **Never run 2 steps before the app starts again.** The order in the blueprint wins over gut feel.
 
@@ -151,8 +154,10 @@ The final report (`build-report.md` complete + `audit-report.md` PASS) is handed
 
 - [ ] App runs end-to-end; first user flow works; no TODO stubs / mocked data in shipped flows
 - [ ] Every confirmed TODO task is `done` (or explicitly `blocked` with a reason)
-- [ ] `audit-webapp.mjs` verdict is PASS (secrets, env, auth, db, payments, error states, mobile, a11y)
-- [ ] Tests exist for auth, billing, and anything that deletes data
+- [ ] `audit-webapp.mjs` verdict is PASS (secrets, env, auth, db, payments, error states, mobile, a11y; `--ai` if AI features)
+- [ ] Tests exist for auth, billing, and anything that deletes data (+ AI evals if AI features)
+- [ ] **Design parity:** screens match the design source of truth (Figma/Stitch/pack) — layout, spacing, tokens, states (`frontend-design.md` §5)
+- [ ] **AI features:** stream, abort/stop + timeout, keys env-only (no `NEXT_PUBLIC_`), rate-limited, evals pass (`ai-logic.md`)
 - [ ] README with setup + env vars + deploy runbook
 - [ ] `build-report.md` detailed and evidence-backed
 - [ ] `MEMORY.md` today's entry appended; standing decisions current
@@ -168,5 +173,7 @@ The final report (`build-report.md` complete + `audit-report.md` PASS) is handed
 - ❌ Write secrets in code — `process.env` only, `.env.example` committed, `.env` ignored
 - ❌ Skip running between changes, or commit an app that doesn't start
 - ❌ Mark a task `done` before it's verified
+- ❌ Redesign the UI away from the design source of truth (Figma/Stitch/pack) — if the design needs changing, update the pack AND re-confirm with the user
+- ❌ Commit a mocked AI response as "done", or ship AI without abort/timeout/error states, cost caps, or evals
 - ❌ Re-platform an existing project unless the blueprint explicitly says so
 - ❌ Rewrite `MEMORY.md` history — append only
