@@ -42,6 +42,38 @@ description: Create reel scripts with scene-by-scene video-generation prompts fo
 
 ---
 
+## Storytelling + addiction rails (the universal contract — read before anything else)
+
+Every deliverable this skill produces must tell **ONE micro-story** and engineer **rewatch**. These rails are the SAME contract every video/image skill in this repo follows — apply them to every beat, scene, slide, shot or clip before it ships.
+
+**Applied to cinematic reels:** the scene script IS the story spine — scene 1 opens the loop, scenes 2–N−1 escalate (rising tension, no filler scenes), the payoff scene closes the loop, and the final scene loops back to scene 1's hook (or chains to the next reel). If a scene can be cut without losing the story, cut it — it was filler.
+
+### The story spine (all four beats, always)
+
+| Beat | Rule |
+|---|---|
+| **Open loop (hook, 0–3s)** | The first thing the viewer sees — first frame, cover slide, first scene — opens an unresolved question, tension or promise the brain must see closed. No intro, no logo, no "hey guys". |
+| **Rising tension** | Every beat after the hook escalates: new stakes, a twist, a pattern interrupt, an "and then…". Each beat either raises the question or raises the stakes — never just fills time. |
+| **Payoff** | The open loop closes in the final seconds with the "aha" the hook promised. A loop opened and never closed kills trust and rewatch. |
+| **Loop ending** | The last frame mirrors or seeds the first (rewatch counts as a second view) or chains into the next post ("Part 2", "Follow for part 2", "Save this"). |
+
+### The addiction levers (use ≥3 per deliverable)
+
+| Lever | Mechanism |
+|---|---|
+| **Curiosity gap** | The open loop the brain must close (Zeigarnik effect — unfinished tasks nag). |
+| **Serialization / cliffhanger** | Cut before resolution; chain posts into a series so the audience returns for the next installment. |
+| **Variable reward** | Reveal payoffs on a beat the viewer can't predict — countdowns, answer reveals, verdicts, twists. |
+| **Pattern interrupt** | A scale pop, color flash or tempo break exactly where attention dips (the mid-video hump). |
+| **Relatability / self-recognition** | "That's me" moments — the viewer watches to see their own life, then saves or shares it. |
+| **Commitment bait** | Save / share / comment / "what's your #?" — an engaged viewer is a returning viewer. |
+
+### The fluff rule
+
+Every beat either **raises the question**, **raises the stakes**, or **pays off**. If a beat can be deleted without losing the story, delete it.
+
+---
+
 ## When to use
 
 - "Make a reel script with scenes and Google Flow video prompts"
@@ -178,6 +210,9 @@ If the user's tool isn't listed: same prompt, upload 2–3 clean reference image
 - [ ] Header tells the user exactly where to upload reference images for THEIR tool (Ingredients / Elements / image-to-video)
 - [ ] Bridge flags set where seamless cuts are needed (first/last-frame in Flow)
 - [ ] Every prompt is pure copy-paste (no meta-commentary inside)
+- [ ] Story spine complete: open loop (hook) → rising tension → payoff → loop ending; no beat survives the fluff rule
+- [ ] ≥3 addiction levers used (curiosity gap · serialization · variable reward · pattern interrupt · relatability · commitment bait)
+- [ ] Scene script is a complete story — no scene survives the fluff rule; payoff scene closes the hook's loop; final scene loops to scene 1
 - [ ] **Audit harness run:** `audit-reels.mjs` → automated checks (per-scene token consistency, verify markers, lengths, negative/seed, bridges, cinematic language, sheets) — exit 0
 - [ ] **Reel-auditor subagent** (fresh eyes) completed the reel-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `reels-audit.md`
 - [ ] Delivery: `character-sheet.md` + `scene-script.md` + `prompts.md` + `reels-audit.md` + assembly/stitching notes

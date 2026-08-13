@@ -26,6 +26,38 @@ description: Create premium, high-retention text-only motion graphic reels (kine
 
 ---
 
+## Storytelling + addiction rails (the universal contract — read before anything else)
+
+Every deliverable this skill produces must tell **ONE micro-story** and engineer **rewatch**. These rails are the SAME contract every video/image skill in this repo follows — apply them to every beat, scene, slide, shot or clip before it ships.
+
+**Applied to text reels:** every format runs the same spine — the hook beat opens the loop, middle beats escalate (the format's signature twist lands exactly at the hump), the payoff beat closes the loop, and the loop ending mirrors frame 1 or teases a "Part 2". Story-driven formats (Micro-Fiction, Chat Thriller, Thread Court) must END on the cliffhanger; value formats (Card Listicle, Day Counter, Quiz Trap) must END on the reveal — never mid-list.
+
+### The story spine (all four beats, always)
+
+| Beat | Rule |
+|---|---|
+| **Open loop (hook, 0–3s)** | The first thing the viewer sees — first frame, cover slide, first scene — opens an unresolved question, tension or promise the brain must see closed. No intro, no logo, no "hey guys". |
+| **Rising tension** | Every beat after the hook escalates: new stakes, a twist, a pattern interrupt, an "and then…". Each beat either raises the question or raises the stakes — never just fills time. |
+| **Payoff** | The open loop closes in the final seconds with the "aha" the hook promised. A loop opened and never closed kills trust and rewatch. |
+| **Loop ending** | The last frame mirrors or seeds the first (rewatch counts as a second view) or chains into the next post ("Part 2", "Follow for part 2", "Save this"). |
+
+### The addiction levers (use ≥3 per deliverable)
+
+| Lever | Mechanism |
+|---|---|
+| **Curiosity gap** | The open loop the brain must close (Zeigarnik effect — unfinished tasks nag). |
+| **Serialization / cliffhanger** | Cut before resolution; chain posts into a series so the audience returns for the next installment. |
+| **Variable reward** | Reveal payoffs on a beat the viewer can't predict — countdowns, answer reveals, verdicts, twists. |
+| **Pattern interrupt** | A scale pop, color flash or tempo break exactly where attention dips (the mid-video hump). |
+| **Relatability / self-recognition** | "That's me" moments — the viewer watches to see their own life, then saves or shares it. |
+| **Commitment bait** | Save / share / comment / "what's your #?" — an engaged viewer is a returning viewer. |
+
+### The fluff rule
+
+Every beat either **raises the question**, **raises the stakes**, or **pays off**. If a beat can be deleted without losing the story, delete it.
+
+---
+
 ## When to use
 
 Use this skill whenever the user asks to:
@@ -837,5 +869,8 @@ Count every section before finalizing (`wc -m`). Each section MUST land in the *
 - [ ] Rendered 4K into the proper folder `output/{name}/` with MP4 + frames
 - [ ] `caption.md` written into the output folder — per-platform sections, no hashtags, under char limits
 - [ ] `hyperframes check` passes successfully
+- [ ] Story spine complete: open loop (hook) → rising tension → payoff → loop ending; no beat survives the fluff rule
+- [ ] ≥3 addiction levers used (curiosity gap · serialization · variable reward · pattern interrupt · relatability · commitment bait)
+- [ ] Chosen format runs the full spine — hook opens, middle escalates, payoff closes, loop ends (story formats end on the cliffhanger; value formats end on the reveal)
 - [ ] **Audit harness run:** `audit-reel.mjs` → automated checks (format slug, timeline, determinism, output, caption) — exit 0
 - [ ] **Reel-auditor subagent** (fresh eyes) completed the reel-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `reel-audit.md`

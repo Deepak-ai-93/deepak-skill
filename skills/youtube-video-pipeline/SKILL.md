@@ -39,6 +39,38 @@ description: Plan long-form YouTube videos that get clicked and watched — topi
 
 ---
 
+## Storytelling + addiction rails (the universal contract — read before anything else)
+
+Every deliverable this skill produces must tell **ONE micro-story** and engineer **rewatch**. These rails are the SAME contract every video/image skill in this repo follows — apply them to every beat, scene, slide, shot or clip before it ships.
+
+**Applied to long-form:** the script is a chain of stories — the opening 30s opens THE loop (the video's promise), every section opens and closes its own mini-loop, and the ending pays off every open loop and loops into the next video (series / next-up CTA). If a section doesn't raise the stakes or pay something off, it gets cut.
+
+### The story spine (all four beats, always)
+
+| Beat | Rule |
+|---|---|
+| **Open loop (hook, 0–3s)** | The first thing the viewer sees — first frame, cover slide, first scene — opens an unresolved question, tension or promise the brain must see closed. No intro, no logo, no "hey guys". |
+| **Rising tension** | Every beat after the hook escalates: new stakes, a twist, a pattern interrupt, an "and then…". Each beat either raises the question or raises the stakes — never just fills time. |
+| **Payoff** | The open loop closes in the final seconds with the "aha" the hook promised. A loop opened and never closed kills trust and rewatch. |
+| **Loop ending** | The last frame mirrors or seeds the first (rewatch counts as a second view) or chains into the next post ("Part 2", "Follow for part 2", "Save this"). |
+
+### The addiction levers (use ≥3 per deliverable)
+
+| Lever | Mechanism |
+|---|---|
+| **Curiosity gap** | The open loop the brain must close (Zeigarnik effect — unfinished tasks nag). |
+| **Serialization / cliffhanger** | Cut before resolution; chain posts into a series so the audience returns for the next installment. |
+| **Variable reward** | Reveal payoffs on a beat the viewer can't predict — countdowns, answer reveals, verdicts, twists. |
+| **Pattern interrupt** | A scale pop, color flash or tempo break exactly where attention dips (the mid-video hump). |
+| **Relatability / self-recognition** | "That's me" moments — the viewer watches to see their own life, then saves or shares it. |
+| **Commitment bait** | Save / share / comment / "what's your #?" — an engaged viewer is a returning viewer. |
+
+### The fluff rule
+
+Every beat either **raises the question**, **raises the stakes**, or **pays off**. If a beat can be deleted without losing the story, delete it.
+
+---
+
 ## When to use
 
 - "Plan a YouTube video about X"
@@ -97,6 +129,9 @@ node scripts/audit-video-plan.mjs --pack <pack-folder> --out video-plan-audit.md
 - [ ] `titles.md`: 10 variants, ≤ 60 chars, ≥ 4 formulas, no spam words; winner + alternates with rationale
 - [ ] `thumbnail.md`: one idea, ≤ 5 words on the graphic, 160px-readable, matches winner title, image-gen prompt ready
 - [ ] `metadata.md`: hook-first description, chapters with timestamps, tags from research, links, captions note
+- [ ] Story spine complete: open loop (hook) → rising tension → payoff → loop ending; no beat survives the fluff rule
+- [ ] ≥3 addiction levers used (curiosity gap · serialization · variable reward · pattern interrupt · relatability · commitment bait)
+- [ ] Script is a chain of stories — one master loop opened in 30s, mini-loops per section, all paid off, ending loops to next video
 - [ ] **Audit harness run:** `audit-video-plan.mjs` → automated checks (brief, script hook, title pack, thumbnail, metadata) — exit 0
 - [ ] **Video-plan-auditor subagent** (fresh eyes) completed the video-pack scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `video-plan-audit.md`
 - [ ] Delivery: `video-brief.md` + `script.md` + `titles.md` + `thumbnail.md` + `metadata.md` + `video-plan-audit.md`

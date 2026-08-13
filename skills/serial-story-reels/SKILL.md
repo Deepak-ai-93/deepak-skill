@@ -40,6 +40,17 @@ description: Create EPISODIC story video series with Google Flow / Veo 3.1 — a
 
 ---
 
+## Storytelling + addiction rails (this skill is the repo's exemplar — enforce the two serial rails explicitly)
+
+This skill's design IS the universal storytelling + addiction contract every video/image skill in this repo now follows (open loop → rising tension → payoff → loop ending · curiosity gap · serialization · variable reward · pattern interrupt · relatability · commitment bait · the fluff rule — every beat either raises the question, raises the stakes, or pays off). The two rails to enforce explicitly on top of the story bible:
+
+| Serial rail | Rule |
+|---|---|
+| **Cliffhanger chaining (serialization)** | Every episode ends on an unresolved beat that chains into the next episode — the season arc IS the open loop, episode hooks are the mini-loops. The last episode's cliffhanger teases the next season/part. |
+| **Loop ending across episodes** | Episode N's last frame bridges into episode N+1's first frame (already in the consistency system) — the series restarts seamlessly on rewatch, and each episode's final loop ending makes rewatch count as a second view. |
+
+---
+
 ## When to use
 
 - "Create a serialized story series with episodes — same characters in every episode"
@@ -158,6 +169,7 @@ The script checks: **arc re-validation** (≥2 episodes · hooks + cliffhangers 
 - [ ] `prompts.md`: one copy-paste Veo prompt per scene, grouped by episode, pure prompts (no meta-commentary)
 - [ ] `voiceover.md`: every speaking scene has a line + delivery direction; voice-anchor note present
 - [ ] Approval gate: user approved bible + prompt pack + voiceover before delivery
+- [ ] Serial rails held: every episode ends on a cliffhanger chaining into the next; episode N's last frame bridges into episode N+1 (serialization + loop ending)
 - [ ] `audit-series.mjs` ran clean (exit 0): arc re-validated, per-scene tokens verified, voiceover coverage, cinematic language, sheet + bible present
 - [ ] Fresh **series-auditor subagent** completed the scorecard (/50, ≥35) + verdict in `series-audit.md` → **PASS** (fix loop until then)
 - [ ] Delivery: `story-bible.md` + `character-sheet.md` + `prompts.md` + `voiceover.md` + `series-audit.md` + continuity/assembly notes

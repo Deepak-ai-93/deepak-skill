@@ -41,6 +41,38 @@ description: End-to-end paid ad campaign production for Meta (Facebook/Instagram
 
 ---
 
+## Storytelling + addiction rails (the universal contract — read before anything else)
+
+Every deliverable this skill produces must tell **ONE micro-story** and engineer **rewatch**. These rails are the SAME contract every video/image skill in this repo follows — apply them to every beat, scene, slide, shot or clip before it ships.
+
+**Applied to ads:** every ad is a 3–15 second story — the hook frame opens the loop (the pain or the promise), the middle raises the stakes or proves it (mechanism + proof), the CTA frame pays off and loops (the offer, the brand). Video ads: hook ≤ 1–2s, payoff in the last frames. Image ads: the visual opens the loop, the headline pays it off.
+
+### The story spine (all four beats, always)
+
+| Beat | Rule |
+|---|---|
+| **Open loop (hook, 0–3s)** | The first thing the viewer sees — first frame, cover slide, first scene — opens an unresolved question, tension or promise the brain must see closed. No intro, no logo, no "hey guys". |
+| **Rising tension** | Every beat after the hook escalates: new stakes, a twist, a pattern interrupt, an "and then…". Each beat either raises the question or raises the stakes — never just fills time. |
+| **Payoff** | The open loop closes in the final seconds with the "aha" the hook promised. A loop opened and never closed kills trust and rewatch. |
+| **Loop ending** | The last frame mirrors or seeds the first (rewatch counts as a second view) or chains into the next post ("Part 2", "Follow for part 2", "Save this"). |
+
+### The addiction levers (use ≥3 per deliverable)
+
+| Lever | Mechanism |
+|---|---|
+| **Curiosity gap** | The open loop the brain must close (Zeigarnik effect — unfinished tasks nag). |
+| **Serialization / cliffhanger** | Cut before resolution; chain posts into a series so the audience returns for the next installment. |
+| **Variable reward** | Reveal payoffs on a beat the viewer can't predict — countdowns, answer reveals, verdicts, twists. |
+| **Pattern interrupt** | A scale pop, color flash or tempo break exactly where attention dips (the mid-video hump). |
+| **Relatability / self-recognition** | "That's me" moments — the viewer watches to see their own life, then saves or shares it. |
+| **Commitment bait** | Save / share / comment / "what's your #?" — an engaged viewer is a returning viewer. |
+
+### The fluff rule
+
+Every beat either **raises the question**, **raises the stakes**, or **pays off**. If a beat can be deleted without losing the story, delete it.
+
+---
+
 ## When to use
 
 - "I want to create ads for my product" / "make me X ads" (→ runs the 3-question Ads Wizard)
@@ -217,6 +249,9 @@ You are the ads-auditor for the paid ad campaign pack at {pack-folder}/.
 - [ ] `cost-plan.md`: ramp, learning phase, kill rules, scale rules, creative refresh cadence
 - [ ] `guidelines-checklist.md`: Meta + Google 2026 AI-content rules, dated "verified as of"
 - [ ] `launch-checklist.md`: manual copy-paste launch order per platform
+- [ ] Story spine complete: open loop (hook) → rising tension → payoff → loop ending; no beat survives the fluff rule
+- [ ] ≥3 addiction levers used (curiosity gap · serialization · variable reward · pattern interrupt · relatability · commitment bait)
+- [ ] Every ad is a mini-story — hook frame opens the loop, middle proves/raises stakes, CTA pays off and loops
 - [ ] `audit-ads.mjs` ran: automated verdicts written to `ad-audit.md` (no automated FAIL)
 - [ ] **Ads-auditor subagent** (fresh eyes) completed the hook-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `ad-audit.md`
 - [ ] Fix loop closed: any FAIL → fixed → re-audited

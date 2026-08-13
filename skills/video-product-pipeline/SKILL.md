@@ -26,6 +26,38 @@ description: Viral-engineered production workflow for ANY short-form video reque
 
 ---
 
+## Storytelling + addiction rails (the universal contract — read before anything else)
+
+Every deliverable this skill produces must tell **ONE micro-story** and engineer **rewatch**. These rails are the SAME contract every video/image skill in this repo follows — apply them to every beat, scene, slide, shot or clip before it ships.
+
+**Applied to the pipeline:** every `video-product.md` spec must carry the story spine explicitly — the spec's hook names the open loop, the beat sheet must show escalation (each beat raises the stakes), the final beats must show the payoff + loop, and the **Decisions** section records the story shape chosen. The viral scorecard already scores curiosity gap + loopability — a winning angle that scores low on either is sent back to Stage 0.
+
+### The story spine (all four beats, always)
+
+| Beat | Rule |
+|---|---|
+| **Open loop (hook, 0–3s)** | The first thing the viewer sees — first frame, cover slide, first scene — opens an unresolved question, tension or promise the brain must see closed. No intro, no logo, no "hey guys". |
+| **Rising tension** | Every beat after the hook escalates: new stakes, a twist, a pattern interrupt, an "and then…". Each beat either raises the question or raises the stakes — never just fills time. |
+| **Payoff** | The open loop closes in the final seconds with the "aha" the hook promised. A loop opened and never closed kills trust and rewatch. |
+| **Loop ending** | The last frame mirrors or seeds the first (rewatch counts as a second view) or chains into the next post ("Part 2", "Follow for part 2", "Save this"). |
+
+### The addiction levers (use ≥3 per deliverable)
+
+| Lever | Mechanism |
+|---|---|
+| **Curiosity gap** | The open loop the brain must close (Zeigarnik effect — unfinished tasks nag). |
+| **Serialization / cliffhanger** | Cut before resolution; chain posts into a series so the audience returns for the next installment. |
+| **Variable reward** | Reveal payoffs on a beat the viewer can't predict — countdowns, answer reveals, verdicts, twists. |
+| **Pattern interrupt** | A scale pop, color flash or tempo break exactly where attention dips (the mid-video hump). |
+| **Relatability / self-recognition** | "That's me" moments — the viewer watches to see their own life, then saves or shares it. |
+| **Commitment bait** | Save / share / comment / "what's your #?" — an engaged viewer is a returning viewer. |
+
+### The fluff rule
+
+Every beat either **raises the question**, **raises the stakes**, or **pays off**. If a beat can be deleted without losing the story, delete it.
+
+---
+
 ## When to use
 
 Use this skill for **every** "make a reel / short / TikTok" request, no matter how good or how broken the prompt is:
@@ -273,6 +305,9 @@ The audit script flags any text outside the hard safe zone (WARN) or off-screen/
 - [ ] **Approval gate: user explicitly approved before ANY generation**
 - [ ] Generation delegated per the spec (text-motion-reels / video-asset-reels / voice-sfx-audio)
 - [ ] Deterministic contract held: paused GSAP timeline, data-start/duration, no SMIL/Math.random/play()/audio
+- [ ] Story spine complete: open loop (hook) → rising tension → payoff → loop ending; no beat survives the fluff rule
+- [ ] ≥3 addiction levers used (curiosity gap · serialization · variable reward · pattern interrupt · relatability · commitment bait)
+- [ ] `video-product.md` carries the story spine (hook = open loop, beats escalate, final beats = payoff + loop) recorded in Decisions
 - [ ] `audit-composition.mjs` ran: keyframes + audit-report.md scaffold produced
 - [ ] Auditor subagent completed Section 4 and signed off **PASS**
 - [ ] Any FAIL → fixed → re-rendered → re-audited (loop closed)
