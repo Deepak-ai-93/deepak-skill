@@ -1,0 +1,58 @@
+{
+  "creator": "Dan — online fitness coach",
+  "niche": "fat-loss + strength training for busy professionals",
+  "audience": "busy professionals 30–45 who want to lose fat and build strength without living in the gym",
+  "goal": "reset the algorithm — 100K+ monthly views in 90 days, +500 followers per 30 days",
+  "startDate": "2026-08-17",
+  "platforms": [
+    {
+      "platform": "instagram",
+      "postsPerWeek": 5,
+      "formats": ["Reel < 60s (hook 1.5s, loop)", "Carousel 5 slides", "Reel < 60s (Trial Reel first)", "Static + caption", "Carousel 5 slides"],
+      "bestTime": "7:30 AM ET"
+    },
+    {
+      "platform": "x",
+      "postsPerWeek": 7,
+      "formats": ["Short post", "Short post", "Thread (one idea/post)", "Quote-post + insight"],
+      "bestTime": "8:00 AM ET"
+    },
+    {
+      "platform": "linkedin",
+      "postsPerWeek": 3,
+      "formats": ["PDF carousel 8 slides", "Text post", "Native video < 60s"],
+      "bestTime": "9:00 AM ET"
+    },
+    {
+      "platform": "youtube",
+      "postsPerWeek": 4,
+      "formats": ["Shorts < 60s (hook 1s, loop)", "Long-form 8–12 min (retention curve)", "Shorts < 60s", "Shorts < 60s (bridge to long-form)"],
+      "bestTime": "6:00 PM ET"
+    }
+  ],
+  "pillars": [
+    { "name": "Transformation receipts", "share": 0.4 },
+    { "name": "Fat-loss myths (busted with science)", "share": 0.3 },
+    { "name": "The coaching process", "share": 0.2 },
+    { "name": "Behind the scenes", "share": 0.1 }
+  ],
+  "hooks": [
+    "You don't need to 'eat less' — you need to eat the right amount of the right things. Here's the math.",
+    "This one training variable moved more fat in 90 days than any diet I've seen.",
+    "I've coached 40 busy professionals this year — and 38 of them made the same 3 mistakes.",
+    "The 20-minute workout that beats an hour at the gym (science, not vibes).",
+    "Your metabolism isn't broken. Your routine is. Fix this one thing first.",
+    "What I tell clients who 'can't lose weight' — straight talk, no nonsense.",
+    "Day 1 vs Day 90: the difference wasn't the workout. It was this.",
+    "Cardio burns calories. Strength training changes what your body does with them.",
+    "The 5-minute habit that fixes your protein intake (screenshot this).",
+    "Nobody talks about this: stress is quietly undoing your fat loss."
+  ],
+  "ctas": [
+    "Save this for your next training week",
+    "Comment 'PROTOCOL' and I'll send the framework",
+    "Follow for the day-by-day breakdown",
+    "Share this with someone who's stuck",
+    "DM me 'START' if you want the 30-day plan"
+  ]
+}

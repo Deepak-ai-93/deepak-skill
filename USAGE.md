@@ -40,7 +40,7 @@ The deciding factor is: **does the product let an agent run terminal commands?**
 # in your project folder — a single skill
 npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images
 
-# or everything (all 17 skills)
+# or everything (all 18 skills)
 npx skills add Deepak-ai-93/deepak-skill --all
 
 # or install globally for every project
@@ -109,6 +109,12 @@ cd skills/blog-seo-content && node scripts/audit-blog.mjs --pack <blog-folder> -
 # LinkedIn: voice capture → bio → calendar → engagement, then audit
 cd skills/linkedin-personal-brand && node scripts/audit-brand.mjs --pack <brand-folder> --out brand-audit.md   # automated audit → spawn brand-auditor subagent
 
+# Social content plans: platform playbook → strategy → pillars → 30-day calendar → companion gate → engagement + metrics → audit
+cd skills/social-media-content-plan && node scripts/platform-playbook.mjs --platform instagram,x,linkedin   # grounded 2026 algorithm facts
+cd skills/social-media-content-plan && node scripts/build-calendar.mjs --plan plan.json --out calendar.md   # deterministic 30-day calendar
+cd skills/social-media-content-plan && node scripts/check-skills.mjs --out companion-skills.md   # companion gate: producer skills installed? (--install to add missing)
+cd skills/social-media-content-plan && node scripts/audit-content-plan.mjs --pack <plan-folder> --platforms instagram,x --out content-plan-audit.md   # automated audit → spawn content-plan-auditor subagent
+
 # Carousels: render/generate, then audit the deck + captions
 cd skills/carousel-post-images && node scripts/render-carousel.mjs --html slides.html --out carousel/ --4k
 cd skills/carousel-post-images && node scripts/audit-carousel.mjs --pack <carousel-folder> --out carousel-audit.md   # automated audit → spawn carousel-auditor subagent
@@ -133,7 +139,7 @@ cd skills/paid-ads-studio && node scripts/audit-ads.mjs --pack <campaign-folder>
 
 > "Make a reel with scenes and Google Flow prompts — same character every scene, IMAX cinematic look" — the skill builds the character sheet → scene script → self-verified copy-paste prompt pack, then you generate scene by scene in Flow.
 
-> "Turn this podcast episode into 5 shorts" · "Plan a YouTube video with 10 title options" · "Write an SEO blog post that AI search cites" · "Build my LinkedIn presence in my voice" — each runs score → approve → generate → audit.
+> "Turn this podcast episode into 5 shorts" · "Plan a YouTube video with 10 title options" · "Write an SEO blog post that AI search cites" · "Build my LinkedIn presence in my voice" · "Build me a 30-day content plan to reset my Instagram and X algorithm" — each runs score → approve → generate → audit.
 
 Other skills follow the same pattern (text-motion reels, video-asset reels, voice/SFX, viral pipeline). See the [README](README.md) for the full install table and per-skill commands.
 

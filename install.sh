@@ -15,7 +15,7 @@
 #    ./install.sh --help                # this help
 #
 #  Examples:
-#    ./install.sh                       → all 17 skills into .agents/skills/
+#    ./install.sh                       → all 18 skills into .agents/skills/
 #    ./install.sh --skill podcast-to-shorts
 #    ./install.sh --skill email-marketing --global
 # ═══════════════════════════════════════════════════════════════════════════
@@ -40,7 +40,7 @@ ${C_CYAN}${C_BOLD}
    ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
    ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
 ${C_RESET}
-${C_CYAN}${C_BOLD}  deepak-skill — 16 agent skills crafted by Deepak 🎬${C_RESET}
+${C_CYAN}${C_BOLD}  deepak-skill — 18 agent skills crafted by Deepak 🎬${C_RESET}
 ${C_YELLOW}  install once · use in any AI coding agent · MIT license${C_RESET}
 EOF
   echo ""
@@ -63,12 +63,13 @@ SKILLS=(
   "youtube-video-pipeline   → script, 10-title pack, thumbnail, metadata"
   "podcast-to-shorts        → long-form → viral vertical clips"
   "linkedin-personal-brand  → voice-captured posts, bio, calendar"
+  "social-media-content-plan → algorithm-reset 30-day content plans (any platform)"
   "vibe-code-webapp         → production vibe-coded web apps"
   "skill-builder            → scaffold new skills the deepak-skill way"
 )
 
 show_skills() {
-  echo "${C_BOLD}  17 skills installed:${C_RESET}"
+  echo "${C_BOLD}  18 skills installed:${C_RESET}"
   for s in "${SKILLS[@]}"; do
     printf "  ${C_GREEN}•${C_RESET} %s\n" "$s"
   done
@@ -118,7 +119,7 @@ banner
 show_skills
 
 if [ "$LIST_ONLY" = "1" ]; then
-  echo "${C_GREEN}✅ Installer ready — run ./install.sh to install all 17 skills.${C_RESET}"
+  echo "${C_GREEN}✅ Installer ready — run ./install.sh to install all 18 skills.${C_RESET}"
   exit 0
 fi
 

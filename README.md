@@ -11,7 +11,7 @@
 
 **🎬 deepak-skill — crafted by Deepak** · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
 
-Open-source agent skills for the **full content-creator stack** — short-form video (text-motion + asset reels), **Google Flow / Veo cinematic scene prompts**, viral hooks & storyboards, AI voiceover + sound design, native-image-model carousels, spam-free HTML emails with high-CTR subject lines, **long-form repurposing** (podcast→shorts, YouTube packaging, SEO blog content), **LinkedIn personal branding**, vibe-coded web apps, and a meta **skill-builder** that scaffolds new skills. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
+Open-source agent skills for the **full content-creator stack** — short-form video (text-motion + asset reels), **Google Flow / Veo cinematic scene prompts**, viral hooks & storyboards, AI voiceover + sound design, native-image-model carousels, spam-free HTML emails with high-CTR subject lines, **long-form repurposing** (podcast→shorts, YouTube packaging, SEO blog content), **LinkedIn personal branding**, **platform-native social content plans (algorithm-reset calendars)**, vibe-coded web apps, and a meta **skill-builder** that scaffolds new skills. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
 
 [![skills.sh](https://skills.sh/b/Deepak-ai-93/deepak-skill)](https://skills.sh/Deepak-ai-93/deepak-skill)
 
@@ -30,6 +30,7 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 | **youtube-video-pipeline** | Plan long-form YouTube videos end-to-end: researched `video-brief.md` → retention-engineered script (hook in 30s, open loops) → **10-variant title pack** scored on CTR formulas + 60-char limit (`title-pack.mjs`) → thumbnail brief + image-gen prompt → description + chapters + tags — **audit harness**: `audit-video-plan.mjs` (brief, script hook, title pack, thumbnail, metadata → `video-plan-audit.md`) + a fresh **video-plan-auditor subagent** signing PASS / FIX NEEDED |
 | **blog-seo-content** | SEO articles that rank **and** get cited by AI search (GEO) — `keyword-outline.mjs` builds the keyword cluster + intent scores + outline scaffold → approved `seo-brief.md` → E-E-A-T-rich article (named author, cited stats, quotable blocks) + meta title/description pack — **audit harness**: `audit-blog.mjs` (brief, headings, EEAT, citations, quotable blocks, anti-fluff, meta → `blog-audit.md`) + a fresh **blog-auditor subagent** signing PASS / FIX NEEDED |
 | **linkedin-personal-brand** | Founder/creator LinkedIn presence that compounds — **capture the user's real voice first** (`voice-capture.md`), then headline + About rewrite, a weekly post calendar (story/teaching/contrarian/win/question roles, one CTA each), and a comment + connection strategy — **audit harness**: `audit-brand.mjs` (voice, bio, calendar, engagement, blocklists → `brand-audit.md`) + a fresh **brand-auditor subagent** signing PASS / FIX NEEDED |
+| **social-media-content-plan** | **30-day algorithm-reset content plan across user-selected platforms** (Instagram · X · LinkedIn · TikTok · YouTube (Shorts + long-form) · Facebook · Threads) — honest per-platform strategy (how each algorithm actually ranks in 2026, the 14-day re-training sprint, native formats, cadence, hashtag/keyword rules — grounded by `platform-playbook.mjs`), 3–4 content pillars + hook bank, a deterministic day-by-day calendar (`build-calendar.mjs` from `plan.json`), a first-60-minute engagement protocol, and a metrics/review loop (day-7/14/21/30) — **audit harness**: `audit-content-plan.mjs` (platform coverage, reset framing, pillars, calendar, engagement, metrics, fluff blocklist → `content-plan-audit.md`) + a fresh **content-plan-auditor subagent** signing PASS / FIX NEEDED |
 | **skill-builder** (meta) | Scaffold **new skills** the deepak-skill way — `scaffold-skill.mjs` generates the folder, SKILL.md contract (quality bar + workflow + checklist), Deepak-branded scripts, templates and examples, then wires the skill into README/USAGE/prompt-examples — **audit harness**: `audit-scaffold.mjs --docs` checks the new skill against the repo contract (SKILL.md, scripts, templates/examples, docs wiring + counts → `scaffold-audit.md`) + a fresh **scaffold-auditor subagent** signing PASS / FIX NEEDED |
 | **veo-cinematic-reels** | Reel scripts + **rich long-form copy-paste video prompts (~150–250 words) that work in ANY generator** — Google Flow / Veo 3.1, Kling, Luma, Runway, Hailuo, Vidu, Pika, PixVerse — manual copy-paste workflow with **character consistency locked** (reference-image ingredients + a verbatim character block in EVERY prompt, self-verified by `scene-prompts.mjs`), **IMAX-level cinematic language** with per-scene lens/tempo/lighting detail, locked color grading (film-stock tokens), native dialogue/SFX audio, a labeled **negative prompt** + locked **seed** per scene, per-tool upload instructions (Ingredients / Elements / image-to-video) — **and an audit harness**: `audit-reels.mjs` (automated per-scene token/verify/length/negative/seed/bridge checks → `reels-audit.md`) + a fresh **reel-auditor subagent** scoring reel-worthiness (/50) and signing PASS / FIX NEEDED |
 | **serial-story-reels** | **EPISODIC story video series** for Google Flow / Veo 3.1 — comic, love story, action, thriller or fantasy (or the user's own characters via image uploads): a **story bible** (season arc + per-episode hooks + cliffhangers, validated by `series-arc.mjs`) → **character sheets** (verbatim blocks + reference-image prompts) → a **self-verified copy-paste prompt pack for EVERY scene of EVERY episode** (`episode-prompts.mjs`, exits 1 on drift) so the SAME characters stay consistent ACROSS episodes — plus cinematic action/motion language, native Veo dialogue/SFX, and a **voiceover line sheet** for a Kokoro post pass |
@@ -39,13 +40,13 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 
 The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets / thumbnails) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline) → **multiplied** (podcast→shorts, YouTube packaging, SEO blog, LinkedIn, email) → **paid** (Meta + Google ad campaigns with forecast-first economics via paid-ads-studio).
 
-**Every skill now ships the same audit-harness pattern**: an `audit-*.mjs` script runs the automated checks on the delivered pack (consistency tokens, verify markers, char limits, blocklists, output files → `*-audit.md`, exit 0/1/2), then a FRESH `<skill>-auditor` subagent completes a /50 worthiness scorecard and signs **PASS / FIX NEEDED** — nothing ships until PASS. Skills with a harness: text-motion-reels, hook-storyboard-retention, voice-sfx-audio, video-asset-reels, carousel-post-images, veo-cinematic-reels, photoshoot-studio, podcast-to-shorts, youtube-video-pipeline, blog-seo-content, linkedin-personal-brand, skill-builder, serial-story-reels, paid-ads-studio, vibe-code-webapp, video-product-pipeline, email-marketing.
+**Every skill now ships the same audit-harness pattern**: an `audit-*.mjs` script runs the automated checks on the delivered pack (consistency tokens, verify markers, char limits, blocklists, output files → `*-audit.md`, exit 0/1/2), then a FRESH `<skill>-auditor` subagent completes a /50 worthiness scorecard and signs **PASS / FIX NEEDED** — nothing ships until PASS. Skills with a harness: text-motion-reels, hook-storyboard-retention, voice-sfx-audio, video-asset-reels, carousel-post-images, veo-cinematic-reels, photoshoot-studio, podcast-to-shorts, youtube-video-pipeline, blog-seo-content, linkedin-personal-brand, social-media-content-plan, skill-builder, serial-story-reels, paid-ads-studio, vibe-code-webapp, video-product-pipeline, email-marketing.
 
 ---
 
 ## Quick start — install in your project (3 steps)
 
-> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 17 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
+> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 18 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
 >
 > **Using the claude.com website (browser, no terminal)?** No install needed — copy-paste the skill instructions and Claude follows them in the chat. Step-by-step: [`CLAUDE-COM.md`](CLAUDE-COM.md).
 
@@ -63,7 +64,7 @@ Run this **inside your project folder**:
 npx skills add Deepak-ai-93/deepak-skill --all
 ```
 
-That's it. It installs all seventeen skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
+That's it. It installs all eighteen skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
 
 ### 3. Use it with any CLI
 
@@ -90,6 +91,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **youtube-video-pipeline only** (self-contained — SKILL.md + scripts/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill youtube-video-pipeline` |
 | **blog-seo-content only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill blog-seo-content` |
 | **linkedin-personal-brand only** (self-contained — SKILL.md + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill linkedin-personal-brand` |
+| **social-media-content-plan only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill social-media-content-plan` |
 | **skill-builder only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill skill-builder` |
 | **veo-cinematic-reels only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill veo-cinematic-reels` |
 | **serial-story-reels only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill serial-story-reels` |
@@ -105,7 +107,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 ls .agents/skills/
 # blog-seo-content  carousel-post-images  email-marketing  hook-storyboard-retention
 # linkedin-personal-brand  paid-ads-studio  photoshoot-studio  podcast-to-shorts  serial-story-reels  skill-builder
-# text-motion-reels  veo-cinematic-reels  video-asset-reels  video-product-pipeline
+# social-media-content-plan  text-motion-reels  veo-cinematic-reels  video-asset-reels  video-product-pipeline
 # vibe-code-webapp  voice-sfx-audio  youtube-video-pipeline
 ```
 
@@ -245,6 +247,23 @@ Build a founder/creator presence that compounds — **your real voice captured f
 
 > "Help me build my LinkedIn — capture my voice, rewrite my bio, and give me a week of posts."
 > → voice capture → voice-profile.md → bio.md → calendar.md → engagement.md → auditor check → deliver
+
+### Social media content plans (`social-media-content-plan`)
+
+Reset a stalled algorithm with a **platform-native 30-day content plan** — you pick the platforms (Instagram · X · LinkedIn · TikTok · YouTube (Shorts + long-form) · Facebook · Threads):
+
+```bash
+cd skills/social-media-content-plan
+node scripts/platform-playbook.mjs --platform instagram,x,linkedin   # grounded 2026 algorithm facts for strategy.md
+node scripts/build-calendar.mjs --plan plan.json --out calendar.md   # deterministic 30-day calendar (validated, exit 1 on bad plans)
+node scripts/check-skills.mjs --out companion-skills.md              # companion gate: which producer skills are installed + install commands
+node scripts/audit-content-plan.mjs --pack <plan-folder> --platforms instagram,x --out content-plan-audit.md   # automated audit → spawn content-plan-auditor subagent
+```
+
+Deliverables: `strategy.md` (per-platform algorithm strategy + **honest 14-day re-training sprint framing** — no "hacks", no guaranteed view counts) → `pillars.md` (3–4 narrow pillars + ≥ 8 hook bank) → `calendar.md` (day-by-day posts: pillar / format / hook / one CTA / metric-to-watch) → `engagement.md` (the **first-60-minute protocol** — the window that decides tier expansion) → `metrics.md` (dwell / completion / save-share / follower-conversion + day-7/14/21/30 review loop) → **`companion-skills.md`** (the **companion gate** — `check-skills.mjs` shows which producer skills are installed — text-motion-reels / veo-cinematic-reels / carousel-post-images / linkedin-personal-brand / youtube-video-pipeline / voice-sfx-audio — and installs the missing ones so the calendar is actually executable). Built-in example: **"Dan — fitness coach reset"** (Instagram + X + LinkedIn + YouTube, full pack in `examples/fitness-coach-reset/`).
+
+> "My Instagram and X are dead — build me a 30-day content plan to reset the algorithm. Niche: fat loss for busy professionals."
+> → Platform Wizard (3 questions) → playbook → strategy → pillars → 30-day calendar → engagement + metrics → auditor check → deliver
 
 ### Build new skills (`skill-builder`)
 
