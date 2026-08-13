@@ -40,7 +40,7 @@ The deciding factor is: **does the product let an agent run terminal commands?**
 # in your project folder — a single skill
 npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images
 
-# or everything (all 18 skills)
+# or everything (all 20 skills)
 npx skills add Deepak-ai-93/deepak-skill --all
 
 # or install globally for every project
@@ -78,6 +78,15 @@ cd skills/youtube-video-pipeline && node scripts/title-pack.mjs --topic "saas pr
 cd skills/blog-seo-content && node scripts/keyword-outline.mjs --seed "saas onboarding"
 
 # LinkedIn: voice capture → bio → calendar → engagement
+
+# X threads: story-spine thread pack + engagement ritual
+cd skills/x-threads-engagement && node scripts/thread-writer.mjs --plan thread-plan.json --out thread.md
+cd skills/x-threads-engagement && node scripts/audit-threads.mjs --pack <thread-folder> --out threads-audit.md   # automated audit → spawn x-auditor subagent
+
+# Newsletters: story-first issue + growth plan
+cd skills/newsletter-growth && node scripts/issue-writer.mjs --plan issue-plan.json --out issue.md
+cd skills/newsletter-growth && node scripts/audit-newsletter.mjs --pack <newsletter-folder> --out newsletter-audit.md   # automated audit → spawn newsletter-auditor subagent
+
 # Skill builder: scaffold a new skill in the repo's conventions
 cd skills/skill-builder && node scripts/scaffold-skill.mjs --name my-skill --desc "…"
 

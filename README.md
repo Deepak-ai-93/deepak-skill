@@ -26,10 +26,12 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 | **video-product-pipeline** | The viral-engineered gatekeeper for every video request: hunt trending topics (`trend-hunt.mjs` + web research) → brainstorm + score angles → analyze ANY prompt (sloppy or not) → write a `video-product.md` spec → **get your approval** → generate (text-motion / asset reels) → audit the frames with a script + dedicated auditor subagent (spelling, text overlap, safe zones, style, readability) |
 | **carousel-post-images** | Scroll-stopping carousel posts (LinkedIn/Instagram) as image sets — **one script, two CLI modes**: **browser render** (slides.html → deterministic 4K PNGs, any CLI) or **native image-model generation** (same deck exports photoreal 4K prompts for Antigravity / Codex `image_gen` / Grok `/imagine`). Photorealistic real-life visuals, viral anti-fluff copywriting, 4 trending styles (Cinematic Real-Life default), per-platform `caption.md` — **audit harness**: `audit-carousel.mjs` (deck, copy limits, fluff, output, captions → `carousel-audit.md`) + a fresh **carousel-auditor subagent** signing PASS / FIX NEEDED |
 | **email-marketing** | High-converting, **spam-free HTML emails** for Brevo / MailerLite / Mailchimp / Klaviyo — bulletproof responsive code, anti-fluff copywriting, **E-E-A-T trust signals** (real author + credentials + proof), and a **high-CTR subject line pack** (33–50 char formulas + A/B plan). Validated by `validate-email.mjs` (spam-trigger scan, CAN-SPAM compliance, EEAT signals → `validation-report.md`) and previewed at desktop + mobile via `preview-email.mjs` before send |
+| **newsletter-growth** | Grow an editorial newsletter (Beehiiv / Substack / ConvertKit) with **story-first issues** people actually open and forward — subject-line packs from proven formulas (≤ 60 chars, one formula), a story-spine issue writer (open loop → rising tension → payoff → ONE CTA + growth plug, enforced by `issue-writer.mjs`), welcome-sequence + referral-loop + cross-promo growth tactics, and an analytics review loop — **audit harness**: `audit-newsletter.mjs` (subject, story spine, anti-fluff, CTA/growth, word window, growth plan → `newsletter-audit.md`) + a fresh **newsletter-auditor subagent** signing PASS / FIX NEEDED |
 | **podcast-to-shorts** | Turn long-form podcast/video content into **viral-ready vertical clips** — `clip-finder.mjs` scores every transcript moment on a virality scorecard (hook/emotion/controversy/quotability), picks the standalone winners, and generates the exact **FFmpeg 9:16 cut commands** — plus a hook + caption per clip — **audit harness**: `audit-clips.mjs` (transcript, scored moments, cut commands, clips output, captions → `clips-audit.md`) + a fresh **clips-auditor subagent** signing PASS / FIX NEEDED |
 | **youtube-video-pipeline** | Plan long-form YouTube videos end-to-end: researched `video-brief.md` → retention-engineered script (hook in 30s, open loops) → **10-variant title pack** scored on CTR formulas + 60-char limit (`title-pack.mjs`) → thumbnail brief + image-gen prompt → description + chapters + tags — **audit harness**: `audit-video-plan.mjs` (brief, script hook, title pack, thumbnail, metadata → `video-plan-audit.md`) + a fresh **video-plan-auditor subagent** signing PASS / FIX NEEDED |
 | **blog-seo-content** | SEO articles that rank **and** get cited by AI search (GEO) — `keyword-outline.mjs` builds the keyword cluster + intent scores + outline scaffold → approved `seo-brief.md` → E-E-A-T-rich article (named author, cited stats, quotable blocks) + meta title/description pack — **audit harness**: `audit-blog.mjs` (brief, headings, EEAT, citations, quotable blocks, anti-fluff, meta → `blog-audit.md`) + a fresh **blog-auditor subagent** signing PASS / FIX NEEDED |
 | **linkedin-personal-brand** | Founder/creator LinkedIn presence that compounds — **capture the user's real voice first** (`voice-capture.md`), then headline + About rewrite, a weekly post calendar (story/teaching/contrarian/win/question roles, one CTA each), and a comment + connection strategy — **audit harness**: `audit-brand.mjs` (voice, bio, calendar, engagement, blocklists → `brand-audit.md`) + a fresh **brand-auditor subagent** signing PASS / FIX NEEDED |
+| **x-threads-engagement** | Write scroll-stopping **X/Twitter threads** that get read, shared, and followed — viral thread formulas (hook → numbered beats → CTA, from `thread-formulas.md`), story-spine + addiction rails (open loop → rising tension → payoff → loop ending, enforced by `thread-writer.mjs` with 280-char caps + anti-fluff/bait-spam blocklists), an engagement ritual (reply-first hour, quote-post strategy, DM follow-ups), and a day-7 metrics review — **audit harness**: `audit-threads.mjs` (hook, char caps, story spine, fluff, engagement → `threads-audit.md`) + a fresh **x-auditor subagent** signing PASS / FIX NEEDED |
 | **social-media-content-plan** | **30-day algorithm-reset content plan across user-selected platforms** (Instagram · X · LinkedIn · TikTok · YouTube (Shorts + long-form) · Facebook · Threads) — honest per-platform strategy (how each algorithm actually ranks in 2026, the 14-day re-training sprint, native formats, cadence, hashtag/keyword rules — grounded by `platform-playbook.mjs`), 3–4 content pillars + hook bank, a deterministic day-by-day calendar (`build-calendar.mjs` from `plan.json`), a first-60-minute engagement protocol, and a metrics/review loop (day-7/14/21/30) — **audit harness**: `audit-content-plan.mjs` (platform coverage, reset framing, pillars, calendar, engagement, metrics, fluff blocklist → `content-plan-audit.md`) + a fresh **content-plan-auditor subagent** signing PASS / FIX NEEDED |
 | **skill-builder** (meta) | Scaffold **new skills** the deepak-skill way — `scaffold-skill.mjs` generates the folder, SKILL.md contract (quality bar + workflow + checklist), Deepak-branded scripts, templates and examples, then wires the skill into README/USAGE/prompt-examples — **audit harness**: `audit-scaffold.mjs --docs` checks the new skill against the repo contract (SKILL.md, scripts, templates/examples, docs wiring + counts → `scaffold-audit.md`) + a fresh **scaffold-auditor subagent** signing PASS / FIX NEEDED |
 | **veo-cinematic-reels** | Reel scripts + **rich long-form copy-paste video prompts (~150–250 words) that work in ANY generator** — Google Flow / Veo 3.1, Kling, Luma, Runway, Hailuo, Vidu, Pika, PixVerse — manual copy-paste workflow with **character consistency locked** (reference-image ingredients + a verbatim character block in EVERY prompt, self-verified by `scene-prompts.mjs`), **IMAX-level cinematic language** with per-scene lens/tempo/lighting detail, locked color grading (film-stock tokens), native dialogue/SFX audio, a labeled **negative prompt** + locked **seed** per scene, per-tool upload instructions (Ingredients / Elements / image-to-video) — **and an audit harness**: `audit-reels.mjs` (automated per-scene token/verify/length/negative/seed/bridge checks → `reels-audit.md`) + a fresh **reel-auditor subagent** scoring reel-worthiness (/50) and signing PASS / FIX NEEDED |
@@ -38,15 +40,15 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 | **paid-ads-studio** | **The paid engine** — end-to-end ad campaign production for **Meta + Google**: copy-paste **Veo 3.1 video ad prompts** + **image ad prompts** (Nano Banana Pro / Midjourney / Flux) with **locked brand consistency** (verbatim product block in EVERY prompt, self-verified by `ad-prompts.mjs`), **hook-first ad copy** inside every platform's char limits (anti-fluff enforced by `ad-copy.mjs`), **campaign blueprints** (Meta ODAX + Advantage+ audiences · Google Demand Gen + PMax + Search, audience signals ≠ targeting), **2026 AI-content compliance checklists**, a **cost-management plan** (ramp / learning / kill / scale), a **benchmark-driven forecast** of expected results — impressions, clicks, conversions, CPA, ROAS across conservative/base/aggressive scenarios (`forecast-ads.mjs`) — **and an audit harness**: `audit-ads.mjs` (automated hook/char/consistency/compliance checks → `ad-audit.md`) + a fresh **ads-auditor subagent** scoring hook worthiness (/50) and signing PASS / FIX NEEDED before anything ships. Built-in example: **"Brew & Co Tumbler — Paid Launch"** (full launch-ready pack). |
 | **vibe-code-webapp** | Build **or extend** production-ready vibe-coded web apps at **20-year-expert depth** — **detailed idea interview** first (+ existing-project scan `scan-project.mjs` → `project-scan.md`) → **expert research** (`research-playbook.md`: signals + competitor teardown + TAM/SAM/SOM + channels + pricing + positioning) → **SaaS validator** (`saas-validator.md` + `saas-score.mjs` → `validation.md`: /35 verdict, kill criteria, unit economics, kill guardrail, validation moves) → **Build Pack** (`PRD.md` + `stack-blueprint.md` — with a **design source of truth**: Figma via the **Figma Developer MCP**, **Google Stitch** `DESIGN.md`, or the open-source pack (`frontend-design.md`), plus **AI-feature rails** when the PRD has AI (`ai-logic.md`) — + **`sitemap.md`** + **`TODO.md`** P0/P1/P2 via `todo.mjs`) → **you approve the pack AND the todo list** → builds **step by step** from `vibe-coder-instructions.md` (BUILD.md, golden loop + design parity) filing **detailed `build-report.md`** reports → **production audit** (`--payments`/`--ai` flags) → **everything-auditor** final review → **daily `MEMORY.md`** keeps you and any AI in sync |
 
-The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets / thumbnails) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline) → **multiplied** (podcast→shorts, YouTube packaging, SEO blog, LinkedIn, email) → **paid** (Meta + Google ad campaigns with forecast-first economics via paid-ads-studio).
+The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets / thumbnails) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline) → **multiplied** (podcast→shorts, YouTube packaging, SEO blog, LinkedIn, X threads, editorial newsletters) → **paid** (Meta + Google ad campaigns with forecast-first economics via paid-ads-studio).
 
-**Every skill now ships the same audit-harness pattern**: an `audit-*.mjs` script runs the automated checks on the delivered pack (consistency tokens, verify markers, char limits, blocklists, output files → `*-audit.md`, exit 0/1/2), then a FRESH `<skill>-auditor` subagent completes a /50 worthiness scorecard and signs **PASS / FIX NEEDED** — nothing ships until PASS. Skills with a harness: text-motion-reels, hook-storyboard-retention, voice-sfx-audio, video-asset-reels, carousel-post-images, veo-cinematic-reels, photoshoot-studio, podcast-to-shorts, youtube-video-pipeline, blog-seo-content, linkedin-personal-brand, social-media-content-plan, skill-builder, serial-story-reels, paid-ads-studio, vibe-code-webapp, video-product-pipeline, email-marketing.
+**Every skill now ships the same audit-harness pattern**: an `audit-*.mjs` script runs the automated checks on the delivered pack (consistency tokens, verify markers, char limits, blocklists, output files → `*-audit.md`, exit 0/1/2), then a FRESH `<skill>-auditor` subagent completes a /50 worthiness scorecard and signs **PASS / FIX NEEDED** — nothing ships until PASS. Skills with a harness: text-motion-reels, hook-storyboard-retention, voice-sfx-audio, video-asset-reels, carousel-post-images, veo-cinematic-reels, photoshoot-studio, podcast-to-shorts, youtube-video-pipeline, blog-seo-content, linkedin-personal-brand, social-media-content-plan, skill-builder, serial-story-reels, paid-ads-studio, vibe-code-webapp, video-product-pipeline, email-marketing, x-threads-engagement, newsletter-growth.
 
 ---
 
 ## Quick start — install in your project (3 steps)
 
-> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 18 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
+> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 20 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
 >
 > **Using the claude.com website (browser, no terminal)?** No install needed — copy-paste the skill instructions and Claude follows them in the chat. Step-by-step: [`CLAUDE-COM.md`](CLAUDE-COM.md).
 
@@ -64,7 +66,7 @@ Run this **inside your project folder**:
 npx skills add Deepak-ai-93/deepak-skill --all
 ```
 
-That's it. It installs all eighteen skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
+That's it. It installs all twenty skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
 
 ### 3. Use it with any CLI
 
@@ -91,6 +93,8 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **youtube-video-pipeline only** (self-contained — SKILL.md + scripts/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill youtube-video-pipeline` |
 | **blog-seo-content only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill blog-seo-content` |
 | **linkedin-personal-brand only** (self-contained — SKILL.md + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill linkedin-personal-brand` |
+| **x-threads-engagement only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill x-threads-engagement` |
+| **newsletter-growth only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill newsletter-growth` |
 | **social-media-content-plan only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill social-media-content-plan` |
 | **skill-builder only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill skill-builder` |
 | **veo-cinematic-reels only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill veo-cinematic-reels` |
@@ -105,10 +109,10 @@ The agent will run the format wizard, build the composition, and render your 4K 
 
 ```bash
 ls .agents/skills/
-# blog-seo-content  carousel-post-images  email-marketing  hook-storyboard-retention
+# blog-seo-content  carousel-post-images  email-marketing  hook-storyboard-retention  newsletter-growth
 # linkedin-personal-brand  paid-ads-studio  photoshoot-studio  podcast-to-shorts  serial-story-reels  skill-builder
 # social-media-content-plan  text-motion-reels  veo-cinematic-reels  video-asset-reels  video-product-pipeline
-# vibe-code-webapp  voice-sfx-audio  youtube-video-pipeline
+# vibe-code-webapp  voice-sfx-audio  x-threads-engagement  youtube-video-pipeline
 ```
 
 **Update:** `npx skills update` • **Remove:** `npx skills remove <skill-name>`
@@ -198,6 +202,21 @@ Built-in example — **"Meet Replays" product launch** (`examples/product-launch
 > "Write a product-launch email for our SaaS — audience: existing customers, goal: demo clicks. Make it spam-free with high-CTR subject lines and strong E-E-A-T."
 > → subject line pack → `email.html` + `plain.txt` → `validate-email.mjs` report → preview screenshots → auditor sign-off → deliver
 
+### Editorial newsletters (`newsletter-growth`)
+
+Grow an editorial newsletter (Beehiiv / Substack / ConvertKit) with **story-first issues** — subject-line pack (≤ 60 chars, one proven formula) → story-spine issue (open loop → stakes → payoff → value receipts → **ONE CTA + ONE growth plug**):
+
+```bash
+cd skills/newsletter-growth
+node scripts/issue-writer.mjs --plan issue-plan.json --out issue.md          # assembles + validates (exit 1 on bad plans)
+node scripts/audit-newsletter.mjs --pack <newsletter-folder> --out newsletter-audit.md   # automated audit → spawn newsletter-auditor subagent
+```
+
+Deliverables: `issue.md` (subject + story-first body, word window 350–900, no fluff) + `growth-plan.md` (welcome sequence, referral loop, cross-promos, analytics review) + `newsletter-audit.md`. Distinct from `email-marketing` — that's transactional ESP campaigns; this is editorial + growth. Built-in example: **"Founder Welcome"** (`examples/founder-welcome/`).
+
+> "Write my newsletter issue this week — story-first. Niche: SaaS pricing for founders. Goal: replies + forwards."
+> → subject formula → story plan → `issue-writer.mjs` → `growth-plan.md` → auditor check → deliver
+
 ### Podcast → Shorts (`podcast-to-shorts`)
 
 Long-form content → **viral-ready vertical clips**. The pipeline scores, picks, and cuts:
@@ -247,6 +266,21 @@ Build a founder/creator presence that compounds — **your real voice captured f
 
 > "Help me build my LinkedIn — capture my voice, rewrite my bio, and give me a week of posts."
 > → voice capture → voice-profile.md → bio.md → calendar.md → engagement.md → auditor check → deliver
+
+### X threads & engagement (`x-threads-engagement`)
+
+Write scroll-stopping **X threads** that get read, shared, and followed — one formula (curiosity / contrarian / results / list / pain / story) → story-spine thread plan (hook ≤ 100 chars opens a loop → rising beats → payoff → CTA/loop):
+
+```bash
+cd skills/x-threads-engagement
+node scripts/thread-writer.mjs --plan thread-plan.json --out thread.md      # assembles + validates (exit 1 on bad plans)
+node scripts/audit-threads.mjs --pack <thread-folder> --out threads-audit.md   # automated audit → spawn x-auditor subagent
+```
+
+Deliverables: `thread.md` (numbered tweets, 280-char caps, role-annotated story spine, no fluff/bait-spam) + `engagement.md` (the reply-first hour, quote-post strategy, DM follow-ups — the replies are the growth) + `threads-audit.md`. Built-in example: **"Founder Pricing Thread"** (`examples/founder-pricing-thread/`).
+
+> "Write a viral X thread: 3 pricing mistakes founders make. Goal: follows + replies."
+> → formula → thread plan → `thread-writer.mjs` → `engagement.md` → auditor check → deliver
 
 ### Social media content plans (`social-media-content-plan`)
 
