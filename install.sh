@@ -15,7 +15,7 @@
 #    ./install.sh --help                # this help
 #
 #  Examples:
-#    ./install.sh                       → all 25 skills into .agents/skills/
+#    ./install.sh                       → all 28 skills into .agents/skills/
 #    ./install.sh --skill podcast-to-shorts
 #    ./install.sh --skill email-marketing --global
 # ═══════════════════════════════════════════════════════════════════════════
@@ -40,7 +40,7 @@ ${C_CYAN}${C_BOLD}
    ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
    ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
 ${C_RESET}
-${C_CYAN}${C_BOLD}  deepak-skill — 22 agent skills crafted by Deepak 🎬${C_RESET}
+${C_CYAN}${C_BOLD}  deepak-skill — 28 agent skills crafted by Deepak 🎬${C_RESET}
 ${C_YELLOW}  install once · use in any AI coding agent · MIT license${C_RESET}
 EOF
   echo ""
@@ -73,10 +73,13 @@ SKILLS=(
   "vibe-code-webapp         → production vibe-coded web apps"
   "skill-builder            → scaffold new skills the deepak-skill way"
   "mcp-agent-builder        → MCP servers + AI agents: discovery → PRD → architecture → scaffold → audit"
+  "positioning-studio       → product/brand positioning: one-liner + hierarchy + voice guide + audit"
+  "prompt-engineering       → prompt library in the creator's voice: framework + test loop + audit"
+  "ai-automation            → AI workflow design: worthiness gate → steps → checkpoints → cost → audit"
 )
 
 show_skills() {
-  echo "${C_BOLD}  25 skills installed:${C_RESET}"
+  echo "${C_BOLD}  28 skills installed:${C_RESET}"
   for s in "${SKILLS[@]}"; do
     printf "  ${C_GREEN}•${C_RESET} %s\n" "$s"
   done
@@ -126,7 +129,7 @@ banner
 show_skills
 
 if [ "$LIST_ONLY" = "1" ]; then
-  echo "${C_GREEN}✅ Installer ready — run ./install.sh to install all 25 skills.${C_RESET}"
+  echo "${C_GREEN}✅ Installer ready — run ./install.sh to install all 28 skills.${C_RESET}"
   exit 0
 fi
 

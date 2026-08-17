@@ -16,10 +16,10 @@ The **deepak-skill** repo ships a **branded installer** that prints the **DEEPAK
    ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
    ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
 
-  deepak-skill — 22 agent skills crafted by Deepak 🎬
+  deepak-skill — 28 agent skills crafted by Deepak 🎬
   install once · use in any AI coding agent · MIT license
 
-  25 skills installed:
+  28 skills installed:
   • text-motion-reels         → text-only motion graphic reels (4K)
   • video-asset-reels         → reels from your own clips & images
   • video-product-pipeline    → viral-engineered video workflow + audit
@@ -45,6 +45,9 @@ The **deepak-skill** repo ships a **branded installer** that prints the **DEEPAK
   • vibe-code-webapp          → production vibe-coded web apps
   • skill-builder             → scaffold new skills the deepak-skill way
   • mcp-agent-builder         → MCP servers + AI agents: discovery → PRD → architecture → scaffold → audit
+  • positioning-studio       → product/brand positioning: one-liner + hierarchy + voice guide + audit
+  • prompt-engineering       → prompt library in the creator's voice: framework + test loop + audit
+  • ai-automation            → AI workflow design: worthiness gate → steps → checkpoints → cost → audit
 
 🚀 Installing…
 ✅ Done — deepak-skill installed
@@ -68,7 +71,7 @@ npx skills add Deepak-ai-93/deepak-skill --all
 ### Step 2 — Run the branded installer
 
 ```bash
-./install.sh              # prints the DEEPAK banner + installs all 25 skills
+./install.sh              # prints the DEEPAK banner + installs all 28 skills
 ```
 
 > 💡 On Windows use **Git Bash** (not cmd/PowerShell) to run `./install.sh`. No clone? Skip straight to the `npx` command — the skills still work; you just don't get the banner.
@@ -89,7 +92,7 @@ The agent loads the skill and runs its pipeline (with the **deepak-skill — cra
 
 | Command | What it does |
 |---|---|
-| `./install.sh` | Install **all 25 skills** into `.agents/skills/` in the current project |
+| `./install.sh` | Install **all 28 skills** into `.agents/skills/` in the current project |
 | `./install.sh --skill <name>` | Install a **single skill** (e.g. `--skill podcast-to-shorts`) |
 | `./install.sh --all` | Same as no args (all skills) |
 | `./install.sh --global` | Install **globally** (`-g`) — available in every project on your machine |
@@ -122,7 +125,7 @@ ls .agents/skills/
 # blog-seo-content  carousel-post-images  content-repurposing-hub  ebook-builder  email-marketing  hook-storyboard-retention  newsletter-growth
 # linkedin-personal-brand  mcp-agent-builder  paid-ads-studio  photoshoot-studio  podcast-to-shorts  serial-story-reels  skill-builder
 # social-media-content-plan  sponsorship-pipeline  text-motion-reels  thumbnail-studio  veo-cinematic-reels  video-asset-reels  video-product-pipeline
-# vibe-code-webapp  voice-sfx-audio  x-threads-engagement  youtube-video-pipeline
+# vibe-code-webapp  voice-sfx-audio  x-threads-engagement  youtube-video-pipeline  ai-automation  positioning-studio  prompt-engineering
 ```
 
 **Update:** `npx skills update` · **Remove:** `npx skills remove <skill-name>`

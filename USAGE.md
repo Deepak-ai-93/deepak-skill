@@ -40,7 +40,7 @@ The deciding factor is: **does the product let an agent run terminal commands?**
 # in your project folder — a single skill
 npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images
 
-# or everything (all 25 skills)
+# or everything (all 28 skills)
 npx skills add Deepak-ai-93/deepak-skill --all
 
 # or install globally for every project
@@ -102,6 +102,15 @@ cd skills/skill-builder && node scripts/scaffold-skill.mjs --name my-skill --des
 # MCP + AI agents: discovery → PRD → architecture → scaffolded server → agent wiring → audit
 cd skills/mcp-agent-builder && node scripts/scaffold-server.mjs --plan mcp-plan.json --out server
 cd skills/mcp-agent-builder && node scripts/audit-mcp.mjs --pack <mcp-folder> --out mcp-audit.md   # automated audit → spawn mcp-auditor subagent
+
+# Positioning: one-liner + messaging hierarchy + taglines + voice guide, in the author's taste → audit
+cd skills/positioning-studio && node scripts/audit-positioning.mjs --pack <positioning-folder> --out positioning-audit.md   # automated audit → spawn positioning-auditor subagent
+
+# Prompt libraries: framework prompts (role → context → task → format → constraints) + voice rules + test loop → audit
+cd skills/prompt-engineering && node scripts/audit-prompts.mjs --pack <library-folder> --out prompts-audit.md   # automated audit → spawn prompt-auditor subagent
+
+# AI workflows: worthiness gate → trigger → steps with contracts → human checkpoints → cost → build handoff → audit
+cd skills/ai-automation && node scripts/audit-automation.mjs --pack <design-folder> --out automation-audit.md   # automated audit → spawn automation-auditor subagent
 
 # Google Flow / Veo: rich long-form scene prompts, any video generator (Flow/Veo, Kling, Luma, Runway, Hailuo, Vidu, Pika, PixVerse) — locked character consistency + negative prompt + seed
 cd skills/veo-cinematic-reels && node scripts/scene-prompts.mjs --plan scene-plan.json --out prompts.md

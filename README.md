@@ -11,7 +11,7 @@
 
 **🎬 deepak-skill — crafted by Deepak** · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
 
-Open-source agent skills for the **full content-creator stack** — short-form video (text-motion + asset reels), **Google Flow / Veo cinematic scene prompts**, viral hooks & storyboards, AI voiceover + sound design, native-image-model carousels, designed ebook lead magnets, spam-free HTML emails with high-CTR subject lines, **long-form repurposing** (podcast→shorts, YouTube packaging, SEO blog content), **LinkedIn personal branding**, **platform-native social content plans (algorithm-reset calendars)**, vibe-coded web apps, a meta **skill-builder** that scaffolds new skills, and a **mcp-agent-builder** that scaffolds MCP servers + the AI agents that use them (full path: discovery → PRD → architecture → runnable server → agent wiring, in any IDE/CLI). Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
+Open-source agent skills for the **full content-creator stack** — short-form video (text-motion + asset reels), **Google Flow / Veo cinematic scene prompts**, viral hooks & storyboards, AI voiceover + sound design, native-image-model carousels, designed ebook lead magnets, spam-free HTML emails with high-CTR subject lines, **long-form repurposing** (podcast→shorts, YouTube packaging, SEO blog content), **LinkedIn personal branding**, **platform-native social content plans (algorithm-reset calendars)**, vibe-coded web apps, a meta **skill-builder** that scaffolds new skills, and a **mcp-agent-builder** that scaffolds MCP servers + the AI agents that use them (full path: discovery → PRD → architecture → runnable server → agent wiring, in any IDE/CLI) — plus the **business side**: **product positioning** (`positioning-studio`: one-liner + messaging hierarchy + voice guide), a **prompt library in your voice** (`prompt-engineering`: framework + test loop), and **AI workflow design** (`ai-automation`: worthiness gate → steps → human checkpoints → cost → build handoff). Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
 
 [![skills.sh](https://skills.sh/b/Deepak-ai-93/deepak-skill)](https://skills.sh/Deepak-ai-93/deepak-skill)
 
@@ -39,6 +39,9 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 | **social-media-content-plan** | **30-day algorithm-reset content plan across user-selected platforms** (Instagram · X · LinkedIn · TikTok · YouTube (Shorts + long-form) · Facebook · Threads) — honest per-platform strategy (how each algorithm actually ranks in 2026, the 14-day re-training sprint, native formats, cadence, hashtag/keyword rules — grounded by `platform-playbook.mjs`), 3–4 content pillars + hook bank, a deterministic day-by-day calendar (`build-calendar.mjs` from `plan.json`), a first-60-minute engagement protocol, and a metrics/review loop (day-7/14/21/30) — **audit harness**: `audit-content-plan.mjs` (platform coverage, reset framing, pillars, calendar, engagement, metrics, fluff blocklist → `content-plan-audit.md`) + a fresh **content-plan-auditor subagent** signing PASS / FIX NEEDED |
 | **skill-builder** (meta) | Scaffold **new skills** the deepak-skill way — `scaffold-skill.mjs` generates the folder, SKILL.md contract (quality bar + workflow + checklist), Deepak-branded scripts, templates and examples, then wires the skill into README/USAGE/prompt-examples — **audit harness**: `audit-scaffold.mjs --docs` checks the new skill against the repo contract (SKILL.md, scripts, templates/examples, docs wiring + counts → `scaffold-audit.md`) + a fresh **scaffold-auditor subagent** signing PASS / FIX NEEDED |
 | **mcp-agent-builder** | Build **MCP servers + the AI agents that use them** end-to-end in any IDE/CLI — a **discovery interview** (connector, users, action surface, auth, deployment model) → `mcp-prd.md` (problem, users, tools/resources/prompts, auth, non-goals, metrics) → `mcp-architecture.md` (ONE deployment model: stdio / remote HTTP / MCPB — transport + auth flow must match) → **runnable server** (`scaffold-server.mjs` generates a real `@modelcontextprotocol/sdk` server from `mcp-plan.json`, one handler per tool, exit 1 on bad plans) → `agent-design.md` (system prompt + tool wiring + guardrails) → `ide-cli-matrix.md` (connect in Claude Code, Cursor, Codex CLI, Gemini CLI, OpenCode, Cline, Windsurf, VS Code, Zed) — **audit harness**: `audit-mcp.mjs` (PRD, architecture, scaffold, agent wiring, IDE matrix, secrets → `mcp-audit.md`) + a fresh **mcp-auditor subagent** signing PASS / FIX NEEDED |
+| **positioning-studio** | Turn any product or brand into **ONE positioning that makes every content piece convert** — ONE one-liner (≤ 15 words), a **messaging hierarchy** (audience → problem → promise → proof), **3 taglines**, a **proof-point bank**, and a **voice guide** written in the creator's own taste (memory + taste rails) — **anti-hype**: proof beats adjectives; no proof → shrink the promise. Optional `message-map.md` rephrases the SAME message per channel (landing page, email, social). **Audit harness**: `audit-positioning.mjs` (one-liner cap, hierarchy completeness, proof ≥ 3, taglines, fluff + taste banned-words → `positioning-audit.md`) + a fresh **positioning-auditor subagent** signing PASS / FIX NEEDED |
+| **prompt-engineering** | Build a **structured, versioned prompt library in the creator's voice** — recurring use cases (content / research / code / email) each with the **role → context → task → format → constraints** framework, written through the **taste profile** (voice rules + banned words) so outputs sound like the author — plus a **test/iterate loop** (`test-results.md`: verdict per prompt, weak prompts rewritten) so only prompts that work ship. **Audit harness**: `audit-prompts.mjs` (framework sections on every prompt, no placeholder gaps, voice rules carry taste banned-words, test verdicts per prompt → `prompts-audit.md`) + a fresh **prompt-auditor subagent** signing PASS / FIX NEEDED |
+| **ai-automation** | Design **AI agent workflows BEFORE building them** — an honest **automation-worthiness** gate first (automatable? worth it? says NO when it isn't), then `automation-design.md`: trigger → per-step **tool/agent with input/output contracts** → **human-in-the-loop checkpoints on irreversible actions** (send / publish / delete / charge / deploy) → error handling → **cost estimate** → **build handoff** that delegates to `mcp-agent-builder` / `vibe-code-webapp` / `prompt-engineering`. **Audit harness**: `audit-automation.mjs` (worthiness verdict, trigger, step contracts, checkpoints, cost → `automation-audit.md`) + a fresh **automation-auditor subagent** signing PASS / FIX NEEDED |
 | **veo-cinematic-reels** | Reel scripts + **rich long-form copy-paste video prompts (~150–250 words) that work in ANY generator** — Google Flow / Veo 3.1, Kling, Luma, Runway, Hailuo, Vidu, Pika, PixVerse — manual copy-paste workflow with **character consistency locked** (reference-image ingredients + a verbatim character block in EVERY prompt, self-verified by `scene-prompts.mjs`), **IMAX-level cinematic language** with per-scene lens/tempo/lighting detail, locked color grading (film-stock tokens), native dialogue/SFX audio, a labeled **negative prompt** + locked **seed** per scene, per-tool upload instructions (Ingredients / Elements / image-to-video) — **and an audit harness**: `audit-reels.mjs` (automated per-scene token/verify/length/negative/seed/bridge checks → `reels-audit.md`) + a fresh **reel-auditor subagent** scoring reel-worthiness (/50) and signing PASS / FIX NEEDED |
 | **serial-story-reels** | **EPISODIC story video series** for Google Flow / Veo 3.1 — comic, love story, action, thriller or fantasy (or the user's own characters via image uploads): a **story bible** (season arc + per-episode hooks + cliffhangers, validated by `series-arc.mjs`) → **character sheets** (verbatim blocks + reference-image prompts) → a **self-verified copy-paste prompt pack for EVERY scene of EVERY episode** (`episode-prompts.mjs`, exits 1 on drift) so the SAME characters stay consistent ACROSS episodes — plus cinematic action/motion language, native Veo dialogue/SFX, and a **voiceover line sheet** for a Kokoro post pass |
 | **photoshoot-studio** | **AI photoshoot prompt packs for people AND products** (Google Flow / Nano Banana Pro, Midjourney, Flux) — manual copy-paste workflow with **subject consistency locked** (reference-image ingredients + a verbatim person/product block in EVERY prompt, self-verified by `shot-prompts.mjs`), **professional photography language** (camera body, lens, f-stop, lighting setup, film stock), locked grade per shoot, per-platform aspect ratios, short **edit/inpaint prompts** for re-posing / re-outfitting / re-lighting — **and an audit harness**: `audit-shoot.mjs` (per-shot token/verify/aspect/edit checks → `shoot-audit.md`) + a fresh **shoot-auditor subagent** scoring shoot-worthiness (/50) and signing PASS / FIX NEEDED |
@@ -47,13 +50,13 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 
 The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets / thumbnails) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline) → **multiplied** (podcast→shorts, YouTube packaging, SEO blog, LinkedIn, X threads, editorial newsletters) → **paid** (Meta + Google ad campaigns with forecast-first economics via paid-ads-studio).
 
-**Every skill now ships the same audit-harness pattern**: an `audit-*.mjs` script runs the automated checks on the delivered pack (consistency tokens, verify markers, char limits, blocklists, output files → `*-audit.md`, exit 0/1/2), then a FRESH `<skill>-auditor` subagent completes a /50 worthiness scorecard and signs **PASS / FIX NEEDED** — nothing ships until PASS. Skills with a harness: text-motion-reels, hook-storyboard-retention, voice-sfx-audio, video-asset-reels, carousel-post-images, veo-cinematic-reels, photoshoot-studio, podcast-to-shorts, youtube-video-pipeline, blog-seo-content, linkedin-personal-brand, social-media-content-plan, skill-builder, serial-story-reels, paid-ads-studio, vibe-code-webapp, video-product-pipeline, email-marketing, x-threads-engagement, newsletter-growth, mcp-agent-builder, ebook-builder, thumbnail-studio, content-repurposing-hub, sponsorship-pipeline.
+**Every skill now ships the same audit-harness pattern**: an `audit-*.mjs` script runs the automated checks on the delivered pack (consistency tokens, verify markers, char limits, blocklists, output files → `*-audit.md`, exit 0/1/2), then a FRESH `<skill>-auditor` subagent completes a /50 worthiness scorecard and signs **PASS / FIX NEEDED** — nothing ships until PASS. Skills with a harness: text-motion-reels, hook-storyboard-retention, voice-sfx-audio, video-asset-reels, carousel-post-images, veo-cinematic-reels, photoshoot-studio, podcast-to-shorts, youtube-video-pipeline, blog-seo-content, linkedin-personal-brand, social-media-content-plan, skill-builder, serial-story-reels, paid-ads-studio, vibe-code-webapp, video-product-pipeline, email-marketing, x-threads-engagement, newsletter-growth, mcp-agent-builder, ebook-builder, thumbnail-studio, content-repurposing-hub, sponsorship-pipeline, positioning-studio, prompt-engineering, ai-automation.
 
 ---
 
 ## Quick start — install in your project (3 steps)
 
-> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 25 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
+> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 28 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
 >
 > **Using the claude.com website (browser, no terminal)?** No install needed — copy-paste the skill instructions and Claude follows them in the chat. Step-by-step: [`CLAUDE-COM.md`](CLAUDE-COM.md).
 
@@ -111,6 +114,9 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **serial-story-reels only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill serial-story-reels` |
 | **photoshoot-studio only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill photoshoot-studio` |
 | **paid-ads-studio only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill paid-ads-studio` |
+| **positioning-studio only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill positioning-studio` |
+| **prompt-engineering only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill prompt-engineering` |
+| **ai-automation only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill ai-automation` |
 | Install globally (any project, any machine) | `npx skills add Deepak-ai-93/deepak-skill --all -g` |
 | Target specific agents | `npx skills add Deepak-ai-93/deepak-skill --all -a claude-code -a cursor` |
 | Install from a local clone | `npx skills add ./deepak-skill --all` |
@@ -122,7 +128,7 @@ ls .agents/skills/
 # blog-seo-content  carousel-post-images  content-repurposing-hub  ebook-builder  email-marketing  hook-storyboard-retention  newsletter-growth
 # linkedin-personal-brand  mcp-agent-builder  paid-ads-studio  photoshoot-studio  podcast-to-shorts  serial-story-reels  skill-builder
 # social-media-content-plan  sponsorship-pipeline  text-motion-reels  thumbnail-studio  veo-cinematic-reels  video-asset-reels  video-product-pipeline
-# vibe-code-webapp  voice-sfx-audio  x-threads-engagement  youtube-video-pipeline
+# vibe-code-webapp  voice-sfx-audio  x-threads-engagement  youtube-video-pipeline  ai-automation  positioning-studio  prompt-engineering
 ```
 
 **Update:** `npx skills update` • **Remove:** `npx skills remove <skill-name>`
@@ -397,6 +403,48 @@ Deliverables: `mcp-discovery.md` (interview + Decisions) → `mcp-prd.md` (probl
 
 > "Build me an MCP server that posts my drafts to Instagram and X — full path from idea to connected server in Claude Code."
 > → discovery → PRD → architecture → scaffold (`scaffold-server.mjs`) → agent design + IDE matrix → audit (`audit-mcp.mjs` + mcp-auditor) → deliver
+
+### Positioning (`positioning-studio`)
+
+Turn any product or brand into **ONE message every piece of content lifts** — one-liner, messaging hierarchy, taglines, proof bank, voice guide — written in the author's taste (memory + taste rails):
+
+```bash
+cd skills/positioning-studio
+node scripts/audit-positioning.mjs --pack <positioning-folder> --out positioning-audit.md   # automated audit → spawn positioning-auditor subagent
+```
+
+Deliverables: `positioning.md` (one-liner ≤ 15 words → hierarchy Audience/Problem/Promise/Proof → ≥ 3 proof points → ≥ 3 taglines → voice guide with banned words) + optional `message-map.md` (SAME message rephrased per channel) + `positioning-audit.md` + `positioning-memory.md` (author identity + taste + past builds, read at Stage 0 / written at the end). Anti-hype rail: proof beats adjectives — no proof, shrink the promise. Built-in example: **"ClipDeck positioning"** (`examples/saas-tool-positioning/` — async video feedback tool, one-liner + message map + memory).
+
+> "Give my product a positioning — one-liner, taglines, and a voice guide that sounds like me."
+> → memory + taste (Stage 0) → positioning card → `positioning.md` (+ message map) → audit (`audit-positioning.mjs` + positioning-auditor) → deliver
+
+### Prompt libraries (`prompt-engineering`)
+
+Build a **structured, versioned prompt library in your voice** — framework prompts (role → context → task → format → constraints) + voice rules + a test loop that records a verdict per prompt:
+
+```bash
+cd skills/prompt-engineering
+node scripts/audit-prompts.mjs --pack <library-folder> --out prompts-audit.md   # automated audit → spawn prompt-auditor subagent
+```
+
+Deliverables: `prompt-library.md` (## Voice rules from the taste profile + one section per prompt) + `test-results.md` (tool, test input, output quality, verdict per prompt) + `prompts-audit.md` + `prompt-memory.md`. Built-in example: **"Creator prompt library"** (`examples/creator-prompt-library/` — hooks, newsletter intro, competitor teardown, carousel repurpose — each framework-written and tested).
+
+> "Build me a prompt library for my content workflow — prompts that make AI sound like me."
+> → memory + taste (Stage 0) → voice rules → framework prompts → test loop → audit (`audit-prompts.mjs` + prompt-auditor) → deliver
+
+### AI workflow design (`ai-automation`)
+
+Design **AI agent workflows before building them** — an honest worthiness gate, then trigger → steps with contracts → human checkpoints → cost → build handoff to `mcp-agent-builder` / `vibe-code-webapp` / `prompt-engineering`:
+
+```bash
+cd skills/ai-automation
+node scripts/audit-automation.mjs --pack <design-folder> --out automation-audit.md   # automated audit → spawn automation-auditor subagent
+```
+
+Deliverables: `automation-design.md` (## Automation-worthiness verdict → ## Trigger → ## Workflow steps with Tool/Input/Output/Human-checkpoint/Error-handling → ## Human checkpoints → ## Cost + risk → ## Build handoff) + `automation-audit.md` + `automation-memory.md` (past verdicts — the NOs matter most). Built-in example: **"Weekly content pipeline agent"** (`examples/content-pipeline-agent/` — collect → draft → author review → publish, with checkpoints and a per-run cost estimate).
+
+> "Design an AI workflow that turns my week's posts into a newsletter — and tell me honestly if it's worth automating."
+> → memory (Stage 0) → worthiness gate → workflow design → cost + handoff → audit (`audit-automation.mjs` + automation-auditor) → deliver
 
 ### Google Flow / Veo reels (`veo-cinematic-reels`)
 
