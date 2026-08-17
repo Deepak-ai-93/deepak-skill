@@ -11,7 +11,7 @@
 
 **🎬 deepak-skill — crafted by Deepak** · [deepak-skill on GitHub](https://github.com/Deepak-ai-93/deepak-skill) · MIT
 
-Open-source agent skills for the **full content-creator stack** — short-form video (text-motion + asset reels), **Google Flow / Veo cinematic scene prompts**, viral hooks & storyboards, AI voiceover + sound design, native-image-model carousels, spam-free HTML emails with high-CTR subject lines, **long-form repurposing** (podcast→shorts, YouTube packaging, SEO blog content), **LinkedIn personal branding**, **platform-native social content plans (algorithm-reset calendars)**, vibe-coded web apps, and a meta **skill-builder** that scaffolds new skills. Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
+Open-source agent skills for the **full content-creator stack** — short-form video (text-motion + asset reels), **Google Flow / Veo cinematic scene prompts**, viral hooks & storyboards, AI voiceover + sound design, native-image-model carousels, designed ebook lead magnets, spam-free HTML emails with high-CTR subject lines, **long-form repurposing** (podcast→shorts, YouTube packaging, SEO blog content), **LinkedIn personal branding**, **platform-native social content plans (algorithm-reset calendars)**, vibe-coded web apps, a meta **skill-builder** that scaffolds new skills, and a **mcp-agent-builder** that scaffolds MCP servers + the AI agents that use them (full path: discovery → PRD → architecture → runnable server → agent wiring, in any IDE/CLI). Built for AI coding agents (Claude Code, Cursor, Codex, Gemini CLI, Antigravity CLI, Grok Build, and 70+ more via the skills ecosystem).
 
 [![skills.sh](https://skills.sh/b/Deepak-ai-93/deepak-skill)](https://skills.sh/Deepak-ai-93/deepak-skill)
 
@@ -25,7 +25,11 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 | **video-asset-reels** | Build reels from your own video clips & images — understand the prompt, cut assets to beats, overlay kinetic text, sync a voiceover, render 4K (see [PLAN.md](PLAN.md)) — **audit harness**: `audit-asset-reel.mjs` (storyboard, cuts, HTML determinism, output, captions → `asset-reel-audit.md`) + a fresh **asset-reel-auditor subagent** signing PASS / FIX NEEDED |
 | **video-product-pipeline** | The viral-engineered gatekeeper for every video request: hunt trending topics (`trend-hunt.mjs` + web research) → brainstorm + score angles → analyze ANY prompt (sloppy or not) → write a `video-product.md` spec → **get your approval** → generate (text-motion / asset reels) → audit the frames with a script + dedicated auditor subagent (spelling, text overlap, safe zones, style, readability) |
 | **carousel-post-images** | Scroll-stopping carousel posts (LinkedIn/Instagram) as image sets — **one script, two CLI modes**: **browser render** (slides.html → deterministic 4K PNGs, any CLI) or **native image-model generation** (same deck exports photoreal 4K prompts for Antigravity / Codex `image_gen` / Grok `/imagine`). Photorealistic real-life visuals, viral anti-fluff copywriting, 4 trending styles (Cinematic Real-Life default), per-platform `caption.md` — **audit harness**: `audit-carousel.mjs` (deck, copy limits, fluff, output, captions → `carousel-audit.md`) + a fresh **carousel-auditor subagent** signing PASS / FIX NEEDED |
+| **ebook-builder** | Build **beautiful lead-magnet ebooks** (guides / checklists / frameworks) as print-ready **A4 PDF + 4K page PNGs + cover.png** — **six layout presets** (Editorial Classic · Modern Bold · Minimal Luxury · Playful Pop · Technical Dark · Nature Calm), **30 design palettes** (5 per layout) + typography pairings + **6 cover styles** (full-bleed / solid / split / pattern / scene-frame / duotone) + page-motif families (step-cards / timeline / checklist / scenario / quote / chapter-dividers / comparison / framework-map) + mood/texture — ONE of each locked via the **design picker**, story-first structure (cover opens a loop → chapters escalate → payoff → CTA), and **two generation modes** like carousel-post-images (Mode 1 browser: `render-ebook.mjs` → headless Chrome A4 PDF + page PNGs; Mode 2 image-model: the same deck exports photoreal cover + interior scene prompts). Cover-image brief built in — **audit harness**: `audit-ebook.mjs` (pages, cover, layout + palette + motif consistency, copy limits, fluff, output → `ebook-audit.md`) + a fresh **ebook-auditor subagent** signing PASS / FIX NEEDED |
 | **email-marketing** | High-converting, **spam-free HTML emails** for Brevo / MailerLite / Mailchimp / Klaviyo — bulletproof responsive code, anti-fluff copywriting, **E-E-A-T trust signals** (real author + credentials + proof), and a **high-CTR subject line pack** (33–50 char formulas + A/B plan). Validated by `validate-email.mjs` (spam-trigger scan, CAN-SPAM compliance, EEAT signals → `validation-report.md`) and previewed at desktop + mobile via `preview-email.mjs` before send |
+| **thumbnail-studio** | Engineer **click-worthy YouTube thumbnails** — a **CTR teardown** of the niche first (what wins, what's saturated, the ONE idea the video sells) → **3–5 thumbnail variants** (each = ONE idea + ≤ 5-word overlay + face/emotion/contrast + a 1280×720 photoreal image-gen prompt, self-verified by `thumbnail-prompts.mjs`) → **A/B plan** with niche CTR benchmarks (`templates/ctr-benchmarks.md`) — **audit harness**: `audit-thumbs.mjs` (teardown, variants, overlay caps, anti-cliché blocklist, A/B plan → `thumbs-audit.md`) + a fresh **thumbs-auditor subagent** signing PASS / FIX NEEDED |
+| **content-repurposing-hub** | Turn ONE source (blog post / podcast / video / thread / idea) into a **multi-platform content pack** — per-platform NATIVE angles (X = thread, LinkedIn = story/lesson, newsletter = issue, carousel = slides, blog = SEO article, Shorts = clip — from `templates/platform-angles.md`), **no copy-paste reposts** (anti-repost hook-overlap check enforced by `repurpose-writer.mjs`, exit 1 on duplicates), a staggered cross-post calendar, one CTA per piece — **audit harness**: `audit-repurpose.mjs` (source, platform count, native angles, no duplicates, CTAs, calendar → `repurpose-audit.md`) + a fresh **repurpose-auditor subagent** signing PASS / FIX NEEDED. Delegates production to the producer skills |
+| **sponsorship-pipeline** | Turn a creator's audience into **brand-deal revenue** — media kit (audience stats + engagement + the offer), **rate card computed from niche CPM/RPM benchmarks** by `rate-card.mjs` (honest ranges, no guarantees), personalized outreach + negotiation scripts (FTC disclosure built in, zero placeholders survive), and a deal-tracking sheet with the day 3/7/14 follow-up cadence — **audit harness**: `audit-sponsor.mjs` (kit, rate card honesty, outreach structure + disclosure + no placeholders, tracking → `sponsor-audit.md`) + a fresh **sponsor-auditor subagent** signing PASS / FIX NEEDED |
 | **newsletter-growth** | Grow an editorial newsletter (Beehiiv / Substack / ConvertKit) with **story-first issues** people actually open and forward — subject-line packs from proven formulas (≤ 60 chars, one formula), a story-spine issue writer (open loop → rising tension → payoff → ONE CTA + growth plug, enforced by `issue-writer.mjs`), welcome-sequence + referral-loop + cross-promo growth tactics, and an analytics review loop — **audit harness**: `audit-newsletter.mjs` (subject, story spine, anti-fluff, CTA/growth, word window, growth plan → `newsletter-audit.md`) + a fresh **newsletter-auditor subagent** signing PASS / FIX NEEDED |
 | **podcast-to-shorts** | Turn long-form podcast/video content into **viral-ready vertical clips** — `clip-finder.mjs` scores every transcript moment on a virality scorecard (hook/emotion/controversy/quotability), picks the standalone winners, and generates the exact **FFmpeg 9:16 cut commands** — plus a hook + caption per clip — **audit harness**: `audit-clips.mjs` (transcript, scored moments, cut commands, clips output, captions → `clips-audit.md`) + a fresh **clips-auditor subagent** signing PASS / FIX NEEDED |
 | **youtube-video-pipeline** | Plan long-form YouTube videos end-to-end: researched `video-brief.md` → retention-engineered script (hook in 30s, open loops) → **10-variant title pack** scored on CTR formulas + 60-char limit (`title-pack.mjs`) → thumbnail brief + image-gen prompt → description + chapters + tags — **audit harness**: `audit-video-plan.mjs` (brief, script hook, title pack, thumbnail, metadata → `video-plan-audit.md`) + a fresh **video-plan-auditor subagent** signing PASS / FIX NEEDED |
@@ -34,6 +38,7 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 | **x-threads-engagement** | Write scroll-stopping **X/Twitter threads** that get read, shared, and followed — viral thread formulas (hook → numbered beats → CTA, from `thread-formulas.md`), story-spine + addiction rails (open loop → rising tension → payoff → loop ending, enforced by `thread-writer.mjs` with 280-char caps + anti-fluff/bait-spam blocklists), an engagement ritual (reply-first hour, quote-post strategy, DM follow-ups), and a day-7 metrics review — **audit harness**: `audit-threads.mjs` (hook, char caps, story spine, fluff, engagement → `threads-audit.md`) + a fresh **x-auditor subagent** signing PASS / FIX NEEDED |
 | **social-media-content-plan** | **30-day algorithm-reset content plan across user-selected platforms** (Instagram · X · LinkedIn · TikTok · YouTube (Shorts + long-form) · Facebook · Threads) — honest per-platform strategy (how each algorithm actually ranks in 2026, the 14-day re-training sprint, native formats, cadence, hashtag/keyword rules — grounded by `platform-playbook.mjs`), 3–4 content pillars + hook bank, a deterministic day-by-day calendar (`build-calendar.mjs` from `plan.json`), a first-60-minute engagement protocol, and a metrics/review loop (day-7/14/21/30) — **audit harness**: `audit-content-plan.mjs` (platform coverage, reset framing, pillars, calendar, engagement, metrics, fluff blocklist → `content-plan-audit.md`) + a fresh **content-plan-auditor subagent** signing PASS / FIX NEEDED |
 | **skill-builder** (meta) | Scaffold **new skills** the deepak-skill way — `scaffold-skill.mjs` generates the folder, SKILL.md contract (quality bar + workflow + checklist), Deepak-branded scripts, templates and examples, then wires the skill into README/USAGE/prompt-examples — **audit harness**: `audit-scaffold.mjs --docs` checks the new skill against the repo contract (SKILL.md, scripts, templates/examples, docs wiring + counts → `scaffold-audit.md`) + a fresh **scaffold-auditor subagent** signing PASS / FIX NEEDED |
+| **mcp-agent-builder** | Build **MCP servers + the AI agents that use them** end-to-end in any IDE/CLI — a **discovery interview** (connector, users, action surface, auth, deployment model) → `mcp-prd.md` (problem, users, tools/resources/prompts, auth, non-goals, metrics) → `mcp-architecture.md` (ONE deployment model: stdio / remote HTTP / MCPB — transport + auth flow must match) → **runnable server** (`scaffold-server.mjs` generates a real `@modelcontextprotocol/sdk` server from `mcp-plan.json`, one handler per tool, exit 1 on bad plans) → `agent-design.md` (system prompt + tool wiring + guardrails) → `ide-cli-matrix.md` (connect in Claude Code, Cursor, Codex CLI, Gemini CLI, OpenCode, Cline, Windsurf, VS Code, Zed) — **audit harness**: `audit-mcp.mjs` (PRD, architecture, scaffold, agent wiring, IDE matrix, secrets → `mcp-audit.md`) + a fresh **mcp-auditor subagent** signing PASS / FIX NEEDED |
 | **veo-cinematic-reels** | Reel scripts + **rich long-form copy-paste video prompts (~150–250 words) that work in ANY generator** — Google Flow / Veo 3.1, Kling, Luma, Runway, Hailuo, Vidu, Pika, PixVerse — manual copy-paste workflow with **character consistency locked** (reference-image ingredients + a verbatim character block in EVERY prompt, self-verified by `scene-prompts.mjs`), **IMAX-level cinematic language** with per-scene lens/tempo/lighting detail, locked color grading (film-stock tokens), native dialogue/SFX audio, a labeled **negative prompt** + locked **seed** per scene, per-tool upload instructions (Ingredients / Elements / image-to-video) — **and an audit harness**: `audit-reels.mjs` (automated per-scene token/verify/length/negative/seed/bridge checks → `reels-audit.md`) + a fresh **reel-auditor subagent** scoring reel-worthiness (/50) and signing PASS / FIX NEEDED |
 | **serial-story-reels** | **EPISODIC story video series** for Google Flow / Veo 3.1 — comic, love story, action, thriller or fantasy (or the user's own characters via image uploads): a **story bible** (season arc + per-episode hooks + cliffhangers, validated by `series-arc.mjs`) → **character sheets** (verbatim blocks + reference-image prompts) → a **self-verified copy-paste prompt pack for EVERY scene of EVERY episode** (`episode-prompts.mjs`, exits 1 on drift) so the SAME characters stay consistent ACROSS episodes — plus cinematic action/motion language, native Veo dialogue/SFX, and a **voiceover line sheet** for a Kokoro post pass |
 | **photoshoot-studio** | **AI photoshoot prompt packs for people AND products** (Google Flow / Nano Banana Pro, Midjourney, Flux) — manual copy-paste workflow with **subject consistency locked** (reference-image ingredients + a verbatim person/product block in EVERY prompt, self-verified by `shot-prompts.mjs`), **professional photography language** (camera body, lens, f-stop, lighting setup, film stock), locked grade per shoot, per-platform aspect ratios, short **edit/inpaint prompts** for re-posing / re-outfitting / re-lighting — **and an audit harness**: `audit-shoot.mjs` (per-shot token/verify/aspect/edit checks → `shoot-audit.md`) + a fresh **shoot-auditor subagent** scoring shoot-worthiness (/50) and signing PASS / FIX NEEDED |
@@ -42,13 +47,13 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 
 The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets / thumbnails) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline) → **multiplied** (podcast→shorts, YouTube packaging, SEO blog, LinkedIn, X threads, editorial newsletters) → **paid** (Meta + Google ad campaigns with forecast-first economics via paid-ads-studio).
 
-**Every skill now ships the same audit-harness pattern**: an `audit-*.mjs` script runs the automated checks on the delivered pack (consistency tokens, verify markers, char limits, blocklists, output files → `*-audit.md`, exit 0/1/2), then a FRESH `<skill>-auditor` subagent completes a /50 worthiness scorecard and signs **PASS / FIX NEEDED** — nothing ships until PASS. Skills with a harness: text-motion-reels, hook-storyboard-retention, voice-sfx-audio, video-asset-reels, carousel-post-images, veo-cinematic-reels, photoshoot-studio, podcast-to-shorts, youtube-video-pipeline, blog-seo-content, linkedin-personal-brand, social-media-content-plan, skill-builder, serial-story-reels, paid-ads-studio, vibe-code-webapp, video-product-pipeline, email-marketing, x-threads-engagement, newsletter-growth.
+**Every skill now ships the same audit-harness pattern**: an `audit-*.mjs` script runs the automated checks on the delivered pack (consistency tokens, verify markers, char limits, blocklists, output files → `*-audit.md`, exit 0/1/2), then a FRESH `<skill>-auditor` subagent completes a /50 worthiness scorecard and signs **PASS / FIX NEEDED** — nothing ships until PASS. Skills with a harness: text-motion-reels, hook-storyboard-retention, voice-sfx-audio, video-asset-reels, carousel-post-images, veo-cinematic-reels, photoshoot-studio, podcast-to-shorts, youtube-video-pipeline, blog-seo-content, linkedin-personal-brand, social-media-content-plan, skill-builder, serial-story-reels, paid-ads-studio, vibe-code-webapp, video-product-pipeline, email-marketing, x-threads-engagement, newsletter-growth, mcp-agent-builder, ebook-builder, thumbnail-studio, content-repurposing-hub, sponsorship-pipeline.
 
 ---
 
 ## Quick start — install in your project (3 steps)
 
-> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 20 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
+> **Want the DEEPAK banner in your terminal?** Clone the repo and run `./install.sh` — the branded installer prints the DEEPAK ASCII banner, lists all 25 skills, and installs them (Windows: use Git Bash). Full guide: [`install.md`](install.md).
 >
 > **Using the claude.com website (browser, no terminal)?** No install needed — copy-paste the skill instructions and Claude follows them in the chat. Step-by-step: [`CLAUDE-COM.md`](CLAUDE-COM.md).
 
@@ -66,7 +71,7 @@ Run this **inside your project folder**:
 npx skills add Deepak-ai-93/deepak-skill --all
 ```
 
-That's it. It installs all twenty skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
+That's it. It installs all twenty-five skills into `.agents/skills/` — no heavy media, no demo files. **Or run the branded installer** (`install.sh`) for the DEEPAK terminal banner.
 
 ### 3. Use it with any CLI
 
@@ -87,8 +92,12 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **video-asset-reels only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill video-asset-reels` |
 | **video-product-pipeline only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill video-product-pipeline` |
 | **carousel-post-images only** (self-contained — SKILL.md + scripts/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images` |
+| **ebook-builder only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill ebook-builder` |
 | **vibe-code-webapp only** (self-contained — SKILL.md + scripts/ + templates/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill vibe-code-webapp` |
 | **email-marketing only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill email-marketing` |
+| **thumbnail-studio only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill thumbnail-studio` |
+| **content-repurposing-hub only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill content-repurposing-hub` |
+| **sponsorship-pipeline only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill sponsorship-pipeline` |
 | **podcast-to-shorts only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill podcast-to-shorts` |
 | **youtube-video-pipeline only** (self-contained — SKILL.md + scripts/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill youtube-video-pipeline` |
 | **blog-seo-content only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill blog-seo-content` |
@@ -97,6 +106,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **newsletter-growth only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill newsletter-growth` |
 | **social-media-content-plan only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill social-media-content-plan` |
 | **skill-builder only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill skill-builder` |
+| **mcp-agent-builder only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill mcp-agent-builder` |
 | **veo-cinematic-reels only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill veo-cinematic-reels` |
 | **serial-story-reels only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill serial-story-reels` |
 | **photoshoot-studio only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill photoshoot-studio` |
@@ -109,9 +119,9 @@ The agent will run the format wizard, build the composition, and render your 4K 
 
 ```bash
 ls .agents/skills/
-# blog-seo-content  carousel-post-images  email-marketing  hook-storyboard-retention  newsletter-growth
-# linkedin-personal-brand  paid-ads-studio  photoshoot-studio  podcast-to-shorts  serial-story-reels  skill-builder
-# social-media-content-plan  text-motion-reels  veo-cinematic-reels  video-asset-reels  video-product-pipeline
+# blog-seo-content  carousel-post-images  content-repurposing-hub  ebook-builder  email-marketing  hook-storyboard-retention  newsletter-growth
+# linkedin-personal-brand  mcp-agent-builder  paid-ads-studio  photoshoot-studio  podcast-to-shorts  serial-story-reels  skill-builder
+# social-media-content-plan  sponsorship-pipeline  text-motion-reels  thumbnail-studio  veo-cinematic-reels  video-asset-reels  video-product-pipeline
 # vibe-code-webapp  voice-sfx-audio  x-threads-engagement  youtube-video-pipeline
 ```
 
@@ -192,6 +202,67 @@ Built-in examples — **"Day in the life of an AI developer"** (`examples/day-in
 
 > "Make a carousel: 3 money rules nobody told you. Real scenes, image-model mode, 8 slides, 4K, LinkedIn."
 > → choose mode → `prompts.md` → 4K images → `caption.md` → auditor check → deliver
+
+### Ebook lead magnets (`ebook-builder`)
+
+Build **designed ebooks** (guides / checklists / frameworks) as print-ready **A4 PDF + 4K page PNGs + cover.png** — run the **design picker**: pick ONE of **six layouts** (Editorial Classic · Modern Bold · Minimal Luxury · Playful Pop · Technical Dark · Nature Calm) + ONE of **30 palettes** + accent/type pairing + ONE of **6 cover styles** + ONE motif family + mood/texture, then generate in **two modes** like the carousel:
+
+```bash
+cd skills/ebook-builder
+node scripts/render-ebook.mjs --html ebook.html --out ebook/ --pdf         # Mode 1: A4 PDF + cover.png + page PNGs (headless Chrome)
+node scripts/render-ebook.mjs --html ebook.html --out ebook/ --mode model # Mode 2: photoreal cover + interior scene prompts (prompts.md)
+node scripts/audit-ebook.mjs --pack <ebook-folder> --out ebook-audit.md   # automated audit → spawn ebook-auditor subagent
+```
+
+Deliverables: `ebook.html` (single source of truth, one `.page` per book page, `data-layout` + `data-palette` + `data-motif` on every page, `data-cover-style` on the cover) → `ebook.pdf` + `cover.png` + `pages/*.png` (Mode 1, 2× = 2160×3056) **or** `prompts.md` (Mode 2 — design-token prompts dispatched to Nano Banana / Midjourney / Flux at 4K) → `ebook-audit.md`. Story-first structure enforced (cover opens a loop → chapters escalate → payoff → CTA) + the **design picker card** (`templates/design-picker.md`) + **cover-image brief** (`templates/cover-brief.md` — one idea, title ≤ 6 words, thumbnail-readable). Built-in examples: **"The 5-Page Pricing Fix"** (`examples/pricing-guide/`, Modern Bold · Electric Blue) and **"The Shipping Playbook"** (`examples/dev-shipping-playbook/`, Technical Dark · Terminal Green) — decks + generated prompts.
+
+> "Build me a lead-magnet ebook: the 5-Page SaaS Pricing Fix — Modern Bold design, ~7 pages, killer cover, A4 PDF."
+> → design picker (layout + palette + cover style + motif) → `ebook.html` → render (PDF + cover + pages) → auditor check → deliver
+
+### YouTube thumbnails (`thumbnail-studio`)
+
+The visual CTR engine for `youtube-video-pipeline` — a **CTR teardown** of the niche first, then **3–5 thumbnail variants** with photoreal image-gen prompts + an A/B plan:
+
+```bash
+cd skills/thumbnail-studio
+node scripts/thumbnail-prompts.mjs --plan thumbnail-plan.json --out thumbnails.md   # builds + self-verifies (overlay ≤ 5 words, anti-cliché, exit 1 on drift)
+node scripts/audit-thumbs.mjs --pack <thumbnail-folder> --out thumbs-audit.md       # automated audit → spawn thumbs-auditor subagent
+```
+
+Deliverables: `thumbnail-teardown.md` (niche patterns + the ONE idea) → `thumbnails.md` (3–5 variants, each = ONE idea + ≤ 5-word overlay + 1280×720 photoreal prompt for Nano Banana / Midjourney / Flux) → `ab-test.md` (2 variants, identical title, window, niche CTR benchmarks) → `thumbs-audit.md`. Built-in example: **"3 Pricing Mistakes"** (`examples/pricing-video/`).
+
+> "Make 3 thumbnails for my SaaS pricing video — teardown my niche first, give me prompts + an A/B plan."
+> → CTR teardown → 3–5 variants (`thumbnail-prompts.mjs`) → `ab-test.md` → auditor check → deliver
+
+### Repurposing hub (`content-repurposing-hub`)
+
+Turn ONE source into **platform-native pieces** — the orchestrator that hands each piece to its producer skill:
+
+```bash
+cd skills/content-repurposing-hub
+node scripts/repurpose-writer.mjs --plan repurpose-plan.json --out hub-plan.md   # builds + validates (≥ 2 platforms, no near-duplicate hooks, exit 1 on bad plans)
+node scripts/audit-repurpose.mjs --pack <hub-folder> --out repurpose-audit.md    # automated audit → spawn repurpose-auditor subagent
+```
+
+Deliverables: `hub-plan.md` (angle bank + per-platform cards: format, native angle, unique hook, producer skill, one CTA) + `calendar.md` (staggered cross-post order — no same-day self-competing) + `repurpose-audit.md`. The **anti-repost rule** is script-enforced: two pieces opening with the same line fail the build. Built-in example: **"The 5-Page Pricing Fix hub"** (`examples/pricing-guide-hub/`, X + LinkedIn + newsletter + carousel).
+
+> "Repurpose my pricing-guide blog post — X thread, LinkedIn post, newsletter issue and a carousel, all natively, no copy-paste."
+> → angle bank → `hub-plan.md` (unique hooks per platform) → `calendar.md` → auditor check → deliver to each producer skill
+
+### Sponsorship pipeline (`sponsorship-pipeline`)
+
+The monetization layer — turn the audience into brand deals:
+
+```bash
+cd skills/sponsorship-pipeline
+node scripts/rate-card.mjs --niche saas --followers 48000 --platform youtube --views 210000   # → rate-card.md from niche CPM/RPM benchmarks
+node scripts/audit-sponsor.mjs --pack <sponsor-folder> --out sponsor-audit.md                   # automated audit → spawn sponsor-auditor subagent
+```
+
+Deliverables: `media-kit.md` (audience + engagement + the offer — the sponsor's problem first) → `rate-card.md` (benchmark-grounded ranges, no guarantees) → `outreach.md` (≥ 2 personalized pitches with problem/proof/offer/ask + negotiation scripts + FTC disclosure) → `tracking.md` (pipeline + day 3/7/14 follow-ups) → `sponsor-audit.md`. Built-in example: **"Alex Rivera — SaaS creator deals"** (`examples/saas-creator-deals/`).
+
+> "Build my media kit + rate card + outreach for brand deals. Niche: SaaS, 48k YouTube, 12k newsletter."
+> → interview → `rate-card.mjs` (benchmarks) → media kit → 3 personalized pitches → tracking → auditor check → deliver
 
 ### Emails (`email-marketing`)
 
@@ -311,6 +382,21 @@ node scripts/scaffold-skill.mjs --list   # show every skill in skills/
 
 > "Add a new skill for {topic} to the repo."
 > → scaffold → fill the placeholders → wire into README/USAGE/prompt-examples → validate → audit
+
+### MCP servers + AI agents (`mcp-agent-builder`)
+
+Build an **MCP server and the agent that uses it** end to end — the full path from idea to a running server connected in any IDE/CLI. Discovery first (never scaffold blind), then PRD, architecture, scaffold, agent wiring:
+
+```bash
+cd skills/mcp-agent-builder
+node scripts/scaffold-server.mjs --plan mcp-plan.json --out server    # generates a real @modelcontextprotocol/sdk server (exit 1 on bad plans)
+node scripts/audit-mcp.mjs --pack <mcp-folder> --out mcp-audit.md    # automated audit → spawn mcp-auditor subagent
+```
+
+Deliverables: `mcp-discovery.md` (interview + Decisions) → `mcp-prd.md` (problem/users/tools/auth/non-goals/metrics) → `mcp-architecture.md` (ONE deployment model — stdio / remote HTTP / MCPB — with matching transport + auth flow) → `server/` (runnable scaffold: SDK + zod, a handler per tool in mock mode, README, per-IDE `config/` snippets, `.env.example` — no secrets) → `agent-design.md` (system prompt + tool wiring + guardrails) → `ide-cli-matrix.md` (Claude Code `claude mcp add`, Cursor `.cursor/mcp.json`, Codex `config.toml`, Gemini CLI, OpenCode, Cline, Windsurf, VS Code, Zed) → `mcp-audit.md`. Built-in example: **"social-poster"** (an Instagram + X posting/analytics MCP server, full pack in `examples/social-poster/`).
+
+> "Build me an MCP server that posts my drafts to Instagram and X — full path from idea to connected server in Claude Code."
+> → discovery → PRD → architecture → scaffold (`scaffold-server.mjs`) → agent design + IDE matrix → audit (`audit-mcp.mjs` + mcp-auditor) → deliver
 
 ### Google Flow / Veo reels (`veo-cinematic-reels`)
 

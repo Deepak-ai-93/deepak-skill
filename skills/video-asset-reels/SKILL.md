@@ -26,7 +26,7 @@ description: Create proper reels from user-supplied video clips and images with 
 
 ---
 
-## Storytelling + addiction rails (the universal contract — read before anything else)
+## The quality bar — storytelling + addiction rails (the universal contract — read before anything else)
 
 Every deliverable this skill produces must tell **ONE micro-story** and engineer **rewatch**. These rails are the SAME contract every video/image skill in this repo follows — apply them to every beat, scene, slide, shot or clip before it ships.
 

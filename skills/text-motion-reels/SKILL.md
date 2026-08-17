@@ -26,7 +26,7 @@ description: Create premium, high-retention text-only motion graphic reels (kine
 
 ---
 
-## Storytelling + addiction rails (the universal contract — read before anything else)
+## The quality bar — storytelling + addiction rails (the universal contract — read before anything else)
 
 Every deliverable this skill produces must tell **ONE micro-story** and engineer **rewatch**. These rails are the SAME contract every video/image skill in this repo follows — apply them to every beat, scene, slide, shot or clip before it ships.
 
@@ -130,7 +130,7 @@ Act as a text-motion reel engineer using the text-motion-reels skill.
 
 ---
 
-## Core principles (always apply)
+## Step 2 — Core principles (always apply)
 
 1. **Clean Premium Aesthetic (Anti-Messy)** — Avoid high-frequency visual chaos, distracting transitions, or overlapping text. Use a unified, clean color palette, structured whitespace, and subtle layouts.
 2. **Low-Opacity Ambient Geometry** — Integrate decorative geometric shapes (circles, rings, cards) and structural lines with low opacity (**0.05 to 0.15**) to construct premium depth without distracting from the text.
@@ -141,7 +141,7 @@ Act as a text-motion reel engineer using the text-motion-reels skill.
 
 ---
 
-## Trending niches (pick one per reel)
+## Step 3 — Trending niches (pick one per reel)
 
 | # | Niche | Vibe | Example hooks |
 |---|-------|------|----------------|

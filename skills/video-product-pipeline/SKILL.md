@@ -26,7 +26,7 @@ description: Viral-engineered production workflow for ANY short-form video reque
 
 ---
 
-## Storytelling + addiction rails (the universal contract — read before anything else)
+## The quality bar — storytelling + addiction rails (the universal contract — read before anything else)
 
 Every deliverable this skill produces must tell **ONE micro-story** and engineer **rewatch**. These rails are the SAME contract every video/image skill in this repo follows — apply them to every beat, scene, slide, shot or clip before it ships.
 
@@ -80,7 +80,7 @@ npx skills add Deepak-ai-93/deepak-skill --skill video-product-pipeline
 npx skills add Deepak-ai-93/deepak-skill --skill video-product-pipeline -g
 ```
 
-Installs to `.agents/skills/video-product-pipeline/` (`SKILL.md` + `scripts/`: `audit-composition.mjs`, `trend-hunt.mjs`, `spec-template.md`, `trend-brief-template.md`). It *orchestrates* the other skills, so also install them:
+Installs to `.agents/skills/video-product-pipeline/` (`SKILL.md` + `scripts/`: `audit-composition.mjs`, `trend-hunt.mjs` + `templates/`: `spec-template.md`, `trend-brief-template.md`). It *orchestrates* the other skills, so also install them:
 
 ```bash
 npx skills add Deepak-ai-93/deepak-skill --skill text-motion-reels --skill video-asset-reels --skill voice-sfx-audio
@@ -100,7 +100,7 @@ prompt ──► 0. TREND + BRAINSTORM ──► 1. ANALYZE ──► 2. video-p
 
 ### Stage 0 — Trend research & brainstorming (go viral on purpose)
 
-Before analyzing the prompt, find out what is **rising right now** in the niche. Goal: one **`trend-brief.md`** (from `scripts/trend-brief-template.md`) that names the angle most likely to reach millions of views.
+Before analyzing the prompt, find out what is **rising right now** in the niche. Goal: one **`trend-brief.md`** (from `templates/trend-brief-template.md`) that names the angle most likely to reach millions of views.
 
 **Step 0a — harvest signals (no API key needed):**
 
@@ -162,7 +162,7 @@ Read the prompt **as written** — including the bad ones. Fold the winning angl
 
 ### Stage 2 — Write `video-product.md` and STOP for approval (the gate)
 
-Copy `scripts/spec-template.md` → **`video-product.md`** in the project root and fill it completely:
+Copy `templates/spec-template.md` → **`video-product.md`** in the project root and fill it completely:
 
 - **Title, niche, platform, duration** — locked, no ambiguity left.
 - **Style / format** (one entry, with slug) + hook formula + hook copy (from the trend-brief winner).
@@ -301,7 +301,7 @@ The audit script flags any text outside the hard safe zone (WARN) or off-screen/
 - [ ] Freshness rule respected (rising > peaked; nothing older than ~14 days)
 - [ ] ≥5 brainstormed angles; viral scorecard applied; winner locked
 - [ ] Prompt analyzed; ≤3 clarifying questions if vague; no silent guessing
-- [ ] `video-product.md` written from `scripts/spec-template.md` (root) with **Decisions** section incl. the trend winner
+- [ ] `video-product.md` written from `templates/spec-template.md` (root) with **Decisions** section incl. the trend winner
 - [ ] **Approval gate: user explicitly approved before ANY generation**
 - [ ] Generation delegated per the spec (text-motion-reels / video-asset-reels / voice-sfx-audio)
 - [ ] Deterministic contract held: paused GSAP timeline, data-start/duration, no SMIL/Math.random/play()/audio

@@ -72,5 +72,6 @@
 - [ ] `audit-report.md` = PASS
 - [ ] `TODO.md` all done (or blocked with reasons) — confirmed gate history intact
 - [ ] `MEMORY.md` current (today's entry + standing decisions)
-- [ ] README: setup, env vars, deploy + rollback runbook
+- [ ] README: setup, env vars, deploy + rollback runbook (links `deploy-runbook.md`)
+- [ ] `deploy-runbook.md` written from the template — ONE host, env vars mapped, verification list run, rollback steps; app actually deployed
 - [ ] Handoff prompt (from `stack-blueprint.md` §7) given to the user for their favorite builder

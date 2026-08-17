@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The 5-Page Pricing Fix — lead-magnet ebook</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #0d0d0f; }
+
+  /* Layout B — Modern Bold: white base, electric-blue accent, heavy sans */
+  :root {
+    --base: #ffffff;
+    --panel: #f4f6f9;
+    --ink: #0d0d0f;
+    --accent: #2f6fed;
+    --muted: #5c6470;
+  }
+
+  .page {
+    position: relative;
+    width: 1080px;
+    height: 1528px;
+    background: var(--base);
+    overflow: hidden;
+    padding: 110px 100px;
+    page-break-after: always;
+    break-after: page;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+
+  .chapter-label {
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 44px;
+  }
+  .headline {
+    font-family: 'Arial Black', 'Archivo Black', 'Inter', sans-serif;
+    font-size: 88px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 44px;
+  }
+  .body { font-size: 36px; line-height: 1.55; color: var(--muted); max-width: 820px; }
+  .body strong { color: var(--ink); }
+  .callout {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 34px;
+    font-weight: 700;
+    padding: 28px 40px;
+    border-radius: 14px;
+    margin-top: 56px;
+  }
+  .quote { font-size: 40px; font-style: italic; color: var(--ink); margin-top: 56px; border-left: 10px solid var(--accent); padding-left: 32px; }
+  .scene-tag { position: absolute; bottom: 60px; left: 100px; right: 100px; font-size: 22px; color: #a8b0bc; font-style: italic; }
+  .page-num { position: absolute; bottom: 56px; right: 100px; font-size: 24px; font-weight: 700; color: #c3cad4; letter-spacing: 0.1em; }
+  .cta-box { margin-top: 80px; border: 4px solid var(--accent); border-radius: 20px; padding: 56px 48px; }
+  .cta-box .cta { font-family: 'Arial Black', 'Archivo Black', sans-serif; font-size: 46px; text-transform: uppercase; color: var(--accent); }
+
+  /* cover-specific */
+  .cover { background: var(--ink); color: #fff; }
+  .cover .chapter-label { color: var(--accent); }
+  .cover-title { font-family: 'Arial Black', 'Archivo Black', sans-serif; font-size: 150px; line-height: 0.98; letter-spacing: -0.02em; text-transform: uppercase; margin-top: 200px; }
+  .cover-sub { font-size: 42px; color: #b9c2cf; margin-top: 48px; max-width: 760px; line-height: 1.4; }
+  .cover-bar { width: 180px; height: 16px; background: var(--accent); margin-top: 96px; }
+</style>
+</head>
+<body>
+
+  <!-- Cover — data-page="cover" opens the loop (design picker: modern-bold · electric-blue · solid · scenario) -->
+  <div class="page cover" data-page="cover" data-layout="modern-bold" data-palette="electric-blue" data-motif="scenario" data-cover-style="solid">
+    <div class="chapter-label">A 10-minute read</div>
+    <h1 class="cover-title">The 5-Page Pricing Fix</h1>
+    <p class="cover-sub">The framework that tripled our revenue per visitor in 30 days.</p>
+    <div class="cover-bar"></div>
+    <div class="scene-tag">SCENE: a founder's laptop at 11pm, one warm lamp, a pricing page with a single highlighted button</div>
+  </div>
+
+  <!-- Mistake 01 — rising -->
+  <div class="page" data-page="mistake-01" data-layout="modern-bold" data-palette="electric-blue" data-motif="scenario">
+    <div class="chapter-label">Mistake 01</div>
+    <h2 class="headline">You sell features, not outcomes.</h2>
+    <p class="body">Nobody buys software — they buy the 3 hours saved every week. Your pricing page lists capabilities; the winners list the result.</p>
+    <div class="callout">3 hours saved / week &gt; 40 features</div>
+    <div class="scene-tag">SCENE: a pricing page split in two — a features table on one side, a single outcome sentence on the other</div>
+  </div>
+
+  <!-- Mistake 02 — rising -->
+  <div class="page" data-page="mistake-02" data-layout="modern-bold" data-palette="electric-blue" data-motif="scenario">
+    <div class="chapter-label">Mistake 02</div>
+    <h2 class="headline">The price hides behind a demo.</h2>
+    <p class="body">If a buyer has to talk to you to learn the price, they're gone. The demo call became a filter — and it filtered out the buyers who didn't need hand-holding.</p>
+    <p class="quote">"If I have to call you to see a price, I'm out." — a founder we lost</p>
+    <div class="scene-tag">SCENE: a closed laptop at a desk, a sticky note reading "book a demo" crossed out, a price tag drawn over it</div>
+  </div>
+
+  <!-- Mistake 03 — rising -->
+  <div class="page" data-page="mistake-03" data-layout="modern-bold" data-palette="electric-blue" data-motif="scenario">
+    <div class="chapter-label">Mistake 03</div>
+    <h2 class="headline">One plan leaves buyers guessing.</h2>
+    <p class="body">With no anchor, nobody can judge "is this fair?" — so nobody judged at all. A reference plan makes the mid-tier look reasonable and the choice obvious.</p>
+    <div class="callout">3 tiers &gt; 1 tier &gt; 0 tiers</div>
+    <div class="scene-tag">SCENE: three pricing cards on a screen, the middle card highlighted with a "most popular" tag</div>
+  </div>
+
+  <!-- Mistake 04 — rising -->
+  <div class="page" data-page="mistake-04" data-layout="modern-bold" data-palette="electric-blue" data-motif="scenario">
+    <div class="chapter-label">Mistake 04</div>
+    <h2 class="headline">You watch signups, not the funnel.</h2>
+    <p class="body">We measured the result and ignored the page that produced it. $12,400 went into traffic while the pricing page converted at 0.4%.</p>
+    <p class="quote">Instrument the page, not the outcome.</p>
+    <div class="scene-tag">SCENE: a dashboard showing a flat signup line while a smaller chart below shows a 0.4% pricing-page conversion</div>
+  </div>
+
+  <!-- The Fix — payoff -->
+  <div class="page" data-page="the-fix" data-layout="modern-bold" data-palette="electric-blue" data-motif="scenario">
+    <div class="chapter-label">The Fix</div>
+    <h2 class="headline">One page. One price. One outcome.</h2>
+    <p class="body">The swap took one afternoon: <strong>"Book a demo" became "$29/month — cancel anytime."</strong> Revenue per visitor tripled in 30 days, and support time dropped — the price did the qualifying for us.</p>
+    <div class="callout">3× revenue per visitor · −40% support time</div>
+    <div class="scene-tag">SCENE: the same laptop, now showing a clean pricing page with one highlighted price — the lamp still on, the founder smiling</div>
+  </div>
+
+  <!-- CTA — loop ending -->
+  <div class="page" data-page="cta" data-layout="modern-bold" data-palette="electric-blue" data-motif="scenario">
+    <div class="chapter-label">Part 2</div>
+    <h2 class="headline">Ready to fix your pricing page?</h2>
+    <div class="cta-box">
+      <p class="cta">Get part 2 — the teardown with the numbers</p>
+    </div>
+    <p class="body" style="margin-top:44px">Reply "teardown" or save this page — the open loop closes in the next issue.</p>
+    <div class="scene-tag">SCENE: a notebook page titled "pricing teardown" with hand-drawn charts and a checkbox list</div>
+  </div>
+
+</body>
+</html>

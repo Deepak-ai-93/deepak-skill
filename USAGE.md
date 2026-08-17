@@ -40,7 +40,7 @@ The deciding factor is: **does the product let an agent run terminal commands?**
 # in your project folder — a single skill
 npx skills add Deepak-ai-93/deepak-skill --skill carousel-post-images
 
-# or everything (all 20 skills)
+# or everything (all 25 skills)
 npx skills add Deepak-ai-93/deepak-skill --all
 
 # or install globally for every project
@@ -87,8 +87,21 @@ cd skills/x-threads-engagement && node scripts/audit-threads.mjs --pack <thread-
 cd skills/newsletter-growth && node scripts/issue-writer.mjs --plan issue-plan.json --out issue.md
 cd skills/newsletter-growth && node scripts/audit-newsletter.mjs --pack <newsletter-folder> --out newsletter-audit.md   # automated audit → spawn newsletter-auditor subagent
 
+# Vibe-coded web apps (vibe-code-webapp): idea interview → scan existing → research → SaaS validation → build pack + TODO gate → build → audit → deploy
+cd skills/vibe-code-webapp && node scripts/scan-project.mjs --dir . --name my-app          # existing-project mode: structure scan → project-scan.md
+cd skills/vibe-code-webapp && node scripts/saas-score.mjs --scores 5 4 4 5 5 3 4 --out validation.md   # BUILD / ITERATE / PIVOT verdict
+cd skills/vibe-code-webapp && node scripts/audit-webapp.mjs --dir . --name my-app --payments   # production audit (project-local report) → spawn auditor subagent
+
+# Viral video pipeline (video-product-pipeline): trend hunt → analyze ANY prompt → video-product.md spec → approval gate → generate → audit
+cd skills/video-product-pipeline && node scripts/trend-hunt.mjs --niche "saas pricing"    # keyless trend signals → trend-brief.md
+cd skills/video-product-pipeline && node scripts/audit-composition.mjs --html reel.html   # composition audit → auditor subagent
+
 # Skill builder: scaffold a new skill in the repo's conventions
 cd skills/skill-builder && node scripts/scaffold-skill.mjs --name my-skill --desc "…"
+
+# MCP + AI agents: discovery → PRD → architecture → scaffolded server → agent wiring → audit
+cd skills/mcp-agent-builder && node scripts/scaffold-server.mjs --plan mcp-plan.json --out server
+cd skills/mcp-agent-builder && node scripts/audit-mcp.mjs --pack <mcp-folder> --out mcp-audit.md   # automated audit → spawn mcp-auditor subagent
 
 # Google Flow / Veo: rich long-form scene prompts, any video generator (Flow/Veo, Kling, Luma, Runway, Hailuo, Vidu, Pika, PixVerse) — locked character consistency + negative prompt + seed
 cd skills/veo-cinematic-reels && node scripts/scene-prompts.mjs --plan scene-plan.json --out prompts.md
@@ -127,6 +140,22 @@ cd skills/social-media-content-plan && node scripts/audit-content-plan.mjs --pac
 # Carousels: render/generate, then audit the deck + captions
 cd skills/carousel-post-images && node scripts/render-carousel.mjs --html slides.html --out carousel/ --4k
 cd skills/carousel-post-images && node scripts/audit-carousel.mjs --pack <carousel-folder> --out carousel-audit.md   # automated audit → spawn carousel-auditor subagent
+
+# Ebooks: design picker (6 layouts × 30 palettes × 6 cover styles × motif) → A4 PDF + cover + page PNGs (or image-model prompts), then audit
+cd skills/ebook-builder && node scripts/render-ebook.mjs --html ebook.html --out ebook/ --pdf
+cd skills/ebook-builder && node scripts/audit-ebook.mjs --pack <ebook-folder> --out ebook-audit.md   # automated audit → spawn ebook-auditor subagent
+
+# YouTube thumbnails: CTR teardown → 3-5 variants + prompts → A/B plan → audit
+cd skills/thumbnail-studio && node scripts/thumbnail-prompts.mjs --plan thumbnail-plan.json --out thumbnails.md
+cd skills/thumbnail-studio && node scripts/audit-thumbs.mjs --pack <thumbnail-folder> --out thumbs-audit.md   # automated audit → spawn thumbs-auditor subagent
+
+# Repurposing hub: one source → platform-native pieces (no duplicates) → calendar → audit
+cd skills/content-repurposing-hub && node scripts/repurpose-writer.mjs --plan repurpose-plan.json --out hub-plan.md
+cd skills/content-repurposing-hub && node scripts/audit-repurpose.mjs --pack <hub-folder> --out repurpose-audit.md   # automated audit → spawn repurpose-auditor subagent
+
+# Sponsorships: rate card from benchmarks → media kit → outreach → tracking → audit
+cd skills/sponsorship-pipeline && node scripts/rate-card.mjs --niche saas --followers 48000 --platform youtube
+cd skills/sponsorship-pipeline && node scripts/audit-sponsor.mjs --pack <sponsor-folder> --out sponsor-audit.md   # automated audit → spawn sponsor-auditor subagent
 
 # Text-motion + asset reels: render, then audit the composition + output
 cd skills/text-motion-reels && node scripts/audit-reel.mjs --pack <reel-folder> --out reel-audit.md   # automated audit → spawn reel-auditor subagent

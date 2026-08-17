@@ -1,0 +1,34 @@
+{
+  "name": "social-poster",
+  "version": "0.1.0",
+  "description": "Post content drafts and pull engagement analytics for Instagram and X from any agent",
+  "deployment": "remote-http",
+  "auth": {
+    "mode": "oauth2",
+    "provider": "instagram-graph-api + x-api-v2"
+  },
+  "tools": [
+    {
+      "name": "post_draft",
+      "description": "Post an approved content draft to a connected platform (instagram or x); requires user confirmation before posting",
+      "params": [
+        { "name": "platform", "type": "string", "required": true, "describe": "instagram or x" },
+        { "name": "text", "type": "string", "required": true, "describe": "The post copy (max 280 chars for x)" },
+        { "name": "media_url", "type": "string", "required": false, "describe": "Optional image/video URL for the post" }
+      ]
+    },
+    {
+      "name": "get_analytics",
+      "description": "Fetch engagement metrics (impressions, likes, replies) for a post or account-level summary on a platform",
+      "params": [
+        { "name": "platform", "type": "string", "required": true, "describe": "instagram or x" },
+        { "name": "post_id", "type": "string", "required": false, "describe": "Specific post id; omit for account-level summary" }
+      ]
+    },
+    {
+      "name": "list_drafts",
+      "description": "List the pending content drafts available for posting",
+      "params": []
+    }
+  ]
+}

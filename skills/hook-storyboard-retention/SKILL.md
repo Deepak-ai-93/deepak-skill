@@ -26,7 +26,7 @@ description: Write scroll-stopping hook copy, engineer watch-time and retention,
 
 ---
 
-## Storytelling + addiction rails (the universal contract — read before anything else)
+## The quality bar — storytelling + addiction rails (the universal contract — read before anything else)
 
 Every deliverable this skill produces must tell **ONE micro-story** and engineer **rewatch**. These rails are the SAME contract every video/image skill in this repo follows — apply them to every beat, scene, slide, shot or clip before it ships.
 
@@ -79,7 +79,7 @@ Use this skill whenever the user asks to:
 
 ---
 
-## 0. Trend research & brainstorming (go viral on purpose)
+## Step 0 — Trend research & brainstorming (go viral on purpose)
 
 Before writing any hook, find out what is **rising right now** in the niche. Research first, brainstorm second — never settle on the first idea:
 
@@ -90,7 +90,7 @@ Before writing any hook, find out what is **rising right now** in the niche. Res
 
 ---
 
-## 1. Hook copywriting formulas (stop the scroll)
+## Step 1 — Hook copywriting formulas (stop the scroll)
 
 Pick ONE hook formula per video. Fill the blanks from the niche.
 
@@ -109,7 +109,7 @@ Pick ONE hook formula per video. Fill the blanks from the niche.
 
 ---
 
-## 2. Retention engineering (keep them watching)
+## Step 2 — Retention engineering (keep them watching)
 
 ### The retention curve — diagnose before you write
 
@@ -128,7 +128,7 @@ Pick ONE hook formula per video. Fill the blanks from the niche.
 
 ---
 
-## 3. Storyboard beat sheet (15–60s template)
+## Step 3 — Storyboard beat sheet (15–60s template)
 
 | Time | Beat | Objective | Text-on-screen rule |
 |---|---|---|---|
@@ -141,7 +141,7 @@ Pick ONE hook formula per video. Fill the blanks from the niche.
 
 ---
 
-## 4. Script ↔ storyboard ↔ video sync (dual-column blueprint)
+## Step 4 — Script ↔ storyboard ↔ video sync (dual-column blueprint)
 
 Content and video generation work together **line by line**. Every script clause = one visual beat = one timed text element.
 
@@ -156,7 +156,7 @@ Content and video generation work together **line by line**. Every script clause
 
 ---
 
-## 5. Audit harness (automated checks + storyboard-auditor subagent, before delivery)
+## Step 5 — Audit harness (automated checks + storyboard-auditor subagent, before delivery)
 
 **Step 5a — run the automated audit harness:**
 ```bash
@@ -170,7 +170,7 @@ node scripts/audit-storyboard.mjs --pack <storyboard-folder> --out storyboard-au
 
 ---
 
-## 6. Generating the video from the storyboard (HyperFrames)
+## Step 6 — Generating the video from the storyboard (HyperFrames)
 
 The storyboard IS the composition map. Each beat becomes a `.clip` element with `data-start` / `data-duration`; each script clause becomes a GSAP timeline position.
 

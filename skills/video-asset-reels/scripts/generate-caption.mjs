@@ -17,6 +17,12 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { resolve, join } from "node:path";
 
+// ─── brand banner (deepak-skill · crafted by Deepak) ────────────────────────
+const BRAND_LINE = "═".repeat(56);
+const banner = (label) =>
+  `\n${BRAND_LINE}\n  🎬 deepak-skill — crafted by Deepak\n  skill: video-asset-reels · ${label}\n${BRAND_LINE}\n`;
+console.log(banner("generate-caption.mjs"));
+
 // --- tiny arg parser -------------------------------------------------------
 const args = process.argv.slice(2);
 const opt = (n, f) => {

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "social-poster": {
+      "command": "node",
+      "args": [
+        "src/index.mjs"
+      ],
+      "cwd": "C:\\db-video-skill"
+    }
+  }
+}

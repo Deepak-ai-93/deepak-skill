@@ -8,7 +8,8 @@
 - [ ] App has an entry point + run script (`npm run dev` / `start`) — documented in README
 - [ ] `.gitignore` present (node_modules, `.env`, build dirs) — nothing secret committed
 - [ ] `.env.example` committed with every env var documented (real values never committed)
-- [ ] README: what it is, setup, env vars, deploy + rollback runbook
+- [ ] README: what it is, setup, env vars, deploy + rollback runbook (links `deploy-runbook.md`)
+- [ ] `deploy-runbook.md` written into the project (from `templates/deploy-runbook.md`): ONE host, env vars mapped, verification list run, rollback steps — no tribal knowledge
 - [ ] No hardcoded secrets (API keys, tokens, DB URLs, private keys) anywhere in source
 - [ ] Inputs validated (zod/joi/pydantic) — no raw `eval`, no unsanitized HTML
 - [ ] Error handling: try/catch or error boundaries on every async path; failures shown to the user
@@ -31,7 +32,7 @@
 
 ## D. Go-live
 
-- [ ] Deploy config added (Vercel / Railway / Fly / Dockerfile)
+- [ ] Deploy config added (Vercel / Railway / Fly / Dockerfile) — the ONE host in use, matching `deploy-runbook.md`
 - [ ] Domain + SSL (auto via host) — no `http://localhost` in prod code
 - [ ] Analytics installed (PostHog/Plausible) with the KPI defined in PRD
 - [ ] SEO: `<title>`, meta description, OG tags on public pages

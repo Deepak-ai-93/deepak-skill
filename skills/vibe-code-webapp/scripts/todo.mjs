@@ -26,6 +26,12 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
 
+// ─── brand banner (deepak-skill · crafted by Deepak) ────────────────────────
+const BRAND_LINE = "═".repeat(56);
+const banner = (label) =>
+  `\n${BRAND_LINE}\n  🎬 deepak-skill — crafted by Deepak\n  skill: vibe-code-webapp · ${label}\n${BRAND_LINE}\n`;
+console.log(banner("todo.mjs"));
+
 const args = process.argv.slice(2);
 const opt = (name, fallback) => {
   const needle = `--${name}`;

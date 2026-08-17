@@ -1,0 +1,29 @@
+{
+  "title": "3 Pricing Mistakes That Cost You Revenue",
+  "niche": "SaaS / B2B founders",
+  "idea": "The mistake that quietly costs founders $12k — and the one-line fix",
+  "emotion": "uneasy realization",
+  "variants": [
+    {
+      "concept": "Founder staring at a shrinking revenue chart — the realization moment",
+      "overlay": "the mistake that costs $12k",
+      "scene": "a founder at their desk at night, one warm lamp, staring at a laptop showing a downward revenue chart, realization on their face",
+      "style": "photoreal",
+      "test": true
+    },
+    {
+      "concept": "Split-screen wrong way vs right way pricing page",
+      "overlay": "your way vs mine",
+      "scene": "split composition: left side a cluttered pricing page with a 'book a demo' button greyed out, right side a clean page with one visible price, the same founder's hand pointing at the right side",
+      "style": "bold-graphic",
+      "test": true
+    },
+    {
+      "concept": "Close-up of a pricing page with a single circled number — the reveal",
+      "overlay": "5 mistakes",
+      "scene": "close-up of a laptop screen showing a pricing page, one price tag visually highlighted by natural light, shallow depth of field, the number is the focal point",
+      "style": "photoreal",
+      "test": false
+    }
+  ]
+}

@@ -11,12 +11,20 @@
 //
 //   --dir <path>   project folder to scan (default: ".")
 //   --name <slug>  report label (default: folder name)
-//   --out <dir>    where project-scan.md is written (default: output/scan)
+//   --out <dir>    where project-scan.md is written (default: INSIDE the
+//                  scanned project, at <project>/output/scan — so the scan
+//                  always lands in the project, never in the caller's folder)
 //
 // Framework/feature detection is marker-based (like audit-webapp.mjs), so it
 // works on any stack. Exit code 1 when nothing project-like is found.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from "node:fs";
 import { resolve, join, extname, basename } from "node:path";
+
+// ─── brand banner (deepak-skill · crafted by Deepak) ────────────────────────
+const BRAND_LINE = "═".repeat(56);
+const banner = (label) =>
+  `\n${BRAND_LINE}\n  🎬 deepak-skill — crafted by Deepak\n  skill: vibe-code-webapp · ${label}\n${BRAND_LINE}\n`;
+console.log(banner("scan-project.mjs"));
 
 const args = process.argv.slice(2);
 const opt = (name, fallback) => {
@@ -29,7 +37,12 @@ const opt = (name, fallback) => {
 
 const DIR = resolve(process.cwd(), opt("dir", "."));
 const NAME = opt("name", basename(DIR) || "project");
-const OUT_DIR = resolve(process.cwd(), opt("out", "output/scan"));
+// PROJECT-LOCAL STORAGE RULE: by default the scan is written INSIDE the
+// project being scanned (<DIR>/output/scan), so it can never land in the
+// skill's install folder, a global folder, or anywhere outside the project.
+// An explicit --out is honored as before (relative to cwd).
+const OUT_ARG = opt("out");
+const OUT_DIR = resolve(OUT_ARG ? process.cwd() : DIR, OUT_ARG || "output/scan");
 
 // --- walk the project -----------------------------------------------------------
 const SKIP = new Set([
@@ -237,6 +250,9 @@ writeFileSync(join(OUT_DIR, "project-scan.md"), md, "utf8");
 
 const fail = scans.filter((s) => s[2] === "FAIL").length;
 console.log(`\n${fail ? "❌" : "✅"} ${NAME}: ${scans.length - fail} checks ok · ${fail} FAIL → project-scan.md → ${join(OUT_DIR, "project-scan.md")}`);
+if (OUT_ARG) {
+  console.log(`ℹ️  --out override used — report written OUTSIDE the project (${OUT_DIR}). Default is inside the project (<project>/output/scan).`);
+}
 if (!srcCount && !pkg && !pyProject) {
   console.log("\n⚠️  Nothing project-like found — is this really an existing project? (If not, skip the scan and run the new-project flow.)");
   process.exitCode = 1;

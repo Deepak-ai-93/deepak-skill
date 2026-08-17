@@ -158,7 +158,7 @@ The final report (`build-report.md` complete + `audit-report.md` PASS) is handed
 - [ ] Tests exist for auth, billing, and anything that deletes data (+ AI evals if AI features)
 - [ ] **Design parity:** screens match the design source of truth (Figma/Stitch/pack) — layout, spacing, tokens, states (`frontend-design.md` §5)
 - [ ] **AI features:** stream, abort/stop + timeout, keys env-only (no `NEXT_PUBLIC_`), rate-limited, evals pass (`ai-logic.md`)
-- [ ] README with setup + env vars + deploy runbook
+- [ ] README with setup + env vars + deploy runbook (`deploy-runbook.md` in the project root: ONE host, env vars mapped, verification run, rollback steps)
 - [ ] `build-report.md` detailed and evidence-backed
 - [ ] `MEMORY.md` today's entry appended; standing decisions current
 - [ ] Everything-auditor signed off PASS (or fixes applied and re-checked)

@@ -1,0 +1,53 @@
+{
+  "source": "The 5-Page Pricing Fix — founder's blog post on SaaS pricing mistakes",
+  "story": "Most founders lose revenue on their pricing page not with pricing, but with page structure — one afternoon of restructuring tripled revenue per visitor in 30 days",
+  "audience": "SaaS founders & indie hackers",
+  "goal": "grow followers on X + LinkedIn and newsletter subscribers",
+  "cta": "get the pricing teardown",
+  "hooks": [
+    "Your pricing page is losing money before anyone sees the price",
+    "The pricing fix that tripled revenue per visitor in 30 days"
+  ],
+  "beats": [
+    "4 mistakes: features-not-outcomes, hidden price, one plan, watching signups not funnel",
+    "the one-page fix",
+    "3× revenue per visitor, -40% support time"
+  ],
+  "aha": "one page, one price, one outcome — the price does the qualifying",
+  "quote": "If I have to call you to see a price, I'm out.",
+  "proof": "3× revenue per visitor in 30 days · 0.4% → 1.2% pricing-page conversion",
+  "platforms": [
+    {
+      "platform": "X / Twitter",
+      "format": "thread",
+      "angle": "the contrarian claim — your pricing page isn't a pricing problem, it's a structure problem",
+      "hook": "Your pricing page loses money before anyone sees the price.",
+      "producer": "x-threads-engagement",
+      "cta": "Follow for part 2 — the teardown with the numbers"
+    },
+    {
+      "platform": "LinkedIn",
+      "format": "post",
+      "angle": "the founder lesson — the story of restructuring a pricing page one afternoon and tripling revenue per visitor",
+      "hook": "We doubled revenue per visitor in one afternoon. The change had nothing to do with the price.",
+      "producer": "linkedin-personal-brand",
+      "cta": "Comment 'teardown' for the page teardown"
+    },
+    {
+      "platform": "Newsletter",
+      "format": "issue",
+      "angle": "the story-first issue — the 11pm laptop scene, the 4 mistakes, the one-afternoon fix",
+      "hook": "It was 11pm and the pricing page was still wrong.",
+      "producer": "newsletter-growth",
+      "cta": "Reply 'teardown' — part 2 goes to subscribers"
+    },
+    {
+      "platform": "Carousel (LinkedIn/IG)",
+      "format": "carousel",
+      "angle": "the list — 5 pricing-page mistakes, one fix per slide",
+      "hook": "5 pricing mistakes nobody tells you (slide 4 is the expensive one).",
+      "producer": "carousel-post-images",
+      "cta": "Save this for your next pricing review"
+    }
+  ]
+}

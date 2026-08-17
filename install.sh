@@ -15,7 +15,7 @@
 #    ./install.sh --help                # this help
 #
 #  Examples:
-#    ./install.sh                       → all 20 skills into .agents/skills/
+#    ./install.sh                       → all 25 skills into .agents/skills/
 #    ./install.sh --skill podcast-to-shorts
 #    ./install.sh --skill email-marketing --global
 # ═══════════════════════════════════════════════════════════════════════════
@@ -40,7 +40,7 @@ ${C_CYAN}${C_BOLD}
    ██████╔╝███████╗███████╗██║  ██║██║  ██║██║  ██╗
    ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝
 ${C_RESET}
-${C_CYAN}${C_BOLD}  deepak-skill — 20 agent skills crafted by Deepak 🎬${C_RESET}
+${C_CYAN}${C_BOLD}  deepak-skill — 22 agent skills crafted by Deepak 🎬${C_RESET}
 ${C_YELLOW}  install once · use in any AI coding agent · MIT license${C_RESET}
 EOF
   echo ""
@@ -54,6 +54,10 @@ SKILLS=(
   "hook-storyboard-retention → scroll-stopping hooks + retention storyboards"
   "voice-sfx-audio          → open-source voiceovers + SFX + mixing"
   "carousel-post-images     → LinkedIn/Instagram carousels at 4K"
+  "ebook-builder            → designed lead-magnet ebooks: 6 layouts/30 palettes, A4 PDF + cover"
+  "thumbnail-studio         → CTR-engineered YouTube thumbnails: teardown + 3-5 variants + A/B"
+  "content-repurposing-hub  → one source → native pieces per platform (no copy-paste)"
+  "sponsorship-pipeline     → brand deals: media kit + rate card + outreach + tracking"
   "veo-cinematic-reels      → rich scene prompts for ANY video gen (Flow/Veo, Kling, Luma...), IMAX + consistency"
   "serial-story-reels       → episodic story series: bible + episode prompts + VO"
   "photoshoot-studio        → AI photoshoot prompts: people + products"
@@ -68,10 +72,11 @@ SKILLS=(
   "social-media-content-plan → algorithm-reset 30-day content plans (any platform)"
   "vibe-code-webapp         → production vibe-coded web apps"
   "skill-builder            → scaffold new skills the deepak-skill way"
+  "mcp-agent-builder        → MCP servers + AI agents: discovery → PRD → architecture → scaffold → audit"
 )
 
 show_skills() {
-  echo "${C_BOLD}  20 skills installed:${C_RESET}"
+  echo "${C_BOLD}  25 skills installed:${C_RESET}"
   for s in "${SKILLS[@]}"; do
     printf "  ${C_GREEN}•${C_RESET} %s\n" "$s"
   done
@@ -121,7 +126,7 @@ banner
 show_skills
 
 if [ "$LIST_ONLY" = "1" ]; then
-  echo "${C_GREEN}✅ Installer ready — run ./install.sh to install all 20 skills.${C_RESET}"
+  echo "${C_GREEN}✅ Installer ready — run ./install.sh to install all 25 skills.${C_RESET}"
   exit 0
 fi
 

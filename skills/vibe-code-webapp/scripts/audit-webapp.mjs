@@ -13,7 +13,10 @@
 //   --payments        also audit for payment/billing integration
 //   --ai              also audit AI features (LLM SDK, streaming, abort/timeout,
 //                     env-key hygiene, rate limits, evals) — from ai-logic.md
-//   --out <dir>       where audit-report.md is written (default: output/audit)
+//   --out <dir>       where audit-report.md is written (default: INSIDE the
+//                     audited project, at <project>/output/audit — so the
+//                     report always lands in the project, never in the caller's
+//                     folder or a global location)
 //
 // Checks are marker-based: PASS = marker found, WARN = worth a human look,
 // FAIL = blocker (no app entry, hardcoded secret, zero source files). The
@@ -21,6 +24,12 @@
 // Exit code 1 when any FAIL exists.
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from "node:fs";
 import { resolve, join, extname, basename, dirname } from "node:path";
+
+// ─── brand banner (deepak-skill · crafted by Deepak) ────────────────────────
+const BRAND_LINE = "═".repeat(56);
+const banner = (label) =>
+  `\n${BRAND_LINE}\n  🎬 deepak-skill — crafted by Deepak\n  skill: vibe-code-webapp · ${label}\n${BRAND_LINE}\n`;
+console.log(banner("audit-webapp.mjs"));
 
 const args = process.argv.slice(2);
 const opt = (name, fallback) => {
@@ -35,7 +44,12 @@ const DIR = resolve(process.cwd(), opt("dir", "."));
 const NAME = opt("name", basename(DIR) || "webapp");
 const WITH_PAYMENTS = args.includes("--payments");
 const WITH_AI = args.includes("--ai");
-const OUT_DIR = resolve(process.cwd(), opt("out", "output/audit"));
+// PROJECT-LOCAL STORAGE RULE: by default the report is written INSIDE the
+// project being audited (<DIR>/output/audit), so it can never land in the
+// skill's install folder, a global folder, or anywhere outside the project.
+// An explicit --out is honored as before (relative to cwd).
+const OUT_ARG = opt("out");
+const OUT_DIR = resolve(OUT_ARG ? process.cwd() : DIR, OUT_ARG || "output/audit");
 
 // --- walk the project -----------------------------------------------------------
 const SKIP = new Set([
@@ -212,6 +226,11 @@ add("lint", "Lint / format", someMatch(/\b(eslint|prettier|biome|oxlint|flake8|b
 // 8. Ops + go-live
 add("ci", "CI config", anyOf([".github/workflows/ci.yml", ".github/workflows/main.yml", ".gitlab-ci.yml", ".circleci/config.yml", "azure-pipelines.yml", ".travis.yml"]) || rels.has(".github/workflows") ? "PASS" : "WARN", "CI config found or none — a simple GitHub Actions test-on-push is recommended");
 add("deploy", "Deploy config", anyOf(["vercel.json", "netlify.toml", "render.yaml", "fly.toml", "railway.json", "app.json", "Procfile", "Dockerfile", "wrangler.toml", "amplify.yml"]) || has("Dockerfile") ? "PASS" : "WARN", "deploy config found or none — pick Vercel/Railway/Fly and add config");
+// Deploy runbook — the how-to-deploy doc (per-host steps, env mapping, rollback).
+const runbookMd = textFiles.find((f) => /^deploy[-_]runbook\.md$/i.test(f.rel) || /^DEPLOY\.md$/i.test(f.rel));
+const readmeDeploy = textFiles.find((f) => /^readme\.(md|rst)$/i.test(f.rel));
+const hasRunbook = Boolean(runbookMd) || (readmeDeploy && /deploy|vercel|railway|fly\.io|netlify|docker|render/i.test(readmeDeploy.content));
+add("deploy-runbook", "Deploy runbook", hasRunbook ? "PASS" : "WARN", hasRunbook ? (runbookMd ? `${runbookMd.rel} found` : "deploy steps documented in README") : "no deploy-runbook.md — write one from templates/deploy-runbook.md (host steps, env vars, rollback) so deploy never depends on tribal knowledge");
 add("analytics", "Analytics", someMatch(/\b(analytics|posthog|plausible|segment|gtag|google-analytics|umami|mixpanel|amplitude|fathom)\b/i) ? "PASS" : "WARN", "analytics markers found or none — you can't improve what you don't measure");
 const htmlFiles = textFiles.filter((f) => /\.html$/i.test(f.rel));
 const layoutFiles = textFiles.filter((f) => /(layout|index)\.(tsx|jsx|html)$/i.test(f.rel));
@@ -258,4 +277,7 @@ ${rows}
 writeFileSync(join(OUT_DIR, "audit-report.md"), md, "utf8");
 console.log(`\n${fail ? "❌" : "✅"} ${NAME}: ${pass} PASS · ${warn} WARN · ${fail} FAIL → verdict ${verdict}`);
 console.log(`   audit-report.md → ${join(OUT_DIR, "audit-report.md")}`);
+if (OUT_ARG) {
+  console.log(`ℹ️  --out override used — report written OUTSIDE the project (${OUT_DIR}). Default is inside the project (<project>/output/audit).`);
+}
 process.exitCode = fail ? 1 : 0;

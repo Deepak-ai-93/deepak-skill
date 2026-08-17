@@ -43,15 +43,40 @@ description: Build or EXTEND production-ready vibe-coded web apps at 20-year-exp
 
 ---
 
+## The quality bar (non-negotiable — read before anything else)
+
+| Rail | Rule |
+|---|---|
+| **The approval gate** | No code before the user approves the build pack AND the TODO list (`todo.mjs confirm`) — never scaffold blind |
+| **Project-local storage** | Every artifact the skill creates lives inside the project (root or `<project>/output/`) — never a global folder, never outside the project, so it deploys with the app |
+| **No secrets in code** | `process.env` only; `.env.example` committed, `.env` gitignored; keys never hardcoded or `NEXT_PUBLIC_` |
+| **Evidence-backed reports** | `build-report.md` entries carry commands + output + file paths — a vague report gets sent back |
+| **Audit gate** | Nothing ships until `audit-webapp.mjs` passes and the auditor + everything-auditor subagents sign off PASS |
+| **Deploy runbook** | The app is actually deployed per `deploy-runbook.md` (env vars mapped, verification list run, rollback written) — "deploy later" is not done |
+
+---
+
 ## Install anywhere (standalone)
 
 ```bash
-# install ONLY this skill into the current project
+# install ONLY this skill into the current project (recommended — the skill
+# travels with the repo, so every agent on every machine uses the same version)
 npx skills add Deepak-ai-93/deepak-skill --skill vibe-code-webapp
 
-# globally — available in every project on this machine
+# globally — the SKILL FILES live in a global folder, available in every project
 npx skills add Deepak-ai-93/deepak-skill --skill vibe-code-webapp -g
 ```
+
+> **⚠️ Project-local storage rule:** only the *skill files* ever go global. **Everything
+the skill CREATES is always written inside the project** — `MEMORY.md`, `TODO.md`,
+`PRD.md`, `stack-blueprint.md`, `sitemap.md`, `BUILD.md`, `build-report.md`,
+`idea-brief.md`, `validation.md`, `deploy-runbook.md`, and all `output/` reports
+live in the project root or `<project>/output/`, never in the skill's install
+folder, never in a global folder, never outside the project. The scripts enforce
+this (their reports default to `<project>/output/`, even when `--dir` points at a
+folder you're not standing in); the agent copies every template to the project
+root. **Run the scripts from the project root** and everything lands in the
+project — so it's committed, deployed, and versioned with the app.
 
 Installs to `.agents/skills/vibe-code-webapp/`:
 
@@ -80,6 +105,7 @@ templates/
   backend-architecture.md    # backend architecture pack (Drizzle/Postgres, Auth.js, Stripe, security, ops)
   sitemap-pages.md           # sitemap.md — full sitemap + every frontend page + backend architecture + workflows (one markdown)
   production-checklist.md    # the go-live bar (mirrors audit-webapp.mjs)
+  deploy-runbook.md          # deploy-runbook.md — per-host deploy steps + env var mapping + post-deploy verification + rollback (copied to the project root in Stage 7)
 ```
 
 **Prerequisites:** Node.js 18+ (for the scripts). Everything else is the chosen stack's (`npm create next-app@latest` etc.) — no other dependencies.
@@ -309,7 +335,9 @@ Report the verdict, the fix list, and the paths you reviewed.
 ### Stage 7 — Deliver
 
 - Working app + `PRD.md` + `stack-blueprint.md` + `sitemap.md` (full sitemap + pages + backend architecture + workflows) + `TODO.md` (confirmed, done-state) + `BUILD.md` + `build-report.md` (detailed, auditor-signed) + `idea-brief.md` + `idea-answers.md` + `validation.md` (verdict + guardrail) + (existing projects) `project-scan.md` + `audit-report.md` (PASS) + `MEMORY.md` (today's entry written).
-- A production README: what it is, setup, env vars, deploy + rollback runbook.
+- **`deploy-runbook.md`** (project root, from `templates/deploy-runbook.md`) — the ONE host actually used, every env var mapped (values only in the host dashboard), post-deploy verification list run, rollback steps written. The app is deployed and the runbook reflects reality.
+- A production README: what it is, setup, env vars, deploy + rollback runbook (links `deploy-runbook.md`).
+- **Everything the skill produced lives inside the project** — all files above are in the project root or `<project>/output/`, committed with the app (never a global folder, never outside the project).
 - Tell the user: the one-line pitch, the scorecard total + verdict, what was built (map to the confirmed TODO), the auditor's verdict + what the fix loop changed, what's in `NEXT.md`, and how to rebuild/tweak it in their favorite tool (paste the blueprint's handoff prompt).
 
 ---
@@ -354,6 +382,7 @@ Rules: the **user owns the list** · `P0` do first / `P1` important / `P2` nice-
 - [ ] Error handling + input validation + CORS/rate limiting in place
 - [ ] Tests for auth/billing/delete paths; lint passing; CI on push
 - [ ] Deploy config, domain/SSL, analytics, SEO meta present
+- [ ] `deploy-runbook.md` present (project root): one host, env vars mapped, verification list run, rollback steps — deploy never depends on tribal knowledge
 - [ ] No half-built screens, TODO stubs, or mocked data in shipped flows
 - [ ] Every route/page/endpoint in `sitemap.md` exists in the app (and nothing major is missing from the sitemap)
 - [ ] Mobile responsive; empty/loading/error states; accessibility basics
@@ -411,4 +440,6 @@ Rules: the **user owns the list** · `P0` do first / `P1` important / `P2` nice-
 - [ ] **Everything-auditor subagent ran** (app + plan + instructions + memory + reports): verdict recorded, hardening + test-harness fixes applied, brainstorm → `NEXT.md`, skill feedback submitted/approved
 - [ ] Everything-auditor signed off **PASS** after the fix loop
 - [ ] **`MEMORY.md` today's entry appended (Did / Decided / Blocked / Next)**
-- [ ] Delivered: working app + `PRD.md` + `stack-blueprint.md` + `sitemap.md` + `TODO.md` + `BUILD.md` + `build-report.md` + `idea-brief.md` + `audit-report.md` + production README
+- [ ] **Everything stored project-local**: all artifacts in the project root or `<project>/output/` — nothing in the skill's install folder, global folders, or outside the project
+- [ ] **`deploy-runbook.md` written from the template** (one host, env vars mapped, verification list run, rollback steps) — app actually deployed
+- [ ] Delivered: working app + `PRD.md` + `stack-blueprint.md` + `sitemap.md` + `TODO.md` + `BUILD.md` + `build-report.md` + `idea-brief.md` + `audit-report.md` + `deploy-runbook.md` + production README

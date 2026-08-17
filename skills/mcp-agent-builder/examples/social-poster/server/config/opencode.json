@@ -1,0 +1,12 @@
+{
+  "mcp": {
+    "social-poster": {
+      "type": "local",
+      "command": [
+        "node",
+        "src/index.mjs"
+      ],
+      "enabled": true
+    }
+  }
+}

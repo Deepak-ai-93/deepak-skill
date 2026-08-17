@@ -26,6 +26,12 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { resolve, join } from "node:path";
 
+// ─── brand banner (deepak-skill · crafted by Deepak) ────────────────────────
+const BRAND_LINE = "═".repeat(56);
+const banner = (label) =>
+  `\n${BRAND_LINE}\n  🎬 deepak-skill — crafted by Deepak\n  skill: vibe-code-webapp · ${label}\n${BRAND_LINE}\n`;
+console.log(banner("research-idea.mjs"));
+
 // --- tiny arg parser (--name value and --name=value forms) --------------------
 const args = process.argv.slice(2);
 const opt = (name, fallback) => {

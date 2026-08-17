@@ -21,6 +21,12 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { resolve, join } from "node:path";
 import { pathToFileURL } from "node:url";
 
+// ─── brand banner (deepak-skill · crafted by Deepak) ────────────────────────
+const BRAND_LINE = "═".repeat(56);
+const banner = (label) =>
+  `\n${BRAND_LINE}\n  🎬 deepak-skill — crafted by Deepak\n  skill: carousel-post-images · ${label}\n${BRAND_LINE}\n`;
+console.log(banner("render-carousel.mjs"));
+
 // --- tiny arg parser (same style as the other render scripts) ----------------
 // Supports BOTH "--name value" and "--name=value" forms (e.g. --scale=2).
 const args = process.argv.slice(2);

@@ -109,7 +109,7 @@ Rules: `user_id` FK on every owned table · `created_at` default now() · indexe
 6. Payments (if monetized): Checkout → webhook → status UI → test with `stripe listen`.
 7. AI features (if any, per `ai-logic.md` §9): streaming route → prompts+zod+evals → UX (stop/timeout/errors) → cost rails → observability.
 8. Analytics + SEO meta + error states + empty states + polish (micro-interactions).
-9. Tests for auth/billing/AI evals → CI → production audit → deploy.
+9. Tests for auth/billing/AI evals → CI → production audit → deploy. **Deploy per `templates/deploy-runbook.md` → `deploy-runbook.md` in the project root**: pick ONE host, set every env var from §5 in the host dashboard (never in code), run DB migrations against production, deploy, then run the runbook's post-deploy verification list — and write the rollback steps down. Deploy is done only when the verification list passes.
 
 **Definition of done per step:** the app runs (`npm run dev`), the step's flow works end-to-end (and matches the design for UI steps), committed. Never 2 steps before running.
 
@@ -159,6 +159,7 @@ next item from PRD.md's must-haves exactly as scoped; run it; verify; commit.
 - [ ] Data model SQL paste-ready; build order numbered and complete
 - [ ] **AI section present iff the PRD has AI features** (else removed) — rails locked per `ai-logic.md`
 - [ ] Handoff prompts filled in with the real app details
+- [ ] **Deploy plan locked**: ONE host chosen in the stack lock (§2) and mirrored in `deploy-runbook.md` — no "deploy later"
 - [ ] PRD.md must-haves match the build order 1:1
 - [ ] `validation.md` verdict recorded (BUILD only — or user's explicit override after seeing the risks)
 - [ ] Nothing in the pack references a tool-specific feature (works in CLI + web builders)

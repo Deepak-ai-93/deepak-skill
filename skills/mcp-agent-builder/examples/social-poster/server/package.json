@@ -1,0 +1,14 @@
+{
+  "name": "social-poster",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Post content drafts and pull engagement analytics for Instagram and X from any agent",
+  "scripts": {
+    "start": "node src/index.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.24.0"
+  }
+}

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Shipping Playbook — developer lead-magnet ebook</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #e6edf3; background: #0d1117; }
+
+  /* Layout E — Technical Dark: terminal navy, green accent, mono headlines */
+  :root {
+    --base: #0d1117;
+    --panel: #161b22;
+    --ink: #e6edf3;
+    --accent: #3fb950;
+    --muted: #8b949e;
+  }
+
+  .page {
+    position: relative;
+    width: 1080px;
+    height: 1528px;
+    background:
+      linear-gradient(rgba(63, 185, 80, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(63, 185, 80, 0.045) 1px, transparent 1px),
+      var(--base);
+    background-size: 90px 90px;
+    overflow: hidden;
+    padding: 110px 100px;
+    page-break-after: always;
+    break-after: page;
+  }
+  .page:last-child { page-break-after: auto; break-after: auto; }
+
+  .chapter-label {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 26px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    margin-bottom: 44px;
+  }
+  .chapter-label::before { content: '$ '; opacity: 0.6; }
+  .headline {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 74px;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 44px;
+  }
+  .headline .hl { color: var(--accent); }
+  .body { font-size: 34px; line-height: 1.6; color: var(--muted); max-width: 840px; }
+  .body strong { color: var(--ink); }
+  .callout {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    display: inline-block;
+    background: var(--panel);
+    border: 2px solid var(--accent);
+    color: var(--ink);
+    font-size: 30px;
+    padding: 26px 36px;
+    border-radius: 10px;
+    margin-top: 52px;
+  }
+  .callout::before { content: '> '; color: var(--accent); }
+  .quote { font-size: 36px; color: var(--ink); margin-top: 52px; border-left: 6px solid var(--accent); padding-left: 30px; font-family: 'JetBrains Mono', monospace; }
+  .scene-tag { position: absolute; bottom: 60px; left: 100px; right: 100px; font-size: 22px; color: #484f58; font-style: italic; }
+  .page-num { position: absolute; bottom: 56px; right: 100px; font-size: 24px; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #3d444d; letter-spacing: 0.1em; }
+  .cta-box { margin-top: 72px; border: 2px solid var(--accent); border-radius: 12px; padding: 52px 44px; background: var(--panel); }
+  .cta-box .cta { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 42px; color: var(--accent); }
+
+  /* cover-specific */
+  .cover { background: var(--base); }
+  .cover::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px; background: var(--accent); }
+  .cover-title { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 118px; line-height: 1.02; letter-spacing: -0.02em; margin-top: 190px; }
+  .cover-title .hl { color: var(--accent); }
+  .cover-sub { font-family: 'JetBrains Mono', 'Fira Code', monospace; font-size: 34px; color: var(--muted); margin-top: 44px; max-width: 780px; line-height: 1.5; }
+  .cover-sub::before { content: '$ '; color: var(--accent); }
+  .cover-bar { width: 180px; height: 10px; background: var(--accent); margin-top: 88px; border-radius: 5px; }
+</style>
+</head>
+<body>
+
+  <!-- Cover — data-page="cover" opens the loop (design picker: technical-dark · terminal-green · pattern · step-cards) -->
+  <div class="page cover" data-page="cover" data-layout="technical-dark" data-palette="terminal-green" data-motif="step-cards" data-cover-style="pattern">
+    <div class="chapter-label">for developers</div>
+    <h1 class="cover-title">The <span class="hl">Shipping</span> Playbook</h1>
+    <p class="cover-sub">Five steps that took our deploy time from 4 days to 40 minutes.</p>
+    <div class="cover-bar"></div>
+    <div class="scene-tag">SCENE: a developer's dual monitors at 2am, terminal full of green checkmarks, one merge button highlighted</div>
+  </div>
+
+  <!-- Step 01 — rising -->
+  <div class="page" data-page="step-01" data-layout="technical-dark" data-palette="terminal-green" data-motif="step-cards">
+    <div class="chapter-label">step 01</div>
+    <h2 class="headline">Ship the <span class="hl">smallest</span> thing that works.</h2>
+    <p class="body">Big PRs rot. A 4,000-line diff sits for weeks, then dies in review. The 40-minute deploy started with one rule: <strong>every merge ships something usable.</strong></p>
+    <div class="callout">avg PR size: 4,000 → 350 lines</div>
+    <div class="scene-tag">SCENE: a git log screen, each commit one green dot, a reviewer clicking "approve" in seconds</div>
+  </div>
+
+  <!-- Step 02 — rising -->
+  <div class="page" data-page="step-02" data-layout="technical-dark" data-palette="terminal-green" data-motif="step-cards">
+    <div class="chapter-label">step 02</div>
+    <h2 class="headline">Automate the <span class="hl">boring</span> gate.</h2>
+    <p class="body">Lint, tests, and type checks ran on a dev's machine — where everyone "forgot." Now they run in CI before review ever starts. Humans review logic; machines review style.</p>
+    <p class="quote">"If a bot can check it, a human shouldn't."</p>
+    <div class="scene-tag">SCENE: a CI pipeline dashboard, every check a green square, a red one auto-blocking a merge with a comment</div>
+  </div>
+
+  <!-- Step 03 — rising -->
+  <div class="page" data-page="step-03" data-layout="technical-dark" data-palette="terminal-green" data-motif="step-cards">
+    <div class="chapter-label">step 03</div>
+    <h2 class="headline">Review in <span class="hl">hours</span>, not days.</h2>
+    <p class="body">A review SLA turned waiting from a black hole into a contract. Small diffs + a 4-hour SLA meant merges stopped stacking. <strong>Throughput doubled with zero new hires.</strong></p>
+    <div class="callout">time-to-merge: 96h → 3.2h</div>
+    <div class="scene-tag">SCENE: two developers over a laptop at a whiteboard, a clock showing the 4-hour review SLA, a merge button clicked</div>
+  </div>
+
+  <!-- Step 04 — rising -->
+  <div class="page" data-page="step-04" data-layout="technical-dark" data-palette="terminal-green" data-motif="step-cards">
+    <div class="chapter-label">step 04</div>
+    <h2 class="headline">Deploy like it's <span class="hl">nothing</span>.</h2>
+    <p class="body">Feature flags made the deploy boring — so we shipped daily. When a release stopped being an event, it stopped being a risk. Rollbacks became one command.</p>
+    <p class="quote">"You should be slightly embarrassed by your deploy process — if it's impressive, it's too rare."</p>
+    <div class="scene-tag">SCENE: a one-click deploy button on a dashboard, a green banner reading "deployed to production", a developer shrugging</div>
+  </div>
+
+  <!-- Step 05 + payoff -->
+  <div class="page" data-page="step-05" data-layout="technical-dark" data-palette="terminal-green" data-motif="step-cards">
+    <div class="chapter-label">step 05</div>
+    <h2 class="headline">Measure the <span class="hl">pipeline</span>, not the heroics.</h2>
+    <p class="body">Lead time, deploy frequency, change-failure rate — tracked on one board. The heroics stopped because the metrics made the system visible. <strong>4 days → 40 minutes in 90 days.</strong></p>
+    <div class="callout">lead time: 4 days → 40 min · deploys: 2/mo → 22/mo</div>
+    <div class="scene-tag">SCENE: a wall board with four DORA metrics trending down to green, a team standing around it</div>
+  </div>
+
+  <!-- CTA — loop ending -->
+  <div class="page" data-page="cta" data-layout="technical-dark" data-palette="terminal-green" data-motif="step-cards">
+    <div class="chapter-label">part 2</div>
+    <h2 class="headline">Ready to <span class="hl">ship faster</span>?</h2>
+    <div class="cta-box">
+      <p class="cta">Get part 2 — the CI pipeline teardown with the actual configs</p>
+    </div>
+    <p class="body" style="margin-top:40px">Reply "pipeline" or save this page — the open loop closes in the next issue.</p>
+    <div class="scene-tag">SCENE: a terminal scrolling deploy logs, ending on a blinking cursor at a prompt reading "next: part 2"</div>
+  </div>
+
+</body>
+</html>

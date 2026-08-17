@@ -22,7 +22,13 @@
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
+// ─── brand banner (deepak-skill · crafted by Deepak) ────────────────────────
+const BRAND_LINE = "═".repeat(56);
+const banner = (label) =>
+  `\n${BRAND_LINE}\n  🎬 deepak-skill — crafted by Deepak\n  skill: vibe-code-webapp · ${label}\n${BRAND_LINE}\n`;
+// Keep --verdict-only machine-parseable (single line) — banner is human-only.
 const args = process.argv.slice(2);
+if (!args.includes("--verdict-only")) console.log(banner("saas-score.mjs"));
 const opt = (name) => {
   const i = args.indexOf(`--${name}`);
   return i !== -1 ? args[i + 1] : undefined;

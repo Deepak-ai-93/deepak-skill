@@ -36,7 +36,19 @@ Use this skill whenever the user asks to:
 
 ---
 
-## 1. Open-source TTS engines (voiceover)
+## The quality bar (non-negotiable — read before anything else)
+
+| Rail | Rule |
+|---|---|
+| **License-safe only** | Every engine, model and track used must be commercially usable (Apache-2.0/MIT/etc.) — anything marked ⚠️ non-commercial is banned from monetized deliverables unless explicitly fine-tuned/owned |
+| **Speech intelligibility** | The voiceover must be clearly understandable at phone volume — no mumble, no robotic flatline; wrong voice → re-pick, don't ship |
+| **Mix discipline** | Music ducks under narration (sidechain/volume automation), no clipping, loudness ~−14 LUFS for social |
+| **Deterministic FFmpeg** | Every audio task ends in a reproducible FFmpeg command with explicit codecs/rates — no "one-off edits" that can't be re-run |
+| **Audit gate** | Nothing ships until `audit-audio.mjs` passes and the audio-auditor subagent signs off |
+
+---
+
+## Step 1 — Open-source TTS engines (voiceover)
 
 **Top pick: Kokoro-82M** — Apache 2.0, broadcast-quality narration, runs locally (even CPU), 54 voices across 8+ languages (US/UK English, Spanish, French, Hindi, Italian, Japanese, Mandarin, Brazilian Portuguese).
 
@@ -94,7 +106,7 @@ node render/enhance-voice.mjs --in assets/vo_01_hook.wav --out assets/vo_01_hook
 
 ---
 
-## 2. Open-source / royalty-free SFX & music
+## Step 2 — Open-source / royalty-free SFX & music
 
 | Source | License | Monetize? | Use for |
 |---|---|---|---|
@@ -113,7 +125,7 @@ node render/enhance-voice.mjs --in assets/vo_01_hook.wav --out assets/vo_01_hook
 
 ---
 
-## 3. Mixing with FFmpeg (voiceover + music + SFX)
+## Step 3 — Mixing with FFmpeg (voiceover + music + SFX)
 
 Target levels: **voice 100%, music ~30%, SFX ~80%**. Always **duck** music under narration.
 
@@ -135,7 +147,7 @@ How it works: music drops to 30% baseline → sidechain compressor lowers it aut
 
 ---
 
-## 4. Integration with HyperFrames
+## Step 4 — Integration with HyperFrames
 
 Audio lives in the composition as `<audio>` tracks with timing + volume:
 
@@ -151,7 +163,7 @@ Audio lives in the composition as `<audio>` tracks with timing + volume:
 
 ---
 
-## 5. Audit harness (automated checks + audio-auditor subagent, before delivery)
+## Step 5 — Audit harness (automated checks + audio-auditor subagent, before delivery)
 
 **Step 5a — run the automated audit harness:**
 ```bash

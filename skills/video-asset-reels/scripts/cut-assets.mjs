@@ -21,9 +21,26 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, mkdirSync, existsSync } from "node:fs";
 import { resolve, join } from "node:path";
 
-const manifestPath = process.argv[2];
+// ─── brand banner (deepak-skill · crafted by Deepak) ────────────────────────
+const BRAND_LINE = "═".repeat(56);
+const banner = (label) =>
+  `\n${BRAND_LINE}\n  🎬 deepak-skill — crafted by Deepak\n  skill: video-asset-reels · ${label}\n${BRAND_LINE}\n`;
+console.log(banner("cut-assets.mjs"));
+
+// --- tiny arg parser (same style as the other skill scripts) ----------------
+const args = process.argv.slice(2);
+const opt = (name, fallback) => {
+  const needle = `--${name}`;
+  const found = args.find((a) => a === needle || a.startsWith(`${needle}=`));
+  if (found === undefined) return fallback;
+  const eq = found.indexOf("=");
+  return eq !== -1 ? found.slice(eq + 1) : args[args.indexOf(found) + 1];
+};
+
+// Accept --manifest <path> or the positional form (kept for back-compat).
+const manifestPath = opt("manifest", process.argv[2]);
 if (!manifestPath) {
-  console.error("Usage: node render/cut-assets.mjs storyboard.json");
+  console.error("Usage: node render/cut-assets.mjs storyboard.json  (or --manifest <path>)");
   process.exit(1);
 }
 
