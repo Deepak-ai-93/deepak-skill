@@ -141,9 +141,9 @@ cd skills/social-media-content-plan && node scripts/audit-content-plan.mjs --pac
 cd skills/carousel-post-images && node scripts/render-carousel.mjs --html slides.html --out carousel/ --4k
 cd skills/carousel-post-images && node scripts/audit-carousel.mjs --pack <carousel-folder> --out carousel-audit.md   # automated audit → spawn carousel-auditor subagent
 
-# Ebooks: design picker (6 layouts × 30 palettes × 6 cover styles × motif) → A4 PDF + cover + page PNGs (or image-model prompts), then audit
+# Ebooks: author memory + taste (ebook-memory.md: voice + design defaults) → design picker → A4 PDF + cover + page PNGs (or image-model prompts), then audit
 cd skills/ebook-builder && node scripts/render-ebook.mjs --html ebook.html --out ebook/ --pdf
-cd skills/ebook-builder && node scripts/audit-ebook.mjs --pack <ebook-folder> --out ebook-audit.md   # automated audit → spawn ebook-auditor subagent
+cd skills/ebook-builder && node scripts/audit-ebook.mjs --pack <ebook-folder> --out ebook-audit.md   # automated audit (incl. memory/taste) → spawn ebook-auditor subagent
 
 # YouTube thumbnails: CTR teardown → 3-5 variants + prompts → A/B plan → audit
 cd skills/thumbnail-studio && node scripts/thumbnail-prompts.mjs --plan thumbnail-plan.json --out thumbnails.md

@@ -1,6 +1,6 @@
 ---
 name: ebook-builder
-description: Build beautiful, designed lead-magnet ebooks (guides, checklists, frameworks) as print-ready PDFs + page PNGs — SIX layout presets (Editorial Classic / Modern Bold / Minimal Luxury / Playful Pop / Technical Dark / Nature Calm), 30 design palettes + typography + 6 cover styles + page-motif families + mood/texture options (design picker locks ONE of each at Stage 3), a story-first structure (cover opens a loop → chapters escalate → payoff → CTA), and TWO generation modes like carousel-post-images (Mode 1 browser render: ebook.html → A4 PDF + 4K page PNGs via headless Chrome; Mode 2 image-model: the same deck exports photoreal cover + interior scene prompts). Cover-image brief built in, plus an audit harness (render-ebook.mjs + audit-ebook.mjs → a fresh ebook-auditor subagent scores /50 and signs PASS / FIX NEEDED).
+description: Build beautiful, designed lead-magnet ebooks (guides, checklists, frameworks) as print-ready PDFs + page PNGs — SIX layout presets (Editorial Classic / Modern Bold / Minimal Luxury / Playful Pop / Technical Dark / Nature Calm), 30 design palettes + typography + 6 cover styles + page-motif families + mood/texture options (design picker locks ONE of each at Stage 3), a story-first structure (cover opens a loop → chapters escalate → payoff → CTA), and TWO generation modes like carousel-post-images (Mode 1 browser render: ebook.html → A4 PDF + 4K page PNGs via headless Chrome; Mode 2 image-model: the same deck exports photoreal cover + interior scene prompts). Plus cross-session AUTHOR MEMORY + TASTE: the skill reads `ebook-memory.md` (identity, taste/voice profile, design defaults, past builds) at Stage 0 and writes it back at Stage 8, so every ebook is built in the author's voice — a TASTE PROFILE (tone, rhythm, pet phrases, banned words distilled from the author's own writing) that every cover title, headline and CTA must match, and the audit FAILs the deck on taste banned-words. Cover-image brief built in, plus an audit harness (render-ebook.mjs + audit-ebook.mjs → a fresh ebook-auditor subagent scores /50 and signs PASS / FIX NEEDED).
 ---
 
 <!-- ════════════════════════════════════════════════════════════════════════
@@ -67,8 +67,21 @@ Every beat either **raises the question**, **raises the stakes**, or **pays off*
 | **Design options, locked (the design picker)** | Per layout: ONE of 5 palettes (30 total), ONE accent hex, ONE type pairing (primary/alt), ONE of 6 cover styles, ONE page-motif family, ONE mood + texture — all locked via the **design picker** card (`templates/design-picker.md`) and held from `templates/design-options.md`. Same world from cover to last page. |
 | **Cover earns the download (the cover-image rail)** | The cover has ONE idea, title ≤ 6 words, readable at thumbnail size, high contrast, an emotion — and a `.cover-image` slot: Mode 1 renders the designed cover, Mode 2 exports a photoreal cover prompt (see `templates/cover-brief.md`). |
 | **Copy that converts** | Anti-fluff (the blocklist — no "unlock", "game-changer", …), specific beats generic (numbers, receipts), headline ≤ 8 words, one idea per page, CTA on the last page. |
+| **Author memory + taste (the new rails)** | `ebook-memory.md` read at **Stage 0** (identity + taste + design defaults from past builds) and updated at **Stage 8** — never skipped. Copy matches the taste profile (tone, rhythm, pet phrases); the audit FAILs the deck on taste banned-words and the ebook-auditor scores voice match. |
 | **Print-ready output** | Mode 1: A4 PDF + 4K page PNGs + cover.png via headless Chrome (text always exact). Mode 2: per-page image-model prompts (photoreal cover + interior scenes) with the exact overlay copy. Either way the deliverable is `ebook.pdf` (or `prompts.md` + generated pages). |
 | **Audited before delivery (the harness)** | Stage 7 is a harness, never a self-check: `audit-ebook.mjs` runs the automated checks (pages, cover, layout consistency, copy limits, fluff, output) → a FRESH ebook-auditor subagent scores ebook-worthiness (/50, ≥ 35 = worth publishing) → fix loop until signed **PASS** in `ebook-audit.md`. |
+
+---
+
+## Memory + taste rails (the author's voice — read before anything else)
+
+Every ebook is built FOR the same person every time. The skill remembers them across sessions and writes copy that sounds like THEM, not like generic AI.
+
+**The memory file** — `ebook-memory.md` at the working folder root (format: `templates/memory-profile.md`): author identity, **taste profile** (voice fingerprint), persistent **design defaults** (layout / palette / cover style / motif / mood / texture they've chosen before), a growing **past-builds table** (topic, layout · palette, audit verdict, what they changed or loved), and **standing facts** (offer/CTA, list, links). Created at **Stage 0** on first run (≤3 questions + optional writing sample via `templates/taste-profile.md`), read at the start of EVERY build, updated at **Stage 8** after every build. It lives OUTSIDE the skill folder so it persists across sessions and projects — install the skill once, keep the memory per project.
+
+**The taste profile** — the voice fingerprint inside the memory file (§2): tone, sentence rhythm, person, humor, jargon level, pet phrases, and **banned words** (the author's personal anti-fluff list — the audit FAILs the deck on any of them). The rail: every cover title, headline, body line and CTA is written in this voice. If a line could have been written by any AI for any niche, rewrite it in the author's voice.
+
+**The loop:** Stage 0 loads memory + refreshes taste → Stages 2–4 plan and write the deck IN that voice → Stage 7's auditor judges voice match → Stage 8 writes the build back (topic, design, verdict, what the author approved/changed) so the next ebook starts smarter.
 
 ---
 
@@ -80,6 +93,7 @@ Every beat either **raises the question**, **raises the stakes**, or **pays off*
 - "Pick the design for me — layout, palette, cover style, motif, mood"
 - "Make an ebook cover image + interior pages"
 - "Turn my blog post / thread into a downloadable ebook"
+- "Build another ebook for me — same voice as the last one" (memory: it reads `ebook-memory.md` and keeps your voice + defaults)
 
 **Complements:** `carousel-post-images` (same two-mode render + design-system DNA) · `newsletter-growth` (the ebook becomes the lead magnet in the welcome sequence) · `x-threads-engagement` (the same story becomes the thread) · `blog-seo-content` (expand the ebook into an article) · `photoshoot-studio` (photoreal cover imagery via image prompts) · `social-media-content-plan` (the ebook slots into a pillar).
 
@@ -116,19 +130,22 @@ Same deck (`ebook.html`), two outputs:
 
 ---
 
-## Workflow (7 stages)
+## Workflow (Stage 0 → Stage 8)
+
+### Stage 0 — Load the author's memory + taste (always first)
+Read `ebook-memory.md` in the working folder (format: `templates/memory-profile.md`). First run (no file)? Capture identity + taste in ≤ 3 questions using `templates/taste-profile.md` — offer: "paste one paragraph you wrote that you love — I'll copy your rhythm" — then write the file. Before planning a single page, echo back what you're building from: "Building in [author]'s voice: [tone], starting from [design defaults] — anything change?" Every build starts from memory — same author, same voice, same defaults — so ebook N+1 is built properly with everything ebook N taught us.
 
 ### Stage 1 — Analyze the prompt + CHOOSE THE MODE
-Extract: **topic** (ask ≤3 questions if vague) · **audience** · **goal** (subscribers / leads / authority) · **length** (default 10–14 pages) · **tone** · **layout** (default via the picker's goal table: Editorial Classic for guides, Modern Bold for checklists/frameworks, Minimal Luxury for premium, Playful Pop for social/fun, Technical Dark for tech/SaaS, Nature Calm for wellness). Then **present the two-mode choice** (browser render vs image-model). Lock the mode; it drives Stage 5.
+Memory was already loaded at Stage 0 — **tone** and **layout defaults** come from `ebook-memory.md`, don't re-ask what's already known. Extract what's new: **topic** (ask ≤3 questions if vague) · **audience** · **goal** (subscribers / leads / authority) · **length** (default 10–14 pages). If the author gave no design history, **layout** defaults via the picker's goal table: Editorial Classic for guides, Modern Bold for checklists/frameworks, Minimal Luxury for premium, Playful Pop for social/fun, Technical Dark for tech/SaaS, Nature Calm for wellness. Then **present the two-mode choice** (browser render vs image-model). Lock the mode; it drives Stage 5.
 
 ### Stage 2 — Plan the ebook (the page map)
-Cover (open loop) → 4–8 content pages (each chapter escalates) → payoff page → CTA page. For each page record: `page / headline (≤ 8 words, anti-fluff) / body / layout element (chapter numeral, step card, callout, quote, scene-tag) / SCENE (the exact visual moment)`. The scene is planned before the deck — it's half the design.
+Cover (open loop) → 4–8 content pages (each chapter escalates) → payoff page → CTA page. For each page record: `page / headline (≤ 8 words, anti-fluff) / body / layout element (chapter numeral, step card, callout, quote, scene-tag) / SCENE (the exact visual moment)`. The scene is planned before the deck — it's half the design. **Draft every headline + body line in the author's voice from the taste profile** (`ebook-memory.md` §2 — tone, rhythm, pet phrases, banned words). A line any AI could have written for any niche gets rewritten now, not at audit time.
 
 ### Stage 3 — The design picker: lock ONE of everything
-Run the **design picker** (`templates/design-picker.md`) — a decision card that forces exactly ONE choice per knob: **layout** (`editorial-classic` / `modern-bold` / `minimal-luxury` / `playful-pop` / `technical-dark` / `nature-calm`) + **palette** (5 per layout, 30 total — e.g. `electric-blue`) + **accent hex** + **type pairing** (primary/alt) + **cover style** (6: full-bleed / solid / split / pattern-geometric / scene-frame / duotone) + **motif family** (8: step-cards / timeline / checklist / scenario / quote-interstitial / chapter-dividers / comparison / framework-map) + **mood** (calm / confident / playful / urgent) + **texture** (paper / film / clean). If the user is undecided, the picker's goal table picks the layout, then walk the palette choice. Show the filled card to the user before writing the deck. Write the cover brief (`templates/cover-brief.md`) — one idea, ≤ 6 words, thumbnail-readable. The card is the contract: every `data-*` attribute in the deck mirrors it.
+Run the **design picker** (`templates/design-picker.md`) — a decision card that forces exactly ONE choice per knob: **layout** (`editorial-classic` / `modern-bold` / `minimal-luxury` / `playful-pop` / `technical-dark` / `nature-calm`) + **palette** (5 per layout, 30 total — e.g. `electric-blue`) + **accent hex** + **type pairing** (primary/alt) + **cover style** (6: full-bleed / solid / split / pattern-geometric / scene-frame / duotone) + **motif family** (8: step-cards / timeline / checklist / scenario / quote-interstitial / chapter-dividers / comparison / framework-map) + **mood** (calm / confident / playful / urgent) + **texture** (paper / film / clean). **Start from the remembered defaults in `ebook-memory.md` §3** — the picker only overrides what the author actually changes. If the user is undecided, the picker's goal table picks the layout, then walk the palette choice. Show the filled card to the user before writing the deck. Write the cover brief (`templates/cover-brief.md`) — one idea, ≤ 6 words, thumbnail-readable. The card is the contract: every `data-*` attribute in the deck mirrors it.
 
 ### Stage 4 — Write the deck → `ebook.html` (the single source of truth for BOTH modes)
-One `.page` div per ebook page; the cover page carries `data-page="cover"` **and** `data-cover-style="{cover-style}"`; **every page carries `data-layout="{layout}"` + `data-palette="{palette}"` + `data-motif="{motif}"`** (mirror the design-picker card — mixed values fail the audit); CSS custom properties on `:root` for `--base` / `--ink` / `--accent` / `--panel` / `--muted` from the palette hexes; text in `.cover-title` / `.cover-sub` / `.chapter-label` / `.headline` / `.body` / `.callout` / `.quote` / `.cta`; a `.scene-tag` annotation per page (Mode 2 reads it as the SCENE; Mode 1 renders it as the placeholder); a `.page-num` footer. Print CSS: `@page { size: A4; margin: 0 }` and `.page { page-break-after: always }` so the PDF gets one page per sheet.
+One `.page` div per ebook page; the cover page carries `data-page="cover"` **and** `data-cover-style="{cover-style}"`; **every page carries `data-layout="{layout}"` + `data-palette="{palette}"` + `data-motif="{motif}"`** (mirror the design-picker card — mixed values fail the audit); CSS custom properties on `:root` for `--base` / `--ink` / `--accent` / `--panel` / `--muted` from the palette hexes; text in `.cover-title` / `.cover-sub` / `.chapter-label` / `.headline` / `.body` / `.callout` / `.quote` / `.cta`; a `.scene-tag` annotation per page (Mode 2 reads it as the SCENE; Mode 1 renders it as the placeholder); a `.page-num` footer. **Copy is written in the author's taste** (`ebook-memory.md` §2 — tone, rhythm, pet phrases, no banned words); if a line reads like generic AI copy, rewrite it. Print CSS: `@page { size: A4; margin: 0 }` and `.page { page-break-after: always }` so the PDF gets one page per sheet.
 
 ### Stage 5 — Generate in the chosen mode
 **Mode 1 (browser, pixel-perfect):** `node scripts/render-ebook.mjs --html ebook.html --out ebook/ --pdf` → A4 `ebook.pdf` + `cover.png` + `pages/page_01.png …` (2× scale = 2160×3056). Text never garbled.
@@ -142,16 +159,22 @@ Show the user: **page map + layout/palette + cover brief (+ rendered preview or 
 ```bash
 node scripts/audit-ebook.mjs --pack <ebook-folder> --out ebook-audit.md
 ```
-`audit-ebook.mjs` scans the pack and checks everything a script can: ebook.html (page count ≥ 5, cover page present, ONE `data-layout` across pages, headline ≤ 8 words, anti-fluff blocklist, scene tags, CTA on the last page, cover title ≤ 6 words) and the output (Mode 1: `ebook.pdf` + `cover.png` + pages/*.png, or Mode 2: `prompts.md` with per-page blocks + 4K canvas). Writes `ebook-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
+`audit-ebook.mjs` scans the pack and checks everything a script can: ebook.html (page count ≥ 5, cover page present, ONE `data-layout` across pages, headline ≤ 8 words, anti-fluff blocklist, scene tags, CTA on the last page, cover title ≤ 6 words), **memory + taste** (`ebook-memory.md` present in the pack or working folder; taste **banned words** from the author's profile FAIL the deck if they leak in), and the output (Mode 1: `ebook.pdf` + `cover.png` + pages/*.png, or Mode 2: `prompts.md` with per-page blocks + 4K canvas). Writes `ebook-audit.md` (automated verdicts + scorecard scaffold). **Exit 1 on any FAIL.**
 
-**Step 7b — spawn the ebook-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/ebook-auditor-brief.md`: reads `ebook-audit.md` + all pack files, completes the **ebook-worthiness scorecard** (10 criteria, /50 — **≥ 35 = worth publishing**, with verdict bands), makes the creative judgment calls the script can't (cover pull, layout consistency, design quality, typography, copy punch, story structure, imagery, print quality, CTA strength), and signs **PASS / FIX NEEDED** with per-page fixes.
+**Step 7b — spawn the ebook-auditor subagent** — a FRESH subagent (never self-audit) with the exact brief from `templates/ebook-auditor-brief.md`: reads `ebook-audit.md` + all pack files + the taste profile in `ebook-memory.md`, completes the **ebook-worthiness scorecard** (10 criteria, /50 — **≥ 35 = worth publishing**, with verdict bands), makes the creative judgment calls the script can't (cover pull, layout consistency, design quality, typography, copy punch + **voice match**, story structure, imagery, print quality, CTA strength), and signs **PASS / FIX NEEDED** with per-page fixes.
 
 **Step 7c — fix loop.** Any FAIL (or an auditor-flagged WARN) → fix the deck → re-run `render-ebook.mjs` (re-render if the HTML changed) → re-submit to a fresh auditor. **Nothing is delivered until the auditor signs off PASS.** The `ebook-audit.md` ships with the pack.
+
+### Stage 8 — Write memory back (the loop closes here)
+Append this build to `ebook-memory.md`: date, topic, layout · palette · cover style, audit verdict (/50), and what the author approved / changed / loved. Update design defaults (§3) only when the author clearly prefers something new (2+ builds or an explicit choice). Never delete standing facts (§5). This is the memory: the next ebook starts with everything this one taught — same author, same voice, same defaults.
 
 ---
 
 ## Production checklist
 
+- [ ] Stage 0: `ebook-memory.md` read (created on first run via `templates/taste-profile.md`, ≤ 3 questions + optional writing sample) — author identity + taste profile known before planning
+- [ ] Deck copy written in the author's voice (taste profile: tone, rhythm, pet phrases, no banned words) — no generic AI lines; the audit FAILs on taste banned-words
+- [ ] Stage 8: build appended to `ebook-memory.md` (date, topic, layout · palette, verdict, what the author changed/loved)
 - [ ] Mode chosen and **presented to the user** (browser render vs image-model) before generating
 - [ ] Story spine complete: cover opens the loop → chapters escalate → payoff → CTA/loop ending; no page survives the fluff rule
 - [ ] ≥3 addiction levers used (curiosity gap · serialization · variable reward · pattern interrupt · relatability · commitment bait)
@@ -164,4 +187,4 @@ node scripts/audit-ebook.mjs --pack <ebook-folder> --out ebook-audit.md
 - [ ] Approval gate: user approved page map + design + cover before delivery
 - [ ] **Audit harness run:** `audit-ebook.mjs` → automated checks (pages, cover, layout consistency, copy limits, fluff, output) — exit 0
 - [ ] **Ebook-auditor subagent** (fresh eyes) completed the ebook-worthiness scorecard (/50 ≥ 35) and signed **PASS / FIX NEEDED** in `ebook-audit.md`
-- [ ] Delivery: `ebook.html` + `ebook.pdf` (or `prompts.md` + generated pages) + `cover.png` + `ebook-audit.md`
+- [ ] Delivery: `ebook.html` + `ebook.pdf` (or `prompts.md` + generated pages) + `cover.png` + `ebook-audit.md` + `ebook-memory.md` (updated at Stage 8)

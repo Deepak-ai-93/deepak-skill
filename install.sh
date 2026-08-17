@@ -54,7 +54,7 @@ SKILLS=(
   "hook-storyboard-retention → scroll-stopping hooks + retention storyboards"
   "voice-sfx-audio          → open-source voiceovers + SFX + mixing"
   "carousel-post-images     → LinkedIn/Instagram carousels at 4K"
-  "ebook-builder            → designed lead-magnet ebooks: 6 layouts/30 palettes, A4 PDF + cover"
+  "ebook-builder            → memory + taste-driven lead-magnet ebooks: 6 layouts/30 palettes, A4 PDF + cover"
   "thumbnail-studio         → CTR-engineered YouTube thumbnails: teardown + 3-5 variants + A/B"
   "content-repurposing-hub  → one source → native pieces per platform (no copy-paste)"
   "sponsorship-pipeline     → brand deals: media kit + rate card + outreach + tracking"

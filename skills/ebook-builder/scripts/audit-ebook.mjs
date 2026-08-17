@@ -4,7 +4,9 @@
 // can: page count ≥ 5, cover page present, ONE data-layout + data-palette +
 // data-motif across pages (design picker consistency) + data-cover-style on the
 // cover, headline ≤ 8 words, cover title ≤ 6 words, anti-fluff blocklist, scene
-// tags, CTA on the last page, and the output (Mode 1: ebook.pdf + cover.png +
+// tags, CTA on the last page, author memory + taste (ebook-memory.md present in
+// the pack or working folder; taste banned-words from the author's profile FAIL
+// the deck if they leak in), and the output (Mode 1: ebook.pdf + cover.png +
 // pages/*.png, or Mode 2: prompts.md with per-page blocks + 4K canvas). Writes
 // ebook-audit.md with automated verdicts + an AUDITOR section. Exit 1 on any FAIL.
 //
@@ -151,6 +153,36 @@ if (pdf && cover) add("PASS", "Mode 1 output", `ebook.pdf + cover.png present (+
 else if (prompts) add("PASS", "Mode 2 output", "prompts.md present (per-page image-model prompts)");
 else add("WARN", "output", "no ebook.pdf/cover.png (Mode 1) or prompts.md (Mode 2) — render or export before delivery");
 
+// memory + taste (author rails — read at Stage 0, written at Stage 8)
+const memPack = read("ebook-memory.md");
+const memCwdPath = join(process.cwd(), "ebook-memory.md");
+const memCwd = existsSync(memCwdPath) ? readFileSync(memCwdPath, "utf8") : null;
+const mem = memPack || memCwd;
+if (mem) {
+  add("PASS", "author memory", "ebook-memory.md present (pack or working folder) — Stage 0 read → Stage 8 write");
+  // taste banned words: bullets under a heading (or bold-bullet marker) mentioning banned / never-use / avoid
+  const banned = [];
+  let inBanned = false;
+  for (const line of mem.split(/\r?\n/)) {
+    if (/^#{1,4}\s/.test(line)) {
+      inBanned = /banned|never\s+use|avoid/i.test(line);
+      continue;
+    }
+    if (/banned words/i.test(line)) { inBanned = true; continue; }
+    if (inBanned && /^\s*[-*]\s+(.+)$/.test(line)) {
+      const w = line.replace(/^\s*[-*]\s+/, "").trim().replace(/[`*_]/g, "");
+      if (w && !/[|]/.test(w)) banned.push(w);
+    }
+  }
+  if (banned.length) {
+    const hits = banned.filter((w) => deck && deck.toLowerCase().includes(w.toLowerCase()));
+    if (!hits.length) add("PASS", "taste banned words", `${banned.length} author-banned word(s) from the taste profile — none leaked into the deck`);
+    else add("FAIL", "taste banned words", `${hits.join(", ")} — the author banned these (ebook-memory.md §2); rewrite in their voice`);
+  }
+} else {
+  add("WARN", "author memory", "no ebook-memory.md in the pack or working folder — create one at Stage 0 (templates/memory-profile.md): identity, taste, design defaults, past builds");
+}
+
 // ─── write ebook-audit.md ───────────────────────────────────────────────────
 const fails = results.filter((r) => r.status === "FAIL");
 const warns = results.filter((r) => r.status === "WARN");
@@ -177,7 +209,7 @@ L.push("| **Cover pull** | Would the cover earn a download at thumbnail size (on
 L.push("| **Story structure** | Cover opens a loop → chapters escalate → payoff → CTA (fluff rule held)? | |");
 L.push("| **Layout consistency** | ONE layout + palette + accent + cover style + motif family across every page (matches the design-picker card)? | |");
 L.push("| **Design quality** | Does the design look premium (spacing, hierarchy, typography), not template-y? | |");
-L.push("| **Copy punch** | Headlines ≤ 8 words, specific beats generic, numbers/receipts present? | |");
+L.push("| **Copy punch + voice** | Headlines ≤ 8 words, specific beats generic, numbers/receipts present, AND the copy sounds like the author wrote it (taste profile in ebook-memory.md: tone, rhythm, pet phrases, no banned words)? | |");
 L.push("| **Imagery** | Cover + interior scenes support the story (or prompts are scene-rich)? | |");
 L.push("| **Readability** | Type legible over the design; contrast held on every page? | |");
 L.push("| **Print quality** | PDF pages break cleanly; nothing clipped; images crisp? | |");
@@ -187,6 +219,7 @@ L.push("");
 L.push("### 2.2 Creative judgment calls");
 L.push("");
 L.push("- Does the cover promise something the ebook actually pays off?");
+L.push("- Does the copy sound like the AUTHOR (taste profile in ebook-memory.md) — or could any AI have written it for any niche?");
 L.push("- Any page that violates the fluff rule (doesn't raise the question, raise the stakes, or pay off)?");
 L.push("- Would the design hold at print size / on a phone screen?");
 L.push("");
