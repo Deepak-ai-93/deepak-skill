@@ -4,6 +4,11 @@ node_modules/
 # Locally installed skills (registry installs land here)
 .agents/
 
+# Local agent wiring artifacts + install lock from npx skills add
+.claude/
+agent/
+skills-lock.json
+
 # Rendered video output
 frames/
 output/
