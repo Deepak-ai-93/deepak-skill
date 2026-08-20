@@ -173,6 +173,7 @@ cd skills/sponsorship-pipeline && node scripts/rate-card.mjs --niche saas --foll
 cd skills/sponsorship-pipeline && node scripts/audit-sponsor.mjs --pack <sponsor-folder> --out sponsor-audit.md   # automated audit → spawn sponsor-auditor subagent
 
 # Text-motion + asset reels: render, then audit the composition + output
+# Copy rails enforced by the audit: hook ≤ 8 words, zero hashtags on screen + captions, no intro openers, one CTA
 cd skills/text-motion-reels && node scripts/audit-reel.mjs --pack <reel-folder> --out reel-audit.md   # automated audit → spawn reel-auditor subagent
 cd skills/video-asset-reels && node scripts/audit-asset-reel.mjs --pack <reel-folder> --out asset-reel-audit.md   # automated audit → spawn asset-reel-auditor subagent
 

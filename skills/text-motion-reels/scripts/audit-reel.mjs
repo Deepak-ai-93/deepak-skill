@@ -4,11 +4,13 @@
 // what a script CAN check: the HTML composition (format slug in the name,
 // paused GSAP timeline registered on window.__timelines.reel, hook in the
 // first scene, data-start/data-duration beat windows, no Math.random, no
-// SMIL <animate>, clamp() fluid type, 1080x1920 stage), the rendered output
-// folder (MP4 + frames + 4K name), and caption.md (500–900 char sections,
-// no hashtags). Writes reel-audit.md with the automated verdicts + an
-// AUDITOR section for the subagent (visual quality, mute-first clarity,
-// motion polish). Exit 1 on any FAIL.
+// SMIL <animate>, clamp() fluid type, 1080x1920 stage), the top-5-creator
+// copy rails (zero hashtags on screen, no intro openers, hook <= 8 words),
+// the rendered output folder (MP4 + frames + 4K name), and caption.md
+// (500-900 char sections, zero hashtags, one CTA). Writes reel-audit.md with
+// the automated verdicts + an AUDITOR section for the subagent (visual
+// quality, mute-first clarity, motion polish, viral potential). Exit 1 on
+// any FAIL.
 //
 // Usage:
 //   node audit-reel.mjs --pack <reel-folder> [--out reel-audit.md]
@@ -91,6 +93,24 @@ if (!html) {
   else add("PASS", "determinism (no Math.random)", "no Math.random()");
   if (/<animate|<animateTransform|<animateMotion/.test(html)) add("FAIL", "determinism (no SMIL)", "<animate> SMIL tags found — GSAP only");
   else add("PASS", "determinism (no SMIL)", "no SMIL <animate> tags");
+
+  // ─── top-5-creator copy rails (visible on-screen text only) ───────────────
+  // Strip style/script/svg + tags so CSS hex colors (#000), ids (#shape1) and
+  // markup never false-positive — only what the viewer actually reads counts.
+  const visible = html
+    .replace(/<style[\s\S]*?<\/style>/gi, " ")
+    .replace(/<script[\s\S]*?<\/script>/gi, " ")
+    .replace(/<svg[\s\S]*?<\/svg>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&[a-z0-9#]+;/gi, " ");
+  const screenHashtags = (visible.match(/#[a-z0-9_]+/gi) || []).length;
+  if (screenHashtags) add("FAIL", "zero hashtags on screen", `${screenHashtags} hashtag(s) in on-screen text — top-creator rail is zero`);
+  else add("PASS", "zero hashtags on screen", "no hashtags in on-screen text");
+  if (/\b(hey guys|welcome back|in this video|today we|so in this)\b/i.test(visible)) {
+    add("FAIL", "no intro openers", "intro opener found (hey guys / welcome back / in this video / today we) — open the loop, don't announce it");
+  } else {
+    add("PASS", "no intro openers", "no intro openers — the hook opens the loop");
+  }
   const beats = (html.match(/data-start=/g) || []).length;
   if (beats) add("PASS", "beat windows", `${beats} data-start beat window(s)`);
   else add("WARN", "beat windows", "no data-start beat windows found");
@@ -102,7 +122,11 @@ if (!html) {
   if (hookScene) add("PASS", "hook scene at 0s", "opening scene starts at 0s");
   else add("WARN", "hook scene at 0s", "no scene starting at data-start=0");
   const words = [...html.matchAll(/data-start="0"[^>]*>([\s\S]*?)<\/div>/g)];
-  auditSections.push(`hook scene word count: ${(words[0] ? words[0][1].replace(/<[^>]+>/g, "").trim().split(/\s+/).length : "n/a")}`);
+  const hookWords = words[0] ? words[0][1].replace(/<[^>]+>/g, "").replace(/&[a-z0-9#]+;/gi, " ").trim().split(/\s+/).filter(Boolean) : null;
+  auditSections.push(`hook scene word count: ${hookWords ? hookWords.length : "n/a"}`);
+  if (hookWords === null) add("WARN", "hook ≤ 8 words", "no hook scene text to measure");
+  else if (hookWords.length > 8) add("FAIL", "hook ≤ 8 words", `${hookWords.length} words — top-creator rail is ≤ 8 (split the hook)`);
+  else add("PASS", "hook ≤ 8 words", `${hookWords.length} words — top-creator rail holds`);
 }
 
 // ─── rendered output folder ─────────────────────────────────────────────────
@@ -142,6 +166,9 @@ if (existsSync(outDir)) {
     else add("WARN", "caption sections", `${sections} section(s) — expected 5+ platforms`);
     if (hashtags) add("FAIL", "caption hashtags", `${hashtags} hashtag(s) — the contract is zero`);
     else add("PASS", "caption hashtags", "zero hashtags");
+    const cta = /(save this|save it|share|comment|follow|part 2|bookmark)/i.test(captionText);
+    if (cta) add("PASS", "caption CTA", "one CTA present (save / share / comment / follow / part 2)");
+    else add("WARN", "caption CTA", "no save/share/comment/follow/part 2 CTA found — every caption needs exactly one");
   } else {
     add("WARN", "caption.md", "no caption.md in output/");
   }
@@ -173,7 +200,7 @@ if (auditSections.length) {
 }
 L.push("## 2. Auditor section — COMPLETE THIS (subagent, fresh eyes)");
 L.push("");
-L.push("### 2.1 Reel-worthiness scorecard (rate 1–5 each, /50 — a reel worth posting scores ≥ 35)");
+L.push("### 2.1 Reel-worthiness scorecard (rate 1–5 each, /55 — a reel worth posting scores ≥ 38)");
 L.push("");
 L.push("| Criterion | Ask | Score /5 |");
 L.push("|---|---|---|");
@@ -186,17 +213,20 @@ L.push("| **Format fidelity** | Does it follow ONLY the chosen format's spec (pa
 L.push("| **Voiceover sync** | Does the voice land on the exact beat windows (FITS ✓, no drift)? | |");
 L.push("| **Retention pacing** | Visual change every 1–2s, progress bar present, loop ending? | |");
 L.push("| **Caption pack** | 500–900 chars per platform, no hashtags, hook-first, one CTA? | |");
-L.push("| **Determinism** | Two identical renders identical (hyperframes check passes)? | |");
+L.push("| **Top-creator copy discipline** | Hook ≤ 8 words with a curiosity gap, one claim per beat, no intro openers, zero hashtags, loop ending — all five rails (determinism is machine-checked in §1)? | |");
+L.push("| **Viral potential** | Would a random scroller stop AND watch to the end — is this built to chase millions of views (rewatch mechanics, save bait, shareable line)? | |");
 L.push("");
 L.push("### 2.2 Creative judgment calls");
 L.push("");
 L.push("- Any text that would overflow or clip at phone size?");
 L.push("- Any animation that fights the message instead of supporting it?");
 L.push("- Any beat where the voice and text drift apart?");
+L.push("- Would this hook stop a random scroller cold — would you bet it can reach millions of views?");
+L.push("- Is the CTA strong enough to convert a viewer mid-scroll (save / share / follow for part 2)?");
 L.push("");
 L.push("### 2.3 Verdict");
 L.push("");
-L.push("- All PASS and scorecard ≥ 35 → mark **PASS** and sign below.");
+L.push("- All PASS and scorecard ≥ 38 → mark **PASS** and sign below.");
 L.push("- Any FAIL (or a WARN you judge real) → mark **FIX NEEDED** and list concrete fixes per file.");
 L.push("");
 L.push(`> Auditor verdict: **PENDING** · Auditor: _(subagent)_ · Date: ${new Date().toISOString().slice(0, 10)}`);

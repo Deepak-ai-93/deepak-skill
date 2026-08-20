@@ -1,6 +1,6 @@
 ---
 name: text-motion-reels
-description: Create premium, high-retention text-only motion graphic reels (kinetic typography) as HyperFrames HTML compositions. Upgraded with elegant minimalist layouts, low-opacity animated geometric shapes, fine framing lines, and ambient dynamic backgrounds.
+description: Create premium, viral-engineered text-only motion graphic reels (kinetic typography) as HyperFrames HTML compositions. Copy follows the top-5-creator playbook (Hormozi / MrBeast / Bartlett / Gadzhi / Jenny Hoyos rails) — hook ≤ 8 words, zero hashtags on screen AND in captions, one CTA, loop ending for rewatch. Upgraded with elegant minimalist layouts, low-opacity animated geometric shapes, fine framing lines, and ambient dynamic backgrounds.
 ---
 
 <!-- ════════════════════════════════════════════════════════════════════════
@@ -22,7 +22,33 @@ description: Create premium, high-retention text-only motion graphic reels (kine
 # skill: text-only-motion-reels
 
 **Name:** Text-Only Motion Graphic Reels (Kinetic Typography) — Premium Edition
-**Description:** Use this skill to plan, write, and render highly advanced, premium faceless text-only motion graphic reels for Instagram Reels, TikTok, and YouTube Shorts. Compositions are structured as fully responsive, clean, and deterministic HTML compositions (HyperFrames-compatible). Avoids "messy" chaotic styles by prioritizing high-end minimalism, fine framing lines (with low opacity), floating geometric shapes, and cinematic typography.
+**Description:** Use this skill to plan, write, and render highly advanced, premium faceless text-only motion graphic reels for Instagram Reels, TikTok, and YouTube Shorts. Compositions are structured as fully responsive, clean, and deterministic HTML compositions (HyperFrames-compatible). Avoids "messy" chaotic styles by prioritizing high-end minimalism, fine framing lines (with low opacity), floating geometric shapes, and cinematic typography. **Every reel is copy-first, engineered like a top-5 creator reel: viral hook in 3 seconds, ≤ 8 words per beat, zero hashtags (on screen or in captions), one CTA, loop ending — built to chase millions of views, not decorate.**
+
+---
+
+## The top-5-creator playbook (copy rails — read before writing ANY beat)
+
+Text reels live or die on their copy. Before any composition is written, the reel's script must pass the copy rails of the five creators who own the format. These rails are enforced by `audit-reel.mjs` (exit 1 on FAIL) — they are not suggestions.
+
+### The five creators and their rails
+
+| Creator | Signature | Copy rails they enforce |
+|---|---|---|
+| **Alex Hormozi** (word-pop king) | Brutal one-line truths, direct address, zero fluff | Hook ≤ 8 words; every beat ≤ 8 words; first-person stakes or direct "you"; one claim per beat; no filler words ("very", "really", "actually", "basically") |
+| **MrBeast** (pattern interrupt + anticipation) | A promise of a payoff, escalation every beat | Hook promises a specific payoff ("…and the result shocked me"); every beat RAISES the stakes (numbers, stakes, "and then…"); the payoff lands in the final 2 seconds |
+| **Steven Bartlett** (authority + receipts) | "Diary of a CEO" energy: researched, evidence-backed | Every claim gets a receipt (a number, a study, a stat); numbers formatted specifically ("87%", "3 weeks", "$15,400"); no vague claims ("a lot", "many people") |
+| **Iman Gadzhi** (high-energy business text) | Fast, loud, contrarian, conviction | Contrarian frame ("everything you were taught is backwards"); strong verbs; caps + punctuation ONLY where a real punch lands (max 2 per reel); direct CTA |
+| **Jenny Hoyos** (watch-twice mechanics) | Quiz / psychology retention | The reel must be worth a SECOND watch (countdown, hidden detail, re-check answer); end frame re-asks the question or mirrors frame 1 |
+
+### The hard copy rails (all five, always)
+
+1. **Hook ≤ 8 words, in frame 1, ≤ 3 seconds.** Curiosity gap, contrarian claim, specific number, or direct question. NO intros — "hey guys", "welcome back", "today we", "in this video" are FAIL.
+2. **One beat = one claim = ≤ 8 words.** If a beat needs more words, split the beat. One-glance readability is the retention engine.
+3. **Zero hashtags — on screen AND in captions.** A single `#` anywhere fails the audit (the algorithm scatters the audience; top creators never hashtag).
+4. **One CTA per reel, in the final 2 seconds** — save / share / comment / follow for part 2. Never "like and subscribe".
+5. **Loop ending** — the last frame mirrors frame 1 (rewatch = second view) or chains "Part 2 →".
+6. **Every beat passes the fluff rule** — it raises the question, raises the stakes, or pays off. Deletable = delete.
+7. **Specific > vague.** Numbers, names, durations, results. "Your brain does this every time you scroll" beats "your brain works in interesting ways".
 
 ---
 
@@ -74,7 +100,7 @@ The wizard picks the *format*; first you must pick the *angle*. Research what is
 1. **Trend signals** — if `video-product-pipeline` is installed, run `node scripts/trend-hunt.mjs --niche "{topic}" --subreddits "{r1},{r2}" --geo US` (Reddit top-of-day + Google Trends, no API key); web-research TikTok Creative Center, X, YouTube Trending, niche subreddits. **Freshness rule:** rising > peaked — nothing older than ~14 days.
 2. **Brainstorm ≥5 angles** — hook-formula remix (curiosity / contrarian / results / list / PAS applied to the trend), audience lens (beginner / skeptic / expert), pain-first (the most repeated pain in the signals).
 3. **Score with the viral scorecard (1–5 each, /35):** Relatability · Curiosity gap · Hook strength · Format fit · Trend momentum · Mute-first clarity · Loopability. Winner = highest score (tie → curiosity gap).
-4. **Lock the winner** — the winning hook drives the format selection and the beat sheet. Then run the wizard below.
+4. **Lock the winner** — the winning hook drives the format selection and the beat sheet. The winning hook MUST already pass the top-5-creator copy rails (≤ 8 words, curiosity gap, no intro opener, no hashtags). Then run the wizard below.
 
 ## Step 1 — Run the Format Wizard (always do this first)
 
@@ -113,6 +139,7 @@ Never start coding a composition without first running the **format selection wi
 4. Build the composition using ONLY the chosen format's spec below (typography, palette, motion, effects). Do not mix format styles.
 5. Default duration is 15s unless the user says otherwise. Beat count = seconds ÷ 2.
 6. **Voiceover is always-on.** Every reel gets a Kokoro voiceover synced beat-for-beat to the text (see Always-on voiceover).
+7. **Copy rails are enforced before code:** the hook must be ≤ 8 words with a curiosity gap (no "hey guys" / "welcome back" / "in this video"), every beat ≤ 8 words, one claim per beat, zero hashtags in on-screen text, one CTA in the final 2 seconds, loop ending (see The top-5-creator playbook).
 
 ### Single-command agent template (wizard + build + render in one shot)
 
@@ -121,11 +148,14 @@ Act as a text-motion reel engineer using the text-motion-reels skill.
 1. Run the format wizard: ask the user to pick format 1-11 (Word Pop / Highlighter /
    3D Editorial / Card Listicle / Chat Thriller / SVG Ambient / Micro-Fiction / Quiz Trap /
    Day Counter / Notification Drop / Thread Court) and gather topic, hook, duration, audio.
-2. Build the 1080x1920 HTML composition strictly per the chosen format's spec.
-3. Register the paused GSAP timeline on window.__timelines.reel.
-4. Generate the voiceover and sync every line to its text beat (see Always-on voiceover).
-5. Render at vertical 4K into the proper folder output/{format-slug}_{topic-slug}_4k/ (see Rendering to 4K section).
-6. Write caption.md into the output folder (see Caption pack section).
+2. Validate the copy against the top-5-creator playbook rails FIRST (hook ≤ 8 words,
+   curiosity gap, ≤ 8 words per beat, zero hashtags, one CTA, loop ending) — fix the
+   script before writing any HTML if a rail fails.
+3. Build the 1080x1920 HTML composition strictly per the chosen format's spec.
+4. Register the paused GSAP timeline on window.__timelines.reel.
+5. Generate the voiceover and sync every line to its text beat (see Always-on voiceover).
+6. Render at vertical 4K into the proper folder output/{format-slug}_{topic-slug}_4k/ (see Rendering to 4K section).
+7. Write caption.md into the output folder (see Caption pack section).
 ```
 
 ---
@@ -418,7 +448,7 @@ Native SVG `<animate>` tags cannot be scrubbed by the paused GSAP timeline (`tl.
 
 ## Production workflow (HyperFrames loop)
 
-1. **Plan** — pick niche + hook + beat count. Estimate length (sweet spot 15–45s).
+1. **Plan** — pick niche + hook + beat count. Estimate length (sweet spot 15–45s). Validate the script against the top-5-creator copy rails BEFORE anything else (hook ≤ 8 words, no hashtags, one CTA, loop ending).
 2. **Write HTML** — one composition per scene. Vertical 1080x1920 stage.
 3. **Wire seekable animation** — GSAP timeline registered on `window.__timelines` (paused by default).
 4. **Add voiceover (always-on)** — one Kokoro voice line per text beat, auto-fit into its `data-start`/`data-duration` window (see Always-on voiceover).
@@ -426,7 +456,7 @@ Native SVG `<animate>` tags cannot be scrubbed by the paused GSAP timeline (`tl.
 6. **Preview** — live-reload browser preview.
 7. **Render** — deterministic vertical 4K MP4 (2160x3840) via headless Chrome + FFmpeg into the proper output folder (see below).
 8. **Caption pack** — write `caption.md` into the output folder (see Caption pack section).
-9. **Audit harness** — run `node scripts/audit-reel.mjs --pack <reel-folder> --out reel-audit.md` (automated: format slug, GSAP timeline, determinism, beat windows, MP4 + frames, caption), then spawn a FRESH **reel-auditor subagent** with `templates/reel-auditor-brief.md` (reel-worthiness scorecard /50, ≥ 35 = worth posting, signs **PASS / FIX NEEDED**). Fix loop until PASS — `reel-audit.md` ships with the folder.
+9. **Audit harness** — run `node scripts/audit-reel.mjs --pack <reel-folder> --out reel-audit.md` (automated: format slug, GSAP timeline, determinism, beat windows, **copy rails — zero hashtags on screen & in captions, no intro openers, hook ≤ 8 words, one CTA**, MP4 + frames), then spawn a FRESH **reel-auditor subagent** with `templates/reel-auditor-brief.md` (reel-worthiness scorecard /50, ≥ 35 = worth posting, signs **PASS / FIX NEEDED**). Fix loop until PASS — `reel-audit.md` ships with the folder.
 
 ## Always-on voiceover (text ↔ voice sync contract)
 
@@ -501,10 +531,11 @@ After rendering, write a **`caption.md`** into the output folder (same folder as
 ### Caption rules (apply to every platform)
 
 1. **Hook-first:** the first sentence stops the scroll (question, bold claim, or result) — the caption mirrors the video's hook.
-2. **High CTR / high engagement:** specific numbers, curiosity, one clear CTA ("Save this", "Comment your #", "Follow for part 2"). No hashtags, no tag-spam, max 2 emojis.
+2. **High CTR / high engagement:** specific numbers, curiosity, one clear CTA ("Save this", "Comment your #", "Follow for part 2"). **Zero hashtags — a single `#` fails the audit (top-creator rail, enforced by `audit-reel.mjs`).** Max 2 emojis.
 3. **E-E-A-T tone:** authoritative, honest, specific — no hype lies, no fake screenshots. Back claims ("I tested this for 90 days").
 4. **Proper format:** short punchy lines, blank line between hook / value / CTA.
 5. **Character-compatible:** every platform caption targets **500–900 characters (aim ~700)** — see Character window below. No control characters; smart quotes and em-dashes are safe everywhere.
+6. **Top-creator rails apply to captions too:** hook sentence ≤ 8 words, one claim per line, one CTA in the last line, loop-promise ("Part 2 next week" / "Save this for later").
 
 ### Character window (ALL platforms)
 
@@ -846,6 +877,11 @@ Count every section before finalizing (`wc -m`). Each section MUST land in the *
 
 ## Production checklist
 
+- [ ] Script passes the top-5-creator copy rails: hook ≤ 8 words with a curiosity gap, one claim per beat (≤ 8 words), no filler words
+- [ ] Zero hashtags on screen AND in caption.md (a single `#` fails the audit)
+- [ ] No intro openers ("hey guys" / "welcome back" / "in this video" / "today we") in any beat
+- [ ] One CTA only, in the final 2 seconds (save / share / comment / follow for part 2)
+- [ ] Loop ending: last frame mirrors frame 1 or chains "Part 2 →" (rewatch = second view)
 - [ ] Video has a clean, premium visual aesthetic (no messy, overlapping or flashing text)
 - [ ] Framing lines are integrated with low opacity (0.05 to 0.15) to structure the scene
 - [ ] Dynamic geometric shapes or blobs exist in the background with low opacity (0.04 to 0.10)

@@ -5,7 +5,7 @@ Copy-paste any prompt below into your agent (Claude Code, Cursor, Codex, Gemini 
 Two rules that make these prompts work:
 
 1. **Sloppy prompts still work.** The skill asks ≤3 clarifying questions, fills defaults (15s, Kokoro voice, style by niche), and rewrites weak copy into a hook — then shows you the `video-product.md` spec before rendering anything.
-2. **The more you specify, the better the reel.** Niche + audience + duration + style + hook direction beats a one-liner every time.
+2. **The more you specify, the better the reel.** Niche + audience + duration + style + hook direction beats a one-liner every time. Copy is enforced by the **top-5-creator playbook** (hook ≤ 8 words, one claim per beat, zero hashtags on screen and in captions, one CTA, loop ending) — `audit-reel.mjs` fails a reel that uses a single `#` or opens with "hey guys".
 
 ---
 
@@ -63,7 +63,7 @@ Two rules that make these prompts work:
 | "dev reel" | sloppy |
 | "Chat-thriller 15s from my screenshots: 'the moment production broke at 2am' — dev humor, bold captions, typing suspense, cliffhanger ending." | premium |
 | "Notification-drop 15s: '[New message] deploy on Friday?' — phone banners dropping with witty takes, punchline shake, relatable dev pain." | premium |
-| "3 CSS habits that instantly make you look senior — card-listicle, 15s, hook: '#3 feels illegal.' Save-bait final frame." | premium |
+| "3 CSS habits that instantly make you look senior — card-listicle, 15s, hook: 'Rule 3 feels illegal.' Save-bait final frame." | premium |
 
 **Idea sparks:** "deploy on Friday? watch this" · "junior vs senior code review" (chat-thriller) · "your portfolio is bad and here's why" (contrarian) · "the 10x dev myth" · aesthetic "code is art" (svg-ambient).
 

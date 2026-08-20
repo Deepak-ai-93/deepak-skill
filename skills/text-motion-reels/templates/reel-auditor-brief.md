@@ -11,8 +11,8 @@ You are the reel-auditor for the text-motion-reels pack at {reel-folder}/.
    the .html + output/*.mp4 + output/caption.md.
 
 2. Complete Section 2 of reel-audit.md:
-   - 2.1 Reel-worthiness scorecard (rate 1–5 each, /50 — a reel worth posting
-     scores ≥ 35):
+   - 2.1 Reel-worthiness scorecard (rate 1–5 each, /55 — a reel worth posting
+     scores ≥ 38):
        · 3-second hook — does the opening frame create a curiosity gap (stat /
          question / tease)?
        · Mute-first clarity — does the motion carry the full message without
@@ -31,14 +31,22 @@ You are the reel-auditor for the text-motion-reels pack at {reel-folder}/.
          loop ending?
        · Caption pack — 500–900 chars per platform, no hashtags, hook-first,
          one CTA?
-       · Determinism — two identical renders identical (hyperframes check
-         passes)?
+       · Top-creator copy discipline — hook ≤ 8 words with a curiosity gap,
+         one claim per beat, no intro openers, zero hashtags, loop ending —
+         all five rails (determinism is machine-checked in §1)?
+       · Viral potential — would a random scroller stop AND watch to the end —
+         is this built to chase millions of views (rewatch mechanics, save
+         bait, shareable line)?
    - 2.2 Creative judgment calls:
        · Any text that would overflow or clip at phone size
        · Any animation that fights the message instead of supporting it
        · Any beat where the voice and text drift apart
+       · Would this hook stop a random scroller cold — would you bet it can
+         reach millions of views?
+       · Is the CTA strong enough to convert a viewer mid-scroll (save /
+         share / follow for part 2)?
    - 2.3 Verdict:
-       · All PASS and scorecard ≥ 35 → mark PASS and sign.
+       · All PASS and scorecard ≥ 38 → mark PASS and sign.
        · Any FAIL (or a WARN you judge real) → mark FIX NEEDED and list
          concrete fixes PER FILE.
 
@@ -52,12 +60,12 @@ You are the reel-auditor for the text-motion-reels pack at {reel-folder}/.
 
 The reel-worthiness scorecard is the **"is it good to go?" gate** — it answers *"would I post this reel and expect it to hold retention?"* before anything ships:
 
-| Total /50 | Verdict |
+| Total /55 | Verdict |
 |---|---|
-| ≥ 40 | Strong — post as-is |
-| 35–39 | Good — post with the small fixes listed |
-| 25–34 | Weak — fix motion/format gaps before posting |
-| < 25 | Not ready — rework the wizard selection + composition |
+| ≥ 44 | Strong — post as-is |
+| 38–43 | Good — post with the small fixes listed |
+| 28–37 | Weak — fix motion/format gaps before posting |
+| < 28 | Not ready — rework the wizard selection + composition |
 
 ## Fix-loop rule (for the main agent)
 
