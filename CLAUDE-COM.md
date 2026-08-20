@@ -50,7 +50,7 @@ Every skill ships a `SKILL.md` — the instruction file the agent follows. Pick 
 | **video-asset-reels** | Reels from your clips | Storyboard + beat plan + cut commands + captions (no cutting) |
 | **voice-sfx-audio** | Voiceovers + SFX | Voice/SFX/music recommendations + licensing + mixing commands (no audio files) |
 | **paid-ads-studio** | Meta + Google ads | Ads wizard (3 questions) + forecast + Veo/image ad prompts + char-safe copy + campaign blueprint + checklists |
-| **vibe-code-webapp** | Web apps | Idea interview + expert research + SaaS validator (`validation.md`) + `PRD.md` + design source (Figma/Stitch) + AI rails + sitemap + TODO + build instructions for Lovable/Bolt/v0 or any CLI |
+| **vibe-code-webapp** | Web apps | Cross-project taste (`creator-portfolio.md`) + idea interview + expert research + SaaS validator (`validation.md`) + build pack from ONE JSON (`pack-builder.mjs` → `PRD.md` + design source (Figma/Stitch) + AI rails + sitemap + TODO) + stage tracker (`progress.mjs`) + scripted deploy (`deploy-setup.mjs`) + packaged handoff (`package-deliverable.mjs`) |
 | **skill-builder** | Scaffold new skills | The complete new-skill file set as copyable markdown (installing it still needs a CLI) |
 
 ### Step 3 — Get the SKILL.md contents

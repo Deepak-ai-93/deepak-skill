@@ -87,9 +87,15 @@ cd skills/x-threads-engagement && node scripts/audit-threads.mjs --pack <thread-
 cd skills/newsletter-growth && node scripts/issue-writer.mjs --plan issue-plan.json --out issue.md
 cd skills/newsletter-growth && node scripts/audit-newsletter.mjs --pack <newsletter-folder> --out newsletter-audit.md   # automated audit → spawn newsletter-auditor subagent
 
-# Vibe-coded web apps (vibe-code-webapp): idea interview → scan existing → research → SaaS validation → build pack + TODO gate → build → audit → deploy
+# Vibe-coded web apps (vibe-code-webapp): interview → scan existing → research → SaaS validation → scripted build pack + TODO gate → build → audit → scripted deploy → packaged handoff
 cd skills/vibe-code-webapp && node scripts/scan-project.mjs --dir . --name my-app          # existing-project mode: structure scan → project-scan.md
 cd skills/vibe-code-webapp && node scripts/saas-score.mjs --scores 5 4 4 5 5 3 4 --out validation.md   # BUILD / ITERATE / PIVOT verdict
+cd skills/vibe-code-webapp && node scripts/pack-builder.mjs --plan pack-plan.json --check-only         # validate the ONE pack JSON (exit 1 = incomplete)
+cd skills/vibe-code-webapp && node scripts/pack-builder.mjs --plan pack-plan.json                      # assemble PRD + blueprint + sitemap + TODO
+cd skills/vibe-code-webapp && node scripts/pack-builder.mjs --plan ideas.json --batch                   # N ideas → output/packs/<app>/ in one run
+cd skills/vibe-code-webapp && node scripts/progress.mjs log --stage 4 --status doing --note "invoice form"   # stage tracker → output/progress.md
+cd skills/vibe-code-webapp && node scripts/deploy-setup.mjs --host vercel --name my-app --domain app.com --vars DATABASE_URL,AUTH_SECRET   # real host config + CI + filled runbook
+cd skills/vibe-code-webapp && node scripts/package-deliverable.mjs --zip       # HANDOFF.md + manifest.json + one ZIP → output/handoff/
 cd skills/vibe-code-webapp && node scripts/audit-webapp.mjs --dir . --name my-app --payments   # production audit (project-local report) → spawn auditor subagent
 
 # Viral video pipeline (video-product-pipeline): trend hunt → analyze ANY prompt → video-product.md spec → approval gate → generate → audit

@@ -22,7 +22,7 @@ _Completed tasks move here (status `[x]`) — `node scripts/todo.mjs done <id>`.
 ## Task line format (one task per line, agent- and human-readable)
 
 ```
-- [ ] (P1) #3 Create the invoice form — ref: PRD-4
+- [ ] (P1) #N Example task — ref: PRD-4
 ```
 
 - **Status:** `[ ]` todo · `[~]` doing · `[!]` blocked · `[x]` done

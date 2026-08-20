@@ -1,0 +1,375 @@
+{
+  "app": {
+    "name": "InvoiceFlow",
+    "one_liner": "Invoices freelancers actually get paid on",
+    "audience": "freelance designers & devs, 20-35",
+    "platform": "web app (responsive)",
+    "mode": "new",
+    "monetized": true,
+    "pricing": "Free tier (3 invoices/mo) → $12/mo unlimited",
+    "idea_verbatim": "I want to build something like Invoice Ninja but way simpler for freelancers.",
+    "stack_preference": "Next.js + Supabase",
+    "scope": "InvoiceFlow MVP — new Next.js app",
+    "validation": {
+      "scores": [5, 4, 4, 5, 5, 3, 4],
+      "total": 30,
+      "verdict": "BUILD",
+      "guardrail": "If fewer than 10 paying users by day 45 → iterate (usage-based pricing) or kill.",
+      "risks": [
+        "Stripe payout delays — watch chargeback rate in month 1",
+        "Freelancers churn if invoicing is not weekly-habit — activation metric on first invoice",
+        "Invoice Ninja / FreshBooks coverage — wedge is simplicity + 48h-payment framing"
+      ],
+      "economics": {
+        "price": "$12/mo",
+        "variable_cost": "$2.2/mo (DB + email + Stripe fees)",
+        "margin": "82%",
+        "cac": "$40 (content + community)",
+        "payback": "6 mo",
+        "ltv": "$108 (48 mo × 18% churn)"
+      },
+      "moves": [
+        { "move": "5 interviews with freelancer communities", "status": "", "result": "" },
+        { "move": "Landing + waitlist", "status": "", "result": "" },
+        { "move": "Fake-door pricing page", "status": "", "result": "" }
+      ]
+    },
+    "problem": {
+      "statement": "Freelancers send invoices in Word/PDF and chase payments by email for weeks.",
+      "proof": "Reddit r/freelance + r/webdev threads on late payments (2026); competitor reviews complain about setup complexity.",
+      "workaround": "Google Docs templates + email reminders by hand; accountants' spreadsheets.",
+      "jtbd": "When I invoice a client, I want payment in 48h so I don't chase emails."
+    },
+    "personas": [
+      {
+        "name": "The Solo Operator",
+        "who": "freelance designer/dev, 2-5 active clients",
+        "pain": "chasing payments, 3 reminders per invoice",
+        "success": "gets paid without a reminder"
+      }
+    ],
+    "mvp": {
+      "must": [
+        "Signup/login with email (Auth.js credentials)",
+        "Create + send an invoice with a client-pay link",
+        "Stripe Checkout on the pay link (one-time payment)",
+        "Webhook updates invoice status → paid",
+        "Dashboard with invoice list + payment status"
+      ],
+      "should": [
+        "PDF export",
+        "Payment-reminder email after 7 days",
+        "Free tier limit (3 invoices/mo)"
+      ],
+      "wont": [
+        "Mobile apps",
+        "Multi-currency",
+        "Accounting integrations",
+        "Recurring subscriptions in MVP"
+      ]
+    },
+    "flows": [
+      "Signup → dashboard (empty state: create first invoice) → new invoice → client pays via link → status paid",
+      "Client opens pay link → sees invoice → pays with card → both get confirmation"
+    ],
+    "data_model": {
+      "sql": "users        (id uuid pk, email text unique, password_hash text, name text, created_at)\nsubscriptions(id uuid pk, user_id fk, stripe_customer_id, stripe_sub_id, status enum, current_period_end, created_at)\ninvoices     (id uuid pk, user_id fk, client_email, client_name, amount_cents, currency, status enum, stripe_session_id, created_at)\npayments     (id uuid pk, invoice_id fk, provider_ref, amount_cents, created_at)"
+    },
+    "auth": [
+      "email + password via Auth.js v5 (credentials provider); Google OAuth later (P2)",
+      "middleware guards /dashboard/:path* and /api/:path* → redirect /login",
+      "ownership: every query filters by eq(userId, session.user.id)"
+    ],
+    "payments": [
+      "Stripe Checkout Session (mode: payment) per invoice; metadata { userId, invoiceId }",
+      "webhook api/stripe/webhook verifies STRIPE_WEBHOOK_SECRET; checkout.session.completed → mark invoice paid + insert payment",
+      "local test via stripe listen --forward-to localhost:3000/api/stripe/webhook"
+    ],
+    "kpis": {
+      "metric": "Activated users (sent first invoice) + paid invoices + free→paid conversion",
+      "tools": "PostHog + Stripe dashboard",
+      "guardrail": "If < 40 activated users after 4 weeks, iterate the onboarding"
+    },
+    "risks": [
+      "Stripe payout delays",
+      "Chargebacks on first paid invoices",
+      "Should invoices expire? (open question)"
+    ],
+    "decisions": [
+      "User said 'way simpler' → scoped to one-time invoices; subscriptions explicitly out of MVP",
+      "Defaulted to Vercel + Neon over Supabase for zero-config hosting",
+      "Free tier cap (3/mo) kept to create the upgrade path"
+    ],
+    "ai": {
+      "features": [
+        {
+          "feature": "Invoice summary copilot",
+          "value": "Writes a short client-friendly payment reminder from the invoice",
+          "model": "cheap (gpt-4o-mini)",
+          "streaming": false,
+          "cost_rail": "maxTokens 200/request; 20 requests/user/day",
+          "evals": "5 golden reminders; no invoice numbers in output"
+        }
+      ],
+      "non_ai_fallback": "Template reminder text — always rendered even if the AI call fails",
+      "kill_guardrail": "If cost/user exceeds $0.15/mo or error rate > 5% → route to template-only mode"
+    },
+    "design": {
+      "source": "pack",
+      "link": "",
+      "accent_hsl": "243 75% 59%",
+      "notes": "Neutral shadcn tokens, indigo accent, Geist fonts; editorial calm — one CTA per screen"
+    },
+    "stack": {
+      "framework": "Next.js 15 App Router + TypeScript",
+      "ui": "Tailwind v4 + shadcn/ui + Radix + Lucide",
+      "fonts": "Geist Sans + Geist Mono",
+      "data": "Postgres + Drizzle ORM (Neon)",
+      "auth": "Auth.js v5 (credentials + Google)",
+      "payments": "Stripe Checkout + webhooks",
+      "hosting": "Vercel",
+      "analytics": "PostHog",
+      "notes": "npm create next-app@latest -- --typescript --tailwind --app --src-dir"
+    },
+    "deploy": {
+      "host": "Vercel",
+      "domain": "invoiceflow.app"
+    },
+    "routes": [
+      { "route": "/", "purpose": "Landing — hook, features, pricing preview, CTA", "group": "Public", "auth": "none", "status": "🆕" },
+      { "route": "/pricing", "purpose": "Pricing plans + FAQ", "group": "Public", "auth": "none", "status": "🆕" },
+      { "route": "/login", "purpose": "Sign in — email", "group": "Auth", "auth": "guest", "status": "🆕" },
+      { "route": "/signup", "purpose": "Create account", "group": "Auth", "auth": "guest", "status": "🆕" },
+      { "route": "/dashboard", "purpose": "App home — invoice list, status stats, quick actions", "group": "App", "auth": "required", "status": "🆕" },
+      { "route": "/invoices/new", "purpose": "Create invoice form", "group": "App", "auth": "required", "status": "🆕" },
+      { "route": "/invoices/:id", "purpose": "Invoice detail + pay-link share", "group": "App", "auth": "required", "status": "🆕" },
+      { "route": "/settings", "purpose": "Profile + company details", "group": "App", "auth": "required", "status": "🆕" },
+      { "route": "/p/:token", "purpose": "Public client pay page (no login)", "group": "Public", "auth": "none", "status": "🆕" },
+      { "route": "/api/health", "purpose": "Health check", "group": "API", "auth": "none", "status": "🆕" },
+      { "route": "/api/stripe/webhook", "purpose": "Stripe payment events", "group": "API", "auth": "signature", "status": "🆕" }
+    ],
+    "pages": [
+      {
+        "route": "/",
+        "name": "Landing",
+        "purpose": "Hook-first pitch: get paid in 48h, not 6 weeks",
+        "layout": "marketing shell — navbar, hero, feature cards, pricing preview, FAQ accordion, footer",
+        "auth": "public",
+        "components": "navbar, hero, card, pricing table, accordion, footer",
+        "data": "static",
+        "actions": "CTA → /signup",
+        "states": "none (static)",
+        "navigation": "→ /signup, /pricing"
+      },
+      {
+        "route": "/pricing",
+        "name": "Pricing",
+        "purpose": "Free vs Pro plan, one CTA",
+        "layout": "marketing shell",
+        "auth": "public",
+        "components": "pricing table, badge, FAQ accordion",
+        "data": "static",
+        "actions": "CTA → /signup",
+        "states": "none",
+        "navigation": "→ /signup"
+      },
+      {
+        "route": "/login",
+        "name": "Sign in",
+        "purpose": "Email login",
+        "layout": "centered auth card max-w-md",
+        "auth": "guest",
+        "components": "card, input, label, button, separator",
+        "data": "session",
+        "actions": "signIn credentials",
+        "states": "loading, error alert",
+        "navigation": "→ /dashboard"
+      },
+      {
+        "route": "/signup",
+        "name": "Sign up",
+        "purpose": "Create account",
+        "layout": "centered auth card max-w-md",
+        "auth": "guest",
+        "components": "card, input, label, button",
+        "data": "session",
+        "actions": "createUser + signIn",
+        "states": "loading, error alert",
+        "navigation": "→ /dashboard"
+      },
+      {
+        "route": "/dashboard",
+        "name": "Dashboard",
+        "purpose": "Invoice list + paid/draft/unpaid stats + quick actions",
+        "layout": "app shell — sidebar, header, content",
+        "auth": "logged-in",
+        "components": "sidebar, stat cards, data table, badge, dialog, sonner, button",
+        "data": "listInvoices (server component, ownership-filtered)",
+        "actions": "createInvoice, sendInvoice",
+        "states": "loading skeleton, empty state (create first invoice), error alert",
+        "navigation": "→ /invoices/new, /invoices/:id, /settings"
+      },
+      {
+        "route": "/invoices/new",
+        "name": "New invoice",
+        "purpose": "Create + optionally send an invoice",
+        "layout": "app shell — centered form",
+        "auth": "logged-in",
+        "components": "form, input, textarea, currency input, button, sonner",
+        "data": "none (write only)",
+        "actions": "createInvoice (zod) → revalidatePath('/dashboard')",
+        "states": "validation errors, saving state",
+        "navigation": "→ /dashboard"
+      },
+      {
+        "route": "/invoices/:id",
+        "name": "Invoice detail",
+        "purpose": "View invoice, copy pay link, see payment status",
+        "layout": "app shell",
+        "auth": "owner-only",
+        "components": "card, badge, button (copy link), timeline",
+        "data": "getInvoice (ownership check)",
+        "actions": "sendInvoice, copyLink",
+        "states": "loading, not-found, error",
+        "navigation": "→ /dashboard"
+      },
+      {
+        "route": "/settings",
+        "name": "Settings",
+        "purpose": "Profile, company name, email",
+        "layout": "app shell",
+        "auth": "logged-in",
+        "components": "form, input, button, sonner",
+        "data": "getUser",
+        "actions": "updateProfile (zod)",
+        "states": "saving state",
+        "navigation": "→ /dashboard"
+      },
+      {
+        "route": "/p/:token",
+        "name": "Client pay page",
+        "purpose": "Public invoice + pay button — no login",
+        "layout": "public minimal centered card",
+        "auth": "public (token)",
+        "components": "card, invoice lines, button (Stripe Checkout redirect)",
+        "data": "getInvoiceByToken",
+        "actions": "stripe checkout.session.create",
+        "states": "loading, invalid-token state",
+        "navigation": "→ Stripe hosted checkout"
+      },
+      {
+        "route": "/api/health",
+        "name": "Health check",
+        "purpose": "Liveness probe",
+        "layout": "—",
+        "auth": "none",
+        "components": "—",
+        "data": "—",
+        "actions": "GET → { ok: true }",
+        "states": "—",
+        "navigation": "—"
+      },
+      {
+        "route": "/api/stripe/webhook",
+        "name": "Stripe webhook",
+        "purpose": "checkout.session.completed → mark paid",
+        "layout": "—",
+        "auth": "signature",
+        "components": "—",
+        "data": "—",
+        "actions": "verify signature → update invoice + insert payment",
+        "states": "—",
+        "navigation": "—"
+      }
+    ],
+    "backend": {
+      "folder": "src/\n├── app/                    # routes exactly as sitemap §1.2\n│   ├── (marketing)/          # landing, pricing\n│   ├── (auth)/login|signup/\n│   ├── (app)/dashboard|invoices|settings/   # guarded layout group\n│   ├── p/[token]/            # public pay page\n│   ├── api/health/route.ts\n│   ├── api/stripe/webhook/route.ts\n│   └── layout.tsx            # fonts, theme provider, Toaster\n├── components/               # ui/ (shadcn) + feature components\n├── lib/                      # db.ts (drizzle), auth.ts, stripe.ts, utils.ts\n├── db/                       # schema.ts, migrations/\n├── actions/                  # createInvoice, sendInvoice, updateProfile\n└── middleware.ts             # auth guard + rate limit",
+      "endpoints": [
+        { "method": "action", "path": "createInvoice", "purpose": "Create invoice from /invoices/new", "auth": "session", "input": "{clientEmail, clientName, amountCents, currency}" },
+        { "method": "action", "path": "sendInvoice", "purpose": "Mark sent + create pay token", "auth": "session", "input": "{invoiceId}" },
+        { "method": "action", "path": "updateProfile", "purpose": "Update name/company", "auth": "session", "input": "{name, companyName}" },
+        { "method": "GET", "path": "/api/health", "purpose": "Health check", "auth": "none", "input": "—" },
+        { "method": "POST", "path": "/api/stripe/webhook", "purpose": "checkout.session.completed → mark paid", "auth": "Stripe sig", "input": "Stripe event" }
+      ],
+      "auth_flow": [
+        "email + password via lib/auth.ts (Auth.js v5 credentials provider)",
+        "middleware.ts guards /dashboard/:path*, /invoices/:path*, /settings/:path*, /api/:path* → redirect /login",
+        "server reads auth(); client reads useSession(); loading state while hydrating",
+        "ownership: every query filters by session user.id — never trust the client"
+      ],
+      "payments_flow": [
+        "/dashboard sendInvoice → creates Stripe Checkout Session (mode: payment) with metadata { userId, invoiceId }",
+        "webhook api/stripe/webhook verifies with STRIPE_WEBHOOK_SECRET → checkout.session.completed → set invoices.status = paid + insert payments",
+        "/invoices/:id and /dashboard reflect paid",
+        "local test: stripe listen --forward-to localhost:3000/api/stripe/webhook"
+      ],
+      "env_vars": [
+        { "var": "DATABASE_URL", "example": "postgres://…", "source": "Neon" },
+        { "var": "AUTH_SECRET", "example": "openssl rand -base64 32", "source": "Auth.js" },
+        { "var": "STRIPE_SECRET_KEY", "example": "sk_test_…", "source": "Stripe (test mode)" },
+        { "var": "STRIPE_WEBHOOK_SECRET", "example": "whsec_…", "source": "Stripe dashboard → webhooks" },
+        { "var": "NEXT_PUBLIC_APP_URL", "example": "http://localhost:3000", "source": "you (production: https://invoiceflow.app)" },
+        { "var": "NEXT_PUBLIC_POSTHOG_KEY", "example": "phc_…", "source": "PostHog" },
+        { "var": "OPENAI_API_KEY", "example": "sk-…", "source": "OpenAI (AI reminder feature, server-only)" }
+      ]
+    },
+    "workflows": [
+      {
+        "title": "Get paid on an invoice",
+        "steps": [
+          "User signs up → lands on /dashboard (empty state: 'Create your first invoice')",
+          "Clicks New invoice → /invoices/new → fills form → submit createInvoice",
+          "List at /dashboard shows the invoice as draft; user clicks Send → pay link generated",
+          "Client opens /p/:token → sees invoice → pays with card on Stripe",
+          "Webhook marks invoice paid → /invoices/:id shows paid + confirmation",
+          "User sees payment reflected in /dashboard stats"
+        ]
+      },
+      {
+        "title": "Free → Pro upgrade",
+        "steps": [
+          "/dashboard shows a Free plan badge once 3 invoices are used",
+          "CTA to /pricing → Stripe Checkout (subscription) → back with status active",
+          "Invoice cap lifts; reminder emails unlock"
+        ]
+      }
+    ],
+    "system_workflows": [
+      {
+        "title": "Auth (signup → session)",
+        "steps": [
+          "POST /signup (server action) → zod validate → bcrypt hash → insert users → create session → redirect /dashboard"
+        ]
+      },
+      {
+        "title": "Invoice payment (one-time)",
+        "steps": [
+          "sendInvoice action → creates a Checkout Session for amount_cents + stores stripe_session_id + pay token",
+          "checkout.session.completed webhook → verify signature → match invoiceId via metadata → set invoices.status = paid + insert payments",
+          "/invoices/:id + /dashboard reflect paid"
+        ]
+      }
+    ],
+    "build_order": [
+      { "step": 1, "title": "Scaffold create-next-app (TS, Tailwind, App Router)", "done": "npm run dev works → commit", "prio": "P0" },
+      { "step": 2, "title": "Design tokens + fonts + theme provider + base layout (indigo accent)", "done": "landing renders per design pack → commit", "prio": "P0" },
+      { "step": 3, "title": "Drizzle schema + migrations + db client", "done": "db:check passes → commit", "prio": "P0" },
+      { "step": 4, "title": "Auth (lib/auth + middleware + login/signup + session)", "done": "protected route redirects → commit", "prio": "P0" },
+      { "step": 5, "title": "Dashboard + invoice list with status badges", "done": "list renders, ownership-filtered → commit", "prio": "P0" },
+      { "step": 6, "title": "Create + send invoice (form, zod, pay token)", "done": "invoice appears as draft; pay link copies → commit", "prio": "P0" },
+      { "step": 7, "title": "Public pay page /p/:token + Stripe Checkout", "done": "test-mode checkout completes → commit", "prio": "P0" },
+      { "step": 8, "title": "Webhook → paid status + payment record", "done": "stripe listen marks invoice paid → commit", "prio": "P0" },
+      { "step": 9, "title": "AI reminder copilot (streaming off, template fallback)", "done": "reminder renders with fallback → commit", "prio": "P1" },
+      { "step": 10, "title": "Analytics + SEO + error/empty states + polish", "done": "PostHog event fires, meta present → commit", "prio": "P1" },
+      { "step": 11, "title": "Tests for auth/billing + CI", "done": "npm test green, CI on push → commit", "prio": "P1" },
+      { "step": 12, "title": "Production audit + deploy (deploy-setup.mjs → Vercel)", "done": "deploy-runbook.md §5 list passes", "prio": "P0" }
+    ],
+    "extra_ideas": [
+      "Payment-reminder email after 7 days",
+      "Google OAuth",
+      "PDF export",
+      "Annual discount (20%)",
+      "Churn email for canceled accounts"
+    ]
+  }
+}
