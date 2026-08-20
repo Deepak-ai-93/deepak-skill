@@ -79,9 +79,9 @@ cd skills/blog-seo-content && node scripts/keyword-outline.mjs --seed "saas onbo
 
 # LinkedIn: voice capture → bio → calendar → engagement
 
-# X threads: story-spine thread pack + engagement ritual
-cd skills/x-threads-engagement && node scripts/thread-writer.mjs --plan thread-plan.json --out thread.md
-cd skills/x-threads-engagement && node scripts/audit-threads.mjs --pack <thread-folder> --out threads-audit.md   # automated audit → spawn x-auditor subagent
+# X growth: fast growth content plan + drafted posts (top-creator format, zero hashtags)
+cd skills/x-growth && node scripts/post-writer.mjs --plan content-plan.json --out content-plan.md    # assembles content-plan.md + posts.md (500–800 char posts, exit 1 on bad plans)
+cd skills/x-growth && node scripts/audit-x.mjs --pack <plan-folder> --out x-audit.md                 # automated audit → spawn x-auditor subagent
 
 # Newsletters: story-first issue + growth plan
 cd skills/newsletter-growth && node scripts/issue-writer.mjs --plan issue-plan.json --out issue.md

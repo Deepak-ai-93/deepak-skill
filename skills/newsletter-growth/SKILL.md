@@ -78,7 +78,7 @@ Every beat either **raises the question**, **raises the stakes**, or **pays off*
 - "Write a welcome sequence for new subscribers"
 - "I have an issue draft — audit it before I hit send"
 
-**Complements:** `email-marketing` (transactional ESP campaigns — this skill is editorial + growth) · `x-threads-engagement` (the same story becomes the week's thread) · `linkedin-personal-brand` (repurpose the story for LinkedIn) · `blog-seo-content` (expand an issue into an article) · `social-media-content-plan` (a weekly issue slots into the calendar).
+**Complements:** `email-marketing` (transactional ESP campaigns — this skill is editorial + growth) · `x-growth` (the same story becomes the week's X posts) · `linkedin-personal-brand` (repurpose the story for LinkedIn) · `blog-seo-content` (expand an issue into an article) · `social-media-content-plan` (a weekly issue slots into the calendar).
 
 ---
 

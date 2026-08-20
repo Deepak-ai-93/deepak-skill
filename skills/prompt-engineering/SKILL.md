@@ -58,7 +58,7 @@ Same contract as `ebook-builder` and `positioning-studio`: the library is built 
 - "I have prompts that sort of work — organize and test them"
 - "Make a prompt bank for my niche so I stop writing prompts from scratch"
 
-**Complements:** `positioning-studio` (the positioning is injected into every content prompt's context), `blog-seo-content` / `x-threads-engagement` / `newsletter-growth` / `email-marketing` / `carousel-post-images` (the library's prompts feed these producer skills), `ai-automation` (library prompts become the per-step prompts in an agent workflow), `ebook-builder` (voice rules reuse the same taste profile).
+**Complements:** `positioning-studio` (the positioning is injected into every content prompt's context), `blog-seo-content` / `x-growth` / `newsletter-growth` / `email-marketing` / `carousel-post-images` (the library's prompts feed these producer skills), `ai-automation` (library prompts become the per-step prompts in an agent workflow), `ebook-builder` (voice rules reuse the same taste profile).
 
 ---
 

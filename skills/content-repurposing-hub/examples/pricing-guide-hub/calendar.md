@@ -4,7 +4,7 @@
 
 | Day | Platform | Piece | Producer skill | Why this slot |
 |---|---|---|---|---|
-| **Mon** | X / Twitter | Thread — structure problem claim | `x-threads-engagement` | Lead with the contrarian claim; X rewards the quick take |
+| **Mon** | X / Twitter | Post — structure problem claim (no hashtags) | `x-growth` | Lead with the contrarian claim; X rewards the quick take |
 | **Tue** | LinkedIn | Post — the one-afternoon founder story | `linkedin-personal-brand` | Next-day follow-up; LinkedIn reads the story version |
 | **Wed** | — | *(gap — let the thread + post settle)* | | Stagger prevents self-competing impressions |
 | **Thu** | Newsletter | Issue — the 11pm story + full teardown | `newsletter-growth` | Subscribers get the depth the feed can't hold |

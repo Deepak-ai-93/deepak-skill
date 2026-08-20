@@ -19,7 +19,7 @@
 
 - Swap with 2 newsletters: a SaaS-pricing one (same angle) + a founder-tools one (adjacent audience).
 - Guest post on one bigger founder newsletter — bio line drives signups.
-- Every issue → X thread (`x-threads-engagement`) + LinkedIn post, link in bio.
+- Every issue → X posts (`x-growth`, zero hashtags) + LinkedIn post, link in bio.
 
 ## Analytics review (day-7/14/30)
 

@@ -4,7 +4,7 @@ The repurposing sin is copying. Same story, but each platform needs a **native r
 
 | Platform | Native format | The angle (entry point) | The hook leads with | CTA |
 |---|---|---|---|---|
-| **X / Twitter** | Thread (5–9 tweets) | The contrarian claim or the list | The claim nobody says out loud | Follow / save / reply |
+| **X / Twitter** | Top-creator post (500–800 chars, no hashtags) | The contrarian claim or the list | The claim nobody says out loud | Follow / save / reply |
 | **LinkedIn** | Story/lesson post (900–1,300 chars) | The personal lesson + proof | The mini-story or the career lesson | Comment / connect / follow |
 | **Newsletter** | Story-first issue (350–900 words) | The story behind the idea | The narrative open, subject ≤ 60 chars | Subscribe / reply |
 | **Carousel** (IG/LinkedIn) | 7–10 slides | The list / framework | Slide 1: the payoff promise ("5 mistakes") | Save / share / follow |
@@ -16,9 +16,9 @@ The repurposing sin is copying. Same story, but each platform needs a **native r
 
 - **One story, many doors.** The aha (payoff) is the same everywhere; the open loop differs per platform.
 - **No reposts.** If the hook of piece B would work word-for-word as the hook of piece A, rewrite it — the anti-repost rule is script-enforced (≥ 60% normalized overlap = FAIL).
-- **Platform-native length.** A 280-char hook on X, a 2s visual hook on Shorts, a ≤ 60-char subject on the newsletter. Length IS part of being native.
+- **Platform-native length.** A 500–800 char top-creator post on X, a 2s visual hook on Shorts, a ≤ 60-char subject on the newsletter. Length IS part of being native.
 - **One CTA each.** Follow (X) ≠ subscribe (newsletter) ≠ save (carousel). Pick the CTA the platform rewards.
-- **The source stays the source.** The blog post is not "the long version of the thread" — the thread is the X-native retelling of the same story the blog tells.
+- **The source stays the source.** The blog post is not "the long version of the X post" — the X post is the X-native retelling of the same story the blog tells.
 
 ## Beats extraction (the angle bank input)
 

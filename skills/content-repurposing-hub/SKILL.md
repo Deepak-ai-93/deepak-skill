@@ -22,7 +22,7 @@ description: Turn ONE source idea/asset (blog post, thread, podcast, video, idea
 # skill: content-repurposing-hub
 
 **Name:** Content Repurposing Hub — one idea, every platform, natively
-**Description:** Turns ONE source (blog post / podcast / video / thread / even a bare idea) into a **multi-channel content pack with a per-platform angle**: `repurpose-plan.json` (the source + the goal + the chosen platforms) → `hub-plan.md` (one piece per platform, each with its **native angle + format + hook + CTA**, rewritten for the platform — never copy-paste duplicates, enforced by `repurpose-writer.mjs`) → `calendar.md` (the cross-post order + spacing) + `repurpose-audit.md` (the audit harness output). This is the **orchestrator** skill: it decides WHAT each platform gets, then delegates the actual production to the producer skills (`x-threads-engagement`, `newsletter-growth`, `carousel-post-images`, `blog-seo-content`, `podcast-to-shorts`, …).
+**Description:** Turns ONE source (blog post / podcast / video / thread / even a bare idea) into a **multi-channel content pack with a per-platform angle**: `repurpose-plan.json` (the source + the goal + the chosen platforms) → `hub-plan.md` (one piece per platform, each with its **native angle + format + hook + CTA**, rewritten for the platform — never copy-paste duplicates, enforced by `repurpose-writer.mjs`) → `calendar.md` (the cross-post order + spacing) + `repurpose-audit.md` (the audit harness output). This is the **orchestrator** skill: it decides WHAT each platform gets, then delegates the actual production to the producer skills (`x-growth`, `newsletter-growth`, `carousel-post-images`, `blog-seo-content`, `podcast-to-shorts`, …).
 
 ---
 
@@ -78,7 +78,7 @@ Every beat either **raises the question**, **raises the stakes**, or **pays off*
 - "Turn this YouTube video into shorts + a blog + a thread"
 - "I keep posting the same thing everywhere — make me a repurposing system"
 
-**Complements:** the **producer skills** this hub delegates to: `x-threads-engagement` · `newsletter-growth` · `carousel-post-images` · `blog-seo-content` · `podcast-to-shorts` · `linkedin-personal-brand` · `social-media-content-plan` (the hub plan slots into the calendar) · `youtube-video-pipeline` (long-form source → hub). Install the producers with `npx skills add Deepak-ai-93/deepak-skill --all` so the plan is executable.
+**Complements:** the **producer skills** this hub delegates to: `x-growth` · `newsletter-growth` · `carousel-post-images` · `blog-seo-content` · `podcast-to-shorts` · `linkedin-personal-brand` · `social-media-content-plan` (the hub plan slots into the calendar) · `youtube-video-pipeline` (long-form source → hub). Install the producers with `npx skills add Deepak-ai-93/deepak-skill --all` so the plan is executable.
 
 ---
 

@@ -4,7 +4,7 @@
 // (repurpose-plan.json): source + story + audience + goal + cta, plus ≥ 2
 // platforms, each with format / angle / hook / producer / cta. Writes
 // hub-plan.md with the angle bank + per-platform cards — the handoff to the
-// producer skills (x-threads-engagement, newsletter-growth, carousel-post-images,
+// producer skills (x-growth, newsletter-growth, carousel-post-images,
 // blog-seo-content, podcast-to-shorts, linkedin-personal-brand, …).
 // Self-verifies every constraint — most importantly the anti-repost rule:
 // no near-duplicate hooks across platforms (normalized overlap). Exit 1 on FAIL.
@@ -134,7 +134,7 @@ plan.platforms.forEach((p, i) => {
   L.push(`| **Format** | ${p.format} |`);
   L.push(`| **Native angle** | ${p.angle} |`);
   L.push(`| **Hook (unique)** | "${p.hook}" |`);
-  L.push(`| **Producer skill** | ${p.producer || "_name the producer skill (x-threads-engagement / newsletter-growth / carousel-post-images / blog-seo-content / podcast-to-shorts / linkedin-personal-brand / youtube-video-pipeline)_"} |`);
+  L.push(`| **Producer skill** | ${p.producer || "_name the producer skill (x-growth / newsletter-growth / carousel-post-images / blog-seo-content / podcast-to-shorts / linkedin-personal-brand / youtube-video-pipeline)_"} |`);
   L.push(`| **CTA** | ${p.cta || "_add one platform-native CTA_"} |`);
   L.push("");
 });

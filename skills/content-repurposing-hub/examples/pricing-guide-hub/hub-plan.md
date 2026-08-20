@@ -20,10 +20,10 @@ Same story, native retelling on every platform. Each piece opens a different loo
 
 | | |
 |---|---|
-| **Format** | thread |
+| **Format** | single post (series post 1 of the week) |
 | **Native angle** | the contrarian claim — your pricing page isn't a pricing problem, it's a structure problem |
 | **Hook (unique)** | "Your pricing page loses money before anyone sees the price." |
-| **Producer skill** | x-threads-engagement |
+| **Producer skill** | x-growth |
 | **CTA** | Follow for part 2 — the teardown with the numbers |
 
 ### 2. LinkedIn

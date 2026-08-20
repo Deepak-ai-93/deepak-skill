@@ -39,7 +39,7 @@ The **deepak-skill** repo ships a **branded installer** that prints the **DEEPAK
   • youtube-video-pipeline    → script, 10-title pack, thumbnail, metadata
   • podcast-to-shorts         → long-form → viral vertical clips
   • linkedin-personal-brand   → voice-captured posts, bio, calendar
-  • x-threads-engagement      → scroll-stopping X threads + engagement ritual
+  • x-growth                → fast X growth content planning + daily posts (zero hashtags)
   • newsletter-growth         → story-first editorial newsletters + growth plan
   • social-media-content-plan → algorithm-reset 30-day content plans (any platform)
   • vibe-code-webapp          → production vibe-coded web apps
@@ -125,7 +125,7 @@ ls .agents/skills/
 # blog-seo-content  carousel-post-images  content-repurposing-hub  ebook-builder  email-marketing  hook-storyboard-retention  newsletter-growth
 # linkedin-personal-brand  mcp-agent-builder  paid-ads-studio  photoshoot-studio  podcast-to-shorts  serial-story-reels  skill-builder
 # social-media-content-plan  sponsorship-pipeline  text-motion-reels  thumbnail-studio  veo-cinematic-reels  video-asset-reels  video-product-pipeline
-# vibe-code-webapp  voice-sfx-audio  x-threads-engagement  youtube-video-pipeline  ai-automation  positioning-studio  prompt-engineering
+# vibe-code-webapp  voice-sfx-audio  x-growth  youtube-video-pipeline  ai-automation  positioning-studio  prompt-engineering
 ```
 
 **Update:** `npx skills update` · **Remove:** `npx skills remove <skill-name>`

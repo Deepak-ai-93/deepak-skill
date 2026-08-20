@@ -35,7 +35,7 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 | **youtube-video-pipeline** | Plan long-form YouTube videos end-to-end: researched `video-brief.md` → retention-engineered script (hook in 30s, open loops) → **10-variant title pack** scored on CTR formulas + 60-char limit (`title-pack.mjs`) → thumbnail brief + image-gen prompt → description + chapters + tags — **audit harness**: `audit-video-plan.mjs` (brief, script hook, title pack, thumbnail, metadata → `video-plan-audit.md`) + a fresh **video-plan-auditor subagent** signing PASS / FIX NEEDED |
 | **blog-seo-content** | SEO articles that rank **and** get cited by AI search (GEO) — `keyword-outline.mjs` builds the keyword cluster + intent scores + outline scaffold → approved `seo-brief.md` → E-E-A-T-rich article (named author, cited stats, quotable blocks) + meta title/description pack — **audit harness**: `audit-blog.mjs` (brief, headings, EEAT, citations, quotable blocks, anti-fluff, meta → `blog-audit.md`) + a fresh **blog-auditor subagent** signing PASS / FIX NEEDED |
 | **linkedin-personal-brand** | Founder/creator LinkedIn presence that compounds — **capture the user's real voice first** (`voice-capture.md`), then headline + About rewrite, a weekly post calendar (story/teaching/contrarian/win/question roles, one CTA each), and a comment + connection strategy — **audit harness**: `audit-brand.mjs` (voice, bio, calendar, engagement, blocklists → `brand-audit.md`) + a fresh **brand-auditor subagent** signing PASS / FIX NEEDED |
-| **x-threads-engagement** | Write scroll-stopping **X/Twitter threads** that get read, shared, and followed — viral thread formulas (hook → numbered beats → CTA, from `thread-formulas.md`), story-spine + addiction rails (open loop → rising tension → payoff → loop ending, enforced by `thread-writer.mjs` with 280-char caps + anti-fluff/bait-spam blocklists), an engagement ritual (reply-first hour, quote-post strategy, DM follow-ups), and a day-7 metrics review — **audit harness**: `audit-threads.mjs` (hook, char caps, story spine, fluff, engagement → `threads-audit.md`) + a fresh **x-auditor subagent** signing PASS / FIX NEEDED |
+| **x-growth** | Plan, write and grow an **X/Twitter presence FAST** — a scripted **growth content plan** (goal + KPIs + 3+ pillars + daily cadence + engagement schedule + day-7 review) with a **week of drafted posts in the top-creator format** (500–800 char micro-essays: hook line ≤ 100 chars → story → bullet points → payoff → CTA, hook/value/story/proof/cta/loop mix, enforced by `post-writer.mjs` with anti-fluff/bait blocklists) — **and the ZERO-HASHTAG copy-first rail**: a single `#` fails the plan (X growth is copy-first, tags are noise). Story-spine + addiction rails per post, the **weekly series loop** (hook → value → proof → CTA converts viewers into followers), and the growth rituals (reply-first hour, quote posts, DM follow-ups) — **audit harness**: `audit-x.mjs` (posts, 500–800 window, hook lines, format, zero-hashtag gate, story mix, pillars, plan sections → `x-audit.md`) + a fresh **x-auditor subagent** signing PASS / FIX NEEDED |
 | **social-media-content-plan** | **30-day algorithm-reset content plan across user-selected platforms** (Instagram · X · LinkedIn · TikTok · YouTube (Shorts + long-form) · Facebook · Threads) — honest per-platform strategy (how each algorithm actually ranks in 2026, the 14-day re-training sprint, native formats, cadence, hashtag/keyword rules — grounded by `platform-playbook.mjs`), 3–4 content pillars + hook bank, a deterministic day-by-day calendar (`build-calendar.mjs` from `plan.json`), a first-60-minute engagement protocol, and a metrics/review loop (day-7/14/21/30) — **audit harness**: `audit-content-plan.mjs` (platform coverage, reset framing, pillars, calendar, engagement, metrics, fluff blocklist → `content-plan-audit.md`) + a fresh **content-plan-auditor subagent** signing PASS / FIX NEEDED |
 | **skill-builder** (meta) | Scaffold **new skills** the deepak-skill way — `scaffold-skill.mjs` generates the folder, SKILL.md contract (quality bar + workflow + checklist), Deepak-branded scripts, templates and examples, then wires the skill into README/USAGE/prompt-examples — **audit harness**: `audit-scaffold.mjs --docs` checks the new skill against the repo contract (SKILL.md, scripts, templates/examples, docs wiring + counts → `scaffold-audit.md`) + a fresh **scaffold-auditor subagent** signing PASS / FIX NEEDED |
 | **mcp-agent-builder** | Build **MCP servers + the AI agents that use them** end-to-end in any IDE/CLI — a **discovery interview** (connector, users, action surface, auth, deployment model) → `mcp-prd.md` (problem, users, tools/resources/prompts, auth, non-goals, metrics) → `mcp-architecture.md` (ONE deployment model: stdio / remote HTTP / MCPB — transport + auth flow must match) → **runnable server** (`scaffold-server.mjs` generates a real `@modelcontextprotocol/sdk` server from `mcp-plan.json`, one handler per tool, exit 1 on bad plans) → `agent-design.md` (system prompt + tool wiring + guardrails) → `ide-cli-matrix.md` (connect in Claude Code, Cursor, Codex CLI, Gemini CLI, OpenCode, Cline, Windsurf, VS Code, Zed) — **audit harness**: `audit-mcp.mjs` (PRD, architecture, scaffold, agent wiring, IDE matrix, secrets → `mcp-audit.md`) + a fresh **mcp-auditor subagent** signing PASS / FIX NEEDED |
@@ -50,7 +50,7 @@ Open-source agent skills for the **full content-creator stack** — short-form v
 
 The skills are a complete production pipeline: **what's trending** (research + brainstorm) → **what to say** (hooks) → **how it looks** (motion / assets / thumbnails) → **how it sounds** (voice/SFX) → **approved & audited** (video-product-pipeline) → **multiplied** (podcast→shorts, YouTube packaging, SEO blog, LinkedIn, X threads, editorial newsletters) → **paid** (Meta + Google ad campaigns with forecast-first economics via paid-ads-studio).
 
-**Every skill now ships the same audit-harness pattern**: an `audit-*.mjs` script runs the automated checks on the delivered pack (consistency tokens, verify markers, char limits, blocklists, output files → `*-audit.md`, exit 0/1/2), then a FRESH `<skill>-auditor` subagent completes a /50 worthiness scorecard and signs **PASS / FIX NEEDED** — nothing ships until PASS. Skills with a harness: text-motion-reels, hook-storyboard-retention, voice-sfx-audio, video-asset-reels, carousel-post-images, veo-cinematic-reels, photoshoot-studio, podcast-to-shorts, youtube-video-pipeline, blog-seo-content, linkedin-personal-brand, social-media-content-plan, skill-builder, serial-story-reels, paid-ads-studio, vibe-code-webapp, video-product-pipeline, email-marketing, x-threads-engagement, newsletter-growth, mcp-agent-builder, ebook-builder, thumbnail-studio, content-repurposing-hub, sponsorship-pipeline, positioning-studio, prompt-engineering, ai-automation.
+**Every skill now ships the same audit-harness pattern**: an `audit-*.mjs` script runs the automated checks on the delivered pack (consistency tokens, verify markers, char limits, blocklists, output files → `*-audit.md`, exit 0/1/2), then a FRESH `<skill>-auditor` subagent completes a /50 worthiness scorecard and signs **PASS / FIX NEEDED** — nothing ships until PASS. Skills with a harness: text-motion-reels, hook-storyboard-retention, voice-sfx-audio, video-asset-reels, carousel-post-images, veo-cinematic-reels, photoshoot-studio, podcast-to-shorts, youtube-video-pipeline, blog-seo-content, linkedin-personal-brand, social-media-content-plan, skill-builder, serial-story-reels, paid-ads-studio, vibe-code-webapp, video-product-pipeline, email-marketing, x-growth, newsletter-growth, mcp-agent-builder, ebook-builder, thumbnail-studio, content-repurposing-hub, sponsorship-pipeline, positioning-studio, prompt-engineering, ai-automation.
 
 ---
 
@@ -105,7 +105,7 @@ The agent will run the format wizard, build the composition, and render your 4K 
 | **youtube-video-pipeline only** (self-contained — SKILL.md + scripts/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill youtube-video-pipeline` |
 | **blog-seo-content only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill blog-seo-content` |
 | **linkedin-personal-brand only** (self-contained — SKILL.md + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill linkedin-personal-brand` |
-| **x-threads-engagement only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill x-threads-engagement` |
+| **x-growth only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill x-growth` |
 | **newsletter-growth only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill newsletter-growth` |
 | **social-media-content-plan only** (self-contained — SKILL.md + scripts/ + templates/ + examples/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill social-media-content-plan` |
 | **skill-builder only** (self-contained — SKILL.md + scripts/, works standalone in any project) | `npx skills add Deepak-ai-93/deepak-skill --skill skill-builder` |
@@ -128,7 +128,7 @@ ls .agents/skills/
 # blog-seo-content  carousel-post-images  content-repurposing-hub  ebook-builder  email-marketing  hook-storyboard-retention  newsletter-growth
 # linkedin-personal-brand  mcp-agent-builder  paid-ads-studio  photoshoot-studio  podcast-to-shorts  serial-story-reels  skill-builder
 # social-media-content-plan  sponsorship-pipeline  text-motion-reels  thumbnail-studio  veo-cinematic-reels  video-asset-reels  video-product-pipeline
-# vibe-code-webapp  voice-sfx-audio  x-threads-engagement  youtube-video-pipeline  ai-automation  positioning-studio  prompt-engineering
+# vibe-code-webapp  voice-sfx-audio  x-growth  youtube-video-pipeline  ai-automation  positioning-studio  prompt-engineering
 ```
 
 **Update:** `npx skills update` • **Remove:** `npx skills remove <skill-name>`
@@ -344,20 +344,20 @@ Build a founder/creator presence that compounds — **your real voice captured f
 > "Help me build my LinkedIn — capture my voice, rewrite my bio, and give me a week of posts."
 > → voice capture → voice-profile.md → bio.md → calendar.md → engagement.md → auditor check → deliver
 
-### X threads & engagement (`x-threads-engagement`)
+### X growth — fast content planning + posting (`x-growth`)
 
-Write scroll-stopping **X threads** that get read, shared, and followed — one formula (curiosity / contrarian / results / list / pain / story) → story-spine thread plan (hook ≤ 100 chars opens a loop → rising beats → payoff → CTA/loop):
+Plan, write and grow an **X presence fast** — growth goal + KPIs + 3+ pillars + a week of drafted single posts (hook → value → story/proof → CTA/loop mix, **zero hashtags** — a single `#` fails the plan):
 
 ```bash
-cd skills/x-threads-engagement
-node scripts/thread-writer.mjs --plan thread-plan.json --out thread.md      # assembles + validates (exit 1 on bad plans)
-node scripts/audit-threads.mjs --pack <thread-folder> --out threads-audit.md   # automated audit → spawn x-auditor subagent
+cd skills/x-growth
+node scripts/post-writer.mjs --plan content-plan.json --out content-plan.md   # assembles content-plan.md + posts.md (exit 1 on bad plans)
+node scripts/audit-x.mjs --pack <plan-folder> --out x-audit.md                # automated audit → spawn x-auditor subagent
 ```
 
-Deliverables: `thread.md` (numbered tweets, 280-char caps, role-annotated story spine, no fluff/bait-spam) + `engagement.md` (the reply-first hour, quote-post strategy, DM follow-ups — the replies are the growth) + `threads-audit.md`. Built-in example: **"Founder Pricing Thread"** (`examples/founder-pricing-thread/`).
+Deliverables: `content-plan.md` (goal + KPIs + 3+ pillars + cadence table + engagement schedule + day-7 review) + `posts.md` (the week of drafted top-creator posts — 500–800 chars each, hook line ≤ 100, role-annotated story mix, zero hashtags, no fluff/bait-spam) + `x-audit.md`. Built-in example: **"Founder Growth Plan"** (`examples/founder-growth-plan/`).
 
-> "Write a viral X thread: 3 pricing mistakes founders make. Goal: follows + replies."
-> → formula → thread plan → `thread-writer.mjs` → `engagement.md` → auditor check → deliver
+> "Plan a fast-growth week on X for my solo SaaS — goal: 2k → 4k followers in 30 days, voice: first-person founder. NO hashtags."
+> → goal + niche → content plan → `post-writer.mjs` → `posts.md` → auditor check → deliver
 
 ### Social media content plans (`social-media-content-plan`)
 

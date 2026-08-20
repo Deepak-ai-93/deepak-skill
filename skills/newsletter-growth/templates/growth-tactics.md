@@ -25,7 +25,7 @@ Rules: one ask per email · never send the referral ask twice in a row · every 
 
 - **Swap with 2–3 same-audience newsletters** (different niche angle): "issue swap" — each recommends the other in one issue. Aim for 1–2 swaps/month at < 1,000 subscribers; 2–4/month after.
 - **Guest-write once a month** on a bigger newsletter in the niche — one bio line is worth 10 issues of solo writing.
-- **Repurpose every issue** into an X thread (`x-threads-engagement`) + a LinkedIn post — the post drives the link, the link drives signups.
+- **Repurpose every issue** into X posts (`x-growth`, zero hashtags) + a LinkedIn post — the post drives the link, the link drives signups.
 
 ## Analytics review (day-7/14/30 loop)
 

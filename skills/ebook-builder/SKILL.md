@@ -95,7 +95,7 @@ Every ebook is built FOR the same person every time. The skill remembers them ac
 - "Turn my blog post / thread into a downloadable ebook"
 - "Build another ebook for me — same voice as the last one" (memory: it reads `ebook-memory.md` and keeps your voice + defaults)
 
-**Complements:** `carousel-post-images` (same two-mode render + design-system DNA) · `newsletter-growth` (the ebook becomes the lead magnet in the welcome sequence) · `x-threads-engagement` (the same story becomes the thread) · `blog-seo-content` (expand the ebook into an article) · `photoshoot-studio` (photoreal cover imagery via image prompts) · `social-media-content-plan` (the ebook slots into a pillar).
+**Complements:** `carousel-post-images` (same two-mode render + design-system DNA) · `newsletter-growth` (the ebook becomes the lead magnet in the welcome sequence) · `x-growth` (the same story becomes the week's X posts) · `blog-seo-content` (expand the ebook into an article) · `photoshoot-studio` (photoreal cover imagery via image prompts) · `social-media-content-plan` (the ebook slots into a pillar).
 
 ---
 

@@ -59,7 +59,7 @@ Same contract as `ebook-builder`: the positioning is written FOR the same creato
 - "My one-liner is weak — rebuild it"
 - "Make my product sound like me, not like AI marketing"
 
-**Complements:** `landing-page-copy` (the positioning becomes the hero + value prop), `email-marketing` + `drip-email-sequence` (same promise in every email), `x-threads-engagement` / `linkedin-personal-brand` / `newsletter-growth` (threads, posts and newsletters lift the hierarchy), `ebook-builder` (the positioning is the cover promise), `paid-ads-studio` (ad hooks come from the taglines), `prompt-engineering` (the positioning is injected into every content prompt).
+**Complements:** `landing-page-copy` (the positioning becomes the hero + value prop), `email-marketing` + `drip-email-sequence` (same promise in every email), `x-growth` / `linkedin-personal-brand` / `newsletter-growth` (posts and newsletters lift the hierarchy), `ebook-builder` (the positioning is the cover promise), `paid-ads-studio` (ad hooks come from the taglines), `prompt-engineering` (the positioning is injected into every content prompt).
 
 ---
 

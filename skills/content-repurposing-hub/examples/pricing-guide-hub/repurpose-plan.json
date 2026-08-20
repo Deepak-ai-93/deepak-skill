@@ -19,10 +19,10 @@
   "platforms": [
     {
       "platform": "X / Twitter",
-      "format": "thread",
+      "format": "single post (series post 1 of the week)",
       "angle": "the contrarian claim — your pricing page isn't a pricing problem, it's a structure problem",
       "hook": "Your pricing page loses money before anyone sees the price.",
-      "producer": "x-threads-engagement",
+      "producer": "x-growth",
       "cta": "Follow for part 2 — the teardown with the numbers"
     },
     {

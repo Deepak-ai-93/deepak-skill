@@ -1,0 +1,56 @@
+{
+  "goal": "Grow from 2,000 to 4,000 followers in 30 days — replies and quote posts are the leading indicators, followers the lagging one",
+  "niche": "solo SaaS pricing + positioning for indie founders",
+  "audience": "Indie SaaS founders building alone (0–3 employees), pre-revenue to $10k MRR",
+  "voice": "Direct, first-person founder-to-founder. Short sentences, real numbers, no marketing speak, admits mistakes",
+  "cadence": 1,
+  "pillars": [
+    "Pricing lessons",
+    "Positioning & messaging",
+    "Building in public"
+  ],
+  "kpis": {
+    "followers": "4,000 (2k → 4k in 30 days)",
+    "replyRate": "> 0.3% of impressions",
+    "quotes": "> 1% of impressions",
+    "visits": "rising week over week",
+    "conversion": "> 2% of impressions"
+  },
+  "posts": [
+    {
+      "text": "3 pricing mistakes that quietly killed my last SaaS.\n\nI am sharing these because I made all three — and I watched the numbers die in order. The post-mortem took one afternoon; the mistakes took a year.\n\n- Mistake one: I priced the software, not the outcome. Nobody buys buttons. They buy the three hours saved every week.\n- Mistake two: I hid the price behind a demo call. The signup page became a graveyard and I blamed the traffic.\n- Mistake three: I shipped one plan with no anchor. Nobody could judge fair without a reference point, so nobody judged at all.\n\nThe fix was one page, one price, one outcome line. Revenue per visitor tripled in 30 days.\n\nFollow — part 2 drops this week: the exact page that fixed it.",
+      "role": "hook",
+      "pillar": "Pricing lessons"
+    },
+    {
+      "text": "The fastest pricing fix I know takes ten minutes.\n\nYour pricing page does one job: give a stranger enough certainty to pay. Most pages fail it because they argue. Try this instead.\n\n- Price the outcome, not the product. \"Invoices that pay themselves\" beats \"online invoicing software\" every single time.\n- Show one plan before three. An anchor makes the middle plan look reasonable; no anchor makes all of them look like guesses.\n- Put the price where the eye lands first. If a visitor has to scroll to find it, they have already left.\n\nDo those three and your page stops explaining and starts selling.\n\nSave this — it is the ten minutes that pays for itself.",
+      "role": "value",
+      "pillar": "Pricing lessons"
+    },
+    {
+      "text": "The client quit in week 2. I refunded within the hour.\n\nIt was an 11pm invoice that broke me — not the money, the message it sent. I rebuilt the onboarding that night and rewrote the pricing page by morning.\n\n- Refunding fast cost me $400 and saved the referral. Angry customers talk; grateful ones bring two more.\n- The onboarding was nine steps and every step asked for permission. I cut it to three and watched activation double.\n- The pricing page said what the product did. Nobody cared. It now says what the client gets in week one.\n\nOne night taught me more about founder trust than a year of feature work.\n\nThe full teardown with numbers goes out on Friday.",
+      "role": "story",
+      "pillar": "Building in public"
+    },
+    {
+      "text": "Three headlines, 30 days, 41% more signups. Same product.\n\nWe tested three hero lines on identical traffic and the winner was the one that said less. Positioning is subtraction.\n\n- Line A described the product: \"Online invoicing for freelancers.\" Flat.\n- Line B named the outcome: \"Invoices that pay themselves.\" 41% more signups than A.\n- Line C tried to be clever. It lost to B by 18 points — the feed has no room for clever.\n\nWords moved revenue more than any feature launch we shipped that quarter.\n\nSteal the method: write the outcome, delete the adjectives, test it for a week.",
+      "role": "proof",
+      "pillar": "Positioning & messaging"
+    },
+    {
+      "text": "If your pricing page needs a paragraph to explain itself, it is not priced yet.\n\nI wrote this rule after reading fifty founder pricing pages. The ones that sold had the same shape.\n\n- One line of what it does — the outcome, not the features.\n- One line of who it is for — the exact person, not \"anyone who works\".\n- One line of what it costs — a number, not \"contact us\".\n\nThe best pages read like a text message: short, specific, done.\n\nFollow for the teardown on Friday — I show mine with the numbers.",
+      "role": "value",
+      "pillar": "Positioning & messaging"
+    },
+    {
+      "text": "I turned five pricing mistakes into a free teardown.\n\nThree founders asked for it last month. Each one sent back a screenshot of their own page the same week — the fix is that easy to copy. Now it is public.\n\n- The one-page fix that tripled revenue per visitor.\n- The headline test that found 41% more signups.\n- The anchor trick that made the middle plan obvious.\n- The refund policy that turned an angry client into a referral.\n\nDM me the word pricing and I will send the full teardown today.\n\nIt is free, it is one read, and it pays for itself before lunch.",
+      "role": "cta",
+      "pillar": "Pricing lessons"
+    },
+    {
+      "text": "Next week I am publishing the full pricing teardown.\n\nThe before, the after, and what I would change again. Real numbers, real screenshots, zero fluff. This is the post I promised on Monday, but bigger.\n\n- Monday: the pricing page that was losing money — with the old copy, line by line.\n- Wednesday: the three changes and the tests behind them — including the headline test.\n- Friday: the numbers — what moved, what did not, what I regret.\n\nIt is the teardown I wished I had a year ago.\n\nFollow so you do not miss the part everyone screenshots.",
+      "role": "loop",
+      "pillar": "Building in public"
+    }
+  ]
+}
