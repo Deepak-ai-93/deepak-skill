@@ -11,7 +11,7 @@
 // strength, clustering tightness, sustainability judgment). Exit 1 on any FAIL.
 //
 // Usage:
-//   node audit-content-plan.mjs --pack <plan-folder> [--platforms instagram,x] [--out content-plan-audit.md]
+//   node audit-content-plan.mjs --pack <plan-folder> [--platforms instagram,x] [--search] [--out content-plan-audit.md]
 //
 // Exit codes: 0 = all automated checks PASS, 1 = any FAIL, 2 = usage error.
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
@@ -35,7 +35,7 @@ const opt = (name, fallback) => {
 
 const packArg = opt("pack");
 if (!packArg) {
-  console.error("Usage: node audit-content-plan.mjs --pack <plan-folder> [--platforms instagram,x] [--out content-plan-audit.md]");
+  console.error("Usage: node audit-content-plan.mjs --pack <plan-folder> [--platforms instagram,x] [--search] [--out content-plan-audit.md]");
   process.exit(2);
 }
 const packDir = resolve(process.cwd(), packArg);
@@ -61,6 +61,7 @@ const FLUFF = [
   "go viral overnight", "100k in 24", "unlock", "game-changer", "supercharge",
   "elevate", "agreed?", "who else feels", "like this post if", "thrilled to announce",
   "fake it till you make it",
+  "tapestry", "delve", "landscape", "cutting-edge", "leverage", "unleash", "world-class", "revolutionary",
 ];
 const countFluff = (text) => FLUFF.filter((w) => new RegExp(`\\b${w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`, "i").test(text));
 
@@ -180,6 +181,49 @@ if (companion) {
 }
 
 // ─── summary + write ────────────────────────────────────────────────────────
+
+// --- search UI gate (NEW --search, see templates/search-ui.md) ---
+const withSearch = args.includes("--search");
+if (withSearch) {
+  const html = read("calendar.html");
+  if (!html) add("FAIL", "calendar.html (search)", "missing - build-calendar.mjs now emits searchable calendar.html next to calendar.md (Fuse.js, URL-synced)");
+  else {
+    if (/fuse\.js|Fuse/i.test(html)) add("PASS", "calendar.html search engine", "Fuse.js present");
+    else add("FAIL", "calendar.html search engine", "no Fuse.js - searchable calendar must include fuse.js");
+    if (/role=.combobox.|aria-label=.Search/i.test(html)) add("PASS", "calendar.html a11y", "combobox + aria present");
+    else add("WARN", "calendar.html a11y", "no role=combobox / aria-label on search input");
+    if (/URLSearchParams|searchParams\.get/i.test(html)) add("PASS", "calendar.html URL sync", "URL-synced (?q=&platform=&pillar=) present");
+    else add("WARN", "calendar.html URL sync", "no URL param sync");
+    if (/localStorage.*recent/i.test(html)) add("PASS", "calendar.html recent", "recent searches in localStorage");
+    else add("WARN", "calendar.html recent", "no recent searches");
+    if (/No posts for|No query|empty/i.test(html)) add("PASS", "calendar.html empty states", "empty states present");
+    else add("WARN", "calendar.html empty states", "no empty state copy found");
+  }
+}
+
+// --- X zero-hashtag rail (when X selected) ---
+if (platformsArg.includes("x")) {
+  const hasHash = (txt) => /#\w/.test(txt || "");
+  const xHits = [];
+  const pillarsTxt = read("pillars.md");
+  const calendarTxt = read("calendar.md");
+  const strategyTxt = read("strategy.md");
+  if (hasHash(pillarsTxt)) xHits.push("pillars.md");
+  if (hasHash(calendarTxt)) xHits.push("calendar.md");
+  if (xHits.length) add("FAIL", "X zero-hashtag rail", "X is copy-first, tags are noise - a single # fails the plan (hit in " + xHits.join(", ") + "). Remove hashtags for X posts.");
+  else add("PASS", "X zero-hashtag rail", "zero hashtags - copy-first rail holds");
+}
+
+// --- validation.md gate (/35) ---
+const validation = read("validation.md");
+if (validation) {
+  if (/Verdict.*\*\*(BUILD|ITERATE|PIVOT)/i.test(validation)) add("PASS", "validation verdict", "validation.md with BUILD/ITERATE/PIVOT verdict present");
+  else add("WARN", "validation verdict", "validation.md present but no verdict line - run score-plan.mjs");
+  if (/\/35/.test(validation)) add("PASS", "validation score", "/35 scorecard present");
+  else add("WARN", "validation score", "no /35 scorecard in validation.md");
+} else {
+  add("WARN", "validation gate", "no validation.md - run score-plan.mjs --scores ... --out validation.md (see templates/scorecard.md)");
+}
 const fails = results.filter((r) => r.status === "FAIL");
 const warns = results.filter((r) => r.status === "WARN");
 const passes = results.filter((r) => r.status === "PASS");
@@ -203,7 +247,7 @@ if (auditSections.length) {
 }
 L.push("## 2. Auditor section — COMPLETE THIS (subagent, fresh eyes)");
 L.push("");
-L.push("### 2.1 Plan-worthiness scorecard (rate 1–5 each, /50 — a plan worth posting scores ≥ 35)");
+L.push("### 2.1 Plan-worthiness scorecard (rate 1–5 each, /60 — a plan worth posting scores ≥ 35)");
 L.push("");
 L.push("| Criterion | Ask | Score /5 |");
 L.push("|---|---|---|");
@@ -211,10 +255,12 @@ L.push("| **Honest reset framing** | Is the 'algorithm reset' framed as a re-tra
 L.push("| **Platform-native depth** | Does each platform's section reflect how that algorithm ACTUALLY ranks (real signals), not generic advice? | |");
 L.push("| **Niche clustering** | Are the pillars narrow enough that the model can build one embedding — or is it 'fitness' instead of 'fat-loss for busy professionals'? | |");
 L.push("| **Hook strength** | Would the hooks stop a real scroll — curiosity gap, contrarian claim, specific outcome, pattern interrupt? | |");
-L.push("| **Calendar realism** | 30 days at a cadence the user's time budget can sustain; varied formats; one CTA per post? | |");
+L.push("| **Calendar realism** | 7/14/30/90 days at a cadence the user's time budget can sustain; varied formats; one CTA per post? | |");
+L.push("| **Search UX** | Is `calendar.html` searchable (Fuse.js, URL-synced, keyboard, empties, highlight)? | |");
+L.push("| **Earning clarity** | Does `validation.md` (/35 + earning math + guardrail) make earning plausible? | |");
 L.push("| **First-60-minute protocol** | Engagement velocity is engineered (reply to every comment, 5–10 niche comments, budget set)? | |");
 L.push("| **Metrics loop** | The 4 compounding signals tracked per platform + day-7/14/21/30 review that doubles down on winners? | |");
-L.push("| **Anti-fluff / anti-bait** | Blocklist clear, no 'Agree? 👇', no guarantee claims, no engagement-bait? | |");
+L.push("| **Anti-fluff / anti-bait** | Blocklist clear (incl. tapestry/delve/landscape/cutting-edge/leverage/unleash/world-class/revolutionary + X `#` ban), no ''Agree? 👇'', no guarantee claims, no engagement-bait? | |");
 L.push("| **Sustainability** | Could a solo creator actually execute week two — or does the plan burn out after 5 days? | |");
 L.push("| **Ship-readiness** | Would a stalled account get thousands of views if it followed this for 30 days? | |");
 L.push("");

@@ -14,7 +14,7 @@ plan. Your job: judge whether it is worth posting for 30 days.
 6. `metrics.md` — the signals + review loop
 7. `plan.json` — the input plan (platforms, cadence, pillars, hooks, CTAs)
 
-## 2. Complete the plan-worthiness scorecard (/50 — a plan worth posting scores ≥ 35)
+## 2. Complete the plan-worthiness scorecard (/60 — a plan worth posting scores ≥ 42)
 
 Copy the scorecard table from the **Auditor section** of `content-plan-audit.md`
 into your reply and score each criterion 1–5:
@@ -26,6 +26,8 @@ into your reply and score each criterion 1–5:
 | **Niche clustering** | Are the pillars narrow enough that the model can build one embedding — or is it 'fitness' instead of 'fat-loss for busy professionals'? | |
 | **Hook strength** | Would the hooks stop a real scroll — curiosity gap, contrarian claim, specific outcome, pattern interrupt? | |
 | **Calendar realism** | 30 days at a cadence the user's time budget can sustain; varied formats; one CTA per post? | |
+| **Search UX** | Is `calendar.html` searchable (Fuse.js, URL-synced chips, keyboard, 3 empty states, highlight, typo-tolerant)? | |
+| **Earning clarity** | Does `validation.md` (/35 + CPM/sponsor math + guardrail) make earning plausible? | |
 | **First-60-minute protocol** | Engagement velocity is engineered (reply to every comment, 5–10 niche comments, budget set)? | |
 | **Metrics loop** | The 4 compounding signals tracked per platform + day-7/14/21/30 review that doubles down on winners? | |
 | **Anti-fluff / anti-bait** | Blocklist clear, no 'Agree? 👇', no guarantee claims, no engagement-bait? | |
@@ -42,7 +44,7 @@ into your reply and score each criterion 1–5:
 
 ## 4. Verdict
 
-- **All PASS and scorecard ≥ 35 → sign PASS.** Add one line: what the creator should do on Day 1.
+- **All PASS and scorecard ≥ 42 (/60) → sign PASS.** Add one line: what the creator should do on Day 1.
 - **Any FAIL (or a WARN you judge real) → sign FIX NEEDED** and list **concrete fixes per file** (e.g. "strategy.md: LinkedIn section has no dwell-time mention — add 'dwell 5s+ is the 2026 signal' and a carousel format"). The main agent fixes and re-runs the harness, then a fresh auditor re-checks.
 
 **Sign-off line (fill in):**

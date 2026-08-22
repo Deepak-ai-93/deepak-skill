@@ -74,7 +74,7 @@ const PLAYS = {
     formats: ["Short text posts (one idea, under ~240 chars)", "Numbered threads (one idea per post, open loop across the thread)", "Native video < 60s", "Polls (low-weight — use sparingly)", "Quote-posts of niche accounts with insight added"],
     cadence: "2–4 posts/day during the sprint (about 15–25/week). Best: weekday mornings (US ET) + one weekend post.",
     hashtags:
-      "Minimal — 0–2 tags max, and only if genuinely searched. The model reads the text; keywords in the body matter more than hashtags. Reply in the niche vocabulary your audience uses.",
+      "ZERO hashtags — a single `#` fails the X plan (copy-first, tags are noise). The model reads the text; niche vocabulary in the body is the signal. See x-growth skill.",
     pitfalls: [
       "Reply-bait farming ('unpopular opinion:' with nothing behind it) — detected and throttled",
       "Engagement pods / follow-for-follow — suppressed",

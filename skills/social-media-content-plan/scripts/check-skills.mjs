@@ -96,6 +96,18 @@ const COMPANIONS = [
     produces: "scroll-stopping hooks + beat-by-beat storyboards (script ↔ video timeline in sync)",
     prompt: "Using the hook-storyboard-retention skill, storyboard the Day {N} reel from its hook",
   },
+  {
+    slug: "sponsorship-pipeline",
+    groups: ["earning"],
+    produces: "sponsor media kit + rate-card.mjs CPM benchmarks + outreach scripts (monetize the pillars)",
+    prompt: "Using the sponsorship-pipeline skill, build the media kit + rate card for the Day {N} niche",
+  },
+  {
+    slug: "paid-ads-studio",
+    groups: ["earning"],
+    produces: "Meta + Google ad campaigns with forecast-ads.mjs (boost winners once metrics.md shows pattern)",
+    prompt: "Using the paid-ads-studio skill, forecast and blueprint ads for the Day {N} winner",
+  },
 ];
 
 // ─── where skills can be installed (scan order) ─────────────────────────────
@@ -116,7 +128,7 @@ const isInstalled = (slug) => scanRoots().some((r) => existsSync(join(r, slug, "
 
 // ─── arg parsing ────────────────────────────────────────────────────────────
 const group = opt("group", "all").toLowerCase();
-const GROUPS = ["video", "carousel", "text-post", "long-form", "voice", "all"];
+const GROUPS = ["video", "carousel", "text-post", "long-form", "voice", "earning", "all"];
 if (!GROUPS.includes(group)) {
   console.error(`Usage: node scripts/check-skills.mjs [--group ${GROUPS.slice(0, -1).join("|")}|all] [--out companion-skills.md] [--install]`);
   process.exit(2);
