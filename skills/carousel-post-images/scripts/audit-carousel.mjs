@@ -61,6 +61,7 @@ const FLUFF = [
   "unlock", "game-changer", "elevate", "supercharge", "level up", "unleash",
   "boost", "empower", "revolutionize", "optimize", "leverage", "journey",
   "transform your", "in today's fast-paced world", "skyrocket", "crush it",
+  "tapestry", "delve", "landscape", "cutting-edge", "revolutionary",
 ];
 
 // ─── slides.html ────────────────────────────────────────────────────────────
@@ -93,6 +94,18 @@ if (!html) {
   else add("WARN", "scene tags", "no scene-tag annotations — Mode 2 will fall back to placeholders");
   if (/CTA|Save this|Follow|Comment|part 2/i.test(html)) add("PASS", "cover loop + CTA", "open-loop/CTA pattern present");
   else add("WARN", "cover loop + CTA", "no clear cover-loop / CTA text found");
+  // Style check — 6 styles: cinematic-real-life, dark-terminal, editorial-cards, neon-gradient, storytelling, grey-minimal
+  const knownStyles = ["cinematic-real-life","dark-terminal","editorial-cards","neon-gradient","storytelling","grey-minimal","monochrome-minimal"];
+  const styleHits = knownStyles.filter(s => new RegExp(s, "i").test(html));
+  if (styleHits.length) add("PASS", "style locked", `style: ${styleHits.join(", ")} (6-style library)`);
+  else add("WARN", "style locked", "no known style token found — lock ONE of: cinematic-real-life / dark-terminal / editorial-cards / neon-gradient / storytelling / grey-minimal");
+  // Image source check — AI vs stock vs project folder
+  const hasDataImage = /data-image/i.test(html);
+  const hasPhotoImg = /class="[^"]*photo[^"]*".*?<img/i.test(html) || /<img[^>]*src=/.test(html);
+  const hasStockHint = /unsplash|pexels|pixabay|stock/i.test(html);
+  if (hasDataImage || hasPhotoImg) add("PASS", "project images", "project folder images referenced (data-image or <img> in .photo)");
+  else if (hasStockHint) add("PASS", "stock images", "stock image hint present");
+  else add("WARN", "image source", "no project folder images (data-image/<img>) or stock hint — defaults to AI photoreal (Mode 2) or placeholder .scene-tag");
 }
 
 // ─── carousel/ output (Mode 1 PNGs or Mode 2 prompts.md) ────────────────────

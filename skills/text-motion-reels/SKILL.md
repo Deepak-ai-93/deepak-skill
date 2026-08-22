@@ -137,9 +137,10 @@ Never start coding a composition without first running the **format selection wi
 2. **Always confirm the format slug** — it is reused for the output filename (see Rendering to 4K).
 3. Collect topic, hook, duration, and audio preference after the format is locked in.
 4. Build the composition using ONLY the chosen format's spec below (typography, palette, motion, effects). Do not mix format styles.
-5. Default duration is 15s unless the user says otherwise. Beat count = seconds ÷ 2.
-6. **Voiceover is always-on.** Every reel gets a Kokoro voiceover synced beat-for-beat to the text (see Always-on voiceover).
-7. **Copy rails are enforced before code:** the hook must be ≤ 8 words with a curiosity gap (no "hey guys" / "welcome back" / "in this video"), every beat ≤ 8 words, one claim per beat, zero hashtags in on-screen text, one CTA in the final 2 seconds, loop ending (see The top-5-creator playbook).
+5. After locking the format, ask the background image source (None / Stock / Project folder) — see § Background image layer. Lock the source; it drives the HTML `data-bg` or folder mapping.
+6. Default duration is 15s unless the user says otherwise. Beat count = seconds ÷ 2.
+7. **Voiceover is always-on.** Every reel gets a Kokoro voiceover synced beat-for-beat to the text (see Always-on voiceover).
+8. **Copy rails are enforced before code:** the hook must be ≤ 8 words with a curiosity gap (no "hey guys" / "welcome back" / "in this video"), every beat ≤ 8 words, one claim per beat, zero hashtags in on-screen text, one CTA in the final 2 seconds, loop ending (see The top-5-creator playbook).
 
 ### Single-command agent template (wizard + build + render in one shot)
 
@@ -184,7 +185,7 @@ Act as a text-motion reel engineer using the text-motion-reels skill.
 
 ---
 
-## The 11 Trending Text-Only Formats (format library)
+## The 11 Trending Text-Only Formats (format library) — all 11 support optional background image layer (None / Stock / Project folder) per § Background image layer
 
 Pick ONE format via the wizard and build the composition strictly to its spec below.
 
@@ -434,6 +435,32 @@ Native SVG `<animate>` tags cannot be scrubbed by the paused GSAP timeline (`tl.
 - Animate transforms ONLY (`rotation`, `scale`, `x/y`) — never `fill`, `stroke`, or `d` per frame.
 - Do not apply filters to animated elements (feTurbulence grain stays static).
 - Lottie: keep to one small loop, preload JSON inline, seek with `goToAndStop`.
+
+## Background image layer — stock / project folder (optional, like carousel)
+
+Every text reel can run with **no image** (default, pure typography) or with a **background image layer** behind the text — same story spine, same addiction levers, just with a real photo as the ambient layer.
+
+| Source | What it is | When | How it works |
+|---|---|---|---|
+| **None** (default) | Pure typography + SVG ambient + grain | Most reels — text is the hero | No extra markup — existing 11 formats as-is |
+| **Stock images** | Curated CC0 stock (Unsplash, Pexels, Pixabay — commercial-safe) | Need real texture fast, no shoot | Agent searches stock via SCENE keywords, downloads CC0 images to `assets/stock/` at 1920x1080, injects as `background-image` on `.stage` with 0.35 opacity + dark scrim so text stays readable |
+| **Project folder images** | Images already in your repo (`assets/`, `public/images/`, `project/images/`) | You have screenshots, product photos, brand assets | Pass images via `data-bg="./assets/hero.jpg"` per `.clip` or a folder `assets/reel-images/` → script maps one image per beat, always behind the text (z-index 0) with scrim |
+
+**Wizard prompt (after Format pick):**
+```
+[Agent]: Format 3 (3D Editorial) selected. Background image?
+         (1) None (pure typography, default)
+         (2) Stock images (CC0, fast)
+         (3) Project folder images (e.g. ./assets/reel-images)
+[User]: 2
+```
+
+**Rules:**
+- Text always wins (z-index 3, scrim 0.4–0.6). Never put busy photo under thin text without scrim — audit checks contrast.
+- One source per reel — don’t mix stock + project folder in one video.
+- Stock: specific queries — "hands on mechanical keyboard, 7am, terminal glow" beats "technology".
+- Project folder: images ≥ 1920x1080, 9:16 crop center; missing → audit WARN.
+- All 11 formats support the layer — storytelling formats (Micro-Fiction, Chat Thriller) use it as chapter art, minimal formats (3D Editorial, SVG Ambient) use it as soft texture.
 
 ## Premium Design Elements & Styles
 

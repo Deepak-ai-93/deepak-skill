@@ -1,6 +1,6 @@
 ---
 name: carousel-post-images
-description: Create scroll-stopping carousel posts (LinkedIn + Instagram) as image sets. ONE script, TWO CLI modes — Mode 1 browser render (slides.html → headless Chrome → pixel-perfect 4K PNGs on any agent) or Mode 2 native image-model generation (the same deck exports 4K photoreal prompts for Antigravity CLI / Codex image_gen / Grok /imagine). Photorealistic real-life scenario visuals, viral anti-fluff copywriting (hook formulas + a fluff blocklist), four trending design styles (Cinematic Real-Life default), per-platform caption pack, and an auditor stage.
+description: Create scroll-stopping carousel posts (LinkedIn + Instagram) as image sets. ONE script, TWO CLI modes — Mode 1 browser render (slides.html → headless Chrome → pixel-perfect 4K PNGs on any agent) or Mode 2 native image-model generation (the same deck exports 4K photoreal prompts for Antigravity CLI / Codex image_gen / Grok /imagine). Photorealistic real-life scenario visuals, viral anti-fluff copywriting (hook formulas + a fluff blocklist), six trending design styles (Cinematic Real-Life default), per-platform caption pack, and an auditor stage.
 ---
 
 <!-- ════════════════════════════════════════════════════════════════════════
@@ -119,7 +119,7 @@ Every beat either **raises the question**, **raises the stakes**, or **pays off*
 
 ---
 
-## The 4 design styles (pick ONE per carousel)
+## The 6 design styles (pick ONE per carousel)
 
 Style D is the default — the other three keep their identity as the *text/accents layer*, but per the quality bar the **visual layer is always a photorealistic real-life scene**.
 
@@ -152,6 +152,24 @@ Style D is the default — the other three keep their identity as the *text/acce
 - **Type:** heavy condensed sans, tight letter-spacing, uppercase.
 - **Signature:** neon glow + gradient band. **Visual layer:** real-life scenes shot *through* the neon aesthetic — a city street at night with neon signs, a phone glowing in a dark room, late-night gym lighting. Keep the photo recognizable as a real place.
 - **Retention device:** loud recognizable brand block; short punchy statements.
+
+### Style E — Storytelling Sequential (`storytelling`) ★ narrative
+*Best for: founder stories, case studies, before/after, brand narratives — the scroll is the story.*
+
+- **Visual layer:** sequential photorealistic moments that read left-to-right like a storybook — same character across 8 frames, one scene per slide, chronological light progression (morning → night). Props evolve (empty desk → finished product).
+- **Palette:** warm paper + ink — bg `#faf7f2` / `#1a1a1a` text · accent terracotta `#c77a55` · secondary sage `#8a9a8b`. Film grain + subtle paper texture.
+- **Type:** serif headline (Cormorant / Playfair, italic for voice) + sans body (Inter) + mono chapter marker ("01 / 08").
+- **Signature:** thin timeline spine on left edge + numbered chapter dots + handwritten-style underline on the key phrase. **Text sits in a soft paper card** over the bottom 40% with 12px radius + 1px hairline.
+- **Retention device:** the story spine from § Storytelling rails — cover opens a question ("How we went 0→10k without ads"), each slide answers one piece, final slide closes the loop + "Save this story".
+
+### Style F — Grey Minimal (`grey-minimal`) ★ quiet luxury
+*Best for: premium SaaS, finance, consulting — greyw style minimal, quiet, spacious, expensive.*
+
+- **Visual layer:** monochrome / desaturated photorealistic scenes — grey concrete, fogged glass, steel, linen, soft window light. No neon, no gradients — only greys, whites, and one muted accent.
+- **Palette:** bg `#f2f2f2` → `#e8e8e8` · text `#111111` · accent single muted tone per deck (slate `#6b7280` or stone `#a8a29e` or graphite `#4b5563`). No second accent.
+- **Type:** light grotesk (Inter 300 / Helvetica Now) + generous whitespace, `clamp(2.8rem, 6vw, 5.2rem)`, tracking 0.02em, line-height 1.4; numbers in tabular lining.
+- **Signature:** ultra-thin 0.5px hairlines, 48px outer frame, centered text block at 68% width, bottom-aligned scrim is a **soft grey gradient** (not dark) — text is dark on light, not white on dark. Negative space IS the design.
+- **Retention device:** quiet confidence — the viewer stops because it feels premium and calm in a loud feed; save-bait is the system, not the hype.
 
 ---
 
@@ -208,11 +226,41 @@ Style D is the default — the other three keep their identity as the *text/acce
 
 ---
 
+## Image sources — pick ONE per deck (like text-motion format selection)
+
+Every carousel needs a visual source. The wizard asks this right after style:
+
+| Source | What it is | When | How the deck uses it |
+|---|---|---|---|
+| **AI photoreal** (default) | Mode 2 prompts → Nano Banana Pro / Imagen / `image_gen` | No assets, want bespoke scenes | `.scene-tag` → `prompts.md` → 4K image model (existing Mode 2) |
+| **Stock images** | Curated CC0 stock (Unsplash, Pexels, Pixabay — commercial-safe, no attribution required for CC0, check license per image) | Need real photos fast, no shoot | Agent searches stock via keywords from SCENE, downloads to `carousel/stock/` at 4K, composites in browser mode (hybrid) |
+| **Project folder images** | Images already in your repo (`assets/`, `public/images/`, `project/images/`, etc.) | You have product screenshots, team photos, brand assets | Pass `--images ./assets/carousel` → `render-carousel.mjs` maps each `.scene-tag` to the next image in that folder (alphabetical), or use explicit `data-image="./assets/hero.jpg"` per slide |
+
+**Wizard prompt (insert after Style pick):**
+```
+[Agent]: Style E (storytelling) selected. Image source?
+         (1) AI photoreal (bespoke, Mode 2)
+         (2) Stock images (CC0, fast)
+         (3) Project folder images (your own files, e.g. ./assets/images)
+[User]: 3
+[Agent]: Folder? → "./assets/carousel" (contains 8 JPGs — one per slide, 4000px+). Will map slide-by-slide.
+```
+
+**Rules:**
+- One source per deck — don’t mix stock + AI in one carousel (breaks world consistency).
+- Stock: use specific queries, not generic — "hands on mechanical keyboard, 7am, terminal glow" beats "technology".
+- Project folder: images must be ≥ 3000px on long edge (audit checks), 4:5 or 1:1 crop center; missing images → audit FAIL.
+- All three sources still respect the quality bar: 4K, real-life visuals, anti-fluff copy, world consistency (same light/grade across the deck).
+
+---
+
 ## Workflow (6 stages)
 
-### Stage 1 — Analyze the prompt + CHOOSE THE MODE
-Extract: **topic** (if vague, ask ≤3 questions), **audience**, **platform** (LinkedIn → square, Instagram → 4:5), **tone** (funny/authoritative/emotional), **style** (default: Cinematic Real-Life; dev/tech → A, business → B, aesthetic → C — in every case the visual layer is real-life per the quality bar).
-Then **present the two-mode choice** (§ Two modes): browser render vs image-model generation — recommend Mode 2 if the image tool exists, else Mode 1. Lock the mode; it drives Stage 4.
+### Stage 1 — Analyze the prompt + CHOOSE THE MODE + IMAGE SOURCE
+Extract: **topic** (if vague, ask ≤3 questions), **audience**, **platform** (LinkedIn → square, Instagram → 4:5), **tone** (funny/authoritative/emotional), **style** (default: Cinematic Real-Life; dev/tech → A, business → B, aesthetic → C, narrative → E, premium/minimal → F — in every case the visual layer is real-life per the quality bar).
+Then **present two choices**:
+1. **Mode:** browser render vs image-model generation (§ Two modes) — recommend Mode 2 if the image tool exists, else Mode 1. Lock the mode; it drives Stage 4.
+2. **Image source:** AI photoreal vs Stock vs Project folder (§ Image sources) — recommend AI when no assets, Stock when speed matters, Project folder when `assets/` exists. Lock the source; it drives Stage 3–4.
 
 ### Stage 2 — Plan the carousel (the slide map)
 Write the deck plan: **cover (hook) → 6–8 content beats → CTA**. For each slide record: `# / headline (≤8 words, anti-fluff) / sub (≤20 words) / SCENE (the exact real-life moment) / prop / layout variant`. The scene is planned *before* the prompt — it's half the content.

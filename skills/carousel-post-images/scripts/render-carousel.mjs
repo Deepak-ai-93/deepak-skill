@@ -8,7 +8,7 @@
 //     overlay copy is read straight from the DOM, so it's typo-free.
 //
 // Usage:
-//   node render-carousel.mjs --html slides.html [--out dir] [--mode browser|model] [--width 1080] [--height 1350] [--scale 1] [--4k]
+//   node render-carousel.mjs --html slides.html [--out dir] [--mode browser|model] [--images ./assets/images] [--width 1080] [--height 1350] [--scale 1] [--4k]
 //
 // Quality bar: carousels are posted at 1080px, but ALWAYS deliver at 4K so the
 // deck survives platform re-encoding. `--4k` forces deviceScaleFactor 4 →
@@ -40,7 +40,7 @@ const opt = (name, fallback) => {
 
 const htmlArg = opt("html");
 if (!htmlArg) {
-  console.error("Usage: node render-carousel.mjs --html slides.html [--out dir] [--mode browser|model] [--width 1080] [--height 1350] [--scale 1] [--4k]");
+  console.error("Usage: node render-carousel.mjs --html slides.html [--out dir] [--mode browser|model] [--images ./assets/images] [--width 1080] [--height 1350] [--scale 1] [--4k]");
   process.exit(2);
 }
 
@@ -55,6 +55,7 @@ if (MODE !== "browser" && MODE !== "model") {
 const CWD = process.cwd();
 const URL = pathToFileURL(resolve(CWD, htmlArg)).href;
 const OUT = resolve(CWD, opt("out", "output/carousel"));
+const IMAGES_DIR = opt("images", "");
 const WIDTH = parseInt(opt("width", "1080"), 10);
 const HEIGHT = parseInt(opt("height", "1350"), 10);
 // 4K quality bar: --4k sets deviceScaleFactor 4 (4320×5400 @ 4:5). An explicit
@@ -92,6 +93,61 @@ await page.evaluate(() =>
   Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 5000))])
 );
 await page.waitForTimeout(300);
+
+// --- Project folder images injection (if --images <folder> provided) ---
+if (IMAGES_DIR) {
+  const { readdirSync, existsSync, statSync } = await import("node:fs");
+  const absImages = resolve(CWD, IMAGES_DIR);
+  if (!existsSync(absImages) || !statSync(absImages).isDirectory()) {
+    console.error(`❌ --images folder not found: ${absImages}`);
+    process.exit(1);
+  }
+  const files = readdirSync(absImages).filter(f => /\.(jpe?g|png|webp|avif)$/i.test(f)).sort();
+  if (!files.length) {
+    console.error(`❌ --images folder has no images: ${absImages}`);
+    process.exit(1);
+  }
+  console.log(`📁 Project images: ${files.length} files from ${IMAGES_DIR} → mapping to slides`);
+  // Inject images into the deck's .photo / .scene-tag slots via file:// URLs
+  const { pathToFileURL: toFileURL } = await import("node:url");
+  const imageUrls = files.map(f => toFileURL(resolve(absImages, f)).href);
+  await page.evaluate((urls) => {
+    const slides = document.querySelectorAll(".slide");
+    slides.forEach((slide, i) => {
+      const url = urls[i % urls.length];
+      // Prefer existing .photo > .scene-tag > create one
+      let container = slide.querySelector(".photo");
+      if (!container) container = slide.querySelector(".scene-tag");
+      if (!container) {
+        container = document.createElement("div");
+        container.className = "photo";
+        container.style.cssText = "position:absolute;inset:0;overflow:hidden;z-index:0;";
+        slide.prepend(container);
+      }
+      // If container is .scene-tag (text), replace with image
+      if (container.classList.contains("scene-tag")) {
+        container.innerHTML = "";
+        container.style.cssText = "position:absolute;inset:0;overflow:hidden;z-index:0;";
+        container.classList.add("photo");
+      }
+      // Inject <img> as background
+      let img = container.querySelector("img");
+      if (!img) {
+        img = document.createElement("img");
+        img.style.cssText = "width:100%;height:100%;object-fit:cover;display:block;";
+        container.appendChild(img);
+      }
+      img.src = url;
+      img.alt = "";
+      // Ensure slide text stays above
+      slide.querySelectorAll(".headline, .sub, .label, .cta").forEach(el => {
+        el.style.position = "relative";
+        el.style.zIndex = "2";
+      });
+    });
+  }, imageUrls);
+  await page.waitForTimeout(800);
+}
 
 const count = await page.locator(".slide").count();
 if (!count) {
